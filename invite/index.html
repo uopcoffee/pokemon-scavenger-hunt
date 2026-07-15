@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invite Generator — Luca's Trainer Journey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&family=Nunito+Sans:wght@400;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .gen { max-width: 640px; }
+    .preview-wrap { display:grid; place-items:center; margin: var(--sp-4) 0; }
+    canvas { width: 100%; max-width: 360px; height: auto; border-radius: var(--r-card);
+             box-shadow: var(--shadow-card); border: 1px solid var(--line); }
+    textarea { width:100%; min-height:90px; font-family:var(--font-body); font-size:1rem;
+               padding:var(--sp-3); border:2px solid var(--line); border-radius:var(--r-sm); }
+    .seg { display:flex; gap:var(--sp-2); }
+    .seg button { flex:1; }
+    .seg button[aria-pressed="true"] { background: var(--mewtwo-x); color:#fff; }
+  </style>
+</head>
+<body>
+  <main class="app gen">
+    <header class="app-header">
+      <a class="wordmark" href="../index.html" style="text-decoration:none">✦ Invite <em>Generator</em></a>
+    </header>
+
+    <div class="card stack">
+      <div class="card__top"><h2 class="card__name">Make an invite</h2><span class="card__meta">§10 · MMS ready</span></div>
+      <div class="field">
+        <label for="name">Invitee's name</label>
+        <input type="text" id="name" placeholder="e.g. Mia" maxlength="24" value="Trainer">
+      </div>
+
+      <p class="label">Size</p>
+      <div class="seg" role="group" aria-label="Image size">
+        <button class="btn btn--secondary" data-size="portrait" aria-pressed="true">Portrait 1080×1350</button>
+        <button class="btn btn--secondary" data-size="square" aria-pressed="false">Square 1080×1080</button>
+      </div>
+
+      <div class="preview-wrap"><canvas id="cv" width="1080" height="1350"></canvas></div>
+
+      <div class="btn-row">
+        <button class="btn btn--primary btn--game" id="download">Download PNG</button>
+      </div>
+
+      <div class="field">
+        <label for="caption">Caption to paste alongside the text</label>
+        <textarea id="caption" readonly></textarea>
+      </div>
+    </div>
+    <p class="footer-note label">Personal, non-commercial use · original inspired-by artwork (§14)</p>
+  </main>
+
+  <script src="../config/config.js"></script>
+  <script type="module" src="./invite.js"></script>
+</body>
+</html>

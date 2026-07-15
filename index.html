@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FBFCFA">
+  <title>Luca's Trainer Journey</title>
+  <meta name="description" content="A Pokémon Mega-Evolution–themed birthday scavenger hunt for Luca.">
+
+  <!-- Fonts (§4). Fall back gracefully to system-ui if offline. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,800;1,900&family=Nunito+Sans:wght@400;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/tokens.css">
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app-header" id="app-header"></header>
+    <div id="app-screen" tabindex="-1"></div>
+  </main>
+
+  <!-- Editable game data first (plain script), then the app engine (module). -->
+  <script src="./config/config.js"></script>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
