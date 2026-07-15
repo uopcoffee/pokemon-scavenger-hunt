@@ -1,0 +1,10 @@
+<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Badge gem earned">
+<defs>
+<linearGradient id="bg-fill" x1="10" y1="6" x2="38" y2="42" gradientUnits="userSpaceOnUse">
+<stop stop-color="#5CC77E"></stop><stop offset="1" stop-color="#1E7A43"></stop>
+</linearGradient>
+</defs>
+<path d="M24 4 L37 12 L37 30 L24 44 L11 30 L11 12 Z" fill="url(#bg-fill)" stroke="#1B2430" stroke-width="2.2" stroke-linejoin="round"></path>
+<path d="M24 4 L24 44 M11 21 L37 21 M17 8 L31 8" stroke="#FBFCFA" stroke-width="1.2" stroke-opacity="0.5"></path>
+<circle cx="24" cy="21" r="4.5" fill="#FBFCFA" fill-opacity="0.85"></circle>
+</svg>

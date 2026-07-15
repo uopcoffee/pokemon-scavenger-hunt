@@ -1,105 +1,73 @@
 # Luca's Trainer Journey 🌿⚡
 
-A Pokémon **Mega-Evolution–themed birthday scavenger hunt** web app for Luca's 7th birthday.
-Kids follow clues from stop to stop, win a themed mini-game at each one, earn a badge, and
-unlock the gift hidden there — finishing as **Champion**.
+A Pokémon **Mega-Evolution–themed birthday scavenger hunt** web app for Luca's 7th
+birthday. Kids follow clues from stop to stop, win a themed mini-game at each one,
+earn a badge, and unlock the gift hidden there — finishing as **Champion**.
 
-Built as a **zero-build static site** (plain HTML/CSS/JS): no npm, no framework, no
-compile step. It implements the design system in [`docs/design-system.md`](docs/design-system.md)
-("collector card meets clean product UI").
+Built as a **zero-build static site**: no npm install, no compile step. Immersive,
+type-colored "energy field" screens with glassy holographic cards, using real
+Pokémon GO sprites for the creature art.
 
 ---
 
 ## What's in here
 
 ```
-index.html            The scavenger-hunt game (mobile-first)
-config/
-  config.js           👈 EDIT THIS to change clues, gifts, stops (no coding needed)
-  stops.json          Read-only reference mirror of the config
-css/
-  tokens.css          Design tokens (colors, type, spacing) — brief §16
-  styles.css          Components: card frame, buttons, badge trail, mini-games
-js/
-  art.js              Original "inspired-by" SVG motifs (Tropius, Mega stone, Poké Ball…)
-  app.js              Game engine: screen flow + mini-games
+app/                  The scavenger-hunt game (mobile-first)
+  index.html           Entry point — open this
+  data.js               👈 EDIT THIS to change clues, gifts, stops (no coding needed)
+  styles.css            Design tokens + the "game-grade" energy/glow effects
+  components.jsx         Button, Card, TrainerCard, BadgeTrail, ClueCard, etc.
+  minigames.jsx           The 4 mini-games (tap-ball, type-match, shadow-guess, memory)
+  screens.jsx             Screen flow + orchestrator
+  vendor/                 React/ReactDOM/Babel-standalone, vendored (no CDN dependency)
 invite/
-  index.html          Name → image invitation generator (brief §10)
-  invite.js           Draws a personalized 1080×1350 / 1080×1080 PNG on <canvas>
-docs/
-  design-system.md    The full design brief (source of truth)
-  tokens.json         JSON token mirror with RGB + approximate CMYK for print
+  index.html            Name → image invitation generator, exports a PNG
+assets/                 Pokémon GO sprites, stickers, type icons (personal-use only, see below)
 ```
 
----
+## Run it
 
-## Run it locally
+Just open `app/index.html` on a phone (or `npx serve` / `python3 -m http.server`
+from the repo root and visit it). The invite generator is at `invite/index.html`.
 
-Because the app uses JavaScript modules, open it through a tiny local web server
-(not by double-clicking `index.html`, which browsers block for module security):
+## Customize the hunt (no coding needed)
 
-```bash
-# from this folder — pick whichever you have
-python3 -m http.server 8000
-#   then open http://localhost:8000
+Open **`app/data.js`**. Each stop is `{ number, name, type, clueText, hintText,
+activityType, giftLocationText }` — edit clues, hints, gift locations, or add/remove
+stops freely (the badge trail and progress adjust to the count). `activityType` is
+one of `tap-ball` | `type-match` | `shadow-guess` | `memory`.
 
-# or, with Node installed:
-npx serve
-```
-
-Then visit the game at `/` and the invite generator at `/invite/`.
-
----
-
-## Customize the hunt (for Patrick — no coding)
-
-Open **`config/config.js`** in any text editor. Everything you'd want to change is there:
-
-- **Party details** — `party.name`, `age`, `year`, `title`.
-- **The stops** — each entry has a `clueText`, a `hintText`, a mini-game, and a
-  `giftLocationText`. Add or remove stops freely; the badge trail adjusts to the count.
-- **Mini-games** per stop — set `activity.type` to one of:
-  - `quiz` — a multiple-choice question
-  - `shadow-guess` — guess the creature from its shadow
-  - `type-match` — pick the correct Pokémon type
-  - `catch-tap` — tap the Poké Balls before time runs out
-
-Save the file and reload the page. That's it.
-
-> Progress is remembered in the page URL (the `#…` part), so a refresh keeps you
-> in place — no login or browser storage required. Share a fresh link to start over.
-
----
+Progress is kept in memory for the session (no login, no browser storage) — refresh
+starts over, matching the "no localStorage dependency" requirement from the brief.
 
 ## Deploy (free) with GitHub Pages
 
-1. Push this repo to GitHub (already done if you're reading this there).
-2. Repo **Settings → Pages → Build and deployment → Source: Deploy from a branch**.
-3. Choose branch `main`, folder `/ (root)`, **Save**.
-4. In a minute the game is live at `https://<owner>.github.io/pokemon-scavenger-hunt/`
-   and the invite generator at `.../invite/`.
+1. Repo **Settings → Pages → Build and deployment → Source: Deploy from a branch**.
+2. Branch `main`, folder `/ (root)`, **Save**.
+3. The game is live at `https://<owner>.github.io/pokemon-scavenger-hunt/app/` and
+   the invite generator at `.../invite/`.
 
 Any static host works too (Netlify, Vercel, Cloudflare Pages) — just drop the folder in.
 
----
-
 ## Making invitations
 
-Open `/invite/`, type a guest's name, choose portrait or square, and **Download PNG**.
-Edit the date/time/place in `invite/invite.js` (the `DETAILS` block near the top).
-A ready-to-paste caption is generated alongside each image.
-
----
+Open `invite/index.html`, type a guest's name, choose portrait (1080×1350) or square
+(1080×1080), and **Download PNG**. Each guest gets a deterministic, name-seeded
+Pokémon sprite lineup (`assets/roster.js`) so the same guest always gets the same
+lineup if you regenerate their invite. A ready-to-paste caption is shown alongside.
+Edit the date/time/place directly in `invite/index.html` (the details textarea
+default, or type over it before downloading).
 
 ## Scope note
 
-This scaffold covers **Track A — the interactive web app** and the **personalized
-invite generator** from the brief. The **print pieces** (signs, favors, collectible
-cards in Track B, §11) are documented in `docs/design-system.md` and share the same
-tokens in `css/tokens.css` / `docs/tokens.json`, ready to build next.
+This covers the interactive web app and the personalized invite generator. Print
+pieces (signage, party favors, collectible trading cards) aren't included in this
+pass.
 
 ## IP / usage
 
-Personal, non-commercial birthday use. All artwork here is **original, "inspired-by"**
-work — no official Pokémon logos, card templates, or trademarked art are copied
-(see brief §14). Please don't sell these materials.
+Personal, non-commercial birthday use. Creature art in `assets/` is sourced from
+[PokeMiners/pogo_assets](https://github.com/PokeMiners/pogo_assets) (Pokémon GO game
+sprites) — © Nintendo/Niantic/The Pokémon Company. Please don't sell or publicly
+redistribute these materials; this is a private party build.

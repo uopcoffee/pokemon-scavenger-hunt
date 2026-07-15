@@ -1,0 +1,157 @@
+/* ============================================================
+   Luca's Trainer Journey — Web App stylesheet
+   Merged from the design system's tokens/*.css (see /project for the
+   full design-system source). Kept as one file since this app has no
+   build step. Screen-only "game-grade" energy effects live here too —
+   print pieces (not built in this pass) would keep these out.
+   ============================================================ */
+
+/* Webfonts — Google Fonts CDN. No licensed binaries were provided;
+   swap for local @font-face + assets/fonts/*.woff2 if you get them. */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+  /* --- Core palette --- */
+  --paper:             #FBFCFA;
+  --paper-alt:         #F2F4EF;
+  --surface:           #FFFFFF;
+  --ink:               #1B2430;
+  --ink-soft:          #54606E;
+
+  --tropius-leaf:      #3BA55D;
+  --tropius-leaf-deep: #1E7A43;
+  --banana:            #F7C948;
+  --sky:               #4FB0E5;
+  --tan:               #C9A66B;
+
+  --mewtwo-x:          #8A4FFF;
+  --mewtwo-y:          #4B3A8F;
+  --mega-glow:         #B892FF;
+
+  --silver:            #C7CDD4;
+  --silver-deep:       #8B95A1;
+  --gold:              #D9B650;
+
+  --bg:      var(--paper);
+  --text:    var(--ink);
+  --text-muted: var(--ink-soft);
+  --brand:   var(--tropius-leaf);
+  --brand-strong: var(--tropius-leaf-deep);
+  --accent:  var(--mewtwo-x);
+  --accent-deep: var(--mewtwo-y);
+  --success: var(--tropius-leaf);
+  --reward:  var(--banana);
+  --info:    var(--sky);
+  --danger:  #E4572E;
+  --line:    var(--silver);
+
+  --type-grass:    #3BA55D;
+  --type-fire:     #E4572E;
+  --type-water:    #4FB0E5;
+  --type-electric: #F7C948;
+  --type-psychic:  #8A4FFF;
+  --type-normal:   #C9A66B;
+
+  --focus-ring: var(--mewtwo-x);
+
+  /* --- Type --- */
+  --font-display: "Montserrat", "Poppins", system-ui, sans-serif;
+  --font-body:    "Nunito Sans", "Inter", system-ui, sans-serif;
+  --font-label:   "Space Grotesk", "Roboto Mono", ui-monospace, monospace;
+
+  --fs-display: 2.75rem;
+  --fs-h1:      2rem;
+  --fs-h2:      1.5rem;
+  --fs-h3:      1.25rem;
+  --fs-body:    1.0625rem;
+  --fs-small:   0.875rem;
+  --fs-label:   0.75rem;
+
+  --lh-tight: 1.05;
+  --lh-snug:  1.25;
+  --lh-body:  1.55;
+  --tracking-label: 0.08em;
+
+  /* --- Spacing / radius --- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+  --r-sm:   10px;
+  --r-card: 18px;
+  --r-pill: 999px;
+
+  --w-game:    560px;
+  --w-desktop: 1080px;
+
+  /* --- Elevation --- */
+  --shadow-card: 0 6px 24px rgba(27,36,48,.10);
+  --shadow-lift: 0 12px 40px rgba(27,36,48,.16);
+
+  --foil-edge:  linear-gradient(120deg, #C7CDD4 0%, #FFFFFF 45%, #8B95A1 100%);
+  --gold-edge:  linear-gradient(120deg, #D9B650 0%, #FBF0C8 45%, #A8842E 100%);
+  --mega-burst: radial-gradient(circle at 50% 45%, rgba(184,146,255,.55), rgba(184,146,255,0) 60%);
+  --holo-sheen: linear-gradient(115deg, rgba(138,79,255,.10), rgba(79,176,229,.10) 40%, rgba(247,201,72,.10) 70%, rgba(59,165,93,.10));
+
+  --ease-snap: cubic-bezier(.2, .9, .25, 1.2);
+  --ease-out:  cubic-bezier(.22, 1, .36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 240ms;
+  --dur-slow: 480ms;
+
+  /* --- Game-grade energy fields & glow (screen-only) --- */
+  --field-psychic:  radial-gradient(120% 90% at 50% 0%, #7B5CE0 0%, #4B3A8F 42%, #241a4d 100%);
+  --field-grass:    radial-gradient(120% 90% at 50% 0%, #55C77E 0%, #1E7A43 44%, #0c3a22 100%);
+  --field-water:    radial-gradient(120% 90% at 50% 0%, #63C2ED 0%, #2f83bd 44%, #0d3350 100%);
+  --field-fire:     radial-gradient(120% 90% at 50% 0%, #F08A5D 0%, #d1502e 44%, #4a1a10 100%);
+  --field-electric: radial-gradient(120% 90% at 50% 0%, #FBD968 0%, #d1a028 46%, #4a3808 100%);
+  --field-normal:   radial-gradient(120% 90% at 50% 0%, #DBC79A 0%, #a8894f 46%, #4a3c26 100%);
+  --field-hero:     radial-gradient(130% 100% at 50% -10%, #8A4FFF 0%, #4B3A8F 40%, #1c1440 100%);
+
+  --field-grid: radial-gradient(rgba(255,255,255,.08) 1.3px, transparent 1.3px);
+  --field-grid-size: 22px 22px;
+
+  --gloss-violet: linear-gradient(180deg, #A876FF 0%, #8A4FFF 52%, #6E38E6 100%);
+  --gloss-banana: linear-gradient(180deg, #FFE08A 0%, #F7C948 52%, #E0AE28 100%);
+  --gloss-leaf:   linear-gradient(180deg, #5FD088 0%, #3BA55D 52%, #2A8B49 100%);
+  --gloss-gold:   linear-gradient(180deg, #F0D986 0%, #D9B650 52%, #B8922E 100%);
+
+  --holo-strong: linear-gradient(115deg, rgba(255,255,255,0) 30%, rgba(184,146,255,.55) 44%, rgba(99,194,237,.55) 52%, rgba(247,201,72,.55) 60%, rgba(255,255,255,0) 74%);
+  --holo-rainbow: linear-gradient(120deg, #B892FF, #63C2ED 25%, #5FD088 50%, #FBD968 72%, #FF8FB0 100%);
+
+  --glow-violet: 0 10px 34px rgba(138,79,255,.45), 0 2px 8px rgba(138,79,255,.35);
+  --glow-banana: 0 10px 30px rgba(247,201,72,.50);
+  --glow-leaf:   0 10px 30px rgba(59,165,93,.42);
+  --glow-gold:   0 12px 40px rgba(217,182,80,.55);
+  --glow-soft-white: 0 0 0 1px rgba(255,255,255,.7), 0 18px 50px rgba(27,36,48,.28);
+
+  --shadow-float: 0 22px 60px rgba(10,8,30,.45), 0 6px 18px rgba(10,8,30,.30);
+  --press-inset: inset 0 3px 8px rgba(0,0,0,.28);
+}
+
+@keyframes tj-holo-sweep { 0% { transform: translateX(-120%) rotate(0deg); } 100% { transform: translateX(120%) rotate(0deg); } }
+@keyframes tj-burst-spin { to { transform: rotate(360deg); } }
+@keyframes tj-burst-pulse { 0%,100% { transform: scale(1); opacity: .8; } 50% { transform: scale(1.12); opacity: 1; } }
+@keyframes tj-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes tj-bob { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
+@media (prefers-reduced-motion: reduce) {
+  [style*="tj-holo-sweep"], [style*="tj-burst-spin"], [style*="tj-burst-pulse"], [style*="tj-float"], [style*="tj-bob"] { animation: none !important; }
+}
+
+/* --- Page shell --- */
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--field-hero);
+  overscroll-behavior-y: contain;
+}
+body {
+  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+}
+#app {
+  min-height: 100%;
+  min-height: 100dvh;
+}
+* { box-sizing: border-box; }
+button { font: inherit; }
+img { -webkit-user-drag: none; user-select: none; }

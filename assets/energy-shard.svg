@@ -1,0 +1,21 @@
+<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mega energy burst">
+<defs>
+<radialGradient id="eb-glow" cx="50%" cy="48%" r="55%">
+<stop offset="0%" stop-color="#B892FF" stop-opacity="0.85"></stop>
+<stop offset="60%" stop-color="#B892FF" stop-opacity="0"></stop>
+</radialGradient>
+</defs>
+<circle cx="60" cy="58" r="52" fill="url(#eb-glow)"></circle>
+<g fill="#8A4FFF">
+<path d="M60 2 L67 46 L60 40 L53 46 Z"></path>
+<path d="M118 58 L74 65 L80 58 L74 51 Z"></path>
+<path d="M60 114 L53 70 L60 76 L67 70 Z"></path>
+<path d="M2 58 L46 51 L40 58 L46 65 Z"></path>
+</g>
+<g fill="#4FB0E5" opacity="0.9">
+<path d="M100 18 L70 50 L74 42 L66 40 Z"></path>
+<path d="M100 98 L68 68 L76 66 L74 58 Z"></path>
+<path d="M20 98 L50 66 L46 74 L54 76 Z"></path>
+<path d="M20 18 L52 48 L44 50 L46 58 Z"></path>
+</g>
+</svg>

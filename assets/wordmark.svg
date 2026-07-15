@@ -1,0 +1,7 @@
+<svg viewBox="0 0 520 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Luca&#39;s Trainer Journey">
+
+<text x="6" y="30" class="wm-top">LUCA&#39;S</text>
+<text x="4" y="76" class="wm-main">TRAINER <tspan class="wm-accent">JOURNEY</tspan></text>
+<path d="M6 92 L360 92" stroke="#C7CDD4" stroke-width="3" stroke-linecap="round"></path>
+<path d="M370 84 l16 8 l-16 8 z" fill="#8A4FFF"></path>
+</svg>

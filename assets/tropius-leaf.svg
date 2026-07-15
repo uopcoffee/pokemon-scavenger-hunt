@@ -1,0 +1,8 @@
+<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tropius leaf and banana">
+<path d="M8 40 C10 22 24 10 42 8 C40 26 28 40 12 41 C11 41 9 41 8 40 Z" fill="#3BA55D" stroke="#1B2430" stroke-width="2.2" stroke-linejoin="round"></path>
+<path d="M12 40 C20 30 30 20 40 12" stroke="#1E7A43" stroke-width="2" stroke-linecap="round"></path>
+<g stroke="#1B2430" stroke-width="2" stroke-linecap="round">
+<path d="M28 40 C30 45 34 46 37 44" fill="#F7C948" stroke-width="2.2"></path>
+<path d="M33 40 C35 45 39 46 42 44" fill="#F7C948" stroke-width="2.2"></path>
+</g>
+</svg>

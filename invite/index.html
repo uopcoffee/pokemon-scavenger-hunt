@@ -1,58 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Invite Generator — Luca's Trainer Journey</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&family=Nunito+Sans:wght@400;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/tokens.css">
-  <link rel="stylesheet" href="../css/styles.css">
-  <style>
-    .gen { max-width: 640px; }
-    .preview-wrap { display:grid; place-items:center; margin: var(--sp-4) 0; }
-    canvas { width: 100%; max-width: 360px; height: auto; border-radius: var(--r-card);
-             box-shadow: var(--shadow-card); border: 1px solid var(--line); }
-    textarea { width:100%; min-height:90px; font-family:var(--font-body); font-size:1rem;
-               padding:var(--sp-3); border:2px solid var(--line); border-radius:var(--r-sm); }
-    .seg { display:flex; gap:var(--sp-2); }
-    .seg button { flex:1; }
-    .seg button[aria-pressed="true"] { background: var(--mewtwo-x); color:#fff; }
-  </style>
-</head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Luca's Trainer Journey — Invite Generator</title>
+<link rel="stylesheet" href="../app/styles.css">
+<style>
+html,body{margin:0;height:100%}
+body{background:var(--paper-alt);font-family:var(--font-body);color:var(--ink);display:flex;height:100%}
+.panel{width:320px;flex:none;background:#fff;border-right:1px solid var(--silver);padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px;overflow-y:auto}
+.stage{flex:1;display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto}
+h1{font-family:var(--font-display);font-weight:900;font-style:italic;font-size:1.4rem;margin:0}
+label{font-weight:700;font-size:.95rem;display:block;margin-bottom:6px}
+input{width:100%;box-sizing:border-box;font-family:var(--font-body);font-size:1rem;padding:11px 13px;border:2px solid var(--silver);border-radius:10px;outline:none}
+input:focus{border-color:var(--sky)}
+.seg{display:flex;gap:8px}
+.seg button{flex:1;padding:9px;border:2px solid var(--silver);background:#fff;border-radius:999px;font-family:var(--font-label);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-weight:600}
+.seg button.on{border-color:var(--mewtwo-x);color:var(--mewtwo-x);background:rgba(138,79,255,.06)}
+.dl{margin-top:auto;display:flex;flex-direction:column;gap:8px}
+.dl button{padding:14px;border:none;border-radius:999px;background:var(--mewtwo-x);color:#fff;font-family:var(--font-body);font-weight:700;font-size:1.05rem;cursor:pointer}
+.dl .cap{font-size:.8rem;color:var(--ink-soft);line-height:1.4}
+canvas{max-width:100%;max-height:calc(100vh - 48px);box-shadow:0 16px 50px rgba(27,36,48,.22);border-radius:12px;background:#fff}
+textarea{width:100%;box-sizing:border-box;font-family:var(--font-label);font-size:.85rem;padding:10px;border:2px solid var(--silver);border-radius:10px;resize:vertical;min-height:66px}
+</style></head>
 <body>
-  <main class="app gen">
-    <header class="app-header">
-      <a class="wordmark" href="../index.html" style="text-decoration:none">✦ Invite <em>Generator</em></a>
-    </header>
-
-    <div class="card stack">
-      <div class="card__top"><h2 class="card__name">Make an invite</h2><span class="card__meta">§10 · MMS ready</span></div>
-      <div class="field">
-        <label for="name">Invitee's name</label>
-        <input type="text" id="name" placeholder="e.g. Mia" maxlength="24" value="Trainer">
-      </div>
-
-      <p class="label">Size</p>
-      <div class="seg" role="group" aria-label="Image size">
-        <button class="btn btn--secondary" data-size="portrait" aria-pressed="true">Portrait 1080×1350</button>
-        <button class="btn btn--secondary" data-size="square" aria-pressed="false">Square 1080×1080</button>
-      </div>
-
-      <div class="preview-wrap"><canvas id="cv" width="1080" height="1350"></canvas></div>
-
-      <div class="btn-row">
-        <button class="btn btn--primary btn--game" id="download">Download PNG</button>
-      </div>
-
-      <div class="field">
-        <label for="caption">Caption to paste alongside the text</label>
-        <textarea id="caption" readonly></textarea>
-      </div>
-    </div>
-    <p class="footer-note label">Personal, non-commercial use · original inspired-by artwork (§14)</p>
-  </main>
-
-  <script src="../config/config.js"></script>
-  <script type="module" src="./invite.js"></script>
-</body>
-</html>
+<div class="panel">
+<h1>Invite Generator</h1>
+<div class="field"><label for="nm">Guest's name</label><input id="nm" value="Mateo" maxlength="22"></div>
+<div class="field"><label>Format</label><div class="seg"><button id="p" class="on">Portrait 1080×1350</button><button id="s">Square 1080×1080</button></div></div>
+<div class="field"><label for="dt">Details (one per line)</label><textarea id="dt">SUNDAY AUGUST 2 · STARTS AT NOON
+10 CREEKSIDE CT · NOVATO
+LUNCH & SNACKS PROVIDED
+BRING CARDS TO TRADE + POKÉMON GO READY</textarea></div>
+<div class="dl">
+<button id="go">Download PNG</button>
+<div class="cap"><strong>Caption to paste:</strong> Trainer, you're invited! 🌟 Luca is turning 7 and throwing a Pokémon party — Sunday, August 2 at noon, 10 Creekside Ct, Novato. Lunch & snacks on us. Bring your Pokémon cards to trade and have Pokémon GO ready!</div>
+</div>
+</div>
+<div class="stage"><canvas id="cv" width="1080" height="1350"></canvas></div>
+<script src="../assets/roster.js"></script>
+<script>
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+const nm=document.getElementById('nm'),dt=document.getElementById('dt');
+let fmt='portrait';
+const C={paper:'#FBFCFA',ink:'#1B2430',soft:'#54606E',leaf:'#3BA55D',banana:'#F7C948',violet:'#8A4FFF',indigo:'#4B3A8F',glow:'#B892FF',silver:'#C7CDD4',steel:'#8B95A1',gold:'#D9B650'};
+const P='../assets/pokemon/',S='../assets/stickers/',A='../assets/';
+const SRC={tropius:S+'tropius.png',burst:A+'energy-shard.svg',rays:P+'rays.png',mega:P+'mega-icon-violet.png',
+ball:P+'pokeball.png',great:P+'greatball.png',ultra:P+'ultraball.png',master:P+'masterball.png',premier:P+'premierball.png',
+star1:S+'star-1.png',star3:S+'star-3.png',star6:S+'star-6.png'};
+for(const k in window.TJ_ROSTER)SRC[k]=A+window.TJ_ROSTER[k];
+const imgs={};
+function load(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src;});}
+async function preload(){for(const k in SRC)imgs[k]=await load(SRC[k]);}
+function fitText(t,max,start,font){let s=start;do{ctx.font=font(s);if(ctx.measureText(t).width<=max)break;s-=6;}while(s>28);return s;}
+function spr(k,x,y,w,rot){const im=imgs[k];if(!im)return;const h=w*(im.height/im.width);ctx.save();ctx.translate(x,y);if(rot)ctx.rotate(rot*Math.PI/180);ctx.shadowColor='rgba(20,10,50,.45)';ctx.shadowBlur=18;ctx.shadowOffsetY=6;ctx.drawImage(im,-w/2,-h/2,w,h);ctx.restore();}
+function draw(){
+  const W=1080,H=fmt==='portrait'?1350:1080,sq=fmt!=='portrait';cv.width=W;cv.height=H;
+  const cx=W/2;
+  // ENERGY FIELD background
+  const bg=ctx.createRadialGradient(cx,H*.32,60,cx,H*.5,H*.85);
+  bg.addColorStop(0,'#9d76ff');bg.addColorStop(.4,'#6b45d6');bg.addColorStop(1,'#241a4d');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+  // rays (white-on-black png, screen blend = pure light)
+  if(imgs.rays){ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=.9;
+    ctx.drawImage(imgs.rays,cx-W*.75,H*.32-W*.75,W*1.5,W*1.5);ctx.globalAlpha=.5;
+    ctx.drawImage(imgs.rays,cx-W,H*.32-W,W*2,W*2);ctx.restore();}
+  // energy grid dots
+  ctx.save();ctx.fillStyle='rgba(255,255,255,.10)';
+  for(let gx=16;gx<W;gx+=44)for(let gy=16;gy<H;gy+=44){ctx.beginPath();ctx.arc(gx,gy,2,0,7);ctx.fill();}
+  ctx.restore();
+  // holo prism sweeps
+  ctx.save();ctx.globalCompositeOperation='screen';
+  const holo=ctx.createLinearGradient(0,0,W,H);
+  holo.addColorStop(.15,'rgba(184,146,255,0)');holo.addColorStop(.3,'rgba(99,194,237,.28)');
+  holo.addColorStop(.45,'rgba(184,146,255,0)');holo.addColorStop(.6,'rgba(247,201,72,.22)');holo.addColorStop(.75,'rgba(184,146,255,0)');
+  ctx.fillStyle=holo;ctx.fillRect(0,0,W,H);ctx.restore();
+  // SPRITE EXPLOSION — the guest's own seeded Pokémon (shared with their name tag)
+  const pick=window.tjPickPokemon(nm.value,8);
+  spr(pick[0],W-116,116,320,18);
+  spr(pick[1],106,124,270,-14);
+  spr(pick[2],72,H*.42,190,-8);
+  spr(pick[3],W-70,H*.42,185,8);
+  spr(pick[4],96,H-150,225,-10);
+  spr(pick[5],W-112,H-160,255,12);
+  spr(pick[6],W-56,H*.66,170,14);
+  spr(pick[7],68,H*.66,185,-12);
+  spr('great',W*.32,54,74,-20);spr('ultra',W*.68,60,70,22);
+  spr('master',34,H*.24,80,-24);spr('premier',W-38,H*.26,74,18);
+  spr('ball',W*.5,H-42,84,12);
+  spr('star1',W*.16,H*.09,86,0);spr('star3',W*.86,H*.55,72,0);spr('star6',W*.12,H*.52,66,0);spr('star3',W*.85,H*.92,80,0);spr('star1',W*.2,H*.93,60,0);
+  // sparkles
+  ctx.save();ctx.fillStyle='rgba(255,255,255,.85)';
+  [[.25,.05],[.75,.08],[.06,.35],[.94,.38],[.08,.78],[.92,.72],[.4,.03],[.6,.97],[.5,.06]].forEach(([px,py])=>{
+    const x=px*W,y=py*H;ctx.save();ctx.translate(x,y);ctx.beginPath();
+    ctx.moveTo(0,-9);ctx.quadraticCurveTo(2,-2,9,0);ctx.quadraticCurveTo(2,2,0,9);ctx.quadraticCurveTo(-2,2,-9,0);ctx.quadraticCurveTo(-2,-2,0,-9);ctx.fill();ctx.restore();});
+  ctx.restore();
+  // GOLD-FOIL CARD
+  const m=150,top=sq?96:120,bot=sq?70:96;
+  const g=ctx.createLinearGradient(m,top,W-m,H-bot);
+  g.addColorStop(0,C.gold);g.addColorStop(.45,'#FBF0C8');g.addColorStop(1,'#A8842E');
+  ctx.save();ctx.shadowColor='rgba(10,5,35,.55)';ctx.shadowBlur=44;ctx.shadowOffsetY=16;
+  ctx.fillStyle=g;roundRect(m,top,W-2*m,H-top-bot,40);ctx.fill();ctx.restore();
+  ctx.fillStyle=C.paper;roundRect(m+10,top+10,W-2*m-20,H-top-bot-20,32);ctx.fill();
+  // faint holo inside the card
+  ctx.save();roundRect(m+10,top+10,W-2*m-20,H-top-bot-20,32);ctx.clip();
+  const ch=ctx.createLinearGradient(m,top,W-m,H);
+  ch.addColorStop(0,'rgba(184,146,255,.10)');ch.addColorStop(.5,'rgba(99,194,237,.07)');ch.addColorStop(1,'rgba(247,201,72,.10)');
+  ctx.fillStyle=ch;ctx.fillRect(m,top,W-2*m,H);ctx.restore();
+  // eyebrow with mega icons
+  ctx.textAlign='center';ctx.fillStyle=C.violet;ctx.font='600 27px "Space Grotesk",monospace';
+  ctx.save();ctx.letterSpacing='9px';ctx.fillText("LUCA IS TURNING 7",cx,top+78);ctx.restore();
+  // burst + Tropius hero
+  const by=sq?top+272:top+320,msz=sq?250:300;
+  if(imgs.burst){ctx.globalAlpha=.65;ctx.drawImage(imgs.burst,cx-msz*.85,by-msz*.85,msz*1.7,msz*1.7);ctx.globalAlpha=1;}
+  if(imgs.mega){ctx.save();ctx.globalAlpha=.9;const mi=44;
+    ctx.drawImage(imgs.mega,cx-msz*.72,by-msz*.5,mi,mi);ctx.drawImage(imgs.mega,cx+msz*.72-mi,by-msz*.5,mi,mi);ctx.restore();}
+  spr('tropius',cx,by,msz,0);
+  // "You're invited"
+  let y=sq?by+msz*.62+56:by+msz*.62+72;
+  ctx.fillStyle=C.ink;ctx.font='800 italic 42px Montserrat,sans-serif';ctx.fillText("YOU'RE INVITED,",cx,y);
+  const name=(nm.value.trim()||'Trainer').toUpperCase();
+  const fs=fitText(name,W-2*m-90,sq?88:108,s=>`900 italic ${s}px Montserrat,sans-serif`);
+  ctx.save();ctx.shadowColor='rgba(217,182,80,.6)';ctx.shadowBlur=0;ctx.shadowOffsetX=4;ctx.shadowOffsetY=4;
+  ctx.fillStyle=C.violet;ctx.font=`900 italic ${fs}px Montserrat,sans-serif`;ctx.fillText(name+'!',cx,y+fs+6);ctx.restore();
+  y=y+fs+(sq?42:54);
+  ctx.fillStyle=C.soft;ctx.font='400 29px "Nunito Sans",sans-serif';
+  ctx.fillText("to Luca's 7th birthday Pokémon party!",cx,y);
+  // divider
+  y+=sq?40:48;ctx.strokeStyle=C.gold;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(cx-150,y);ctx.lineTo(cx+150,y);ctx.stroke();
+  // details
+  y+=sq?42:50;const lines=dt.value.split('\n').filter(l=>l.trim());
+  const lh=sq?37:43;
+  ctx.font=`500 ${sq?23:25}px "Space Grotesk",monospace`;ctx.save();ctx.letterSpacing='3px';
+  lines.forEach((l,i)=>{ctx.fillStyle=i===0?C.ink:C.soft;ctx.fillText(l.trim().toUpperCase(),cx,y+i*lh);});ctx.restore();
+}
+function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+document.getElementById('p').onclick=()=>{fmt='portrait';document.getElementById('p').classList.add('on');document.getElementById('s').classList.remove('on');draw();};
+document.getElementById('s').onclick=()=>{fmt='square';document.getElementById('s').classList.add('on');document.getElementById('p').classList.remove('on');draw();};
+nm.oninput=draw;dt.oninput=draw;
+document.getElementById('go').onclick=()=>{const a=document.createElement('a');a.download=`invite-${(nm.value.trim()||'trainer').toLowerCase().replace(/\s+/g,'-')}-${fmt}.png`;a.href=cv.toDataURL('image/png');a.click();};
+preload().then(()=>{(document.fonts?document.fonts.ready:Promise.resolve()).then(draw);setTimeout(draw,500);});
+</script>
+</body></html>

@@ -1,0 +1,62 @@
+/* ============================================================
+   Stop configuration — edit this to change the hunt.
+   Each stop: { number, name, type, clueText, hintText,
+                activityType, giftLocationText }
+   activityType is one of: "type-match" | "shadow-guess" | "tap-ball" | "memory"
+   The hunt works with any number of stops; just add/remove entries.
+   ============================================================ */
+window.LUCA_CONFIG = {
+  trainerTitle: "Trainer",
+  /* Real Pokémon GO sprites (assets/pokemon/, personal party use — PokeMiners/pogo_assets). */
+  artBase: "../assets/pokemon/",
+  avatars: [
+    { id: "tropius", name: "Tropius", img: "tropius.png" },
+    { id: "pikachu", name: "Pikachu", img: "pikachu.png" },
+    { id: "charizard", name: "Mega Charizard", img: "mega-charizard-y.png" },
+    { id: "lucario", name: "Mega Lucario", img: "mega-lucario.png" },
+    { id: "blastoise", name: "Mega Blastoise", img: "mega-blastoise.png" },
+    { id: "mewtwo", name: "Mega Mewtwo X", img: "mega-mewtwo-x.png" },
+  ],
+  stops: [
+    { number: 1, name: "The Grass Start", type: "grass", art: "tropius.png",
+      clueText: "Your journey begins where green things grow and morning sunshine likes to glow.",
+      hintText: "Look near the plants by the front window.",
+      activityType: "tap-ball",
+      giftLocationText: "Peek inside the watering can!" },
+    { number: 2, name: "The Water Way", type: "water", art: "mega-blastoise.png",
+      clueText: "Splish and splash! Find the place where water pours to wash your face.",
+      hintText: "It's a room with a big mirror and a sink.",
+      activityType: "type-match",
+      giftLocationText: "Check the cabinet under the sink!" },
+    { number: 3, name: "The Psychic Trial", type: "psychic", art: "mega-mewtwo-x.png",
+      clueText: "Where the family gathers to watch the big screen, your next challenge waits unseen.",
+      hintText: "Think of the coziest room in the house.",
+      activityType: "shadow-guess",
+      giftLocationText: "Look behind the couch cushions!" },
+    { number: 4, name: "The Electric Dash", type: "electric", art: "pikachu.png",
+      clueText: "Zap! Head to the spot where cold things hum and tasty snacks and ice cubes come.",
+      hintText: "It keeps your food chilly.",
+      activityType: "memory",
+      giftLocationText: "Open the freezer — brrr, a surprise!" },
+    { number: 5, name: "The Fire Forge", type: "fire", art: "mega-charizard-y.png",
+      clueText: "Where meals are made and pots get hot, your next badge is waiting on the spot.",
+      hintText: "Grown-ups cook dinner here.",
+      activityType: "tap-ball",
+      giftLocationText: "Look on top of the microwave!" },
+    { number: 6, name: "The Normal Nook", type: "normal", art: "mega-gengar.png",
+      clueText: "Climb up high where you rest your head, the next clue's hiding near your bed.",
+      hintText: "It's where you sleep at night.",
+      activityType: "type-match",
+      giftLocationText: "Under your pillow!" },
+    { number: 7, name: "The Grass Grove", type: "grass", art: "mega-rayquaza.png",
+      clueText: "Step outside to the open air, a leafy friend is waiting there.",
+      hintText: "Head to the backyard or balcony.",
+      activityType: "shadow-guess",
+      giftLocationText: "By the big plant pot outside!" },
+    { number: 8, name: "The Champion's Cup", type: "psychic", art: "mega-mewtwo-y.png",
+      clueText: "The final test! Return to where your journey started — greatness awaits a Trainer so smart.",
+      hintText: "Go back to the very first room.",
+      activityType: "memory",
+      giftLocationText: "The champion's gift is on the table — you did it!" },
+  ],
+};
