@@ -1,6 +1,6 @@
 /* Simple, forgiving mini-games. Each calls onResult(true|false).
    Exposed via window.MiniGame. Ported from /project/ui_kits/web-app/MiniGames.jsx. */
-const MG_ART = (window.LUCA_CONFIG && window.LUCA_CONFIG.artBase) || "../assets/pokemon/";
+const MG_ART = (window.LUCA_CONFIG && window.LUCA_CONFIG.artBase) || "assets/pokemon/";
 
 function TapBall({ onResult }) {
   // Tap the shaking Poké Ball 3 times to catch it.

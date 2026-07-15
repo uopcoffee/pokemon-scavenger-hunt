@@ -2,29 +2,35 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4B3A8F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
 <title>Luca's Trainer Journey</title>
 <link rel="icon" href="assets/pokemon/pokeball.png">
-<link rel="stylesheet" href="app/styles.css">
+<link rel="stylesheet" href="styles.css">
 <style>
-  html,body{margin:0;height:100%;display:flex;align-items:center;justify-content:center;text-align:center}
-  .wrap{padding:32px;max-width:420px}
-  h1{font-family:var(--font-display);font-weight:900;font-style:italic;font-size:2rem;color:#fff;margin:0 0 8px;text-shadow:0 2px 12px rgba(0,0,0,.3)}
-  p{font-family:var(--font-body);color:rgba(255,255,255,.85);margin:0 0 28px}
-  .links{display:flex;flex-direction:column;gap:14px}
-  a.btn{display:block;padding:16px 24px;border-radius:999px;text-decoration:none;font-family:var(--font-display);font-weight:800;font-style:italic;font-size:1.1rem}
-  a.primary{background-image:var(--gloss-banana);color:#5a4410;box-shadow:var(--glow-banana)}
-  a.secondary{background:#fff;color:var(--mewtwo-x);box-shadow:var(--shadow-card)}
+  html, body { overflow-x: hidden; }
+  #app { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
 </style>
+<!-- React/ReactDOM/Babel vendored locally (see vendor/) rather than CDN-loaded:
+     this is a party-day app and shouldn't depend on unpkg being reachable
+     over venue wifi. Swap for CDN tags if you'd rather stay current. -->
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
+<script src="vendor/babel.min.js"></script>
+<script src="data.js"></script>
+<script>window.TJ_TYPE_ICON_BASE = "assets/types/";</script>
 </head>
-<body style="background:var(--field-hero)">
-<div class="wrap">
-  <h1>Luca's Trainer Journey</h1>
-  <p>Pick where you're headed, Trainer.</p>
-  <div class="links">
-    <a class="btn primary" href="app/">Play the scavenger hunt →</a>
-    <a class="btn secondary" href="invite/">Make an invitation →</a>
-  </div>
-</div>
+<body>
+<div id="app"></div>
+<script type="text/babel" data-presets="react" src="components.jsx"></script>
+<script type="text/babel" data-presets="react" src="minigames.jsx"></script>
+<script type="text/babel" data-presets="react" src="screens.jsx"></script>
+<script type="text/babel" data-presets="react">
+const App = window.TrainerApp;
+ReactDOM.createRoot(document.getElementById('app')).render(<App/>);
+</script>
 </body>
 </html>

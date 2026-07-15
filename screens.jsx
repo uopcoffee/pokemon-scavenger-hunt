@@ -3,8 +3,8 @@
    glowing field. Ported from /project/ui_kits/web-app/Screens.jsx. */
 
 const FIELD = { grass: "var(--field-grass)", water: "var(--field-water)", psychic: "var(--field-psychic)", fire: "var(--field-fire)", electric: "var(--field-electric)", normal: "var(--field-normal)" };
-const ART = (window.LUCA_CONFIG && window.LUCA_CONFIG.artBase) || "../assets/pokemon/";
-const STICKERS = "../assets/stickers/";
+const ART = (window.LUCA_CONFIG && window.LUCA_CONFIG.artBase) || "assets/pokemon/";
+const STICKERS = "assets/stickers/";
 
 const shell = { maxWidth: 560, margin: "0 auto", minHeight: "100%", display: "flex", flexDirection: "column", position: "relative", zIndex: 1 };
 const pad = { padding: "24px", flex: 1, display: "flex", flexDirection: "column" };
@@ -213,7 +213,7 @@ function TrainerApp() {
       {screen === "map" && <QuestMap config={config} trainer={trainer} earned={earned} onOpenStop={(i) => { setActiveStop(i); setScreen("clue"); }} />}
       {screen === "clue" && <ClueScreen stop={stop} total={total} onBack={() => setScreen("map")} onContinue={() => setScreen("activity")} />}
       {screen === "activity" && <ActivityScreen stop={stop} onCleared={() => setGift(true)} />}
-      {gift && <GiftModal open stopName={stop.name} giftLocation={stop.giftLocationText} iconSrc="../assets/ui/gift.png"
+      {gift && <GiftModal open stopName={stop.name} giftLocation={stop.giftLocationText} iconSrc="assets/ui/gift.png"
         nextLabel={activeStop + 1 >= total ? "See your results" : "Next clue"}
         onNext={() => {
           setGift(false);

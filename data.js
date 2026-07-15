@@ -8,7 +8,7 @@
 window.LUCA_CONFIG = {
   trainerTitle: "Trainer",
   /* Real Pokémon GO sprites (assets/pokemon/, personal party use — PokeMiners/pogo_assets). */
-  artBase: "../assets/pokemon/",
+  artBase: "assets/pokemon/",
   avatars: [
     { id: "tropius", name: "Tropius", img: "tropius.png" },
     { id: "pikachu", name: "Pikachu", img: "pikachu.png" },
