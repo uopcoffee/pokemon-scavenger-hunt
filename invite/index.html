@@ -138,7 +138,19 @@ function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,
 document.getElementById('p').onclick=()=>{fmt='portrait';document.getElementById('p').classList.add('on');document.getElementById('s').classList.remove('on');draw();};
 document.getElementById('s').onclick=()=>{fmt='square';document.getElementById('s').classList.add('on');document.getElementById('p').classList.remove('on');draw();};
 nm.oninput=draw;dt.oninput=draw;
-document.getElementById('go').onclick=()=>{const a=document.createElement('a');a.download=`invite-${(nm.value.trim()||'trainer').toLowerCase().replace(/\s+/g,'-')}-${fmt}.png`;a.href=cv.toDataURL('image/png');a.click();};
+function saveBlob(blob,name){
+  // toBlob can pass null if encoding fails; fall back to a data URL.
+  const url=blob?URL.createObjectURL(blob):cv.toDataURL('image/png');
+  const a=document.createElement('a');a.download=name;a.href=url;
+  // Firefox/Safari only fire the download when the anchor is in the DOM.
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  if(blob)setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+document.getElementById('go').onclick=()=>{
+  const name=`invite-${(nm.value.trim()||'trainer').toLowerCase().replace(/\s+/g,'-')}-${fmt}.png`;
+  if(cv.toBlob)cv.toBlob(b=>saveBlob(b,name),'image/png');
+  else saveBlob(null,name);
+};
 preload().then(()=>{(document.fonts?document.fonts.ready:Promise.resolve()).then(draw);setTimeout(draw,500);});
 </script>
 </body></html>
