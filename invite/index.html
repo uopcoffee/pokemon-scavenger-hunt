@@ -31,10 +31,10 @@ textarea{width:100%;box-sizing:border-box;font-family:var(--font-label);font-siz
 <div class="field"><label for="dt">Details (one per line)</label><textarea id="dt">SUNDAY AUGUST 2 · STARTS AT NOON
 10 CREEKSIDE CT · NOVATO
 LUNCH & SNACKS PROVIDED
-BRING CARDS TO TRADE + POKÉMON GO READY</textarea></div>
+FEEL FREE TO BRING CARDS TO TRADE</textarea></div>
 <div class="dl">
 <button id="go">Download PNG</button>
-<div class="cap"><strong>Caption to paste:</strong> Trainer, you're invited! 🌟 Luca is turning 7 and throwing a Pokémon party — Sunday, August 2 at noon, 10 Creekside Ct, Novato. Lunch & snacks on us. Bring your Pokémon cards to trade and have Pokémon GO ready!</div>
+<div class="cap"><strong>Caption to paste:</strong> Trainer, you're invited! 🌟 Luca is throwing a Pokémon birthday party — Sunday, August 2 at noon, 10 Creekside Ct, Novato. Lunch & snacks on us. Feel free to bring your Pokémon cards to trade!</div>
 </div>
 </div>
 <div class="stage"><canvas id="cv" width="1080" height="1350"></canvas></div>
@@ -109,7 +109,7 @@ function draw(){
   ctx.fillStyle=ch;ctx.fillRect(m,top,W-2*m,H);ctx.restore();
   // eyebrow with mega icons
   ctx.textAlign='center';ctx.fillStyle=C.violet;ctx.font='600 27px "Space Grotesk",monospace';
-  ctx.save();ctx.letterSpacing='9px';ctx.fillText("LUCA IS TURNING 7",cx,top+78);ctx.restore();
+  ctx.save();ctx.letterSpacing='9px';ctx.fillText("LUCA IS THROWING POKE BALLS",cx,top+78);ctx.restore();
   // burst + Tropius hero
   const by=sq?top+272:top+320,msz=sq?250:300;
   if(imgs.burst){ctx.globalAlpha=.65;ctx.drawImage(imgs.burst,cx-msz*.85,by-msz*.85,msz*1.7,msz*1.7);ctx.globalAlpha=1;}
@@ -125,7 +125,7 @@ function draw(){
   ctx.fillStyle=C.violet;ctx.font=`900 italic ${fs}px Montserrat,sans-serif`;ctx.fillText(name+'!',cx,y+fs+6);ctx.restore();
   y=y+fs+(sq?42:54);
   ctx.fillStyle=C.soft;ctx.font='400 29px "Nunito Sans",sans-serif';
-  ctx.fillText("to Luca's 7th birthday Pokémon party!",cx,y);
+  ctx.fillText("to Luca's Pokémon birthday party!",cx,y);
   // divider
   y+=sq?40:48;ctx.strokeStyle=C.gold;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(cx-150,y);ctx.lineTo(cx+150,y);ctx.stroke();
   // details
