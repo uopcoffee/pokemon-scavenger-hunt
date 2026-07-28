@@ -471,3 +471,112 @@ function Header({ total = 8, earned = 0, iconSrc, style = {}, ...rest }) {
     </header>
   );
 }
+
+/* ---------- game/AdultHoldButton ----------
+   Physical challenges intentionally cannot be completed by a normal tap.
+   Pointer/keyboard release before the configured duration cancels progress. */
+function AdultHoldButton({
+  onComplete, duration = 1500, label = "Gym Leader: Hold to Confirm",
+  disabled = false, style = {},
+}) {
+  const [progress, setProgress] = React.useState(0);
+  const [holding, setHolding] = React.useState(false);
+  const frameRef = React.useRef(null);
+  const startedAtRef = React.useRef(0);
+  const completedRef = React.useRef(false);
+
+  const cancelHold = React.useCallback(() => {
+    if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    frameRef.current = null;
+    startedAtRef.current = 0;
+    completedRef.current = false;
+    setHolding(false);
+    setProgress(0);
+  }, []);
+
+  React.useEffect(() => () => {
+    if (frameRef.current) cancelAnimationFrame(frameRef.current);
+  }, []);
+
+  const beginHold = (event) => {
+    if (disabled || holding) return;
+    if (event && event.pointerId != null && event.currentTarget.setPointerCapture) {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    }
+    completedRef.current = false;
+    startedAtRef.current = performance.now();
+    setHolding(true);
+    setProgress(0);
+
+    const tick = (now) => {
+      const nextProgress = Math.min(1, (now - startedAtRef.current) / duration);
+      setProgress(nextProgress);
+      if (nextProgress >= 1) {
+        completedRef.current = true;
+        frameRef.current = null;
+        setHolding(false);
+        if (navigator.vibrate) navigator.vibrate(35);
+        onComplete();
+        return;
+      }
+      frameRef.current = requestAnimationFrame(tick);
+    };
+    frameRef.current = requestAnimationFrame(tick);
+  };
+
+  const endHold = () => {
+    if (!completedRef.current) cancelHold();
+  };
+
+  return (
+    <button
+      type="button"
+      className="adult-hold-button"
+      disabled={disabled}
+      aria-label={`${label}. Hold for ${duration / 1000} seconds.`}
+      onClick={(event) => event.preventDefault()}
+      onContextMenu={(event) => event.preventDefault()}
+      onPointerDown={beginHold}
+      onPointerUp={endHold}
+      onPointerCancel={cancelHold}
+      onLostPointerCapture={endHold}
+      onKeyDown={(event) => {
+        if ((event.key === " " || event.key === "Enter") && !event.repeat) {
+          event.preventDefault();
+          beginHold();
+        }
+      }}
+      onKeyUp={(event) => {
+        if (event.key === " " || event.key === "Enter") {
+          event.preventDefault();
+          endHold();
+        }
+      }}
+      style={{ "--hold-progress": `${progress * 100}%`, ...style }}
+    >
+      <span className="adult-hold-button__fill" aria-hidden />
+      <span className="adult-hold-button__content">
+        <Icon name={progress >= 1 ? "check" : "badge"} size={24} color="currentColor" />
+        <span>{holding ? `Keep holding… ${Math.round(progress * 100)}%` : label}</span>
+      </span>
+    </button>
+  );
+}
+
+/* ---------- game/CodeFragmentSlots ---------- */
+function CodeFragmentSlots({ fragments = [], collectedSlots = [], style = {} }) {
+  return (
+    <div className="fragment-slots" style={style} aria-label={`${collectedSlots.length} of ${fragments.length} physical fragments recorded`}>
+      {fragments.map((fragment) => {
+        const collected = collectedSlots.includes(fragment.slot);
+        return (
+          <div key={fragment.id} className={`fragment-slot${collected ? " fragment-slot--collected" : ""}`}>
+            <Icon name={collected ? "check" : "lock"} size={22} color={collected ? "var(--tropius-leaf-deep)" : "var(--silver-deep)"} />
+            <span>Slot {fragment.slot}</span>
+            <small>{collected ? fragment.displaySymbol : "Physical fragment"}</small>
+          </div>
+        );
+      })}
+    </div>
+  );
+}

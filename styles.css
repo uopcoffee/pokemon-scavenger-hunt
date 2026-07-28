@@ -155,3 +155,167 @@ body {
 * { box-sizing: border-box; }
 button { font: inherit; }
 img { -webkit-user-drag: none; user-select: none; }
+
+/* --- Creekside V2 Phase 1 controls --- */
+.adult-hold-button {
+  position: relative;
+  width: 100%;
+  min-height: 64px;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: linear-gradient(180deg, #7656B8, #4B3A8F);
+  color: #fff;
+  box-shadow: var(--glow-violet), inset 0 1px 0 rgba(255,255,255,.35);
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.adult-hold-button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+.adult-hold-button:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+.adult-hold-button__fill {
+  position: absolute;
+  inset: 0;
+  width: var(--hold-progress, 0%);
+  background: linear-gradient(90deg, var(--tropius-leaf-deep), var(--tropius-leaf));
+  transition: width 45ms linear;
+}
+.adult-hold-button__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 22px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.fragment-slots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.fragment-slot {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 2px 8px;
+  min-width: 0;
+  padding: 12px;
+  border: 2px dashed var(--silver);
+  border-radius: var(--r-sm);
+  background: var(--paper-alt);
+  color: var(--ink-soft);
+}
+.fragment-slot--collected {
+  border-style: solid;
+  border-color: var(--tropius-leaf);
+  background: rgba(59,165,93,.10);
+  color: var(--ink);
+}
+.fragment-slot > span {
+  font-family: var(--font-label);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.fragment-slot > small {
+  grid-column: 2;
+  overflow: hidden;
+  font-size: .78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.creekside-map-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 14px;
+  border: 0;
+  border-radius: var(--r-card);
+  background: #fff;
+  color: var(--ink);
+  text-align: left;
+  box-shadow: var(--shadow-card);
+}
+.creekside-map-card[disabled] {
+  background: rgba(255,255,255,.55);
+  color: var(--ink-soft);
+  cursor: default;
+}
+.creekside-map-card--active {
+  box-shadow: inset 0 0 0 3px var(--mewtwo-x), var(--shadow-float);
+  cursor: pointer;
+}
+.creekside-map-card--complete {
+  box-shadow: inset 0 0 0 2px var(--tropius-leaf), var(--shadow-card);
+}
+
+.parent-mode-overlay {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(15,12,35,.75);
+  backdrop-filter: blur(5px);
+}
+.parent-mode-panel {
+  width: min(100%, 560px);
+  max-height: 88dvh;
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: var(--r-card);
+  background: var(--surface);
+  box-shadow: var(--shadow-float);
+}
+.parent-mode-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.parent-mode-trigger {
+  position: fixed;
+  z-index: 30;
+  top: max(8px, env(safe-area-inset-top));
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: transparent;
+  cursor: default;
+}
+.parent-mode-trigger:focus-visible {
+  outline: 2px solid rgba(255,255,255,.7);
+}
+
+@media (max-width: 380px) {
+  .fragment-slots,
+  .parent-mode-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .adult-hold-button__fill {
+    transition: none;
+  }
+}
