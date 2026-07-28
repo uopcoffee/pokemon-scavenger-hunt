@@ -290,5 +290,97 @@
   applyAudienceContract(config.checkpoint);
   applyAudienceContract(config.epilogue);
 
+  var relayCueByChallengeId = {
+    "orientation-challenge": "orientation",
+    "fairy-challenge": "fairy",
+    "oak-challenge": "oak-water",
+    "center-challenge": "nurse-joy",
+    "rocket-challenge": "rocket",
+    "vault-challenge": "vault",
+    "victory-challenge-a": "victory-road",
+    "victory-challenge-b": "rayquaza",
+    "champion-challenge": "champion",
+    "oak-return-challenge": "oak-return",
+    "mew-challenge": "mew"
+  };
+
+  function buildRelayScenes(originalScene, cue) {
+    return [
+      {
+        id: originalScene.id + "-handoff",
+        type: "cast-handoff",
+        audience: "luca",
+        title: originalScene.title,
+        body: cue.handoffStory,
+        performerName: cue.performerName,
+        characterName: cue.characterName,
+        handoffLabel: cue.handoffLabel,
+        cueId: cue.id
+      },
+      {
+        id: originalScene.id + "-privacy",
+        type: "privacy-shield",
+        audience: "adult",
+        title: "Adult Cast Screen Ahead",
+        body: "Turn the phone away from Luca.",
+        performerName: cue.performerName,
+        cueId: cue.id
+      },
+      {
+        id: originalScene.id,
+        type: "cast-cue",
+        audience: "cast",
+        title: originalScene.title,
+        performerName: cue.performerName,
+        characterName: cue.characterName,
+        entranceCue: cue.entranceCue,
+        spokenLines: cue.spokenLines.slice(),
+        challengeSteps: cue.challengeSteps.slice(),
+        successCondition: cue.successCondition,
+        rewardPackages: cue.rewardPackages.slice(),
+        rewardOwners: cue.rewardOwners.slice(),
+        rewardPreparation: cue.rewardPreparation,
+        fallback: cue.fallback,
+        transitionLine: cue.transitionLine,
+        transitionDestination: cue.transitionDestination,
+        completionLabel: cue.completionLabel,
+        cueId: cue.id
+      },
+      {
+        id: originalScene.id + "-return",
+        type: "return-to-player",
+        audience: "adult",
+        title: "Return the phone to Luca",
+        body: "Do not reveal the result, reward, badge, fragment, or next destination until Luca can see the phone.",
+        performerName: cue.performerName,
+        cueId: cue.id
+      }
+    ];
+  }
+
+  function applyTheatricalRelays(sequence) {
+    sequence.scenes = sequence.scenes.reduce(function (scenes, scene) {
+      var cueId = relayCueByChallengeId[scene.id];
+      if (!cueId) return scenes.concat(scene);
+      var cue = window.CREEKSIDE_CAST_CORES && window.CREEKSIDE_CAST_CORES[cueId];
+      if (!cue) {
+        return scenes.concat({
+          id: scene.id + "-handoff",
+          type: "cast-handoff",
+          audience: "adult",
+          title: "Mission Recovery",
+          body: "The cast cue could not be loaded. Open Parent Mode and return to the preceding scene.",
+          performerName: "Lead Adult",
+          handoffLabel: "Adult: Hold to open recovery instructions"
+        });
+      }
+      return scenes.concat(buildRelayScenes(scene, cue));
+    }, []);
+  }
+
+  config.chapters.forEach(applyTheatricalRelays);
+  applyTheatricalRelays(config.checkpoint);
+  applyTheatricalRelays(config.epilogue);
+
   window.CREEKSIDE_CONFIG = config;
 })();

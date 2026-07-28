@@ -9,6 +9,7 @@ const repositoryRoot = path.resolve(__dirname, "..");
 const context = { window: {} };
 vm.createContext(context);
 vm.runInContext(fs.readFileSync(path.join(repositoryRoot, "data.js"), "utf8"), context);
+vm.runInContext(fs.readFileSync(path.join(repositoryRoot, "cast-core.js"), "utf8"), context);
 vm.runInContext(fs.readFileSync(path.join(repositoryRoot, "creekside-content.js"), "utf8"), context);
 
 const config = context.window.CREEKSIDE_CONFIG;
@@ -22,7 +23,18 @@ const expectedChapterNames = [
   "Victory Road and Champion Battle",
 ];
 const requiredParticipants = ["ariel", "nina", "bruce", "monica", "polly", "mike", "patrick", "hannah", "noa"];
-const requiredChapterSceneTypes = ["story", "travel-location", "character-encounter", "physical-challenge", "reward", "inventory-update", "chapter-transition"];
+const requiredChapterSceneTypes = [
+  "story",
+  "travel-location",
+  "character-encounter",
+  "cast-handoff",
+  "privacy-shield",
+  "cast-cue",
+  "return-to-player",
+  "reward",
+  "inventory-update",
+  "chapter-transition",
+];
 const validDispositions = ["OPEN NOW", "CARRY FOR LATER", "SAVE FOR CELEBRATION"];
 
 assert.deepStrictEqual(Array.from(config.chapters, (chapter) => chapter.name), expectedChapterNames);
@@ -40,10 +52,10 @@ config.chapters.forEach((chapter) => {
   requiredChapterSceneTypes.forEach((sceneType) => {
     assert.ok(sceneTypes.includes(sceneType), `${chapter.name} must include ${sceneType}`);
   });
-  chapter.scenes.filter((scene) => scene.type === "physical-challenge").forEach((scene) => {
-    assert.ok(scene.successRule, `${scene.title} must define a forgiving success rule`);
-    assert.ok(scene.fallbackText, `${scene.title} must define an adult fallback`);
-    assert.ok(scene.adultPrompt, `${scene.title} must define an adult confirmation prompt`);
+  chapter.scenes.filter((scene) => scene.type === "cast-cue").forEach((scene) => {
+    assert.ok(scene.successCondition, `${scene.title} must define a forgiving success condition`);
+    assert.ok(scene.fallback, `${scene.title} must define an adult fallback`);
+    assert.ok(scene.completionLabel, `${scene.title} must define a protected completion prompt`);
   });
 });
 

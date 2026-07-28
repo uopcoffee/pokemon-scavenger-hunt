@@ -31,7 +31,7 @@ const context = {
 };
 
 vm.createContext(context);
-["data.js", "creekside-content.js", "state.js"].forEach((file) => {
+["data.js", "cast-core.js", "creekside-content.js", "state.js"].forEach((file) => {
   vm.runInContext(fs.readFileSync(path.join(repositoryRoot, file), "utf8"), context);
 });
 

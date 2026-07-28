@@ -264,7 +264,7 @@
     var sequence = activeSequence(state);
     var scene = currentScene(state);
     if (!sequence || !scene) return state;
-    if (scene.type === "physical-challenge" && !allowPhysicalOverride) return state;
+    if (["physical-challenge", "cast-handoff", "cast-cue"].indexOf(scene.type) !== -1 && !allowPhysicalOverride) return state;
 
     var next = withSceneEffects(state, scene);
     if (state.currentSceneIndex < sequence.scenes.length - 1) {
@@ -375,6 +375,7 @@
         next = advance(state, false);
         break;
       case "COMPLETE_PHYSICAL":
+      case "COMPLETE_RELAY_HOLD":
       case "PARENT_ADVANCE":
         next = advance(state, true);
         break;

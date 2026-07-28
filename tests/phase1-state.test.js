@@ -32,6 +32,7 @@ const context = {
 
 vm.createContext(context);
 vm.runInContext(fs.readFileSync(path.join(repositoryRoot, "data.js"), "utf8"), context);
+vm.runInContext(fs.readFileSync(path.join(repositoryRoot, "cast-core.js"), "utf8"), context);
 vm.runInContext(fs.readFileSync(path.join(repositoryRoot, "creekside-content.js"), "utf8"), context);
 vm.runInContext(fs.readFileSync(path.join(repositoryRoot, "state.js"), "utf8"), context);
 
@@ -73,11 +74,11 @@ config.chapters.forEach((chapter, chapterIndex) => {
 
   state = stateEngine.reducer(state, { type: "OPEN_CURRENT_CHAPTER" });
   chapter.scenes.forEach((scene) => {
-    if (scene.type === "physical-challenge") {
+    if (["physical-challenge", "cast-handoff", "cast-cue"].includes(scene.type)) {
       const sceneIndexBeforeTap = state.currentSceneIndex;
       state = stateEngine.reducer(state, { type: "ADVANCE_SCENE" });
-      assert.strictEqual(state.currentSceneIndex, sceneIndexBeforeTap, "A normal advance must not complete a physical challenge");
-      state = stateEngine.reducer(state, { type: "COMPLETE_PHYSICAL" });
+      assert.strictEqual(state.currentSceneIndex, sceneIndexBeforeTap, "A normal advance must not complete a protected relay hold");
+      state = stateEngine.reducer(state, { type: "COMPLETE_RELAY_HOLD" });
     } else {
       state = stateEngine.reducer(state, { type: "ADVANCE_SCENE" });
     }
@@ -91,7 +92,7 @@ config.chapters.forEach((chapter, chapterIndex) => {
     state = stateEngine.reducer(state, { type: "OPEN_CHECKPOINT" });
     config.checkpoint.scenes.forEach((scene) => {
       state = stateEngine.reducer(state, {
-        type: scene.type === "physical-challenge" ? "COMPLETE_PHYSICAL" : "ADVANCE_SCENE",
+        type: ["physical-challenge", "cast-handoff", "cast-cue"].includes(scene.type) ? "COMPLETE_RELAY_HOLD" : "ADVANCE_SCENE",
       });
     });
     assert.strictEqual(state.checkpointComplete, true);
@@ -107,7 +108,7 @@ assert.strictEqual(state.activeFlow, "mew", "The glitch must interrupt the appar
 assert.strictEqual(state.fakeCreditsComplete, true);
 config.epilogue.scenes.forEach((scene) => {
   state = stateEngine.reducer(state, {
-    type: scene.type === "physical-challenge" ? "COMPLETE_PHYSICAL" : "ADVANCE_SCENE",
+    type: ["physical-challenge", "cast-handoff", "cast-cue"].includes(scene.type) ? "COMPLETE_RELAY_HOLD" : "ADVANCE_SCENE",
   });
 });
 
@@ -148,10 +149,10 @@ assert.strictEqual(gatedVault.view, "map", "The Ranger Vault must reject normal 
 
 const parentMew = stateEngine.reducer(stateEngine.initialState(), {
   type: "PARENT_JUMP_MEW",
-  sceneIndex: config.epilogue.scenes.findIndex((scene) => scene.type === "physical-challenge"),
+  sceneIndex: config.epilogue.scenes.findIndex((scene) => scene.type === "cast-cue"),
 });
 assert.strictEqual(parentMew.activeFlow, "mew");
-assert.strictEqual(stateEngine.currentScene(parentMew).type, "physical-challenge");
+assert.strictEqual(stateEngine.currentScene(parentMew).type, "cast-cue");
 assert.strictEqual(parentMew.mewUnlocked, true);
 
 console.log("Creekside state tests passed.");

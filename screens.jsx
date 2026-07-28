@@ -10,10 +10,10 @@ const shell = { maxWidth: 560, margin: "0 auto", minHeight: "100%", display: "fl
 const pad = { padding: "var(--screen-pad)", flex: 1, display: "flex", flexDirection: "column" };
 
 /* Energy-field background wrapper */
-function Field({ type, hero, children, style = {} }) {
+function Field({ type, hero, children, style = {}, className = "", ...rest }) {
   const bg = hero ? "var(--field-hero)" : (FIELD[type] || "var(--field-psychic)");
   return (
-    <div style={{ minHeight: "100%", background: bg, position: "relative", overflow: "hidden", ...style }}>
+    <div className={className} style={{ minHeight: "100%", background: bg, position: "relative", overflow: "hidden", ...style }} {...rest}>
       <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: "var(--field-grid)", backgroundSize: "var(--field-grid-size)", pointerEvents: "none", zIndex: 0 }} />
       <Icon name="energy-shard" size={220} color="#fff" style={{ position: "absolute", top: "-40px", right: "-70px", opacity: 0.08, animation: "tj-burst-spin 40s linear infinite", zIndex: 0 }} />
       <Icon name="energy-shard" size={150} color="#fff" style={{ position: "absolute", bottom: "40px", left: "-50px", opacity: 0.07, animation: "tj-burst-spin 50s linear infinite reverse", zIndex: 0 }} />
@@ -486,10 +486,184 @@ function SceneSpecificContent({ config, state, scene }) {
   return null;
 }
 
+function AudienceIndicator({ audience, performerName }) {
+  const label = audience === "luca"
+    ? "Trainer View · Show Luca"
+    : audience === "cast"
+      ? "Adult Cast Screen · Do Not Show Luca"
+      : "Lead Adult Screen · Turn Away from Luca";
+  return (
+    <div className={`audience-indicator audience-indicator--${audience}`} data-testid="audience-indicator">
+      <Icon name={audience === "luca" ? "sparkle" : "lock"} size={18} color="currentColor" />
+      <span>{label}</span>
+      {performerName && audience !== "luca" && <small>{performerName}</small>}
+    </div>
+  );
+}
+
+function RelayHandoffScreen({ config, sequence, scene, dispatch }) {
+  return (
+    <Field type={sequence.type} className="relay-field relay-field--luca" data-audience="luca">
+      <div style={{ ...shell }}>
+        <div style={{ ...pad, gap: 16, justifyContent: "center" }}>
+          <AudienceIndicator audience="luca" />
+          <Card
+            name={scene.title}
+            meta="Ready for the real-world mission"
+            hero={<HeroArt src={sequence.art ? ART + sequence.art : undefined} glyph="sparkle" color="var(--mewtwo-x)" label={sequence.name} size={132} bob />}
+            burst
+            holo
+            style={{ maxWidth: "none" }}
+            footer={<span>{sequence.name}</span>}
+          >
+            <p className="luca-story-line">{scene.body}</p>
+            <div className="handoff-performer">
+              <span>Next up</span>
+              <strong>{scene.performerName}</strong>
+              <small>{scene.characterName}</small>
+            </div>
+            <p className="handoff-instruction">Lead adult: keep control of the phone until the hold finishes, then turn it away from Luca.</p>
+            <AdultHoldButton
+              duration={config.adultHoldMs}
+              label={scene.handoffLabel}
+              onComplete={() => dispatch({ type: "COMPLETE_RELAY_HOLD" })}
+            />
+          </Card>
+        </div>
+      </div>
+    </Field>
+  );
+}
+
+function PrivacyShieldScreen({ sequence, scene, dispatch }) {
+  return (
+    <Field hero className="relay-field relay-field--adult" data-audience="adult">
+      <div style={{ ...shell }}>
+        <div style={{ ...pad, justifyContent: "center" }}>
+          <section className="relay-shield" data-testid="privacy-shield" aria-labelledby="privacy-shield-title">
+            <AudienceIndicator audience="adult" performerName={scene.performerName} />
+            <div className="relay-shield__icon" aria-hidden><Icon name="lock" size={64} color="var(--banana)" /></div>
+            <p className="relay-shield__eyebrow">Privacy handoff</p>
+            <h1 id="privacy-shield-title">Adult Cast Screen Ahead</h1>
+            <p>Turn the phone away from Luca.</p>
+            <Button
+              variant="reward"
+              size="lg"
+              block
+              onClick={() => dispatch({ type: "ADVANCE_SCENE" })}
+              data-testid="open-cast-cue"
+            >
+              Phone is turned away — open cast cue
+            </Button>
+            <small>The next screen contains speaking lines, challenge operations, and reward preparation.</small>
+          </section>
+        </div>
+      </div>
+    </Field>
+  );
+}
+
+function CastCueScreen({ config, sequence, scene, dispatch }) {
+  return (
+    <div className="runtime-cast-screen" data-audience="cast" data-testid="cast-cue-screen">
+      <div className="runtime-cast-screen__shell">
+        <AudienceIndicator audience="cast" performerName={scene.performerName} />
+        <header className="runtime-cast-header">
+          <p>Active performer</p>
+          <h1>{scene.performerName}</h1>
+          <strong>{scene.characterName}</strong>
+        </header>
+
+        <section className="runtime-cue-card runtime-cue-card--entrance">
+          <span>Entrance cue</span>
+          <p>{scene.entranceCue}</p>
+        </section>
+
+        <section className="runtime-cue-card">
+          <span>Say this</span>
+          <div className="runtime-spoken-lines">
+            {scene.spokenLines.map((line, index) => <blockquote key={`${scene.id}-spoken-${index}`}>“{line}”</blockquote>)}
+          </div>
+        </section>
+
+        <section className="runtime-cue-card">
+          <span>Run the challenge</span>
+          <ol>
+            {scene.challengeSteps.map((step, index) => <li key={`${scene.id}-step-${index}`}>{step}</li>)}
+          </ol>
+        </section>
+
+        <div className="runtime-cue-grid">
+          <section className="runtime-cue-box runtime-cue-box--success">
+            <strong>Success</strong>
+            <p>{scene.successCondition}</p>
+          </section>
+          <section className="runtime-cue-box runtime-cue-box--fallback">
+            <strong>Fallback</strong>
+            <p>{scene.fallback}</p>
+          </section>
+        </div>
+
+        <section className="runtime-cue-card runtime-cue-card--reward">
+          <span>Prepare after Luca sees the result</span>
+          <p>{scene.rewardPreparation}</p>
+          <div className="runtime-package-chips">
+            {scene.rewardPackages.map((packageName, index) => (
+              <strong key={`${scene.id}-package-${index}`}>{packageName} · {scene.rewardOwners[index] || scene.rewardOwners[0]}</strong>
+            ))}
+          </div>
+        </section>
+
+        <section className="runtime-cue-card runtime-cue-card--transition">
+          <span>Final line</span>
+          <blockquote>“{scene.transitionLine}”</blockquote>
+          <small>Transition: {scene.transitionDestination}</small>
+        </section>
+
+        <div className="runtime-cast-completion">
+          <p>Either the named performer or supervising adult may operate this control.</p>
+          <AdultHoldButton
+            duration={config.adultHoldMs}
+            label={scene.completionLabel}
+            onComplete={() => dispatch({ type: "COMPLETE_RELAY_HOLD" })}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReturnToPlayerScreen({ sequence, scene, dispatch }) {
+  return (
+    <Field hero className="relay-field relay-field--adult" data-audience="adult">
+      <div style={{ ...shell }}>
+        <div style={{ ...pad, justifyContent: "center" }}>
+          <section className="relay-shield relay-shield--return" data-testid="return-to-player" aria-labelledby="return-player-title">
+            <AudienceIndicator audience="adult" performerName={scene.performerName} />
+            <div className="relay-shield__icon" aria-hidden><Icon name="pokeball" size={68} color="var(--banana)" /></div>
+            <p className="relay-shield__eyebrow">Mission result ready</p>
+            <h1 id="return-player-title">Return the phone to Luca</h1>
+            <p>The next screen reveals his accomplishment. Make sure Luca can see it before continuing.</p>
+            <Button
+              variant="reward"
+              size="lg"
+              block
+              onClick={() => dispatch({ type: "ADVANCE_SCENE" })}
+              data-testid="reveal-mission-result"
+            >
+              Luca can see the phone — reveal mission result
+            </Button>
+          </section>
+        </div>
+      </div>
+    </Field>
+  );
+}
+
 function CreeksideScene({ config, state, dispatch }) {
   const sequence = window.CreeksideState.activeSequence(state);
   const scene = window.CreeksideState.currentScene(state);
-  if (!sequence || !scene) {
+  if (!sequence || !scene || config.audiences.indexOf(scene.audience) === -1) {
     return (
       <Field hero>
         <div style={{ ...shell, ...pad }}>
@@ -497,6 +671,19 @@ function CreeksideScene({ config, state, dispatch }) {
         </div>
       </Field>
     );
+  }
+
+  if (scene.type === "cast-handoff") {
+    return <RelayHandoffScreen config={config} sequence={sequence} scene={scene} dispatch={dispatch} />;
+  }
+  if (scene.type === "privacy-shield") {
+    return <PrivacyShieldScreen sequence={sequence} scene={scene} dispatch={dispatch} />;
+  }
+  if (scene.type === "cast-cue") {
+    return <CastCueScreen config={config} sequence={sequence} scene={scene} dispatch={dispatch} />;
+  }
+  if (scene.type === "return-to-player") {
+    return <ReturnToPlayerScreen sequence={sequence} scene={scene} dispatch={dispatch} />;
   }
 
   const sceneLabel = scene.type.replace(/-/g, " ");
@@ -513,9 +700,10 @@ function CreeksideScene({ config, state, dispatch }) {
       : `Chapter ${sequence.number} · ${sequence.name} · ${sequence.scheduleLabel}`;
 
   return (
-    <Field type={sequence.type}>
+    <Field type={sequence.type} className="luca-scene-field" data-audience={scene.audience}>
       <div style={{ ...shell }}>
         <div style={{ ...pad, gap: 14 }}>
+          <AudienceIndicator audience={scene.audience} performerName={scene.performerName} />
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
             <Button
               variant="ghost"
