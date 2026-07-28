@@ -6,10 +6,6 @@
    print pieces (not built in this pass) would keep these out.
    ============================================================ */
 
-/* Webfonts — Google Fonts CDN. No licensed binaries were provided;
-   swap for local @font-face + assets/fonts/*.woff2 if you get them. */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
-
 :root {
   /* --- Core palette --- */
   --paper:             #FBFCFA;
@@ -82,6 +78,7 @@
 
   --w-game:    560px;
   --w-desktop: 1080px;
+  --screen-pad: 24px;
 
   /* --- Elevation --- */
   --shadow-card: 0 6px 24px rgba(27,36,48,.10);
@@ -155,3 +152,466 @@ body {
 * { box-sizing: border-box; }
 button { font: inherit; }
 img { -webkit-user-drag: none; user-select: none; }
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* --- Creekside V2 Phase 1 controls --- */
+.adult-hold-button {
+  position: relative;
+  width: 100%;
+  min-height: 64px;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: linear-gradient(180deg, #7656B8, #4B3A8F);
+  color: #fff;
+  box-shadow: var(--glow-violet), inset 0 1px 0 rgba(255,255,255,.35);
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.adult-hold-button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+.adult-hold-button:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+.adult-hold-button__fill {
+  position: absolute;
+  inset: 0;
+  width: var(--hold-progress, 0%);
+  background: linear-gradient(90deg, var(--tropius-leaf-deep), var(--tropius-leaf));
+  transition: width 45ms linear;
+}
+.adult-hold-button__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 22px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 800;
+}
+.adult-hold-button__instruction {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 0 18px 13px;
+  font-family: var(--font-body);
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+.fragment-slots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.fragment-slot {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 2px 8px;
+  min-width: 0;
+  padding: 12px;
+  border: 2px dashed var(--silver);
+  border-radius: var(--r-sm);
+  background: var(--paper-alt);
+  color: var(--ink-soft);
+}
+.fragment-slot--collected {
+  border-style: solid;
+  border-color: var(--tropius-leaf);
+  background: rgba(59,165,93,.10);
+  color: var(--ink);
+}
+.fragment-slot > span {
+  font-family: var(--font-label);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.fragment-slot > small {
+  grid-column: 2;
+  overflow: hidden;
+  font-size: .78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.creekside-map-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 14px;
+  border: 0;
+  border-radius: var(--r-card);
+  background: #fff;
+  color: var(--ink);
+  text-align: left;
+  box-shadow: var(--shadow-card);
+}
+.creekside-map-card[disabled] {
+  background: rgba(255,255,255,.55);
+  color: var(--ink-soft);
+  cursor: default;
+}
+.creekside-map-card--active {
+  box-shadow: inset 0 0 0 3px var(--mewtwo-x), var(--shadow-float);
+  cursor: pointer;
+}
+.creekside-map-card--complete {
+  box-shadow: inset 0 0 0 2px var(--tropius-leaf), var(--shadow-card);
+}
+
+.parent-mode-overlay {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(15,12,35,.75);
+  backdrop-filter: blur(5px);
+}
+.parent-mode-panel {
+  width: min(100%, 560px);
+  max-height: 88dvh;
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: var(--r-card);
+  background: var(--surface);
+  box-shadow: var(--shadow-float);
+}
+.parent-mode-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.parent-mode-trigger {
+  position: fixed;
+  z-index: 30;
+  top: max(8px, env(safe-area-inset-top));
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: transparent;
+  cursor: default;
+}
+.parent-mode-trigger:focus-visible {
+  outline: 2px solid rgba(255,255,255,.7);
+}
+
+@media (max-width: 380px) {
+  .fragment-slots,
+  .parent-mode-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .adult-hold-button__fill {
+    transition: none;
+  }
+}
+
+/* --- Creekside V2 production content --- */
+.dialogue-lines {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+.dialogue-lines p {
+  margin: 0;
+  padding: 12px 14px;
+  border-left: 4px solid var(--mewtwo-x);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  background: rgba(138,79,255,.09);
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.45;
+}
+.mission-instructions {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: var(--r-sm);
+  background: var(--paper-alt);
+}
+.mission-instructions ol {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 22px;
+}
+.success-rule,
+.fallback-rule {
+  display: grid;
+  gap: 3px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: var(--r-sm);
+  font-size: .94rem;
+}
+.success-rule {
+  border: 1.5px solid var(--tropius-leaf);
+  background: rgba(59,165,93,.10);
+}
+.fallback-rule {
+  border: 1.5px solid var(--sky);
+  background: rgba(79,176,229,.10);
+}
+.success-rule strong,
+.fallback-rule strong {
+  font-family: var(--font-label);
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.mission-warning {
+  padding: 10px 12px;
+  border: 1.5px solid var(--danger);
+  border-radius: var(--r-sm);
+  background: rgba(228,87,46,.08);
+  color: var(--danger);
+  font-weight: 700;
+}
+.reward-disposition {
+  flex: none;
+  max-width: 112px;
+  padding: 5px 8px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-label);
+  font-size: .61rem;
+  line-height: 1.15;
+  letter-spacing: .04em;
+  text-align: center;
+}
+.reward-disposition--open-now {
+  background: var(--tropius-leaf);
+  color: #fff;
+}
+.reward-disposition--carry-for-later {
+  background: var(--sky);
+  color: #082f49;
+}
+.reward-disposition--save-for-celebration {
+  background: var(--banana);
+  color: #5a4410;
+}
+.inventory-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 16px;
+}
+.inventory-summary span {
+  padding: 12px;
+  border-radius: var(--r-sm);
+  background: var(--paper-alt);
+  text-align: center;
+}
+.inventory-summary strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+}
+.hall-of-heroes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 16px;
+}
+.hall-of-heroes > div {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  padding: 11px;
+  border: 1.5px solid var(--gold);
+  border-radius: var(--r-sm);
+  background: rgba(217,182,80,.12);
+}
+.hall-of-heroes span,
+.hall-of-heroes small {
+  display: block;
+}
+.hall-of-heroes small {
+  margin-top: 2px;
+  color: var(--ink-soft);
+  font-size: .7rem;
+}
+.fake-credits-panel {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+  padding: 18px;
+  overflow: hidden;
+  border-radius: var(--r-sm);
+  background: #0c0920;
+  color: #fff;
+}
+.fake-credits-roll {
+  display: grid;
+  gap: 10px;
+  min-height: 230px;
+  text-align: center;
+  animation: creekside-credits 10s linear both;
+}
+.fake-credits-roll strong {
+  color: var(--banana);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-style: italic;
+}
+@keyframes creekside-credits {
+  from { transform: translateY(45%); }
+  to { transform: translateY(-35%); }
+}
+.friendly-glitch {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  margin-top: 18px;
+  padding: 22px 14px;
+  overflow: hidden;
+  border: 2px solid #ff8fcb;
+  border-radius: var(--r-sm);
+  background: linear-gradient(135deg, #1c1440, #512b74);
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 0 24px rgba(255,143,203,.45);
+}
+.friendly-glitch::before,
+.friendly-glitch::after {
+  content: "";
+  position: absolute;
+  inset: 25% -10%;
+  height: 3px;
+  background: rgba(255,255,255,.65);
+  animation: creekside-glitch-line 1.4s steps(2) infinite;
+}
+.friendly-glitch::after {
+  inset-block-start: 68%;
+  animation-delay: .35s;
+}
+.friendly-glitch span {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+.friendly-glitch small {
+  font-family: var(--font-label);
+  color: #ffb5dd;
+  letter-spacing: .12em;
+}
+@keyframes creekside-glitch-line {
+  0%,100% { transform: translateX(-12%); opacity: .25; }
+  50% { transform: translateX(12%); opacity: .8; }
+}
+.parent-mode-json {
+  width: 100%;
+  min-height: 150px;
+  margin-bottom: 10px;
+  padding: 12px;
+  resize: vertical;
+  border: 2px solid var(--silver);
+  border-radius: var(--r-sm);
+  background: var(--paper-alt);
+  color: var(--ink);
+  font: .75rem/1.45 var(--font-label);
+}
+.storage-warning {
+  position: sticky;
+  z-index: 80;
+  top: 0;
+  padding: 10px 14px;
+  border-bottom: 2px solid #fff;
+  background: var(--danger);
+  color: #fff;
+  font-size: .92rem;
+  font-weight: 800;
+  text-align: center;
+}
+.celebration-satchel {
+  display: grid;
+  gap: 5px;
+  width: 100%;
+  max-width: 420px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 14px;
+  border: 2px solid var(--banana);
+  border-radius: var(--r-card);
+  background: rgba(12,9,32,.45);
+  color: #fff;
+  text-align: left;
+}
+.celebration-satchel strong {
+  color: var(--banana);
+  margin-bottom: 4px;
+}
+
+@media (max-width: 380px) {
+  :root {
+    --screen-pad: 14px;
+  }
+  .creekside-map-card > img {
+    display: none;
+  }
+  .card-heading {
+    align-items: flex-start !important;
+    flex-direction: column;
+    gap: 4px !important;
+  }
+  .card-hero {
+    min-height: 108px !important;
+  }
+  .card-body {
+    padding: 14px !important;
+  }
+  .card-footer {
+    align-items: flex-start !important;
+    flex-direction: column;
+    letter-spacing: .04em !important;
+    overflow-wrap: anywhere;
+  }
+  .hall-of-heroes,
+  .inventory-summary {
+    grid-template-columns: 1fr;
+  }
+  .reward-item {
+    align-items: flex-start !important;
+    flex-wrap: wrap;
+  }
+  .reward-item .reward-disposition {
+    margin-left: 34px;
+  }
+  .reward-disposition {
+    max-width: 92px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fake-credits-roll,
+  .friendly-glitch::before,
+  .friendly-glitch::after {
+    animation: none;
+  }
+}
