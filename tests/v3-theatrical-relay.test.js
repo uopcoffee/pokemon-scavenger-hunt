@@ -100,6 +100,9 @@ function stateAt(sequence, sceneIndex) {
 }
 
 assert.deepStrictEqual(Object.keys(cues).sort(), Object.keys(approvedPerformers).sort());
+const monicaEntrance = locateScene("monica-entrance").scene;
+assert.strictEqual(monicaEntrance.character, "Professor Monica");
+assert.ok(monicaEntrance.title.startsWith("Professor Monica"));
 
 Object.entries(cues).forEach(([cueId, cue]) => {
   assert.strictEqual(cue.performerName, approvedPerformers[cueId], `${cueId} performer must be explicitly approved`);
@@ -193,6 +196,20 @@ sequences.forEach((sequence) => {
 
     [handoff, privacy, scene, returned, result].forEach((relayScene, offset) => {
       const exactState = stateAt(sequence, index - 2 + offset);
+      const backedUp = stateEngine.reducer(exactState, { type: "PARENT_BACK_SCENE" });
+      assert.strictEqual(
+        backedUp.currentSceneIndex,
+        index - 3 + offset,
+        `Parent Mode must go back one scene from ${relayScene.id}`
+      );
+
+      const parentAdvanced = stateEngine.reducer(exactState, { type: "PARENT_ADVANCE" });
+      assert.strictEqual(
+        parentAdvanced.currentSceneIndex,
+        index - 1 + offset,
+        `Parent Mode must advance one scene from ${relayScene.id}`
+      );
+
       memory.clear();
       assert.strictEqual(stateEngine.writeState(exactState), true);
       const restored = stateEngine.readState();
@@ -221,10 +238,10 @@ const v2Snapshot = {
   completedChapters: ["trainer-orientation", "fairy-garden", "professor-oak-lab", "pokemon-center"],
   earnedRewards: ["mega-gallade-ex", "trainer-license", "fairy-badge"],
   collectedFragments: [1, 2, 4],
-  checkpointComplete: false,
-  mewUnlocked: false,
-  fakeCreditsComplete: false,
-  mewComplete: false,
+  checkpointComplete: true,
+  mewUnlocked: true,
+  fakeCreditsComplete: true,
+  mewComplete: true,
 };
 const migrated = stateEngine.sanitizeState(v2Snapshot);
 assert.strictEqual(migrated.currentSceneId, "rocket-challenge-handoff", "V2 challenge progress must migrate to the Luca handoff");
@@ -233,8 +250,13 @@ assert.strictEqual(migrated.trainer.name, "Luca");
 assert.deepStrictEqual(plain(migrated.completedChapters), plain(v2Snapshot.completedChapters));
 assert.deepStrictEqual(plain(migrated.earnedRewards), plain(v2Snapshot.earnedRewards));
 assert.deepStrictEqual(plain(migrated.collectedFragments), plain(v2Snapshot.collectedFragments));
+assert.strictEqual(migrated.checkpointComplete, true);
+assert.strictEqual(migrated.mewUnlocked, true);
+assert.strictEqual(migrated.fakeCreditsComplete, true);
+assert.strictEqual(migrated.mewComplete, true);
 
 const screenSource = fs.readFileSync(path.join(repositoryRoot, "screens.jsx"), "utf8");
+const componentSource = fs.readFileSync(path.join(repositoryRoot, "components.jsx"), "utf8");
 const privacySource = screenSource.slice(
   screenSource.indexOf("function PrivacyShieldScreen"),
   screenSource.indexOf("function CastCueScreen")
@@ -244,8 +266,20 @@ assert.ok(privacySource.includes("Phone is turned away — open cast cue"));
 ["spokenLines", "challengeSteps", "rewardPackages", "transitionDestination"].forEach((field) => {
   assert.ok(!privacySource.includes(field), `PrivacyShieldScreen must not render ${field}`);
 });
-assert.ok(screenSource.includes('data-audience="luca"'));
-assert.ok(screenSource.includes('data-audience="adult"'));
+assert.ok(screenSource.includes('audience="luca"'));
+assert.ok(screenSource.includes('audience="adult"'));
 assert.ok(screenSource.includes('data-audience="cast"'));
+assert.ok(componentSource.includes("onPointerUp={endHold}"));
+assert.ok(componentSource.includes("onPointerCancel={cancelHold}"));
+assert.ok(componentSource.includes("onLostPointerCapture={endHold}"));
+assert.ok(componentSource.includes("if (!completedRef.current) cancelHold();"));
+assert.strictEqual(
+  componentSource.slice(
+    componentSource.indexOf("function AdultHoldButton"),
+    componentSource.indexOf("function CodeFragmentSlots")
+  ).split("onComplete();").length - 1,
+  1,
+  "AdultHoldButton must have one completion call site"
+);
 
 console.log("V3 theatrical relay tests passed.");

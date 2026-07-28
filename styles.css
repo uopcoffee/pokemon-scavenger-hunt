@@ -864,7 +864,7 @@ textarea:focus-visible {
   width: min(100%, 680px);
   min-height: 100%;
   margin: 0 auto;
-  padding: max(14px, env(safe-area-inset-top)) 14px calc(116px + env(safe-area-inset-bottom));
+  padding: max(14px, env(safe-area-inset-top)) 14px calc(210px + env(safe-area-inset-bottom));
 }
 .runtime-cast-header {
   margin: 12px 0;
@@ -1045,6 +1045,34 @@ textarea:focus-visible {
   }
   .luca-scene-card .card-hero {
     min-height: 138px !important;
+  }
+  .runtime-cast-completion > p {
+    margin-bottom: 4px;
+    font-size: .68rem;
+    line-height: 1.2;
+  }
+  .runtime-cast-completion .adult-hold-button__content {
+    padding: 11px 14px 8px;
+    font-size: .9rem;
+    line-height: 1.2;
+  }
+  .runtime-cast-completion .adult-hold-button__instruction {
+    padding: 0 12px 9px;
+    font-size: .72rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .relay-field .card-heading,
+  .luca-scene-card .card-heading {
+    align-items: flex-start !important;
+    flex-direction: column;
+    gap: 4px !important;
+  }
+  .relay-field .card-heading span:last-child,
+  .luca-scene-card .card-heading span:last-child {
+    flex: initial !important;
+    white-space: normal;
   }
 }
 

@@ -10,10 +10,10 @@ const shell = { maxWidth: 560, margin: "0 auto", minHeight: "100%", display: "fl
 const pad = { padding: "var(--screen-pad)", flex: 1, display: "flex", flexDirection: "column" };
 
 /* Energy-field background wrapper */
-function Field({ type, hero, children, style = {}, className = "", ...rest }) {
+function Field({ type, hero, children, style = {}, className = "", audience }) {
   const bg = hero ? "var(--field-hero)" : (FIELD[type] || "var(--field-psychic)");
   return (
-    <div className={className} style={{ minHeight: "100%", background: bg, position: "relative", overflow: "hidden", ...style }} {...rest}>
+    <div className={className} data-audience={audience} style={{ minHeight: "100%", background: bg, position: "relative", overflow: "hidden", ...style }}>
       <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: "var(--field-grid)", backgroundSize: "var(--field-grid-size)", pointerEvents: "none", zIndex: 0 }} />
       <Icon name="energy-shard" size={220} color="#fff" style={{ position: "absolute", top: "-40px", right: "-70px", opacity: 0.08, animation: "tj-burst-spin 40s linear infinite", zIndex: 0 }} />
       <Icon name="energy-shard" size={150} color="#fff" style={{ position: "absolute", bottom: "40px", left: "-50px", opacity: 0.07, animation: "tj-burst-spin 50s linear infinite reverse", zIndex: 0 }} />
@@ -502,7 +502,7 @@ function AudienceIndicator({ audience, performerName }) {
 
 function RelayHandoffScreen({ config, sequence, scene, dispatch }) {
   return (
-    <Field type={sequence.type} className="relay-field relay-field--luca" data-audience="luca">
+    <Field type={sequence.type} className="relay-field relay-field--luca" audience="luca">
       <div style={{ ...shell }}>
         <div style={{ ...pad, gap: 16, justifyContent: "center" }}>
           <AudienceIndicator audience="luca" />
@@ -536,7 +536,7 @@ function RelayHandoffScreen({ config, sequence, scene, dispatch }) {
 
 function PrivacyShieldScreen({ sequence, scene, dispatch }) {
   return (
-    <Field hero className="relay-field relay-field--adult" data-audience="adult">
+    <Field hero className="relay-field relay-field--adult" audience="adult">
       <div style={{ ...shell }}>
         <div style={{ ...pad, justifyContent: "center" }}>
           <section className="relay-shield" data-testid="privacy-shield" aria-labelledby="privacy-shield-title">
@@ -634,7 +634,7 @@ function CastCueScreen({ config, sequence, scene, dispatch }) {
 
 function ReturnToPlayerScreen({ sequence, scene, dispatch }) {
   return (
-    <Field hero className="relay-field relay-field--adult" data-audience="adult">
+    <Field hero className="relay-field relay-field--adult" audience="adult">
       <div style={{ ...shell }}>
         <div style={{ ...pad, justifyContent: "center" }}>
           <section className="relay-shield relay-shield--return" data-testid="return-to-player" aria-labelledby="return-player-title">
@@ -701,7 +701,7 @@ function CreeksideScene({ config, state, dispatch }) {
       : `Chapter ${sequence.number} · ${sequence.name} · ${sequence.scheduleLabel}`;
 
   return (
-    <Field type={sequence.type} className="luca-scene-field" data-audience={scene.audience}>
+    <Field type={sequence.type} className="luca-scene-field" audience={scene.audience}>
       <div style={{ ...shell }}>
         <div style={{ ...pad, gap: 14 }}>
           <AudienceIndicator audience={scene.audience} performerName={scene.performerName} />

@@ -139,12 +139,25 @@ vm.runInContext(
   fs.readFileSync(path.join(repositoryRoot, "vendor/babel.min.js"), "utf8"),
   babelContext
 );
-["components.jsx", "minigames.jsx", "screens.jsx"].forEach((file) => {
-  babelContext.Babel.transform(
+const compiledBrowserScripts = ["components.jsx", "minigames.jsx", "screens.jsx"].map((file) => {
+  return babelContext.Babel.transform(
     fs.readFileSync(path.join(repositoryRoot, file), "utf8"),
     { presets: ["react"] }
-  );
+  ).code;
 });
+const browserScriptContext = {
+  window: {
+    LUCA_CONFIG: { artBase: "assets/pokemon/" },
+  },
+};
+vm.createContext(browserScriptContext);
+compiledBrowserScripts.forEach((compiledSource, index) => {
+  vm.runInContext(compiledSource, browserScriptContext, {
+    filename: ["components.jsx", "minigames.jsx", "screens.jsx"][index],
+  });
+});
+assert.strictEqual(typeof browserScriptContext.window.MiniGame, "function");
+assert.strictEqual(typeof browserScriptContext.window.TrainerApp, "function");
 
 // Tracked-file privacy scan. Symbolic fragment slot numbers are permitted;
 // numbered household addresses and common secret assignments are not.
