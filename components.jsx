@@ -74,11 +74,11 @@ function Button({
     fontFamily: "var(--font-display)", fontWeight: 800, fontStyle: "italic", cursor: disabled || loading ? "not-allowed" : "pointer",
     border: "none", borderRadius: "var(--r-pill)",
     transition: "transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast), filter var(--dur-fast)",
-    outlineOffset: "3px", textDecoration: "none", whiteSpace: "nowrap", boxSizing: "border-box", overflow: "hidden",
+    outlineOffset: "3px", textDecoration: "none", whiteSpace: "normal", lineHeight: 1.2, textAlign: "center", boxSizing: "border-box", overflow: "hidden",
     width: block ? "100%" : "auto", opacity: disabled ? 0.55 : 1, letterSpacing: "0.01em",
   };
   const sizes = {
-    md: { fontSize: "1.02rem", padding: "12px 24px", minHeight: "46px" },
+    md: { fontSize: "1.02rem", padding: "12px 24px", minHeight: "48px" },
     lg: { fontSize: "1.22rem", padding: "17px 30px", minHeight: "58px" },
   };
   const variants = {
@@ -218,7 +218,7 @@ function Card({
           <span aria-hidden style={{ position: "absolute", top: "-30%", bottom: "-30%", width: "45%", left: 0, backgroundImage: "var(--holo-strong)", filter: "blur(6px)", mixBlendMode: "screen", pointerEvents: "none", zIndex: 3, animation: "tj-holo-sweep 3.2s ease-in-out infinite" }} />
         )}
         {(name || meta) && (
-          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "12px", padding: "14px 18px 8px", position: "relative", zIndex: 2 }}>
+          <div className="card-heading" style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "12px", padding: "14px 18px 8px", position: "relative", zIndex: 2 }}>
             {name && <span style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontStyle: "italic", fontSize: "1.35rem", color: "var(--ink)", lineHeight: 1 }}>{name}</span>}
             {meta && <span style={{ fontFamily: "var(--font-label)", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: accent, flex: "none" }}>{meta}</span>}
           </div>
@@ -227,7 +227,7 @@ function Card({
           <div style={{ padding: "0 18px 4px", fontFamily: "var(--font-label)", fontSize: "0.75rem", letterSpacing: "0.06em", color: "var(--ink-soft)", fontWeight: 600, position: "relative", zIndex: 2 }}>{statLine}</div>
         )}
         {hero && (
-          <div style={{
+          <div className="card-hero" style={{
             position: "relative", margin: "8px 14px 0", borderRadius: "var(--r-sm)", overflow: "hidden",
             display: "flex", alignItems: "center", justifyContent: "center", minHeight: "128px",
             background: burst ? "radial-gradient(circle at 50% 42%, rgba(184,146,255,.35), rgba(184,146,255,0) 62%), linear-gradient(180deg,#F7F5FF,#EEF3FF)" : "linear-gradient(180deg,#F7F8F5,#EEF1EC)",
@@ -239,11 +239,11 @@ function Card({
             <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: "100%" }}>{hero}</div>
           </div>
         )}
-        <div style={{ padding: "16px 18px", flex: 1, fontFamily: "var(--font-body)", fontSize: "1.0625rem", lineHeight: 1.55, color: "var(--ink)", position: "relative", zIndex: 2 }}>
+        <div className="card-body" style={{ padding: "16px 18px", flex: 1, fontFamily: "var(--font-body)", fontSize: "1.0625rem", lineHeight: 1.55, color: "var(--ink)", position: "relative", zIndex: 2 }}>
           {children}
         </div>
         {footer && (
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", padding: "10px 18px", borderTop: "1px solid var(--paper-alt)", fontFamily: "var(--font-label)", fontSize: "0.7rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--ink-soft)", position: "relative", zIndex: 2 }}>
+          <div className="card-footer" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", padding: "10px 18px", borderTop: "1px solid var(--paper-alt)", fontFamily: "var(--font-label)", fontSize: "0.7rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--ink-soft)", position: "relative", zIndex: 2 }}>
             {footer}
           </div>
         )}
@@ -558,6 +558,9 @@ function AdultHoldButton({
       <span className="adult-hold-button__content">
         <Icon name={progress >= 1 ? "check" : "badge"} size={24} color="currentColor" />
         <span>{holding ? `Keep holding… ${Math.round(progress * 100)}%` : label}</span>
+      </span>
+      <span className="adult-hold-button__instruction">
+        Hold for {duration / 1000} seconds. Release early to cancel.
       </span>
     </button>
   );

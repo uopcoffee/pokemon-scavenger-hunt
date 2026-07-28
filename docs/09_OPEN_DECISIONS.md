@@ -4,7 +4,7 @@ These decisions do not block design work. Use reasonable placeholders until Patr
 
 1. Exact actual digits on the four physical fragments
 2. Exact hiding spots for the three Fairy Energy Orbs
-3. Exact location of the Pokémon Center chapter within 10 Creekside
+3. Exact location of the Pokémon Center chapter within Home Base
 4. Exact water depth and whether capsules float or sit in a shallow area
 5. Which pictured mini tin is assigned to Professor Oak versus the Ranger Vault
 6. Exact Rayquaza physical game: hanging target, ring toss, or symbol assembly

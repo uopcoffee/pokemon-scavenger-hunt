@@ -116,7 +116,7 @@ Parent Mode must not display the house-entry code.
 - Use an illustrated Creekside Region path rather than a literal street map.
 - Locked chapters show silhouettes and mysterious labels.
 - Reveal the next destination only when unlocked.
-- 9 Creekside should appear as “Secret Ranger Vault,” not a visible access code.
+- The protected destination should appear only as “Secret Ranger Vault,” never as an address or visible access code.
 - Mew is absent from the map until the glitch.
 
 ## Code-fragment UX

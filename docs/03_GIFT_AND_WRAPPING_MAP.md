@@ -65,7 +65,7 @@ Additional sealed packs are inside:
 
 ## Packing plan by household
 
-### 10 Creekside before start
+### Home Base before start
 
 - Trainer Kit
 - Fairy Gym Reward
@@ -75,7 +75,7 @@ Additional sealed packs are inside:
 - Mew reward
 - Popsicles/treats
 
-### Deliver to 11 Creekside before 10:00
+### Deliver to Professor Oak's Lab before 10:00
 
 - Four sealed pool capsules
 - Professor Oak First Partner File
@@ -83,14 +83,14 @@ Additional sealed packs are inside:
 - Oak and Monica scripts
 - Research tray and Sky Fragment
 
-### Deliver to 8 Creekside
+### Deliver to Team Rocket Base
 
 - Team Rocket costume pieces
 - Basketball markers
 - Recovered Team Rocket Loot
 - Ranger Dispatch
 
-### Deliver to 9 Creekside
+### Deliver to Secret Ranger Vault
 
 - Secret Ranger Cache gift bag
 - Three Ranger trail symbols inside approved entry area

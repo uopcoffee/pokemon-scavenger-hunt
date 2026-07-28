@@ -1,5 +1,10 @@
 # 02. Chapter Specifications
 
+> Release-order note: the approved V2 runtime runs Professor Oak's Water
+> Research Lab as Chapter 3 at 10:15, followed by the Pokémon Center as
+> Chapter 4. The canonical party-day clock is in `01_MASTER_RUN_OF_SHOW.md`
+> and `10_PARTY_DAY_CHECKLIST.md`.
+
 ## Global chapter loop
 
 Each numbered chapter follows this rhythm:
@@ -22,7 +27,7 @@ Each numbered chapter follows this rhythm:
 
 ## Location
 
-10 Creekside, front porch or living room.
+Home Base, front porch or living room.
 
 ## Character
 
@@ -86,7 +91,7 @@ A tiny Fairy-type energy signal appears in the backyard. The app warns that the 
 
 ## Location
 
-10 Creekside backyard and trees.
+Home Base backyard and trees.
 
 ## Character
 
@@ -140,7 +145,7 @@ The recovered Fairy energy reveals that one Pokémon is injured. The app directs
 
 ## Location
 
-10 Creekside porch, patio, or indoor room.
+Home Base porch, patio, or indoor room.
 
 ## Character
 
@@ -195,7 +200,7 @@ The app may provide one hint after an incorrect match. There is no hard failure.
 
 ## Transition
 
-Nurse Joy receives an urgent transmission: Professor Oak has detected Pokémon objects beneath the surface of his Water Research Preserve. Luca must report to 11 Creekside at 10:15.
+Nurse Joy receives an urgent transmission: Professor Oak has detected Pokémon objects beneath the surface of his Water Research Preserve. Luca must report to Professor Oak's Lab at 10:15.
 
 ---
 
@@ -203,7 +208,7 @@ Nurse Joy receives an urgent transmission: Professor Oak has detected Pokémon o
 
 ## Location
 
-11 Creekside, pool and pool deck.
+Professor Oak's Lab, pool and pool deck.
 
 ## Characters
 
@@ -273,7 +278,7 @@ The First Partner box may be opened enough to see the promo cards and sticker sh
 
 ## Transition
 
-The app glitches with a Team Rocket transmission. Mike has intercepted Oak's data and is guarding the route at 8 Creekside. Bruce tells Luca to recover the stolen Ranger Dispatch and protect the Sky Fragment.
+The app glitches with a Team Rocket transmission. Mike has intercepted Oak's data and is guarding the route at Team Rocket Base. Bruce tells Luca to recover the stolen Ranger Dispatch and protect the Sky Fragment.
 
 ---
 
@@ -281,7 +286,7 @@ The app glitches with a Team Rocket transmission. Mike has intercepted Oak's dat
 
 ## Location
 
-8 Creekside, basketball hoop.
+Team Rocket Base, basketball hoop.
 
 ## Character
 
@@ -325,7 +330,7 @@ Round 3: **Final Poké Shot**
 
 **Quest item:**
 
-- Ranger Dispatch stating that the four collected fragments form the entry code for the Secret Ranger Vault at 9 Creekside
+- Ranger Dispatch stating that the four collected fragments form the entry code for the Secret Ranger Vault
 
 ## App update
 
@@ -343,7 +348,7 @@ Mike drops the Dispatch while retreating. The app reveals that Hannah and Noa, t
 
 ## Location
 
-9 Creekside, approved front entry only.
+Secret Ranger Vault, approved front entry only.
 
 ## Characters
 
@@ -395,7 +400,7 @@ The Rangers knew Team Rocket was searching for the Sky Fragment, so they secured
 
 ## Transition
 
-Professor Oak appears on screen and urgently requests the Sky Fragment and sealed Research File. Luca must return to 11 Creekside before attempting Victory Road.
+Professor Oak appears on screen and urgently requests the Sky Fragment and sealed Research File. Luca must return to Professor Oak's Lab before attempting Victory Road.
 
 ---
 
@@ -403,7 +408,7 @@ Professor Oak appears on screen and urgently requests the Sky Fragment and seale
 
 ## Location
 
-11 Creekside, pool deck or front area.
+Professor Oak's Lab, pool deck or front area.
 
 ## Characters
 
@@ -435,7 +440,7 @@ Oak analyzes the Sky Fragment and opens the Rangers' file. The energy is linked 
 **Quest item:**
 
 - League Authorization card
-- Sky Pillar coordinates pointing back to 10 Creekside
+- Sky Pillar coordinates pointing back to Home Base
 
 ## App update
 
@@ -445,7 +450,7 @@ Oak analyzes the Sky Fragment and opens the Rangers' file. The energy is linked 
 
 ## Transition
 
-Oak warns that Rayquaza energy is gathering above the trees at 10 Creekside. Only a League-qualified Trainer may enter Victory Road.
+Oak warns that Rayquaza energy is gathering above the trees at Home Base. Only a League-qualified Trainer may enter Victory Road.
 
 ---
 
@@ -453,7 +458,7 @@ Oak warns that Rayquaza energy is gathering above the trees at 10 Creekside. Onl
 
 ## Location
 
-10 Creekside backyard, trees, patio, and yard-game area.
+Home Base backyard, trees, patio, and yard-game area.
 
 ## Characters
 
@@ -535,7 +540,7 @@ The “Play again” button must not appear yet.
 
 ## Location
 
-10 Creekside backyard and trees.
+Home Base backyard and trees.
 
 ## Storyline
 

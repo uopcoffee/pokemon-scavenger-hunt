@@ -54,7 +54,7 @@ window.CREEKSIDE_CONFIG = {
   publicName: "Team Rocket Basketball Base",
   lockedName: "Intercepted Signal",
   type: "dark",
-  locationLabel: "8 Creekside",
+  locationLabel: "Team Rocket Base",
   participantIds: ["mike"],
   art: "team-rocket.png",
   badge: {

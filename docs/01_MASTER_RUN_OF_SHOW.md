@@ -4,18 +4,17 @@
 
 | Time | Segment | Location | Lead |
 |---|---|---|---|
-| 9:30-9:42 | Chapter 1: Trainer Orientation | 10 Creekside, front porch/living room | Auntie Ariel |
-| 9:42-9:52 | Chapter 2: Fairy Garden Rescue | 10 Creekside, backyard/trees | Nina |
-| 9:52-10:03 | Chapter 3: Pokémon Center Emergency | 10 Creekside, porch/patio/indoors | Polly |
-| 10:03-10:15 | Travel transition and costume reset | Walk to 11 Creekside | App-guided |
-| 10:15-10:35 | Chapter 4: Professor Oak's Water Research Lab | 11 Creekside, pool | Bruce and Monica |
-| 10:35-10:47 | Chapter 5: Team Rocket Basketball Base | 8 Creekside, hoop | Mike |
-| 10:47-10:57 | Chapter 6: Secret Ranger Vault | 9 Creekside, front entry | Adult escort |
-| 10:57-11:05 | Oak Return Checkpoint | 11 Creekside | Bruce and Monica |
-| 11:05-11:20 | Chapter 7: Victory Road and Champion Battle | 10 Creekside, backyard | Auntie Ariel and Patrick |
-| 11:20-11:24 | Apparent finale and Hall of Heroes | 10 Creekside, patio | App and family |
-| 11:24-11:30 | Mew Glitch Epilogue | 10 Creekside, backyard/trees | App and family |
-| 11:30 onward | Popsicles, photos, and booster opening | 10 Creekside, backyard | Family |
+| 9:30-9:42 | Chapter 1: Trainer Orientation | Home Base, front porch/living room | Auntie Ariel |
+| 9:42-9:52 | Chapter 2: Fairy Garden Rescue | Home Base, backyard/trees | Nina |
+| 9:52-10:15 | Travel transition and costume reset | Family-approved route to Professor Oak's Lab | App-guided |
+| 10:15-10:35 | Chapter 3: Professor Oak's Water Research Lab | Professor Oak's Lab, pool | Bruce and Monica |
+| 10:35-10:47 | Chapter 4: Pokémon Center Emergency | Prepared patio/indoor station | Polly |
+| 10:47-10:59 | Chapter 5: Team Rocket Basketball Base | Team Rocket Base, hoop | Mike |
+| 10:59-11:09 | Chapter 6: Secret Ranger Vault | Approved front-entry area | Adult escort |
+| 11:09-11:17 | Oak Return Checkpoint | Professor Oak's Lab | Bruce and Monica |
+| 11:17-11:30 | Chapter 7: Victory Road, Champion, Hall of Heroes, and fake credits | Home Base, backyard/patio | Auntie Ariel and Patrick |
+| 11:30-11:36 | Mew Glitch Epilogue | Home Base, backyard/trees | App and family |
+| 11:36 onward | Popsicles, photos, and booster opening | Home Base, backyard | Family |
 
 ## Timing rules
 

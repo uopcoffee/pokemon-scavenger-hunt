@@ -6,10 +6,6 @@
    print pieces (not built in this pass) would keep these out.
    ============================================================ */
 
-/* Webfonts — Google Fonts CDN. No licensed binaries were provided;
-   swap for local @font-face + assets/fonts/*.woff2 if you get them. */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
-
 :root {
   /* --- Core palette --- */
   --paper:             #FBFCFA;
@@ -82,6 +78,7 @@
 
   --w-game:    560px;
   --w-desktop: 1080px;
+  --screen-pad: 24px;
 
   /* --- Elevation --- */
   --shadow-card: 0 6px 24px rgba(27,36,48,.10);
@@ -155,6 +152,12 @@ body {
 * { box-sizing: border-box; }
 button { font: inherit; }
 img { -webkit-user-drag: none; user-select: none; }
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
 
 /* --- Creekside V2 Phase 1 controls --- */
 .adult-hold-button {
@@ -199,6 +202,15 @@ img { -webkit-user-drag: none; user-select: none; }
   font-size: 1rem;
   font-style: italic;
   font-weight: 800;
+}
+.adult-hold-button__instruction {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 0 18px 13px;
+  font-family: var(--font-body);
+  font-size: .82rem;
+  font-weight: 700;
 }
 
 .fragment-slots {
@@ -526,6 +538,18 @@ img { -webkit-user-drag: none; user-select: none; }
   color: var(--ink);
   font: .75rem/1.45 var(--font-label);
 }
+.storage-warning {
+  position: sticky;
+  z-index: 80;
+  top: 0;
+  padding: 10px 14px;
+  border-bottom: 2px solid #fff;
+  background: var(--danger);
+  color: #fff;
+  font-size: .92rem;
+  font-weight: 800;
+  text-align: center;
+}
 .celebration-satchel {
   display: grid;
   gap: 5px;
@@ -546,9 +570,39 @@ img { -webkit-user-drag: none; user-select: none; }
 }
 
 @media (max-width: 380px) {
+  :root {
+    --screen-pad: 14px;
+  }
+  .creekside-map-card > img {
+    display: none;
+  }
+  .card-heading {
+    align-items: flex-start !important;
+    flex-direction: column;
+    gap: 4px !important;
+  }
+  .card-hero {
+    min-height: 108px !important;
+  }
+  .card-body {
+    padding: 14px !important;
+  }
+  .card-footer {
+    align-items: flex-start !important;
+    flex-direction: column;
+    letter-spacing: .04em !important;
+    overflow-wrap: anywhere;
+  }
   .hall-of-heroes,
   .inventory-summary {
     grid-template-columns: 1fr;
+  }
+  .reward-item {
+    align-items: flex-start !important;
+    flex-wrap: wrap;
+  }
+  .reward-item .reward-disposition {
+    margin-left: 34px;
   }
   .reward-disposition {
     max-width: 92px;

@@ -15,7 +15,7 @@ Before changing code, read every file in `docs/` in numeric order. The chapter s
 3. Luca must feel successful. Challenges may be exciting but cannot hard-fail or stall the adventure.
 4. Preserve the existing polished visual identity. Evolve it rather than redesigning from scratch.
 5. Keep the app mobile-first, fast, offline-friendly, and usable on venue Wi-Fi with no external runtime dependencies.
-6. Never store or publish the four-digit entry code for 9 Creekside. The code exists only on physical fragments carried by an adult and Luca.
+6. Never store or publish the four-digit entry code for Secret Ranger Vault. The code exists only on physical fragments carried by an adult and Luca.
 7. Do not publish surnames, phone numbers, private access codes, or unnecessary household details.
 8. Physical challenges are completed by an adult press-and-hold action. Luca must not be able to skip chapters accidentally.
 9. Add durable progress persistence so a refresh or accidental close does not restart the game.

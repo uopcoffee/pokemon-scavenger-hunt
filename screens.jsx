@@ -7,7 +7,7 @@ const ART = (window.LUCA_CONFIG && window.LUCA_CONFIG.artBase) || "assets/pokemo
 const STICKERS = "assets/stickers/";
 
 const shell = { maxWidth: 560, margin: "0 auto", minHeight: "100%", display: "flex", flexDirection: "column", position: "relative", zIndex: 1 };
-const pad = { padding: "24px", flex: 1, display: "flex", flexDirection: "column" };
+const pad = { padding: "var(--screen-pad)", flex: 1, display: "flex", flexDirection: "column" };
 
 /* Energy-field background wrapper */
 function Field({ type, hero, children, style = {} }) {
@@ -438,7 +438,7 @@ function SceneSpecificContent({ config, state, scene }) {
         {(scene.rewardIds || []).map((rewardId) => {
           const reward = config.rewards[rewardId];
           return (
-            <div key={rewardId} style={{ display: "flex", gap: 10, alignItems: "center", padding: 12, borderRadius: "var(--r-sm)", background: "rgba(247,201,72,.16)", border: "1.5px solid var(--banana)" }}>
+            <div key={rewardId} className="reward-item" style={{ display: "flex", gap: 10, alignItems: "center", padding: 12, borderRadius: "var(--r-sm)", background: "rgba(247,201,72,.16)", border: "1.5px solid var(--banana)" }}>
               <Icon name="sparkle" color="var(--gold)" />
               <span style={{ flex: 1, minWidth: 0 }}>
                 <strong style={{ display: "block" }}>{reward.label}</strong>
@@ -597,6 +597,33 @@ function ParentMode({ config, state, dispatch, onClose }) {
   const [confirmReset, setConfirmReset] = React.useState(false);
   const [restoreText, setRestoreText] = React.useState(() => JSON.stringify(state, null, 2));
   const [restoreError, setRestoreError] = React.useState("");
+  const panelRef = React.useRef(null);
+  React.useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") onClose();
+      if (event.key === "Tab" && panelRef.current) {
+        const focusable = Array.from(panelRef.current.querySelectorAll(
+          "button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex='-1'])"
+        ));
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused && previouslyFocused.focus && previouslyFocused.focus();
+    };
+  }, []);
   React.useEffect(() => {
     if (!confirmReset) return undefined;
     const timeout = setTimeout(() => setConfirmReset(false), 5000);
@@ -610,13 +637,13 @@ function ParentMode({ config, state, dispatch, onClose }) {
 
   return (
     <div className="parent-mode-overlay" role="dialog" aria-modal="true" aria-labelledby="parent-mode-title">
-      <div className="parent-mode-panel">
+      <div className="parent-mode-panel" ref={panelRef}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
           <div>
             <div style={{ fontFamily: "var(--font-label)", color: "var(--mewtwo-x)", fontSize: ".72rem", fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase" }}>Adult controls</div>
             <h2 id="parent-mode-title" style={{ margin: "2px 0 0", fontFamily: "var(--font-display)", fontStyle: "italic" }}>Parent Mode</h2>
           </div>
-          <Button variant="ghost" onClick={onClose} aria-label="Close Parent Mode">Close</Button>
+          <Button variant="ghost" onClick={onClose} aria-label="Close Parent Mode" autoFocus>Close</Button>
         </div>
 
         <p style={{ margin: "14px 0", color: "var(--ink-soft)" }}>
@@ -792,10 +819,11 @@ function CreeksideApp() {
   const stateEngine = window.CreeksideState;
   const [state, dispatch] = React.useReducer(stateEngine.reducer, null, stateEngine.readState);
   const [parentOpen, setParentOpen] = React.useState(false);
+  const [storageWarning, setStorageWarning] = React.useState(false);
   const parentTapRef = React.useRef({ count: 0, startedAt: 0 });
 
   React.useEffect(() => {
-    stateEngine.writeState(state);
+    setStorageWarning(!stateEngine.writeState(state));
   }, [state, stateEngine]);
 
   const handleParentTap = () => {
@@ -816,6 +844,11 @@ function CreeksideApp() {
 
   return (
     <div style={{ height: "100%", overflowY: "auto", background: "var(--field-hero)" }}>
+      {storageWarning && (
+        <div className="storage-warning" role="status">
+          Progress cannot be saved on this phone. Keep this page open and use Parent Mode export before continuing.
+        </div>
+      )}
       {state.view === "splash" && <Splash onStart={() => dispatch({ type: "START_ONBOARDING" })} />}
       {state.view === "onboarding" && (
         <Onboarding

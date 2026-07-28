@@ -12,7 +12,7 @@
 
 - [ ] The actual four-digit code is absent from source, config, assets, tests, comments, and documentation.
 - [ ] The app records only whether each physical fragment has been collected.
-- [ ] The 9 Creekside chapter instructs Luca to use his physical card with an adult.
+- [ ] The Secret Ranger Vault chapter instructs Luca to use his physical card with an adult.
 - [ ] No surnames, phone numbers, or private contact details appear.
 
 ## Story and content
