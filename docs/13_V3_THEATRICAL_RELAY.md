@@ -67,10 +67,17 @@ identity, entrance cue, spoken lines, challenge steps, success condition,
 reward package ownership, fallback, and transition.
 
 `creekside-content.js` derives the live handoff and cast cue scenes from that
-source. `cast/cast-data.js` attaches the same shared cue objects to each full
-Cast Portal guide. The Cast Portal supplies long-form rehearsal details,
-costumes, props, emergency versions, and placeholders; the runtime supplies the
-short day-of Quick Card.
+source. The participant-facing Cast Portal contains short, friendly cameo
+guides written for family members and neighbors. These pages make clear that
+Pokémon knowledge, memorized lines, costumes, and acting skill are optional.
+Patrick brings the important supplies and gives the start and gift signals.
+
+Detailed timing, exact package IDs, prop and safety ownership, fragment
+reminders, setup decisions, fallbacks, spoilers, and shared runtime cue
+alignment live separately at `/cast/director/`. Participants do not need to
+read the Director view. `cast/cast-data.js` attaches the shared cue objects only
+to the Director operations model, preventing production detail from leaking
+back into the friendly participant pages.
 
 ## Persistence and V2 migration
 
@@ -138,12 +145,18 @@ Then serve the repository root from a local static server and review at
 6. Return the phone, reveal the result, and continue through the reward.
 7. Refresh separately on handoff, privacy, cast, return, and result.
 8. Open Parent Mode and inspect/jump through the full scene directory.
-9. Review Cast Portal overview and each individual guide, including print
-   preview.
-10. Repeat the relay spot-check for Oak, Team Rocket, Champion, and Mew.
-11. Confirm no horizontal overflow, inaccessible sticky controls, or
+9. Review the Cast Portal overview and the Bruce/Monica, Polly, Mike, Ariel,
+   Nina, and Patrick guides. Confirm each feels complete within the first
+   screen and uses only the seven friendly sections.
+10. Review `/cast/director/` separately for timeline, package IDs, safety,
+    setup, fallbacks, decisions, and runtime cue alignment.
+11. Print-preview the participant guides. Polly, Mike, and Nina should fit one
+    page; Bruce/Monica and Ariel must fit within two pages. Navigation and the
+    Director link must not print.
+12. Repeat the relay spot-check for Oak, Team Rocket, Champion, and Mew.
+13. Confirm no horizontal overflow, inaccessible sticky controls, or
     console-blocking errors.
-12. Enable reduced motion and confirm all instructions remain visible and
+14. Enable reduced motion and confirm all instructions remain visible and
     progression remains complete.
 
 All test reports must use `PASS`, `FAIL`, or `NOT TESTED`. Do not treat static
