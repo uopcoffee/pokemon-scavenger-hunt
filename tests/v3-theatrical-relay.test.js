@@ -222,9 +222,9 @@ sequences.forEach((sequence) => {
 });
 assert.strictEqual(relayCount, Object.keys(cues).length, "Every cast cue must have one theatrical relay");
 
-Object.entries(portal.guides).forEach(([slug, guide]) => {
-  guide.runtimeCueIds.forEach((cueId, index) => {
-    assert.strictEqual(guide.runtimeCues[index], cues[cueId], `${slug} must use the shared cue object for ${cueId}`);
+portal.director.operations.forEach((operation) => {
+  operation.cueIds.forEach((cueId, index) => {
+    assert.strictEqual(operation.runtimeCues[index], cues[cueId], `${operation.slug} must use the shared cue object for ${cueId}`);
   });
 });
 
