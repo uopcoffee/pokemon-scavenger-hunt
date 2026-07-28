@@ -390,4 +390,19 @@
       }
     }
   };
+
+  var guideCueIds = {
+    "oak-lab": ["oak-water", "oak-return"],
+    "nurse-joy": ["nurse-joy"],
+    "team-rocket": ["rocket"],
+    "league-recruiter": ["orientation", "fairy", "victory-road", "rayquaza"],
+    "champion": ["champion", "mew"]
+  };
+  var sharedCues = window.CREEKSIDE_CAST_CORES || {};
+  Object.keys(guideCueIds).forEach(function (guideSlug) {
+    window.CAST_PORTAL.guides[guideSlug].runtimeCueIds = guideCueIds[guideSlug].slice();
+    window.CAST_PORTAL.guides[guideSlug].runtimeCues = guideCueIds[guideSlug].map(function (cueId) {
+      return sharedCues[cueId];
+    }).filter(Boolean);
+  });
 }());

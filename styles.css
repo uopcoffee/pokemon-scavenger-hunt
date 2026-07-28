@@ -550,6 +550,72 @@ textarea:focus-visible {
   font-weight: 800;
   text-align: center;
 }
+.parent-current-scene {
+  display: grid;
+  gap: 4px;
+  margin: 14px 0;
+  border: 1px solid rgba(75,58,143,.24);
+  border-radius: var(--r-sm);
+  padding: 12px;
+  background: #f6f2ff;
+  font-family: var(--font-label);
+  font-size: .76rem;
+  overflow-wrap: anywhere;
+}
+.parent-current-scene strong {
+  color: var(--mewtwo-y);
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+.parent-current-scene small {
+  margin-top: 4px;
+  color: var(--ink-soft);
+}
+.parent-scene-directory {
+  display: grid;
+  gap: 8px;
+}
+.parent-scene-directory details {
+  border: 1px solid var(--silver);
+  border-radius: var(--r-sm);
+  background: var(--paper-alt);
+  overflow: hidden;
+}
+.parent-scene-directory summary {
+  min-height: 48px;
+  padding: 13px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 850;
+}
+.parent-scene-directory details > div {
+  display: grid;
+  gap: 1px;
+  border-top: 1px solid var(--silver);
+}
+.parent-scene-directory button {
+  display: grid;
+  gap: 3px;
+  min-height: 52px;
+  border: 0;
+  border-bottom: 1px solid rgba(199,205,212,.62);
+  padding: 10px 12px;
+  background: #fff;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+.parent-scene-directory button.is-current {
+  box-shadow: inset 4px 0 0 var(--mewtwo-x);
+  background: #f6f2ff;
+}
+.parent-scene-directory button span,
+.parent-scene-directory button small {
+  color: var(--ink-soft);
+  font-family: var(--font-label);
+  font-size: .69rem;
+  overflow-wrap: anywhere;
+}
 .celebration-satchel {
   display: grid;
   gap: 5px;
@@ -659,6 +725,46 @@ textarea:focus-visible {
   font-size: 1.25rem;
   font-weight: 850;
   line-height: 1.35;
+}
+.luca-scene-card .card-heading span:first-child {
+  font-size: clamp(1.35rem, 5vw, 1.75rem) !important;
+}
+.luca-scene-card .card-hero {
+  min-height: 164px !important;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255,255,255,.92), rgba(255,255,255,0) 46%),
+    radial-gradient(circle at 50% 55%, rgba(184,146,255,.4), rgba(79,176,229,.08) 58%, rgba(255,255,255,0) 72%),
+    linear-gradient(160deg, #f7f3ff, #edf8ff) !important;
+}
+.luca-scene-card--result {
+  box-shadow: var(--glow-gold), var(--shadow-float) !important;
+}
+.mission-result-burst {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 9px;
+  align-items: center;
+  margin-bottom: 14px;
+  border: 1px solid rgba(217,182,80,.65);
+  border-radius: var(--r-sm);
+  padding: 12px;
+  background: linear-gradient(135deg, #fff6cf, #f4e7ff);
+  color: #684e10;
+}
+.mission-result-burst svg {
+  grid-row: 1 / 3;
+}
+.mission-result-burst strong {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+}
+.mission-result-burst span {
+  font-family: var(--font-label);
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
 .handoff-performer {
   display: grid;
@@ -936,6 +1042,9 @@ textarea:focus-visible {
   }
   .relay-shield {
     padding: 20px 16px;
+  }
+  .luca-scene-card .card-hero {
+    min-height: 138px !important;
   }
 }
 

@@ -442,7 +442,6 @@ function SceneSpecificContent({ config, state, scene }) {
               <Icon name="sparkle" color="var(--gold)" />
               <span style={{ flex: 1, minWidth: 0 }}>
                 <strong style={{ display: "block" }}>{reward.label}</strong>
-                <small style={{ display: "block", color: "var(--ink-soft)" }}>{reward.packageId}</small>
               </span>
               <strong className={`reward-disposition reward-disposition--${reward.disposition.toLowerCase().replace(/\s+/g, "-")}`}>{reward.disposition}</strong>
             </div>
@@ -689,6 +688,8 @@ function CreeksideScene({ config, state, dispatch }) {
   const sceneLabel = scene.type.replace(/-/g, " ");
   const isPhysical = scene.type === "physical-challenge";
   const isFakeCredits = scene.type === "fake-credits";
+  const isRewardResult = scene.type === "reward";
+  const isCelebrationResult = ["reward", "inventory-update", "code-fragment-record", "hall-of-heroes", "celebration"].includes(scene.type);
   const isLast = state.currentSceneIndex === sequence.scenes.length - 1;
   const continueLabel = isLast
     ? (state.activeFlow === "mew" ? "Finish the adventure" : state.activeFlow === "checkpoint" ? "Complete checkpoint" : "Complete chapter")
@@ -718,15 +719,19 @@ function CreeksideScene({ config, state, dispatch }) {
           </div>
 
           <Card
+            className={`luca-scene-card${isCelebrationResult ? " luca-scene-card--result" : ""}`}
             name={scene.title}
             meta={sceneLabel}
+            variant={isRewardResult ? "reward" : "clue"}
+            foil={isRewardResult ? "gold" : scene.type === "hall-of-heroes" ? "rainbow" : "silver"}
             hero={
               <HeroArt
                 src={sequence.art ? ART + sequence.art : undefined}
                 glyph={isPhysical ? "badge" : "pokeball"}
                 color="var(--mewtwo-x)"
                 label={sequence.name}
-                size={116}
+                size={isCelebrationResult ? 156 : 136}
+                bob={scene.type === "character-encounter" || isCelebrationResult}
               />
             }
             burst={scene.type === "reward" || scene.type === "celebration" || scene.type === "hall-of-heroes"}
@@ -735,13 +740,24 @@ function CreeksideScene({ config, state, dispatch }) {
             style={{ maxWidth: "none" }}
             footer={<span>{footerLabel}</span>}
           >
+            {isRewardResult && (
+              <div className="mission-result-burst" role="status">
+                <Icon name="sparkle" size={24} color="var(--gold)" />
+                <strong>Mission complete!</strong>
+                <span>New rewards unlocked</span>
+              </div>
+            )}
             {scene.character && (
               <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "7px 12px", marginBottom: 12, borderRadius: "var(--r-pill)", background: "rgba(138,79,255,.10)", color: "var(--mewtwo-y)", fontFamily: "var(--font-label)", fontWeight: 700 }}>
                 <Icon name="sparkle" size={18} color="var(--mewtwo-x)" />
                 {scene.character}
               </div>
             )}
-            {scene.body && <p style={{ margin: 0, fontSize: "1.08rem", lineHeight: 1.58 }}>{scene.body}</p>}
+            {scene.body && (
+              <p style={{ margin: 0, fontSize: "1.08rem", lineHeight: 1.58 }}>
+                {isRewardResult ? "Your earned supplies are ready. See what joined your adventure!" : scene.body}
+              </p>
+            )}
             <SceneSpecificContent config={config} state={state} scene={scene} />
             {scene.successRule && (
               <div className="success-rule"><strong>Success rule</strong><span>{scene.successRule}</span></div>
@@ -822,6 +838,18 @@ function ParentMode({ config, state, dispatch, onClose }) {
     dispatch(action);
     onClose();
   };
+  const currentSequence = window.CreeksideState.activeSequence(state);
+  const currentScene = window.CreeksideState.currentScene(state);
+  const sequenceDirectory = [
+    ...config.chapters.map((sequence) => ({ kind: "chapter", sequence })),
+    { kind: "checkpoint", sequence: config.checkpoint },
+    { kind: "mew", sequence: config.epilogue },
+  ];
+  const jumpActionFor = (kind, sequence, sceneIndex) => {
+    if (kind === "checkpoint") return { type: "PARENT_JUMP_CHECKPOINT", sceneIndex };
+    if (kind === "mew") return { type: "PARENT_JUMP_MEW", sceneIndex };
+    return { type: "PARENT_JUMP_SCENE", chapterId: sequence.id, sceneIndex };
+  };
 
   return (
     <div className="parent-mode-overlay" role="dialog" aria-modal="true" aria-labelledby="parent-mode-title">
@@ -834,9 +862,14 @@ function ParentMode({ config, state, dispatch, onClose }) {
           <Button variant="ghost" onClick={onClose} aria-label="Close Parent Mode" autoFocus>Close</Button>
         </div>
 
-        <p style={{ margin: "14px 0", color: "var(--ink-soft)" }}>
-          Current: {state.activeFlow === "mew" ? "Mew Epilogue" : state.activeFlow === "checkpoint" ? "Professor Oak Return" : state.currentChapterId}, scene {state.currentSceneIndex + 1}. No keypad code is stored here.
-        </p>
+        <section className="parent-current-scene" aria-label="Current scene details">
+          <strong>{currentSequence ? currentSequence.name : "Mission recovery"}</strong>
+          <span>Scene ID: {currentScene ? currentScene.id : "unavailable"}</span>
+          <span>Type: {currentScene ? currentScene.type : "unavailable"}</span>
+          <span>Audience: {currentScene ? currentScene.audience : "unavailable"}</span>
+          {currentScene && currentScene.performerName && <span>Performer: {currentScene.performerName}</span>}
+          <small>No keypad code is stored here.</small>
+        </section>
 
         <div className="parent-mode-grid">
           <Button
@@ -876,41 +909,30 @@ function ParentMode({ config, state, dispatch, onClose }) {
           ))}
         </div>
 
-        <h3 style={{ fontFamily: "var(--font-display)", margin: "20px 0 10px" }}>Physical challenge shortcuts</h3>
-        <div className="parent-mode-grid">
-          {config.chapters.reduce((shortcuts, chapter) => {
-            chapter.scenes.forEach((scene, sceneIndex) => {
-              if (scene.type !== "physical-challenge") return;
-              shortcuts.push(
-              <Button
-                key={scene.id}
-                variant="secondary"
-                onClick={() => runAndClose({ type: "PARENT_JUMP_SCENE", chapterId: chapter.id, sceneIndex })}
-              >
-                {chapter.number}. {scene.title}
-              </Button>
-              );
-            });
-            return shortcuts;
-          }, [])}
-          <Button
-            variant="secondary"
-            onClick={() => runAndClose({
-              type: "PARENT_JUMP_CHECKPOINT",
-              sceneIndex: config.checkpoint.scenes.findIndex((scene) => scene.type === "physical-challenge"),
-            })}
-          >
-            Oak checkpoint challenge
-          </Button>
-          {config.epilogue.scenes.map((scene, sceneIndex) => scene.type === "physical-challenge" ? (
-            <Button
-              key={scene.id}
-              variant="secondary"
-              onClick={() => runAndClose({ type: "PARENT_JUMP_MEW", sceneIndex })}
-            >
-              Mew discovery challenge
-            </Button>
-          ) : null)}
+        <h3 style={{ fontFamily: "var(--font-display)", margin: "20px 0 10px" }}>Scene directory</h3>
+        <p style={{ margin: "0 0 10px", color: "var(--ink-soft)", fontSize: ".9rem" }}>
+          Every entry shows its stable ID, type, audience, and performer. Jumping does not award skipped rewards.
+        </p>
+        <div className="parent-scene-directory">
+          {sequenceDirectory.map(({ kind, sequence }) => (
+            <details key={`${kind}-${sequence.id}`} open={currentSequence && currentSequence.id === sequence.id}>
+              <summary>{sequence.number ? `${sequence.number}. ` : ""}{sequence.name}</summary>
+              <div>
+                {sequence.scenes.map((scene, sceneIndex) => (
+                  <button
+                    type="button"
+                    key={scene.id}
+                    className={currentScene && currentScene.id === scene.id ? "is-current" : ""}
+                    onClick={() => runAndClose(jumpActionFor(kind, sequence, sceneIndex))}
+                  >
+                    <strong>{scene.title}</strong>
+                    <span>{scene.id} · {scene.type} · {scene.audience}</span>
+                    {scene.performerName && <small>Performer: {scene.performerName}</small>}
+                  </button>
+                ))}
+              </div>
+            </details>
+          ))}
         </div>
 
         <h3 style={{ fontFamily: "var(--font-display)", margin: "20px 0 10px" }}>Finale testing</h3>

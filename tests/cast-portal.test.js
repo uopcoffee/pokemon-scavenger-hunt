@@ -5,8 +5,10 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const castRoot = path.join(root, "cast");
+const coreSource = fs.readFileSync(path.join(root, "cast-core.js"), "utf8");
 const dataSource = fs.readFileSync(path.join(castRoot, "cast-data.js"), "utf8");
 const context = { window: {} };
+vm.runInNewContext(coreSource, context, { filename: "cast-core.js" });
 vm.runInNewContext(dataSource, context, { filename: "cast-data.js" });
 
 const portal = context.window.CAST_PORTAL;
@@ -56,6 +58,7 @@ for (const routeFile of routeFiles) {
   assert(html.includes('class="cast-page"'), `${routeFile} must use the isolated cast shell`);
   assert(html.includes('name="robots" content="noindex, nofollow"'), `${routeFile} should discourage indexing`);
   assert(html.includes("cast-data.js"), `${routeFile} must load the shared cast data`);
+  assert(html.includes("cast-core.js"), `${routeFile} must load the shared runtime cue source`);
   assert(html.includes("cast.js"), `${routeFile} must load the shared portal renderer`);
 }
 
@@ -67,6 +70,7 @@ for (const slug of slugs) {
       assert(guide[field].length > 0, `${slug}.${field} must not be empty`);
     }
   }
+  assert(guide.runtimeCues.length > 0, `${slug} must reference at least one shared runtime cue`);
 }
 
 assert(portal.timeline.length >= 10, "Overview must contain the complete event timeline");

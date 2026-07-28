@@ -49,6 +49,31 @@
     }).join("") + "</div>";
   }
 
+  function runtimeCueAlignment(cues) {
+    if (!Array.isArray(cues) || !cues.length) return "";
+    return [
+      '<section class="runtime-alignment" aria-labelledby="runtime-cue-heading">',
+      '<p class="quick-card__eyebrow">Shared day-of source</p>',
+      '<h2 id="runtime-cue-heading">Live relay cue alignment</h2>',
+      '<p class="runtime-alignment__intro">These concise fields also power the private cast screen inside the live adventure.</p>',
+      '<div class="runtime-alignment__grid">',
+      cues.map(function (cue) {
+        return [
+          '<article>',
+          '<span>' + escapeHtml(cue.characterName) + "</span>",
+          "<h3>" + escapeHtml(cue.performerName) + "</h3>",
+          '<p><strong>Core challenge:</strong> ' + escapeHtml(cue.challengeSteps[0]) + "</p>",
+          '<p><strong>Reward owner:</strong> ' + escapeHtml(cue.rewardPackages.map(function (packageName, index) {
+            return packageName + " — " + (cue.rewardOwners[index] || cue.rewardOwners[0]);
+          }).join("; ")) + "</p>",
+          '<p><strong>Transition:</strong> ' + escapeHtml(cue.transitionDestination) + "</p>",
+          "</article>"
+        ].join("");
+      }).join(""),
+      "</div></section>"
+    ].join("");
+  }
+
   function renderGuide(guide) {
     document.title = guide.eyebrow + " Cast Guide · Creekside Region";
     app.innerHTML = [
@@ -73,6 +98,7 @@
       '<div><dt>Main job</dt><dd>' + escapeHtml(guide.mainJob) + "</dd></div>",
       '<div><dt>Do not reveal</dt><dd>' + escapeHtml(guide.doNotReveal.join("; ")) + "</dd></div>",
       "</dl></section>",
+      runtimeCueAlignment(guide.runtimeCues),
       '<div class="guide-grid">',
       guideCard("Your Role", "01", "<p>" + escapeHtml(guide.mainJob) + "</p>"),
       guideCard("What Luca Knows", "02", "<p>" + escapeHtml(guide.lucaKnows) + "</p>"),
