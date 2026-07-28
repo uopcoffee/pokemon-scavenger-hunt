@@ -25,7 +25,7 @@ window.CREEKSIDE_CONFIG = {
     { id: "nina", displayName: "Nina", role: "Fairy Gym Leader" },
     { id: "polly", displayName: "Nurse Joy", role: "Pokémon Center Leader" },
     { id: "oak", displayName: "Professor Oak", role: "Professor" },
-    { id: "monica", displayName: "Research Assistant Monica", role: "Research Assistant" },
+    { id: "monica", displayName: "Professor Monica", role: "Water Research Professor and Oak's Research Partner" },
     { id: "mike", displayName: "Team Rocket Enforcer", role: "Team Rocket" },
     { id: "patrick", displayName: "Creekside Champion", role: "Champion" }
   ],

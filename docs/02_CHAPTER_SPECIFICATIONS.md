@@ -213,7 +213,7 @@ Professor Oak's Lab, pool and pool deck.
 ## Characters
 
 - **Bruce: Professor Oak**
-- **Monica: Lead Research Assistant**
+- **Monica: Professor Monica, Water Research Professor and Oak's Research Partner**
 
 Both are willing to dress up and participate actively.
 
@@ -412,7 +412,7 @@ Professor Oak's Lab, pool deck or front area.
 
 ## Characters
 
-Professor Bruce Oak and Research Assistant Monica.
+Professor Bruce Oak and Professor Monica, equal research partners.
 
 ## Storyline
 

@@ -158,7 +158,7 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 - [ ] Auntie Ariel: opening League Recruiter and later Victory Road referee
 - [ ] Nina: Fairy Gym Leader; use short lines and let her point or cheer
 - [ ] Bruce: Professor Oak; available for the water mission and return checkpoint
-- [ ] Monica: active research assistant; handles capsule diagram and research tray
+- [ ] Monica: Professor Monica and Oak's research partner; handles capsule diagram and research tray
 - [ ] Polly: Nurse Joy; runs the warm, theatrical treatment challenge
 - [ ] Mike: Team Rocket Boss; dramatic entrance and an intentional, gracious defeat
 - [ ] Patrick: appears as Champion only after Victory Road

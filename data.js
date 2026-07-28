@@ -131,7 +131,7 @@ window.CREEKSIDE_CONFIG = {
       scenes: [
         { id: "oak-story", type: "story", title: "An Anomaly in the Water", body: "Professor Oak needs help recovering research capsules from the preserve." },
         { id: "oak-travel", type: "travel-location", title: "Travel to the Water Research Lab", body: "Bring the phone to Professor Oak's Lab with an adult. Follow the prepared family route." },
-        { id: "oak-character", type: "character-encounter", title: "Professor Oak and Monica", character: "Professor Oak", body: "Meet Professor Oak and his Research Assistant for the capsule briefing." },
+        { id: "oak-character", type: "character-encounter", title: "Professor Oak and Professor Monica", character: "Professor Oak", body: "Meet Professor Oak and his research partner, Professor Monica, for the capsule briefing." },
         { id: "oak-challenge", type: "physical-challenge", title: "Recover the Research Capsules", body: "Retrieve the prepared capsules safely. Use the skimmer fallback if needed.", adultPrompt: "Adult: confirm all prepared research capsules are safely recovered." },
         { id: "oak-reward", type: "reward", title: "Water Research Complete", body: "The recovered research has been secured.", rewardIds: ["water-research-kit"] },
         { id: "oak-inventory", type: "inventory-update", title: "Research Inventory Updated", body: "The Water Research Kit is now in the mission inventory." },
