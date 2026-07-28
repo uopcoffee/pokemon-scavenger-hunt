@@ -20,10 +20,10 @@
       "</ul>";
   }
 
-  function actionBar(backHref) {
+  function actionBar(backHref, backLabel) {
     return [
       '<nav class="cast-nav" aria-label="Cast Portal controls">',
-      backHref ? '<a class="cast-button cast-button--quiet" href="' + backHref + '">← Cast overview</a>' : "",
+      backHref ? '<a class="cast-button cast-button--quiet" href="' + backHref + '">← ' + escapeHtml(backLabel || "Cast overview") + "</a>" : "",
       '<div class="cast-actions">',
       '<button class="cast-button cast-button--quiet" type="button" data-copy-link>Copy link</button>',
       '<button class="cast-button cast-button--primary" type="button" data-print>Print / Save as PDF</button>',
@@ -33,105 +33,73 @@
     ].join("");
   }
 
-  function guideCard(title, number, body, className) {
+  function dialogue(lines) {
+    return '<div class="friendly-lines">' + lines.map(function (entry) {
+      return '<blockquote><strong>' + escapeHtml(entry.speaker) + '</strong><span>“' +
+        escapeHtml(entry.line) + '”</span></blockquote>';
+    }).join("") + "</div>";
+  }
+
+  function participantSection(title, body, className, eyebrow) {
     return [
-      '<section class="guide-card ' + (className || "") + '">',
-      '<div class="guide-card__heading"><span>' + escapeHtml(number) + '</span><h2>' + escapeHtml(title) + "</h2></div>",
+      '<section class="participant-section ' + (className || "") + '">',
+      eyebrow ? '<p class="participant-section__eyebrow">' + escapeHtml(eyebrow) + "</p>" : "",
+      "<h2>" + escapeHtml(title) + "</h2>",
       body,
       "</section>"
     ].join("");
   }
 
-  function dialogue(lines) {
-    return '<div class="script-lines">' + lines.map(function (entry) {
-      return '<blockquote><strong>' + escapeHtml(entry.speaker) + ':</strong> “' +
-        escapeHtml(entry.line) + '”</blockquote>';
-    }).join("") + "</div>";
-  }
+  function renderParticipant(guide) {
+    document.title = guide.eyebrow + " · Easy Cast Guide";
+    var secondAppearance = guide.secondAppearance ? [
+      '<section class="participant-section participant-section--second">',
+      '<p class="participant-section__eyebrow">Your other appearance</p>',
+      "<h2>" + escapeHtml(guide.secondAppearance.title) + "</h2>",
+      "<p>" + escapeHtml(guide.secondAppearance.intro) + "</p>",
+      guide.secondAppearance.lines ? dialogue(guide.secondAppearance.lines) : "",
+      guide.secondAppearance.steps ? list(guide.secondAppearance.steps) : "",
+      '<p class="friendly-note">' + escapeHtml(guide.secondAppearance.note) + "</p>",
+      "</section>"
+    ].join("") : "";
 
-  function runtimeCueAlignment(cues) {
-    if (!Array.isArray(cues) || !cues.length) return "";
-    return [
-      '<section class="runtime-alignment" aria-labelledby="runtime-cue-heading">',
-      '<p class="quick-card__eyebrow">Shared day-of source</p>',
-      '<h2 id="runtime-cue-heading">Live relay cue alignment</h2>',
-      '<p class="runtime-alignment__intro">These concise fields also power the private cast screen inside the live adventure.</p>',
-      '<div class="runtime-alignment__grid">',
-      cues.map(function (cue) {
-        return [
-          '<article>',
-          '<span>' + escapeHtml(cue.characterName) + "</span>",
-          "<h3>" + escapeHtml(cue.performerName) + "</h3>",
-          '<p><strong>Core challenge:</strong> ' + escapeHtml(cue.challengeSteps[0]) + "</p>",
-          '<p><strong>Reward owner:</strong> ' + escapeHtml(cue.rewardPackages.map(function (packageName, index) {
-            return packageName + " — " + (cue.rewardOwners[index] || cue.rewardOwners[0]);
-          }).join("; ")) + "</p>",
-          '<p><strong>Transition:</strong> ' + escapeHtml(cue.transitionDestination) + "</p>",
-          "</article>"
-        ].join("");
-      }).join(""),
-      "</div></section>"
-    ].join("");
-  }
-
-  function renderGuide(guide) {
-    document.title = guide.eyebrow + " Cast Guide · Creekside Region";
     app.innerHTML = [
-      '<main class="cast-shell cast-shell--guide">',
-      actionBar("../"),
-      '<header class="guide-hero">',
-      '<div><p class="confidential-label">Adult Cast Guide — Do Not Show Luca</p>',
+      '<main class="cast-shell cast-shell--participant" data-participant-guide="' + escapeHtml(page) + '">',
+      actionBar("../", "Cast overview"),
+      '<header class="participant-hero">',
+      '<p class="confidential-label">For adults · Do not show Luca</p>',
       '<p class="cast-kicker">' + escapeHtml(guide.eyebrow) + "</p>",
       "<h1>" + escapeHtml(guide.title) + "</h1>",
-      '<p class="guide-hero__lead">' + escapeHtml(guide.mainJob) + "</p></div>",
-      '<img src="' + root + '/assets/pokemon/pokeball.png" alt="" width="112" height="112">',
+      '<p class="participant-hero__subtitle">' + escapeHtml(guide.subtitle) + "</p>",
+      '<div class="reassurance-card"><strong>You can’t mess this up.</strong><p>' + escapeHtml(portal.reassurance) + "</p></div>",
       "</header>",
-      '<section class="quick-card" aria-labelledby="quick-card-title">',
-      '<p class="quick-card__eyebrow">One-minute Quick Card</p>',
-      '<h2 id="quick-card-title">Know these five things</h2>',
-      '<dl class="quick-grid">',
-      '<div><dt>Character & role</dt><dd>' + guide.participants.map(function (p) {
-        return escapeHtml(p.name + " — " + p.role);
-      }).join("<br>") + "</dd></div>",
-      '<div><dt>Estimated duration</dt><dd>' + escapeHtml(guide.duration) + "</dd></div>",
-      '<div><dt>Arrival window</dt><dd>' + escapeHtml(guide.arrival) + "</dd></div>",
-      '<div><dt>Main job</dt><dd>' + escapeHtml(guide.mainJob) + "</dd></div>",
-      '<div><dt>Do not reveal</dt><dd>' + escapeHtml(guide.doNotReveal.join("; ")) + "</dd></div>",
-      "</dl></section>",
-      runtimeCueAlignment(guide.runtimeCues),
-      '<div class="guide-grid">',
-      guideCard("Your Role", "01", "<p>" + escapeHtml(guide.mainJob) + "</p>"),
-      guideCard("What Luca Knows", "02", "<p>" + escapeHtml(guide.lucaKnows) + "</p>"),
-      guideCard("Entrance Cue", "03", dialogue(guide.entranceCue)),
-      guideCard("Short Spoken Script", "04", dialogue(guide.script), "guide-card--wide"),
-      guideCard("Challenge Instructions", "05", list(guide.challenge)),
-      guideCard("Forgiving Success Condition", "06", '<p class="success-rule">' + escapeHtml(guide.success) + "</p>"),
-      guideCard("Reward Handoff", "07", list(guide.rewardPackages, "package-list") + "<p>" + escapeHtml(guide.rewardHandoff) + "</p>"),
-      guideCard("Transition to the Next Chapter", "08", "<p>" + escapeHtml(guide.transition) + "</p>"),
-      guideCard("Costume & Prop Checklist", "09", list(guide.checklist, "check-list")),
-      guideCard("Fallback Plan", "10", "<p>" + escapeHtml(guide.fallback) + "</p>"),
-      guideCard("One-minute Emergency Version", "11", '<p class="emergency-copy">' + escapeHtml(guide.emergency) + "</p>"),
-      guideCard("What Not to Reveal", "12", list(guide.doNotReveal), "guide-card--warning"),
-      guideCard("Patrick to Confirm", "13", list(guide.placeholders), "guide-card--placeholder"),
-      "</div>",
-      '<section class="ack-card">',
-      '<label><input type="checkbox" data-acknowledgment> <span>' + escapeHtml(portal.acknowledgment) + "</span></label>",
-      '<p>Your checkmark is saved only on this device.</p>',
-      "</section>",
-      '<footer class="cast-footer"><p>Creekside Region Cast Portal · Keep this guide away from Luca.</p></footer>',
+      participantSection("Your Part", [
+        '<div class="start-facts">',
+        '<div><span>Be ready</span><strong>' + escapeHtml(guide.ready) + "</strong></div>",
+        '<div><span>About how long</span><strong>' + escapeHtml(guide.duration) + "</strong></div>",
+        '<div><span>Your character</span><strong>' + escapeHtml(guide.character) + "</strong></div>",
+        "</div>",
+        '<div class="first-line-card"><span>Your first line</span><strong>“' + escapeHtml(guide.firstLine) + '”</strong></div>',
+        list(guide.yourPart),
+        '<div class="luca-action-card"><span>What Luca does</span><p>' + escapeHtml(guide.whatLucaDoes) + "</p></div>",
+        '<div class="gift-card"><span>What you hand Luca</span><p>' + escapeHtml(guide.gift) + "</p></div>"
+      ].join(""), "participant-section--start", "Start here"),
+      participantSection("Before Luca Arrives", '<p class="arrival-line">' + escapeHtml(guide.arrival) + "</p>" + list(guide.before)),
+      participantSection("When Luca Arrives", dialogue(guide.arrivalLines) + '<p class="improv-note">' + escapeHtml(portal.improvNote) + "</p>"),
+      participantSection("What to Say and Do", list(guide.sayAndDo)),
+      secondAppearance,
+      participantSection("When Luca Succeeds", dialogue(guide.successLines) +
+        '<p class="signal-note"><strong>Wait for Patrick’s signal.</strong> ' + escapeHtml(guide.successInstruction) + "</p>" +
+        '<p class="final-line"><span>Your final line</span><strong>“' + escapeHtml(guide.finalLine) + '”</strong></p>'),
+      participantSection("Easy Backup Plan", list(guide.backup) + '<p class="friendly-note">Shorter and easier is always fine. Luca still succeeds.</p>', "participant-section--backup"),
+      participantSection("Optional Ways to Play Up the Part", '<p>' + escapeHtml(portal.costumeNote) + "</p>" + list(guide.optionalPlay), "participant-section--optional"),
+      '<aside class="participant-closing"><strong>Most important:</strong> Have fun with it. Luca will be excited simply because you are participating.</aside>',
+      '<footer class="participant-footer">',
+      '<a href="../director/">Patrick’s detailed setup notes</a>',
+      '<span>Participants do not need to read the Director view.</span>',
+      "</footer>",
       "</main>"
     ].join("");
-
-    var acknowledgment = document.querySelector("[data-acknowledgment]");
-    var storageKey = "creekside-cast-ack-" + page;
-    try {
-      acknowledgment.checked = window.localStorage.getItem(storageKey) === "yes";
-      acknowledgment.addEventListener("change", function () {
-        window.localStorage.setItem(storageKey, acknowledgment.checked ? "yes" : "no");
-      });
-    } catch (error) {
-      // The checklist still works for the current page if browser storage is unavailable.
-    }
   }
 
   function renderOverview() {
@@ -142,42 +110,101 @@
         '<a class="portal-link-card" href="' + slug + '/">',
         '<span class="portal-link-card__eyebrow">' + escapeHtml(guide.eyebrow) + "</span>",
         "<strong>" + escapeHtml(guide.title) + "</strong>",
-        "<span>" + escapeHtml(guide.arrival) + "</span>",
-        '<span class="portal-link-card__action">Open cast guide →</span>',
+        "<span>" + escapeHtml(guide.ready) + "</span>",
+        '<span class="portal-link-card__action">Open my easy guide →</span>',
         "</a>"
       ].join("");
     }).join("");
 
-    var timeline = portal.timeline.map(function (item) {
-      var content = [
+    app.innerHTML = [
+      '<main class="cast-shell cast-shell--overview">',
+      '<header class="portal-hero portal-hero--friendly">',
+      '<div><p class="confidential-label">For adults · Do not show Luca</p>',
+      '<p class="cast-kicker">Luca’s Creekside Region</p>',
+      "<h1>Pick your name</h1>",
+      '<p>Each guide explains your whole part in a few minutes. No Pokémon knowledge, acting, memorizing, or costume required.</p></div>',
+      '<img src="' + root + '/assets/pokemon/mega-icon-gold.png" alt="" width="140" height="140">',
+      "</header>",
+      '<aside class="overview-reassurance"><strong>This is easy.</strong><p>Patrick brings the supplies and keeps the adventure moving. Read from your phone, use your own words, give Luca lots of hints, and have fun.</p></aside>',
+      '<section class="overview-section" aria-labelledby="cast-guides-heading">',
+      '<p class="section-eyebrow">Friendly role guides</p>',
+      '<h2 id="cast-guides-heading">Whose part are you playing?</h2>',
+      '<div class="portal-link-grid">' + guideLinks + "</div>",
+      "</section>",
+      '<footer class="overview-director-link">',
+      '<a href="director/">Patrick’s Director view →</a>',
+      '<span>Detailed timeline, supplies, gifts, and setup notes</span>',
+      "</footer>",
+      "</main>"
+    ].join("");
+  }
+
+  function directorCueCard(cue) {
+    return [
+      '<article class="director-cue">',
+      '<p class="director-cue__eyebrow">' + escapeHtml(cue.characterName) + "</p>",
+      "<h3>" + escapeHtml(cue.performerName) + "</h3>",
+      '<p><strong>Entrance:</strong> ' + escapeHtml(cue.entranceCue) + "</p>",
+      '<p><strong>Core challenge:</strong> ' + escapeHtml(cue.challengeSteps.join(" ")) + "</p>",
+      '<p><strong>Success:</strong> ' + escapeHtml(cue.successCondition) + "</p>",
+      '<p><strong>Gift ownership:</strong> ' + escapeHtml(cue.rewardPackages.map(function (packageName, index) {
+        return packageName + " — " + (cue.rewardOwners[index] || cue.rewardOwners[0]);
+      }).join("; ")) + "</p>",
+      '<p><strong>Transition:</strong> ' + escapeHtml(cue.transitionDestination) + "</p>",
+      "</article>"
+    ].join("");
+  }
+
+  function renderDirector() {
+    var director = portal.director;
+    document.title = "Patrick’s Director View · Creekside Region";
+    var timeline = director.timeline.map(function (item) {
+      return [
         '<article class="timeline-item">',
         '<div class="timeline-time"><strong>' + escapeHtml(item.time) + "</strong><span>" + escapeHtml(item.window) + "</span></div>",
         '<div class="timeline-copy"><h3>' + escapeHtml(item.segment) + "</h3>",
         '<p><strong>Cast:</strong> ' + escapeHtml(item.cast) + "</p>",
         '<p><strong>Handoff:</strong> ' + escapeHtml(item.handoff) + "</p>",
-        '<p><strong>Reward:</strong> ' + escapeHtml(item.reward) + ' <span class="reward-owner">Owner: ' + escapeHtml(item.responsible) + "</span></p>",
-        item.href ? '<a href="' + item.href + '">Open guide →</a>' : "",
+        '<p><strong>Package:</strong> ' + escapeHtml(item.reward) + ' <span class="reward-owner">Owner: ' + escapeHtml(item.responsible) + "</span></p>",
         "</div></article>"
-      ];
-      return content.join("");
+      ].join("");
+    }).join("");
+
+    var packages = director.packages.map(function (item) {
+      return '<tr><td>' + escapeHtml(item.id) + "</td><td>" + escapeHtml(item.owner) + "</td><td>" + escapeHtml(item.moment) + "</td></tr>";
+    }).join("");
+
+    var operations = director.operations.map(function (operation) {
+      return [
+        '<details class="director-operation">',
+        "<summary><strong>" + escapeHtml(operation.name) + "</strong><span>" + escapeHtml(operation.cueIds.join(" · ")) + "</span></summary>",
+        '<div class="director-operation__body">',
+        '<div><h3>Setup and props</h3>' + list(operation.setup) + "</div>",
+        '<div><h3>Safety owner</h3><p>' + escapeHtml(operation.safety) + "</p></div>",
+        '<div><h3>Fast fallback</h3><p>' + escapeHtml(operation.fallback) + "</p></div>",
+        '<div><h3>Patrick to decide</h3>' + list(operation.decisions) + "</div>",
+        '<section class="director-runtime"><h3>Runtime cue alignment</h3><div class="director-cue-grid">' +
+          operation.runtimeCues.map(directorCueCard).join("") + "</div></section>",
+        "</div></details>"
+      ].join("");
     }).join("");
 
     app.innerHTML = [
-      '<main class="cast-shell">',
-      actionBar(""),
-      '<header class="portal-hero">',
-      '<div><p class="confidential-label">Adult Cast Portal — Do Not Show Luca</p>',
-      '<p class="cast-kicker">Luca’s Creekside Region</p>',
-      "<h1>Cast Portal</h1>",
-      '<p>Quick rehearsal guides, day-of cues, reward ownership, and handoffs for every adult performer.</p></div>',
-      '<img src="' + root + '/assets/pokemon/mega-icon-gold.png" alt="" width="150" height="150">',
+      '<main class="cast-shell cast-shell--director">',
+      actionBar("../", "Participant guides"),
+      '<header class="director-hero">',
+      '<p class="confidential-label">Director only · Do not show Luca</p>',
+      '<p class="cast-kicker">Creekside Region operations</p>',
+      "<h1>" + escapeHtml(director.title) + "</h1>",
+      "<p>" + escapeHtml(director.intro) + "</p>",
       "</header>",
-      '<aside class="spoiler-alert"><strong>Protect the surprise.</strong> Do not show these pages to Luca, forward the overview, discuss locked chapters in front of him, or put private fragment information online. This portal contains no entry-code digits.</aside>',
-      '<section class="overview-section" aria-labelledby="cast-guides-heading"><p class="section-eyebrow">Individual links</p><h2 id="cast-guides-heading">Participant guides</h2><div class="portal-link-grid">' + guideLinks + "</div></section>",
-      '<section class="overview-section" aria-labelledby="participant-order-heading"><p class="section-eyebrow">Handoff sequence</p><h2 id="participant-order-heading">Participant order</h2>' + list(portal.participantOrder, "order-list") + "</section>",
-      '<section class="overview-section" aria-labelledby="timeline-heading"><p class="section-eyebrow">Complete event timeline</p><h2 id="timeline-heading">Run of show, arrivals, and rewards</h2><div class="timeline">' + timeline + "</div></section>",
-      '<section class="overview-section callout-card"><h2>Day-of rule</h2><p>Adults may paraphrase. Luca always succeeds. Use hints early, shorten optional dialogue when behind, and never rush water safety or the adult-accompanied Ranger Vault entry.</p></section>',
-      '<footer class="cast-footer"><p>Creekside Region Cast Portal · Role-based locations only · No private entry information.</p></footer>',
+      '<section class="director-section"><p class="section-eyebrow">Operating defaults</p><h2>Patrick owns the logistics</h2>' + list(director.globalOperations) + "</section>",
+      '<section class="director-section"><p class="section-eyebrow">Full timeline</p><h2>Run of show</h2><div class="timeline">' + timeline + "</div></section>",
+      '<section class="director-section"><p class="section-eyebrow">Gift ownership</p><h2>Exact package IDs</h2>',
+      '<div class="director-table-wrap"><table><thead><tr><th>Package</th><th>Owner</th><th>Moment</th></tr></thead><tbody>' + packages + "</tbody></table></div></section>",
+      '<section class="director-section"><p class="section-eyebrow">Participant order</p><h2>Handoff sequence</h2>' + list(director.participantOrder, "order-list") + "</section>",
+      '<section class="director-section"><p class="section-eyebrow">Detailed setup</p><h2>Role-by-role operations</h2><div class="director-operations">' + operations + "</div></section>",
+      '<footer class="cast-footer"><p>Director view · Keep private story and setup notes away from Luca.</p></footer>',
       "</main>"
     ].join("");
   }
@@ -216,13 +243,10 @@
   }
 
   if (!portal || !app) return;
-  if (page === "overview") {
-    renderOverview();
-  } else if (portal.guides[page]) {
-    renderGuide(portal.guides[page]);
-  } else {
-    app.innerHTML = '<main class="cast-shell"><h1>Cast guide not found</h1><p><a href="../">Return to the Cast Portal</a></p></main>';
-  }
+  if (page === "overview") renderOverview();
+  else if (page === "director") renderDirector();
+  else if (portal.guides[page]) renderParticipant(portal.guides[page]);
+  else app.innerHTML = '<main class="cast-shell"><h1>Cast guide not found</h1><p><a href="../">Return to the Cast Portal</a></p></main>';
 
   document.addEventListener("click", function (event) {
     var copyButton = event.target.closest("[data-copy-link]");
