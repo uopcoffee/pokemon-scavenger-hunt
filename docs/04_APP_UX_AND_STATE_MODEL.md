@@ -46,17 +46,53 @@ The app is a mission controller, not the venue. It should:
 
 Use a deterministic scene state machine rather than many independent booleans.
 
+### V3 audience and stable-position contract
+
+V3 preserves the same state machine and storage key while adding two safeguards:
+
+- Every runtime scene has a globally unique `id` and an explicit `audience` of
+  `luca`, `adult`, or `cast`.
+- Newly saved progress includes both `currentSceneId` and
+  `currentSceneIndex`. The stable ID is authoritative; the index remains for
+  compatibility and debugging.
+
+The live state schema is version 3. Valid version-2 saves are migrated instead
+of discarded. An old numeric scene index is first resolved against the
+preserved V2 scene-ID list. If that content became a relay, restoration lands
+on its Luca-facing handoff, never the private cast cue. Otherwise restoration
+uses the matching Luca scene, the nearest preceding Luca scene, or the
+sequence beginning. Trainer identity, completed chapters, rewards, fragments,
+checkpoint state, fake-credit state, and Mew state are retained.
+
+Unknown or missing audience values fail safely to a preceding Luca-facing
+scene. The renderer also refuses to render an unknown audience.
+
+### V3 theatrical relay
+
+Every substantial physical encounter uses this deterministic sequence:
+
+1. Luca-facing story and challenge introduction
+2. Luca-facing named handoff with a 1.5-second adult hold
+3. Adult-only privacy shield
+4. Cast-only operational cue with a 1.5-second completion hold
+5. Adult-only return-to-player shield
+6. Luca-facing achievement, reward, inventory, fragment, and transition scenes
+
+The cast cue is a separate scene. It is not mounted behind the privacy shield,
+hidden with CSS, or exposed in the shield's accessibility tree.
+
 Recommended top-level state:
 
 ```js
 {
-  version: 2,
+  version: 3,
   trainer: {
     name: "Luca",
     avatarId: "..."
   },
-  chapterIndex: 0,
-  sceneIndex: 0,
+  currentChapterId: "trainer-orientation",
+  currentSceneIndex: 0,
+  currentSceneId: "orientation-story",
   completedChapters: [],
   earnedBadges: [],
   team: [],
@@ -110,6 +146,12 @@ Controls:
 - reset entire game with double confirmation
 
 Parent Mode must not display the house-entry code.
+
+In V3, Parent Mode also shows the current chapter, stable scene ID, scene type,
+audience, and performer. Its scene directory exposes the same metadata for
+every chapter, the Oak return checkpoint, and the Mew epilogue. Overriding a
+cast cue advances only to the return shield; overriding the return shield may
+advance to Luca's result.
 
 ## Map behavior
 

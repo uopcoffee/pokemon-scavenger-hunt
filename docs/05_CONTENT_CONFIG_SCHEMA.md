@@ -8,7 +8,7 @@ Move from a flat list of identical stops to configurable chapters made of typed 
 
 ```js
 window.CREEKSIDE_CONFIG = {
-  version: 2,
+  version: 3,
   title: "Luca's Creekside Region",
   trainerTitle: "Trainer",
   storageKey: "luca-creekside-v2",
@@ -114,6 +114,60 @@ window.CREEKSIDE_CONFIG = {
 - `glitch`
 - `epilogue-clue`
 - `celebration`
+
+V3 adds:
+
+- `cast-handoff` — Luca-facing named phone transfer with protected hold
+- `privacy-shield` — adult-only confirmation before any cue is mounted
+- `cast-cue` — concise performer operations
+- `return-to-player` — adult-only confirmation before revealing the outcome
+- `relay-result` — Luca-facing achievement immediately after the return shield
+
+Every scene must also declare one of the configured audience values:
+
+```js
+{
+  id: "center-challenge-handoff",
+  type: "cast-handoff",
+  audience: "luca"
+}
+```
+
+Scene IDs are stable and globally unique across chapters, checkpoint, and
+epilogue.
+
+## Shared cast cue source
+
+`cast-core.js` owns the concise operational fields shared by the live relay and
+the Cast Portal:
+
+```js
+{
+  id,
+  portalGuide,
+  performerName,
+  characterName,
+  entranceCue,
+  spokenLines,
+  challengeSteps,
+  successCondition,
+  rewardPackages,
+  rewardOwners,
+  rewardPreparation,
+  fallback,
+  transitionLine,
+  transitionDestination,
+  handoffStory,
+  handoffLabel,
+  completionLabel
+}
+```
+
+`creekside-content.js` derives the runtime cast cue from these fields.
+`cast/cast-data.js` attaches the same shared objects to the full rehearsal
+guides, and `cast/cast.js` renders their live alignment summary. The Cast Portal
+remains the detailed rehearsal document; the in-adventure cast scene remains a
+short Quick Card.
 
 ## Reward registry
 
