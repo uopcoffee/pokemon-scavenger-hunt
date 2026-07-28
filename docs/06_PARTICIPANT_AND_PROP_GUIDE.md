@@ -94,7 +94,7 @@ Props:
 
 ## Monica
 
-Role: Lead Research Assistant.
+Role: Professor Monica, Water Research Professor and Professor Oak's equal research partner.
 
 Opening line:
 

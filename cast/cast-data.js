@@ -133,7 +133,7 @@
         eyebrow: "Bruce and Monica",
         participants: [
           { name: "Bruce", role: "Professor Oak" },
-          { name: "Monica", role: "Lead Research Assistant" }
+          { name: "Monica", role: "Professor Monica, Research Partner" }
         ],
         duration: "15–20 minutes, plus an 8-minute return checkpoint",
         arrival: "First visit about 10:15 a.m.; return about 11:09 a.m.",

@@ -35,7 +35,7 @@
       { id: "ariel", displayName: "Auntie Ariel", role: "League Recruiter and Victory Road Referee" },
       { id: "nina", displayName: "Nina", role: "Fairy Gym Leader and Pikachu's Helper" },
       { id: "bruce", displayName: "Professor Oak", role: "Water Research Professor" },
-      { id: "monica", displayName: "Monica", role: "Lead Research Assistant" },
+      { id: "monica", displayName: "Professor Monica", role: "Water Research Professor and Oak's Research Partner" },
       { id: "polly", displayName: "Nurse Joy", role: "Pokémon Center Leader" },
       { id: "mike", displayName: "Mike", role: "Team Rocket Boss" },
       { id: "patrick", displayName: "Patrick", role: "Creekside Region Champion" },

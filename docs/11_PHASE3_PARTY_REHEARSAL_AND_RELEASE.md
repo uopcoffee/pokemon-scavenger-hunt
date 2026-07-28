@@ -87,7 +87,7 @@ longer setup.
 > them safely with Monica, identify the unstable symbol, and bring everything
 > to my research tray.
 
-### Monica — Lead Research Assistant
+### Monica — Professor Monica, Water Research Professor
 
 > Professor, the readings are rising! Trainer Luca, use this symbol diagram to
 > find all four samples. I have the skimmer and towel ready. No running, no

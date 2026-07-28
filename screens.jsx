@@ -378,7 +378,7 @@ function FakeCreditsControl({ scene, onComplete }) {
         <span>League Recruiter · Auntie Ariel</span>
         <span>Fairy Gym Leader · Nina</span>
         <span>Professor Oak · Bruce</span>
-        <span>Research Assistant · Monica</span>
+        <span>Professor Monica · Research Partner</span>
         <span>Nurse Joy · Polly</span>
         <span>Team Rocket Boss · Mike</span>
         <span>Creekside Champion · Patrick</span>

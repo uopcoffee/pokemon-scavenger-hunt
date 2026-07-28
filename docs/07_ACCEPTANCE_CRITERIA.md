@@ -17,7 +17,7 @@
 
 ## Story and content
 
-- [ ] Bruce appears as Professor Oak and Monica as his research assistant.
+- [ ] Bruce appears as Professor Oak and Monica as Professor Monica, his equal research partner.
 - [ ] The Professor Oak chapter supports four pool capsules and a dry skimmer fallback.
 - [ ] Mike's chapter uses a forgiving three-round basketball challenge.
 - [ ] Hannah and Noa appear as absent Rangers who left a cache.
