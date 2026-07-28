@@ -1,6 +1,6 @@
-/* Creekside Region V2 production content.
-   Loaded after data.js so V1 remains intact while this file becomes the
-   source of truth for the configurable V2 engine.
+/* Creekside Region V3 production content.
+   Loaded after data.js so the preserved V1 data remains intact while this
+   file is the source of truth for the configurable Creekside engine.
 
    SECURITY: symbolic fragment labels are not keypad digits. Never place the
    real entry code, a code-derived hint, or a digit field in this repository.
@@ -16,10 +16,11 @@
     return { label: label, category: category, disposition: disposition, packageId: packageId };
   }
 
-  window.CREEKSIDE_CONFIG = {
-    version: 2,
+  var config = {
+    version: 3,
     title: "Luca's Creekside Region",
     storageKey: "luca-creekside-v2-progress",
+    audiences: ["luca", "adult", "cast"],
     adultHoldMs: 1500,
     artBase: "assets/pokemon/",
     avatars: window.LUCA_CONFIG.avatars,
@@ -275,4 +276,19 @@
       ],
     },
   };
+
+  function applyAudienceContract(sequence) {
+    sequence.legacyV2SceneIds = sequence.scenes.map(function (scene) {
+      return scene.id;
+    });
+    sequence.scenes = sequence.scenes.map(function (scene) {
+      return Object.assign({}, scene, { audience: "luca" });
+    });
+  }
+
+  config.chapters.forEach(applyAudienceContract);
+  applyAudienceContract(config.checkpoint);
+  applyAudienceContract(config.epilogue);
+
+  window.CREEKSIDE_CONFIG = config;
 })();

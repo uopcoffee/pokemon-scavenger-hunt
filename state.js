@@ -1,4 +1,4 @@
-/* Creekside V2 Phase 1 state engine.
+/* Creekside V3 state engine.
    Plain browser JavaScript keeps the no-build deployment model intact and
    makes progression/persistence logic testable without rendering React. */
 (function () {
@@ -14,6 +14,7 @@
 
   function initialState() {
     var config = getConfig();
+    var firstChapter = config.chapters[0];
     return {
       version: config.version,
       view: "splash",
@@ -22,8 +23,9 @@
         name: "",
         avatarId: config.avatars[0].id,
       },
-      currentChapterId: config.chapters[0].id,
+      currentChapterId: firstChapter.id,
       currentSceneIndex: 0,
+      currentSceneId: firstChapter.scenes[0].id,
       completedChapters: [],
       earnedRewards: [],
       earnedBadges: [],
@@ -56,6 +58,69 @@
     return sequence && sequence.scenes[state.currentSceneIndex];
   }
 
+  function validAudience(scene) {
+    return scene && getConfig().audiences.indexOf(scene.audience) !== -1;
+  }
+
+  function nearestSafeSceneIndex(sequence, requestedIndex) {
+    var bounded = Math.min(Math.max(Number.isInteger(requestedIndex) ? requestedIndex : 0, 0), sequence.scenes.length - 1);
+    if (validAudience(sequence.scenes[bounded])) return bounded;
+    for (var index = bounded; index >= 0; index -= 1) {
+      if (sequence.scenes[index] && sequence.scenes[index].audience === "luca") return index;
+    }
+    return 0;
+  }
+
+  function migrateV2SceneIndex(sequence, legacyIndex) {
+    var legacyIds = Array.isArray(sequence.legacyV2SceneIds)
+      ? sequence.legacyV2SceneIds
+      : sequence.scenes.map(function (scene) { return scene.id; });
+    var boundedLegacyIndex = Math.min(
+      Math.max(Number.isInteger(legacyIndex) ? legacyIndex : 0, 0),
+      Math.max(0, legacyIds.length - 1)
+    );
+    var legacySceneId = legacyIds[boundedLegacyIndex];
+    var handoffIndex = sequence.scenes.findIndex(function (scene) {
+      return scene.id === legacySceneId + "-handoff" && scene.audience === "luca";
+    });
+    if (handoffIndex !== -1) return handoffIndex;
+
+    var exactIndex = sequence.scenes.findIndex(function (scene) {
+      return scene.id === legacySceneId;
+    });
+    if (exactIndex !== -1 && sequence.scenes[exactIndex].audience === "luca") return exactIndex;
+
+    for (var legacyCursor = boundedLegacyIndex; legacyCursor >= 0; legacyCursor -= 1) {
+      var precedingIndex = sequence.scenes.findIndex(function (scene) {
+        return scene.id === legacyIds[legacyCursor] && scene.audience === "luca";
+      });
+      if (precedingIndex !== -1) return precedingIndex;
+    }
+    return nearestSafeSceneIndex(sequence, 0);
+  }
+
+  function resolveSceneIndex(sequence, input) {
+    var requestedId = typeof input.currentSceneId === "string" ? input.currentSceneId : "";
+    if (requestedId) {
+      var sceneIdIndex = sequence.scenes.findIndex(function (scene) {
+        return scene.id === requestedId;
+      });
+      if (sceneIdIndex !== -1 && validAudience(sequence.scenes[sceneIdIndex])) return sceneIdIndex;
+    }
+    if (input.version === 2) return migrateV2SceneIndex(sequence, input.currentSceneIndex);
+    return nearestSafeSceneIndex(sequence, input.currentSceneIndex);
+  }
+
+  function syncScenePosition(state) {
+    var sequence = activeSequence(state);
+    if (!sequence || !sequence.scenes.length) return state;
+    var index = nearestSafeSceneIndex(sequence, state.currentSceneIndex);
+    return Object.assign({}, state, {
+      currentSceneIndex: index,
+      currentSceneId: sequence.scenes[index].id,
+    });
+  }
+
   function validStringArray(input, allowedValues) {
     if (!Array.isArray(input)) return [];
     return unique(input.filter(function (value) {
@@ -66,7 +131,7 @@
   function sanitizeState(input) {
     var config = getConfig();
     var fallback = initialState();
-    if (!input || typeof input !== "object" || input.version !== config.version) return fallback;
+    if (!input || typeof input !== "object" || [2, config.version].indexOf(input.version) === -1) return fallback;
 
     var chapterIds = config.chapters.map(function (chapter) { return chapter.id; });
     var rewardIds = Object.keys(config.rewards);
@@ -95,10 +160,7 @@
       : activeFlowValue === "checkpoint"
         ? config.checkpoint
         : chapterById(currentChapterId);
-    var maximumSceneIndex = Math.max(0, selectedSequence.scenes.length - 1);
-    var sceneIndex = Number.isInteger(input.currentSceneIndex)
-      ? Math.min(Math.max(input.currentSceneIndex, 0), maximumSceneIndex)
-      : 0;
+    var sceneIndex = resolveSceneIndex(selectedSequence, input);
     var allowedViews = ["splash", "onboarding", "map", "scene", "celebration"];
     var finalChapterId = config.chapters[config.chapters.length - 1].id;
     var mewUnlocked = Boolean(input.mewUnlocked || completedChapters.indexOf(finalChapterId) !== -1);
@@ -106,7 +168,7 @@
     if (activeFlowValue === "mew" && !mewUnlocked) {
       activeFlowValue = "chapter";
       selectedSequence = chapterById(currentChapterId);
-      sceneIndex = Math.min(sceneIndex, Math.max(0, selectedSequence.scenes.length - 1));
+      sceneIndex = nearestSafeSceneIndex(selectedSequence, sceneIndex);
     }
 
     return {
@@ -123,6 +185,7 @@
       },
       currentChapterId: currentChapterId,
       currentSceneIndex: sceneIndex,
+      currentSceneId: selectedSequence.scenes[sceneIndex].id,
       completedChapters: completedChapters,
       earnedRewards: earnedRewards,
       earnedBadges: Array.isArray(input.earnedBadges) ? validStringArray(input.earnedBadges, rewardIds) : derivedBadges,
@@ -207,6 +270,7 @@
     if (state.currentSceneIndex < sequence.scenes.length - 1) {
       return Object.assign({}, next, {
         currentSceneIndex: state.currentSceneIndex + 1,
+        currentSceneId: sequence.scenes[state.currentSceneIndex + 1].id,
       });
     }
 
@@ -222,6 +286,7 @@
         view: "map",
         activeFlow: "chapter",
         currentSceneIndex: 0,
+        currentSceneId: chapterById(state.currentChapterId).scenes[0].id,
         checkpointComplete: true,
       });
     }
@@ -239,6 +304,7 @@
         view: "scene",
         activeFlow: "mew",
         currentSceneIndex: 0,
+        currentSceneId: config.epilogue.scenes[0].id,
         completedChapters: completed,
         mewUnlocked: true,
       });
@@ -248,6 +314,7 @@
       activeFlow: checkpointRequired ? "checkpoint" : "chapter",
       currentChapterId: nextChapter ? nextChapter.id : state.currentChapterId,
       currentSceneIndex: 0,
+      currentSceneId: nextChapter ? nextChapter.scenes[0].id : sequence.scenes[0].id,
       completedChapters: completed,
       mewUnlocked: state.mewUnlocked,
     });
@@ -286,6 +353,9 @@
             view: "scene",
             activeFlow: "checkpoint",
             currentSceneIndex: state.activeFlow === "checkpoint" ? state.currentSceneIndex : 0,
+            currentSceneId: state.activeFlow === "checkpoint"
+              ? state.currentSceneId
+              : getConfig().checkpoint.scenes[0].id,
           });
         }
         break;
@@ -295,6 +365,9 @@
             view: state.mewComplete ? "celebration" : "scene",
             activeFlow: "mew",
             currentSceneIndex: state.mewComplete ? getConfig().epilogue.scenes.length - 1 : 0,
+            currentSceneId: state.mewComplete
+              ? getConfig().epilogue.scenes[getConfig().epilogue.scenes.length - 1].id
+              : getConfig().epilogue.scenes[0].id,
           });
         }
         break;
@@ -315,6 +388,7 @@
             activeFlow: "chapter",
             currentChapterId: action.chapterId,
             currentSceneIndex: 0,
+            currentSceneId: chapterById(action.chapterId).scenes[0].id,
           });
         }
         break;
@@ -326,6 +400,7 @@
             activeFlow: "chapter",
             currentChapterId: action.chapterId,
             currentSceneIndex: Math.min(Math.max(action.sceneIndex || 0, 0), parentChapter.scenes.length - 1),
+            currentSceneId: parentChapter.scenes[Math.min(Math.max(action.sceneIndex || 0, 0), parentChapter.scenes.length - 1)].id,
           });
         }
         break;
@@ -334,6 +409,7 @@
           view: "scene",
           activeFlow: "checkpoint",
           currentSceneIndex: Math.min(Math.max(action.sceneIndex || 0, 0), getConfig().checkpoint.scenes.length - 1),
+          currentSceneId: getConfig().checkpoint.scenes[Math.min(Math.max(action.sceneIndex || 0, 0), getConfig().checkpoint.scenes.length - 1)].id,
         });
         break;
       case "PARENT_JUMP_MEW":
@@ -341,6 +417,7 @@
           view: "scene",
           activeFlow: "mew",
           currentSceneIndex: Math.min(Math.max(action.sceneIndex || 0, 0), getConfig().epilogue.scenes.length - 1),
+          currentSceneId: getConfig().epilogue.scenes[Math.min(Math.max(action.sceneIndex || 0, 0), getConfig().epilogue.scenes.length - 1)].id,
           mewUnlocked: true,
         });
         break;
@@ -348,6 +425,7 @@
         if (state.view === "scene" && state.currentSceneIndex > 0) {
           next = Object.assign({}, state, {
             currentSceneIndex: state.currentSceneIndex - 1,
+            currentSceneId: activeSequence(state).scenes[state.currentSceneIndex - 1].id,
           });
         }
         break;
@@ -365,6 +443,7 @@
         return state;
     }
 
+    next = syncScenePosition(next);
     return Object.assign({}, next, {
       updatedAt: new Date().toISOString(),
     });
@@ -380,5 +459,6 @@
     chapterById: chapterById,
     activeSequence: activeSequence,
     currentScene: currentScene,
+    migrateV2SceneIndex: migrateV2SceneIndex,
   };
 })();
