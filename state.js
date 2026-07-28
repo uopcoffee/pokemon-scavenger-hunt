@@ -26,8 +26,14 @@
       currentSceneIndex: 0,
       completedChapters: [],
       earnedRewards: [],
+      earnedBadges: [],
+      team: [],
+      inventory: [],
+      questItems: [],
       collectedFragments: [],
+      checkpointComplete: false,
       mewUnlocked: false,
+      fakeCreditsComplete: false,
       mewComplete: false,
       updatedAt: null,
     };
@@ -40,7 +46,9 @@
   }
 
   function activeSequence(state) {
-    return state.activeFlow === "mew" ? getConfig().epilogue : chapterById(state.currentChapterId);
+    if (state.activeFlow === "mew") return getConfig().epilogue;
+    if (state.activeFlow === "checkpoint") return getConfig().checkpoint;
+    return chapterById(state.currentChapterId);
   }
 
   function currentScene(state) {
@@ -65,17 +73,35 @@
     var fragmentSlots = config.codeFragments.map(function (fragment) { return fragment.slot; });
     var avatarIds = config.avatars.map(function (avatar) { return avatar.id; });
     var completedChapters = validStringArray(input.completedChapters, chapterIds);
+    var earnedRewards = validStringArray(input.earnedRewards, rewardIds);
+    var derivedTeam = earnedRewards.filter(function (rewardId) {
+      return config.rewards[rewardId].category === "team-card";
+    });
+    var derivedBadges = earnedRewards.filter(function (rewardId) {
+      return config.rewards[rewardId].category === "badge";
+    });
+    var derivedQuestItems = earnedRewards.filter(function (rewardId) {
+      return config.rewards[rewardId].category === "quest-item";
+    });
+    var derivedInventory = earnedRewards.filter(function (rewardId) {
+      return ["team-card", "badge", "quest-item"].indexOf(config.rewards[rewardId].category) === -1;
+    });
     var currentChapterId = chapterIds.indexOf(input.currentChapterId) !== -1
       ? input.currentChapterId
       : config.chapters[0].id;
-    var activeFlowValue = input.activeFlow === "mew" ? "mew" : "chapter";
-    var selectedSequence = activeFlowValue === "mew" ? config.epilogue : chapterById(currentChapterId);
+    var activeFlowValue = ["chapter", "checkpoint", "mew"].indexOf(input.activeFlow) !== -1 ? input.activeFlow : "chapter";
+    var selectedSequence = activeFlowValue === "mew"
+      ? config.epilogue
+      : activeFlowValue === "checkpoint"
+        ? config.checkpoint
+        : chapterById(currentChapterId);
     var maximumSceneIndex = Math.max(0, selectedSequence.scenes.length - 1);
     var sceneIndex = Number.isInteger(input.currentSceneIndex)
       ? Math.min(Math.max(input.currentSceneIndex, 0), maximumSceneIndex)
       : 0;
     var allowedViews = ["splash", "onboarding", "map", "scene", "celebration"];
-    var mewUnlocked = Boolean(input.mewUnlocked || completedChapters.indexOf("champion-finale") !== -1);
+    var finalChapterId = config.chapters[config.chapters.length - 1].id;
+    var mewUnlocked = Boolean(input.mewUnlocked || completedChapters.indexOf(finalChapterId) !== -1);
 
     if (activeFlowValue === "mew" && !mewUnlocked) {
       activeFlowValue = "chapter";
@@ -98,13 +124,19 @@
       currentChapterId: currentChapterId,
       currentSceneIndex: sceneIndex,
       completedChapters: completedChapters,
-      earnedRewards: validStringArray(input.earnedRewards, rewardIds),
+      earnedRewards: earnedRewards,
+      earnedBadges: Array.isArray(input.earnedBadges) ? validStringArray(input.earnedBadges, rewardIds) : derivedBadges,
+      team: Array.isArray(input.team) ? validStringArray(input.team, rewardIds) : derivedTeam,
+      inventory: Array.isArray(input.inventory) ? validStringArray(input.inventory, rewardIds) : derivedInventory,
+      questItems: Array.isArray(input.questItems) ? validStringArray(input.questItems, rewardIds) : derivedQuestItems,
       collectedFragments: Array.isArray(input.collectedFragments)
         ? unique(input.collectedFragments.filter(function (slot) {
             return fragmentSlots.indexOf(slot) !== -1;
           }))
         : [],
+      checkpointComplete: Boolean(input.checkpointComplete),
       mewUnlocked: mewUnlocked,
+      fakeCreditsComplete: Boolean(input.fakeCreditsComplete),
       mewComplete: Boolean(input.mewComplete && mewUnlocked),
       updatedAt: typeof input.updatedAt === "string" ? input.updatedAt : null,
     };
@@ -144,13 +176,23 @@
   }
 
   function withSceneEffects(state, scene) {
+    var config = getConfig();
     var next = Object.assign({}, state);
-    if (scene.type === "reward" && Array.isArray(scene.rewardIds)) {
+    if (Array.isArray(scene.rewardIds)) {
       next.earnedRewards = unique(state.earnedRewards.concat(scene.rewardIds));
+      scene.rewardIds.forEach(function (rewardId) {
+        var item = config.rewards[rewardId];
+        if (!item) return;
+        if (item.category === "team-card") next.team = unique(next.team.concat(rewardId));
+        else if (item.category === "badge") next.earnedBadges = unique(next.earnedBadges.concat(rewardId));
+        else if (item.category === "quest-item") next.questItems = unique(next.questItems.concat(rewardId));
+        else next.inventory = unique(next.inventory.concat(rewardId));
+      });
     }
     if (scene.type === "code-fragment-record" && Number.isInteger(scene.fragmentSlot)) {
       next.collectedFragments = unique(state.collectedFragments.concat(scene.fragmentSlot));
     }
+    if (scene.type === "fake-credits") next.fakeCreditsComplete = true;
     return next;
   }
 
@@ -175,20 +217,39 @@
       });
     }
 
+    if (state.activeFlow === "checkpoint") {
+      return Object.assign({}, next, {
+        view: "map",
+        activeFlow: "chapter",
+        currentSceneIndex: 0,
+        checkpointComplete: true,
+      });
+    }
+
     var config = getConfig();
     var completed = unique(next.completedChapters.concat(state.currentChapterId));
     var currentIndex = config.chapters.findIndex(function (chapter) {
       return chapter.id === state.currentChapterId;
     });
     var nextChapter = config.chapters[currentIndex + 1];
-    var championComplete = state.currentChapterId === "champion-finale";
+    var championComplete = state.currentChapterId === config.chapters[config.chapters.length - 1].id;
+    var checkpointRequired = state.currentChapterId === config.checkpoint.afterChapterId;
+    if (championComplete) {
+      return Object.assign({}, next, {
+        view: "scene",
+        activeFlow: "mew",
+        currentSceneIndex: 0,
+        completedChapters: completed,
+        mewUnlocked: true,
+      });
+    }
     return Object.assign({}, next, {
       view: "map",
-      activeFlow: "chapter",
+      activeFlow: checkpointRequired ? "checkpoint" : "chapter",
       currentChapterId: nextChapter ? nextChapter.id : state.currentChapterId,
       currentSceneIndex: 0,
       completedChapters: completed,
-      mewUnlocked: Boolean(state.mewUnlocked || championComplete),
+      mewUnlocked: state.mewUnlocked,
     });
   }
 
@@ -208,10 +269,23 @@
         });
         break;
       case "OPEN_CURRENT_CHAPTER":
-        if (state.completedChapters.indexOf(state.currentChapterId) === -1) {
+        var currentChapter = chapterById(state.currentChapterId);
+        var fragmentsReady = !currentChapter.requiresFragments
+          || state.collectedFragments.length >= currentChapter.requiresFragments;
+        var checkpointReady = !currentChapter.requiresCheckpoint || state.checkpointComplete;
+        if (state.completedChapters.indexOf(state.currentChapterId) === -1 && fragmentsReady && checkpointReady) {
           next = Object.assign({}, state, {
             view: "scene",
             activeFlow: "chapter",
+          });
+        }
+        break;
+      case "OPEN_CHECKPOINT":
+        if (!state.checkpointComplete && state.completedChapters.indexOf(getConfig().checkpoint.afterChapterId) !== -1) {
+          next = Object.assign({}, state, {
+            view: "scene",
+            activeFlow: "checkpoint",
+            currentSceneIndex: state.activeFlow === "checkpoint" ? state.currentSceneIndex : 0,
           });
         }
         break;
@@ -244,8 +318,44 @@
           });
         }
         break;
+      case "PARENT_JUMP_SCENE":
+        var parentChapter = chapterById(action.chapterId);
+        if (parentChapter) {
+          next = Object.assign({}, state, {
+            view: "scene",
+            activeFlow: "chapter",
+            currentChapterId: action.chapterId,
+            currentSceneIndex: Math.min(Math.max(action.sceneIndex || 0, 0), parentChapter.scenes.length - 1),
+          });
+        }
+        break;
+      case "PARENT_JUMP_CHECKPOINT":
+        next = Object.assign({}, state, {
+          view: "scene",
+          activeFlow: "checkpoint",
+          currentSceneIndex: Math.min(Math.max(action.sceneIndex || 0, 0), getConfig().checkpoint.scenes.length - 1),
+        });
+        break;
+      case "PARENT_JUMP_MEW":
+        next = Object.assign({}, state, {
+          view: "scene",
+          activeFlow: "mew",
+          currentSceneIndex: Math.min(Math.max(action.sceneIndex || 0, 0), getConfig().epilogue.scenes.length - 1),
+          mewUnlocked: true,
+        });
+        break;
+      case "PARENT_BACK_SCENE":
+        if (state.view === "scene" && state.currentSceneIndex > 0) {
+          next = Object.assign({}, state, {
+            currentSceneIndex: state.currentSceneIndex - 1,
+          });
+        }
+        break;
       case "PARENT_UNLOCK_MEW":
         next = Object.assign({}, state, { mewUnlocked: true });
+        break;
+      case "PARENT_RESTORE":
+        next = sanitizeState(action.state);
         break;
       case "RESET":
         clearState();

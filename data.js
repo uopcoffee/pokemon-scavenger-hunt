@@ -62,17 +62,18 @@ window.LUCA_CONFIG = {
 };
 
 /* ============================================================
-   Creekside V2 Phase 1 configuration
+   Creekside V2 fallback configuration
 
-   The V1 configuration above stays intact while the chapter engine is
-   validated. V2 content is intentionally concise in this phase; later
-   phases will replace placeholder copy and artwork without changing the
-   engine.
+   The V1 configuration above remains intact. The production Creekside
+   story, challenge, participant, and reward configuration is loaded from
+   creekside-content.js immediately after this file. This fallback remains
+   available so the Phase 1 foundation is preserved for reference.
 
    PATRICK — CODE FRAGMENT NOTE:
-   `displaySymbol` is only a harmless symbol shown in the app. You may
-   replace these four symbols locally if desired, but NEVER put the real
-   keypad digits, full code, or code-derived answers in this file.
+   `displaySymbol` is only a harmless symbol shown in the app. The active
+   symbolic values are in creekside-content.js. You may replace those four
+   symbols locally if desired, but NEVER put the real keypad digits, full
+   code, or code-derived answers in either file.
    The actual digits belong only on the four physical fragment cards.
    ============================================================ */
 window.CREEKSIDE_CONFIG = {

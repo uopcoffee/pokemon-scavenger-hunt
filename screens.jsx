@@ -229,17 +229,22 @@ function TrainerApp() {
 window.TrainerApp = TrainerApp;
 
 /* ============================================================
-   Creekside V2 Phase 1
+   Creekside V2 configurable application
 
    The V1 screens above intentionally remain available as
-   window.V1TrainerApp while the configurable chapter engine is validated.
+   window.V1TrainerApp while the production chapter engine is active.
    ============================================================ */
 window.V1TrainerApp = TrainerApp;
 
 function CreeksideMap({ config, state, dispatch }) {
   const currentChapter = window.CreeksideState.chapterById(state.currentChapterId);
-  const activeType = state.activeFlow === "mew" ? config.epilogue.type : (currentChapter ? currentChapter.type : "psychic");
+  const activeType = state.activeFlow === "mew"
+    ? config.epilogue.type
+    : state.activeFlow === "checkpoint"
+      ? config.checkpoint.type
+      : (currentChapter ? currentChapter.type : "psychic");
   const avatar = config.avatars.find((item) => item.id === state.trainer.avatarId) || config.avatars[0];
+  const finalChapterId = config.chapters[config.chapters.length - 1].id;
   return (
     <Field type={activeType}>
       <div style={{ ...shell }}>
@@ -255,7 +260,7 @@ function CreeksideMap({ config, state, dispatch }) {
             avatarSrc={ART + avatar.img}
             badges={state.completedChapters.length}
             totalBadges={config.chapters.length}
-            champion={state.completedChapters.includes("champion-finale")}
+            champion={state.completedChapters.includes(finalChapterId)}
             style={{ maxWidth: "none" }}
           />
 
@@ -273,32 +278,58 @@ function CreeksideMap({ config, state, dispatch }) {
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {config.chapters.map((chapter) => {
               const complete = state.completedChapters.includes(chapter.id);
-              const active = !complete && chapter.id === state.currentChapterId;
+              const fragmentRequirementMet = !chapter.requiresFragments || state.collectedFragments.length >= chapter.requiresFragments;
+              const checkpointRequirementMet = !chapter.requiresCheckpoint || state.checkpointComplete;
+              const active = !complete
+                && state.activeFlow === "chapter"
+                && chapter.id === state.currentChapterId
+                && fragmentRequirementMet
+                && checkpointRequirementMet;
               const locked = !complete && !active;
               return (
-                <button
-                  key={chapter.id}
-                  type="button"
-                  className={`creekside-map-card${complete ? " creekside-map-card--complete" : ""}${active ? " creekside-map-card--active" : ""}`}
-                  disabled={!active}
-                  onClick={() => active && dispatch({ type: "OPEN_CURRENT_CHAPTER" })}
-                  data-testid={`chapter-${chapter.number}`}
-                >
-                  <Icon
-                    name={complete ? "check" : locked ? "lock" : "badge-slot"}
-                    size={38}
-                    color={complete ? "var(--tropius-leaf)" : active ? "var(--mewtwo-x)" : "var(--silver-deep)"}
-                  />
-                  <span style={{ flex: 1, minWidth: 0 }}>
-                    <small style={{ display: "block", fontFamily: "var(--font-label)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-soft)" }}>
-                      Chapter {chapter.number}
-                    </small>
-                    <strong style={{ display: "block", fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "1.08rem" }}>
-                      {locked ? chapter.lockedName : chapter.name}
-                    </strong>
-                  </span>
-                  {chapter.art && <img src={ART + chapter.art} alt="" style={{ width: 46, height: 46, objectFit: "contain", filter: locked ? "brightness(0) opacity(.3)" : "drop-shadow(0 3px 6px rgba(27,36,48,.22))" }} />}
-                </button>
+                <React.Fragment key={chapter.id}>
+                  <button
+                    type="button"
+                    className={`creekside-map-card${complete ? " creekside-map-card--complete" : ""}${active ? " creekside-map-card--active" : ""}`}
+                    disabled={!active}
+                    onClick={() => active && dispatch({ type: "OPEN_CURRENT_CHAPTER" })}
+                    data-testid={`chapter-${chapter.number}`}
+                  >
+                    <Icon
+                      name={complete ? "check" : locked ? "lock" : "badge-slot"}
+                      size={38}
+                      color={complete ? "var(--tropius-leaf)" : active ? "var(--mewtwo-x)" : "var(--silver-deep)"}
+                    />
+                    <span style={{ flex: 1, minWidth: 0 }}>
+                      <small style={{ display: "block", fontFamily: "var(--font-label)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-soft)" }}>
+                        Chapter {chapter.number} · {chapter.scheduleLabel}
+                      </small>
+                      <strong style={{ display: "block", fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "1.08rem" }}>
+                        {locked ? chapter.lockedName : chapter.name}
+                      </strong>
+                    </span>
+                    {chapter.art && <img src={ART + chapter.art} alt="" style={{ width: 46, height: 46, objectFit: "contain", filter: locked ? "brightness(0) opacity(.3)" : "drop-shadow(0 3px 6px rgba(27,36,48,.22))" }} />}
+                  </button>
+                  {chapter.id === config.checkpoint.afterChapterId && (
+                    <button
+                      type="button"
+                      className={`creekside-map-card${state.checkpointComplete ? " creekside-map-card--complete" : ""}${state.activeFlow === "checkpoint" && !state.checkpointComplete ? " creekside-map-card--active" : ""}`}
+                      disabled={state.checkpointComplete || state.activeFlow !== "checkpoint"}
+                      onClick={() => dispatch({ type: "OPEN_CHECKPOINT" })}
+                      data-testid="oak-return-checkpoint"
+                    >
+                      <Icon name={state.checkpointComplete ? "check" : state.activeFlow === "checkpoint" ? "sparkle" : "lock"} size={38} color={state.checkpointComplete ? "var(--tropius-leaf)" : "var(--sky)"} />
+                      <span style={{ flex: 1, minWidth: 0 }}>
+                        <small style={{ display: "block", fontFamily: "var(--font-label)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-soft)" }}>
+                          Checkpoint · {config.checkpoint.scheduleLabel}
+                        </small>
+                        <strong style={{ display: "block", fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "1.08rem" }}>
+                          {state.activeFlow === "checkpoint" || state.checkpointComplete ? config.checkpoint.name : config.checkpoint.lockedName}
+                        </strong>
+                      </span>
+                    </button>
+                  )}
+                </React.Fragment>
               );
             })}
 
@@ -329,7 +360,56 @@ function CreeksideMap({ config, state, dispatch }) {
   );
 }
 
+function FakeCreditsControl({ scene, onComplete }) {
+  const durationMs = scene.durationMs || 10000;
+  const [remainingMs, setRemainingMs] = React.useState(durationMs);
+  React.useEffect(() => {
+    const startedAt = Date.now();
+    const timer = setInterval(() => {
+      setRemainingMs(Math.max(0, durationMs - (Date.now() - startedAt)));
+    }, 100);
+    return () => clearInterval(timer);
+  }, [durationMs]);
+  const ready = remainingMs <= 0;
+  return (
+    <div className="fake-credits-panel">
+      <div className="fake-credits-roll" aria-live="polite">
+        <strong>CHAMPION LUCA</strong>
+        <span>League Recruiter · Auntie Ariel</span>
+        <span>Fairy Gym Leader · Nina</span>
+        <span>Professor Oak · Bruce</span>
+        <span>Research Assistant · Monica</span>
+        <span>Nurse Joy · Polly</span>
+        <span>Team Rocket Boss · Mike</span>
+        <span>Creekside Champion · Patrick</span>
+        <span>Pokémon Rangers · Hannah and Noa</span>
+      </div>
+      <Button variant={ready ? "reward" : "secondary"} block disabled={!ready} onClick={onComplete} data-testid="finish-fake-credits">
+        {ready ? "Finish League processing" : `Credits rolling… ${Math.ceil(remainingMs / 1000)}s`}
+      </Button>
+    </div>
+  );
+}
+
 function SceneSpecificContent({ config, state, scene }) {
+  if (Array.isArray(scene.dialogue)) {
+    return (
+      <div className="dialogue-lines">
+        {scene.dialogue.map((line, index) => <p key={`${scene.id}-line-${index}`}>“{line}”</p>)}
+      </div>
+    );
+  }
+
+  if (Array.isArray(scene.instructions)) {
+    return (
+      <div className="mission-instructions">
+        <ol>
+          {scene.instructions.map((instruction, index) => <li key={`${scene.id}-instruction-${index}`}>{instruction}</li>)}
+        </ol>
+      </div>
+    );
+  }
+
   if (scene.type === "code-fragment-record") {
     return (
       <div style={{ marginTop: 16 }}>
@@ -341,7 +421,18 @@ function SceneSpecificContent({ config, state, scene }) {
     );
   }
 
-  if (scene.type === "reward") {
+  if (scene.type === "fragment-check") {
+    return (
+      <div style={{ marginTop: 16 }}>
+        <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={state.collectedFragments} />
+        {state.collectedFragments.length < 4 && (
+          <p className="mission-warning">The Ranger Vault remains locked until all four symbolic fragment slots are complete.</p>
+        )}
+      </div>
+    );
+  }
+
+  if (Array.isArray(scene.rewardIds)) {
     return (
       <div style={{ display: "grid", gap: 8, marginTop: 16 }}>
         {(scene.rewardIds || []).map((rewardId) => {
@@ -349,10 +440,11 @@ function SceneSpecificContent({ config, state, scene }) {
           return (
             <div key={rewardId} style={{ display: "flex", gap: 10, alignItems: "center", padding: 12, borderRadius: "var(--r-sm)", background: "rgba(247,201,72,.16)", border: "1.5px solid var(--banana)" }}>
               <Icon name="sparkle" color="var(--gold)" />
-              <span>
+              <span style={{ flex: 1, minWidth: 0 }}>
                 <strong style={{ display: "block" }}>{reward.label}</strong>
-                <small>{reward.openNow ? "Open now" : "Save for celebration"}</small>
+                <small style={{ display: "block", color: "var(--ink-soft)" }}>{reward.packageId}</small>
               </span>
+              <strong className={`reward-disposition reward-disposition--${reward.disposition.toLowerCase().replace(/\s+/g, "-")}`}>{reward.disposition}</strong>
             </div>
           );
         })}
@@ -362,10 +454,33 @@ function SceneSpecificContent({ config, state, scene }) {
 
   if (scene.type === "inventory-update") {
     return (
-      <div style={{ marginTop: 16, padding: 12, borderRadius: "var(--r-sm)", background: "var(--paper-alt)" }}>
-        <strong>{state.earnedRewards.length} reward{state.earnedRewards.length === 1 ? "" : "s"} recorded</strong>
+      <div className="inventory-summary">
+        <span><strong>{state.team.length}</strong> team cards</span>
+        <span><strong>{state.earnedBadges.length}</strong> badges</span>
+        <span><strong>{state.questItems.length}</strong> quest items</span>
+        <span><strong>{state.inventory.length}</strong> gifts and packs</span>
       </div>
     );
+  }
+
+  if (scene.type === "hall-of-heroes") {
+    return (
+      <div className="hall-of-heroes">
+        {(scene.participantIds || []).map((participantId) => {
+          const participant = config.participants.find((item) => item.id === participantId);
+          return participant ? (
+            <div key={participant.id}>
+              <Icon name="badge" size={24} color="var(--gold)" />
+              <span><strong>{participant.displayName}</strong><small>{participant.role}</small></span>
+            </div>
+          ) : null;
+        })}
+      </div>
+    );
+  }
+
+  if (scene.type === "glitch") {
+    return <div className="friendly-glitch" aria-label="Friendly scanner interference"><span>SIGNAL DETECTED</span><small>MYTHICAL ENERGY TRACE</small></div>;
   }
 
   return null;
@@ -386,10 +501,16 @@ function CreeksideScene({ config, state, dispatch }) {
 
   const sceneLabel = scene.type.replace(/-/g, " ");
   const isPhysical = scene.type === "physical-challenge";
+  const isFakeCredits = scene.type === "fake-credits";
   const isLast = state.currentSceneIndex === sequence.scenes.length - 1;
   const continueLabel = isLast
-    ? (state.activeFlow === "mew" ? "Finish the adventure" : "Complete chapter")
+    ? (state.activeFlow === "mew" ? "Finish the adventure" : state.activeFlow === "checkpoint" ? "Complete checkpoint" : "Complete chapter")
     : scene.type === "reward" ? "Add rewards" : "Continue";
+  const footerLabel = state.activeFlow === "mew"
+    ? `Postgame Event · ${sequence.scheduleLabel}`
+    : state.activeFlow === "checkpoint"
+      ? `Oak Return Checkpoint · ${sequence.scheduleLabel}`
+      : `Chapter ${sequence.number} · ${sequence.name} · ${sequence.scheduleLabel}`;
 
   return (
     <Field type={sequence.type}>
@@ -420,11 +541,11 @@ function CreeksideScene({ config, state, dispatch }) {
                 size={116}
               />
             }
-            burst={scene.type === "reward" || scene.type === "celebration"}
+            burst={scene.type === "reward" || scene.type === "celebration" || scene.type === "hall-of-heroes"}
             holo={scene.type === "reward"}
             float
             style={{ maxWidth: "none" }}
-            footer={<span>{state.activeFlow === "mew" ? "Postgame Event" : `Chapter ${sequence.number} · ${sequence.name}`}</span>}
+            footer={<span>{footerLabel}</span>}
           >
             {scene.character && (
               <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "7px 12px", marginBottom: 12, borderRadius: "var(--r-pill)", background: "rgba(138,79,255,.10)", color: "var(--mewtwo-y)", fontFamily: "var(--font-label)", fontWeight: 700 }}>
@@ -432,8 +553,14 @@ function CreeksideScene({ config, state, dispatch }) {
                 {scene.character}
               </div>
             )}
-            <p style={{ margin: 0, fontSize: "1.08rem", lineHeight: 1.58 }}>{scene.body}</p>
+            {scene.body && <p style={{ margin: 0, fontSize: "1.08rem", lineHeight: 1.58 }}>{scene.body}</p>}
             <SceneSpecificContent config={config} state={state} scene={scene} />
+            {scene.successRule && (
+              <div className="success-rule"><strong>Success rule</strong><span>{scene.successRule}</span></div>
+            )}
+            {scene.fallbackText && (
+              <div className="fallback-rule"><strong>Adult fallback</strong><span>{scene.fallbackText}</span></div>
+            )}
             {isPhysical && (
               <div style={{ marginTop: 18 }}>
                 <p style={{ margin: "0 0 12px", fontSize: ".95rem", fontWeight: 700, color: "var(--ink-soft)" }}>{scene.adultPrompt}</p>
@@ -443,7 +570,10 @@ function CreeksideScene({ config, state, dispatch }) {
                 />
               </div>
             )}
-            {!isPhysical && (
+            {isFakeCredits && (
+              <FakeCreditsControl scene={scene} onComplete={() => dispatch({ type: "ADVANCE_SCENE" })} />
+            )}
+            {!isPhysical && !isFakeCredits && (
               <Button
                 variant={scene.type === "reward" || scene.type === "celebration" ? "reward" : "primary"}
                 size="lg"
@@ -465,6 +595,8 @@ function CreeksideScene({ config, state, dispatch }) {
 
 function ParentMode({ config, state, dispatch, onClose }) {
   const [confirmReset, setConfirmReset] = React.useState(false);
+  const [restoreText, setRestoreText] = React.useState(() => JSON.stringify(state, null, 2));
+  const [restoreError, setRestoreError] = React.useState("");
   React.useEffect(() => {
     if (!confirmReset) return undefined;
     const timeout = setTimeout(() => setConfirmReset(false), 5000);
@@ -488,7 +620,7 @@ function ParentMode({ config, state, dispatch, onClose }) {
         </div>
 
         <p style={{ margin: "14px 0", color: "var(--ink-soft)" }}>
-          Current: {state.activeFlow === "mew" ? "Mew Epilogue" : state.currentChapterId}, scene {state.currentSceneIndex + 1}. No keypad code is stored here.
+          Current: {state.activeFlow === "mew" ? "Mew Epilogue" : state.activeFlow === "checkpoint" ? "Professor Oak Return" : state.currentChapterId}, scene {state.currentSceneIndex + 1}. No keypad code is stored here.
         </p>
 
         <div className="parent-mode-grid">
@@ -500,7 +632,20 @@ function ParentMode({ config, state, dispatch, onClose }) {
           >
             Override / advance
           </Button>
+          <Button
+            variant="secondary"
+            disabled={state.view !== "scene" || state.currentSceneIndex === 0}
+            onClick={() => runAndClose({ type: "PARENT_BACK_SCENE" })}
+          >
+            Go back one scene
+          </Button>
           <Button variant="secondary" onClick={() => runAndClose({ type: "BACK_TO_MAP" })}>Return to map</Button>
+          <Button
+            variant="secondary"
+            onClick={() => runAndClose({ type: "PARENT_JUMP_CHECKPOINT" })}
+          >
+            Jump to Oak return
+          </Button>
         </div>
 
         <h3 style={{ fontFamily: "var(--font-display)", margin: "20px 0 10px" }}>Jump to chapter</h3>
@@ -516,7 +661,44 @@ function ParentMode({ config, state, dispatch, onClose }) {
           ))}
         </div>
 
-        <h3 style={{ fontFamily: "var(--font-display)", margin: "20px 0 10px" }}>Testing</h3>
+        <h3 style={{ fontFamily: "var(--font-display)", margin: "20px 0 10px" }}>Physical challenge shortcuts</h3>
+        <div className="parent-mode-grid">
+          {config.chapters.reduce((shortcuts, chapter) => {
+            chapter.scenes.forEach((scene, sceneIndex) => {
+              if (scene.type !== "physical-challenge") return;
+              shortcuts.push(
+              <Button
+                key={scene.id}
+                variant="secondary"
+                onClick={() => runAndClose({ type: "PARENT_JUMP_SCENE", chapterId: chapter.id, sceneIndex })}
+              >
+                {chapter.number}. {scene.title}
+              </Button>
+              );
+            });
+            return shortcuts;
+          }, [])}
+          <Button
+            variant="secondary"
+            onClick={() => runAndClose({
+              type: "PARENT_JUMP_CHECKPOINT",
+              sceneIndex: config.checkpoint.scenes.findIndex((scene) => scene.type === "physical-challenge"),
+            })}
+          >
+            Oak checkpoint challenge
+          </Button>
+          {config.epilogue.scenes.map((scene, sceneIndex) => scene.type === "physical-challenge" ? (
+            <Button
+              key={scene.id}
+              variant="secondary"
+              onClick={() => runAndClose({ type: "PARENT_JUMP_MEW", sceneIndex })}
+            >
+              Mew discovery challenge
+            </Button>
+          ) : null)}
+        </div>
+
+        <h3 style={{ fontFamily: "var(--font-display)", margin: "20px 0 10px" }}>Finale testing</h3>
         <Button
           variant="secondary"
           block
@@ -524,6 +706,30 @@ function ParentMode({ config, state, dispatch, onClose }) {
           disabled={state.mewUnlocked}
         >
           {state.mewUnlocked ? "Mew event already unlocked" : "Unlock Mew event for testing"}
+        </Button>
+
+        <h3 style={{ fontFamily: "var(--font-display)", margin: "20px 0 10px" }}>Export or restore progress</h3>
+        <textarea
+          className="parent-mode-json"
+          value={restoreText}
+          onChange={(event) => { setRestoreText(event.target.value); setRestoreError(""); }}
+          aria-label="Progress JSON"
+          spellCheck="false"
+        />
+        {restoreError && <p className="mission-warning">{restoreError}</p>}
+        <Button
+          variant="secondary"
+          block
+          onClick={() => {
+            try {
+              const parsed = JSON.parse(restoreText);
+              runAndClose({ type: "PARENT_RESTORE", state: parsed });
+            } catch (error) {
+              setRestoreError("That progress text is not valid JSON. Nothing was changed.");
+            }
+          }}
+        >
+          Restore validated progress
         </Button>
 
         <div style={{ marginTop: 24, paddingTop: 18, borderTop: "1px solid var(--silver)" }}>
@@ -550,6 +756,9 @@ function ParentMode({ config, state, dispatch, onClose }) {
 
 function CreeksideCelebration({ config, state, dispatch }) {
   const avatar = config.avatars.find((item) => item.id === state.trainer.avatarId) || config.avatars[0];
+  const savedBoosters = state.earnedRewards
+    .map((rewardId) => config.rewards[rewardId])
+    .filter((reward) => reward && reward.disposition === "SAVE FOR CELEBRATION");
   return (
     <Field hero style={{ background: "radial-gradient(130% 100% at 50% -10%, #F4D976 0%, #8A4FFF 42%, #241a4d 100%)" }}>
       <div style={{ ...shell }}>
@@ -565,7 +774,11 @@ function CreeksideCelebration({ config, state, dispatch }) {
             totalBadges={config.chapters.length}
             champion
           />
-          <p style={{ color: "#fff", fontSize: "1.08rem", maxWidth: 380 }}>Mew has been registered. Gather the family for the celebration and booster opening.</p>
+          <p style={{ color: "#fff", fontSize: "1.08rem", maxWidth: 380 }}>Mew has been registered. Gather the family, bring out the popsicles, and open the saved Booster Satchel together.</p>
+          <div className="celebration-satchel">
+            <strong>Booster Satchel · {savedBoosters.length} saved groups</strong>
+            {savedBoosters.map((reward) => <span key={reward.label}>{reward.label}</span>)}
+          </div>
           <Button variant="reward" size="lg" onClick={() => dispatch({ type: "BACK_TO_MAP" })}>View completed map</Button>
           <small style={{ color: "rgba(255,255,255,.75)" }}>Restart is available only inside Parent Mode.</small>
         </div>
