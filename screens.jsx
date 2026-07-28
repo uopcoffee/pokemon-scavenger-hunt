@@ -689,7 +689,7 @@ function CreeksideScene({ config, state, dispatch }) {
   const isPhysical = scene.type === "physical-challenge";
   const isFakeCredits = scene.type === "fake-credits";
   const isRewardResult = scene.type === "reward";
-  const isCelebrationResult = ["reward", "inventory-update", "code-fragment-record", "hall-of-heroes", "celebration"].includes(scene.type);
+  const isCelebrationResult = ["relay-result", "reward", "inventory-update", "code-fragment-record", "hall-of-heroes", "celebration"].includes(scene.type);
   const isLast = state.currentSceneIndex === sequence.scenes.length - 1;
   const continueLabel = isLast
     ? (state.activeFlow === "mew" ? "Finish the adventure" : state.activeFlow === "checkpoint" ? "Complete checkpoint" : "Complete chapter")
@@ -740,11 +740,11 @@ function CreeksideScene({ config, state, dispatch }) {
             style={{ maxWidth: "none" }}
             footer={<span>{footerLabel}</span>}
           >
-            {isRewardResult && (
+            {(isRewardResult || scene.type === "relay-result") && (
               <div className="mission-result-burst" role="status">
                 <Icon name="sparkle" size={24} color="var(--gold)" />
-                <strong>Mission complete!</strong>
-                <span>New rewards unlocked</span>
+                <strong>{scene.type === "relay-result" ? "Challenge complete!" : "Mission complete!"}</strong>
+                <span>{scene.type === "relay-result" ? "Trainer achievement recorded" : "New rewards unlocked"}</span>
               </div>
             )}
             {scene.character && (

@@ -354,6 +354,14 @@
         body: "Do not reveal the result, reward, badge, fragment, or next destination until Luca can see the phone.",
         performerName: cue.performerName,
         cueId: cue.id
+      },
+      {
+        id: originalScene.id + "-result",
+        type: "relay-result",
+        audience: "luca",
+        title: "Mission Cleared: " + originalScene.title,
+        body: "Outstanding work! The real-world mission is complete and Luca’s Trainer record has been updated.",
+        cueId: cue.id
       }
     ];
   }

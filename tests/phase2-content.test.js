@@ -31,6 +31,7 @@ const requiredChapterSceneTypes = [
   "privacy-shield",
   "cast-cue",
   "return-to-player",
+  "relay-result",
   "reward",
   "inventory-update",
   "chapter-transition",
