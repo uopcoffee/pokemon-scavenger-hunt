@@ -62,7 +62,7 @@
           { speaker: "Professor Bruce", line: "Excellent work, Trainer Luca! You saved our research." },
           { speaker: "Professor Monica", line: "And you discovered an important clue. Keep it safe—you may need it later." }
         ],
-        successInstruction: "Wait for Patrick’s signal, then hand Luca the research gift and clue card.",
+        successInstruction: "Hand Luca the research gift and clue card.",
         backup: [
           "Use the skimmer instead of swimming.",
           "Use one capsule instead of four if time is short.",
@@ -115,7 +115,7 @@
         successLines: [
           { speaker: "Nurse Joy", line: "You did it! Every Pokémon is feeling better. That was very kind, Trainer Luca." }
         ],
-        successInstruction: "When Patrick gives the signal, hand Luca the Pokémon Center gift bag and clue card. Then give the Team Rocket warning.",
+        successInstruction: "Hand Luca the Pokémon Center gift bag and clue card. Then give the Team Rocket warning.",
         backup: [
           "Use just one patient and two choices.",
           "Point to the answer and let Luca hand it to you.",
@@ -157,7 +157,7 @@
         successLines: [
           { speaker: "Team Rocket Boss", line: "Impossible! My unbeatable defense has been defeated. Fine—take the stolen message!" }
         ],
-        successInstruction: "When Patrick gives the signal, hand Luca the Team Rocket gift bag and Ranger message.",
+        successInstruction: "Hand Luca the Team Rocket gift bag and Ranger message.",
         backup: [
           "Use one close shot instead of several.",
           "Count a backboard or target hit.",
@@ -202,7 +202,7 @@
         successLines: [
           { speaker: "Auntie Ariel", line: "Official Trainer status confirmed! Your first signal is waiting in the Fairy Garden." }
         ],
-        successInstruction: "When Patrick signals, hand Luca the Trainer gift bag and point him toward the Fairy Garden.",
+        successInstruction: "Hand Luca the Trainer gift bag and point him toward the Fairy Garden.",
         backup: [
           "Complete one short promise and protect one card.",
           "Place every Fairy Orb in plain sight or let Luca carry Nina’s basket himself.",
@@ -302,7 +302,7 @@
         successLines: [
           { speaker: "Champion Patrick", line: "The match is over. Luca, you are the new Champion of the Creekside Region!" }
         ],
-        successInstruction: "When the phone gives the signal, reveal the Champion Chest and gather everyone for the Hall of Heroes.",
+        successInstruction: "Reveal the Champion Chest and gather everyone for the Hall of Heroes.",
         backup: [
           "Ask one question, accept a high-five, and ask who helped him.",
           "Skip any prop that is not ready.",

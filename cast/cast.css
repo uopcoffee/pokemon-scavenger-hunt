@@ -510,9 +510,12 @@
   .cast-shell--participant {
     width: 100%;
     max-width: none;
+    column-count: 2;
+    column-gap: 8pt;
   }
 
   .participant-hero {
+    column-span: all;
     border: 0;
     border-bottom: 2pt solid #4b3a8f;
     border-radius: 0;
@@ -562,6 +565,8 @@
   }
 
   .participant-section {
+    display: inline-block;
+    width: 100%;
     break-inside: avoid;
     margin-top: 5pt;
     border-radius: 5pt;
@@ -631,10 +636,7 @@
   }
 
   .participant-closing {
-    break-inside: avoid;
-    margin-top: 5pt;
-    padding: 5pt 6pt;
-    font-size: 8.6pt;
+    display: none;
   }
 
   .participant-footer,
