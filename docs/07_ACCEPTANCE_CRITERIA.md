@@ -3,9 +3,13 @@
 ## Core flow
 
 - [ ] The app supports seven numbered chapters, an Oak return checkpoint, a fake finale, and a Mew epilogue.
+- [ ] Every runtime scene has a unique stable ID and explicit `luca`, `adult`, or `cast` audience.
+- [ ] Every physical encounter follows Luca handoff → privacy shield → cast cue → return shield → Luca result.
 - [ ] Chapter progression cannot occur accidentally through a single normal tap.
 - [ ] Each physical challenge is completed through an adult press-and-hold interaction.
 - [ ] The current chapter and scene restore correctly after refresh or browser restart.
+- [ ] Handoff, privacy, cast, return, and Luca-result scenes each restore exactly by stable scene ID.
+- [ ] A valid V2 save migrates without opening a private cast cue or erasing valid progress.
 - [ ] The app can resume from every chapter and the Oak checkpoint through Parent Mode.
 
 ## Privacy and security
@@ -48,6 +52,10 @@
 ## Birthday-day rehearsal
 
 - [ ] Complete a full run on the actual phone.
+- [ ] Confirm every named handoff with the intended performer.
+- [ ] Confirm cast instructions are absent from the privacy shield and its accessibility tree.
+- [ ] Refresh once on each of the five relay scene types.
+- [ ] Confirm Parent Mode override from a cast cue lands on the return shield.
 - [ ] Test airplane mode after the first load.
 - [ ] Test refresh during Chapter 4 and during fake credits.
 - [ ] Test adult override at every physical challenge.

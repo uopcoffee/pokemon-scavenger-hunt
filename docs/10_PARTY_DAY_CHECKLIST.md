@@ -3,6 +3,19 @@
 Use this as the final parent-facing packing and rehearsal list. The package
 labels below exactly match `packageId` values in `creekside-content.js`.
 
+## Party-day phone protocol
+
+1. The lead adult keeps the phone by default.
+2. Luca views every story, challenge introduction, reward, and achievement.
+3. Complete the named handoff hold, then turn the phone away before opening the
+   cast cue.
+4. The safety adult does not operate the phone during pool or movement-heavy
+   activity; another adult may complete the cue.
+5. Return the phone to Luca and dismiss the return shield before handing over a
+   reward or naming the next destination.
+6. If a performer is delayed or unavailable, Parent Mode may safely advance the
+   cue to the return shield. Use the documented fallback and keep Luca moving.
+
 ## Security rule
 
 - [ ] Keep the real entry digits off phones, computers, photographs, and the repository.

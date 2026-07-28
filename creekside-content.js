@@ -1,6 +1,6 @@
-/* Creekside Region V2 production content.
-   Loaded after data.js so V1 remains intact while this file becomes the
-   source of truth for the configurable V2 engine.
+/* Creekside Region V3 production content.
+   Loaded after data.js so the preserved V1 data remains intact while this
+   file is the source of truth for the configurable Creekside engine.
 
    SECURITY: symbolic fragment labels are not keypad digits. Never place the
    real entry code, a code-derived hint, or a digit field in this repository.
@@ -16,10 +16,11 @@
     return { label: label, category: category, disposition: disposition, packageId: packageId };
   }
 
-  window.CREEKSIDE_CONFIG = {
-    version: 2,
+  var config = {
+    version: 3,
     title: "Luca's Creekside Region",
     storageKey: "luca-creekside-v2-progress",
+    audiences: ["luca", "adult", "cast"],
     adultHoldMs: 1500,
     artBase: "assets/pokemon/",
     avatars: window.LUCA_CONFIG.avatars,
@@ -162,7 +163,7 @@
         scenes: [
           { id: "oak-travel", type: "travel-location", title: "Travel to Professor Oak's Lab", body: "Allow travel and costume-reset time. Target arrival: 10:15 a.m. Bring the phone, Ranger Code Card, and an adult." },
           { id: "oak-entrance", type: "character-encounter", title: "Professor Oak Watches the Water", character: "Professor Oak", dialogue: ["Shhh... the preserve is unusually active.", "Wait. You must be Trainer Luca."] },
-          { id: "monica-entrance", type: "character-encounter", title: "Monica Reports Rising Energy", character: "Monica", dialogue: ["Professor, the capsule readings are rising.", "Trainer Luca, we need all four samples before Team Rocket finds them."] },
+          { id: "monica-entrance", type: "character-encounter", title: "Professor Monica Reports Rising Energy", character: "Professor Monica", dialogue: ["Professor Oak, the capsule readings are rising.", "Trainer Luca, we need all four samples before Team Rocket finds them."] },
           { id: "oak-story", type: "story", title: "Four Research Capsules", body: "One capsule holds the final Ranger fragment. Another holds a Sky Fragment producing unstable Mega Energy." },
           { id: "oak-safety", type: "challenge-briefing", title: "Water Research Safety Briefing", instructions: ["One supervising adult watches the water continuously.", "No running on the pool deck.", "Retrieve only floating or shallow prepared capsules.", "Use the skimmer immediately if swimming is not the best option."] },
           { id: "oak-challenge", type: "physical-challenge", title: "Recover the Four Capsules", body: "Use Monica's symbol diagram, retrieve four double-sealed capsules, identify the unstable-energy symbol, and place the Sky Fragment in the research tray.", successRule: "Retrieve all four safely; swimming should be brief and purposeful.", fallbackText: "Use the pool skimmer, float capsules in a tub, or retrieve four marked tennis balls from the deck.", adultPrompt: "Supervising adult: hold to confirm all four research objects are safely recovered." },
@@ -275,4 +276,119 @@
       ],
     },
   };
+
+  function applyAudienceContract(sequence) {
+    sequence.legacyV2SceneIds = sequence.scenes.map(function (scene) {
+      return scene.id;
+    });
+    sequence.scenes = sequence.scenes.map(function (scene) {
+      return Object.assign({}, scene, { audience: "luca" });
+    });
+  }
+
+  config.chapters.forEach(applyAudienceContract);
+  applyAudienceContract(config.checkpoint);
+  applyAudienceContract(config.epilogue);
+
+  var relayCueByChallengeId = {
+    "orientation-challenge": "orientation",
+    "fairy-challenge": "fairy",
+    "oak-challenge": "oak-water",
+    "center-challenge": "nurse-joy",
+    "rocket-challenge": "rocket",
+    "vault-challenge": "vault",
+    "victory-challenge-a": "victory-road",
+    "victory-challenge-b": "rayquaza",
+    "champion-challenge": "champion",
+    "oak-return-challenge": "oak-return",
+    "mew-challenge": "mew"
+  };
+
+  function buildRelayScenes(originalScene, cue) {
+    return [
+      {
+        id: originalScene.id + "-handoff",
+        type: "cast-handoff",
+        audience: "luca",
+        title: originalScene.title,
+        body: cue.handoffStory,
+        performerName: cue.performerName,
+        characterName: cue.characterName,
+        handoffLabel: cue.handoffLabel,
+        cueId: cue.id
+      },
+      {
+        id: originalScene.id + "-privacy",
+        type: "privacy-shield",
+        audience: "adult",
+        title: "Adult Cast Screen Ahead",
+        body: "Turn the phone away from Luca.",
+        performerName: cue.performerName,
+        cueId: cue.id
+      },
+      {
+        id: originalScene.id,
+        type: "cast-cue",
+        audience: "cast",
+        title: originalScene.title,
+        performerName: cue.performerName,
+        characterName: cue.characterName,
+        entranceCue: cue.entranceCue,
+        spokenLines: cue.spokenLines.slice(),
+        challengeSteps: cue.challengeSteps.slice(),
+        successCondition: cue.successCondition,
+        rewardPackages: cue.rewardPackages.slice(),
+        rewardOwners: cue.rewardOwners.slice(),
+        rewardPreparation: cue.rewardPreparation,
+        fallback: cue.fallback,
+        transitionLine: cue.transitionLine,
+        transitionDestination: cue.transitionDestination,
+        completionLabel: cue.completionLabel,
+        cueId: cue.id
+      },
+      {
+        id: originalScene.id + "-return",
+        type: "return-to-player",
+        audience: "adult",
+        title: "Return the phone to Luca",
+        body: "Do not reveal the result, reward, badge, fragment, or next destination until Luca can see the phone.",
+        performerName: cue.performerName,
+        cueId: cue.id
+      },
+      {
+        id: originalScene.id + "-result",
+        type: "relay-result",
+        audience: "luca",
+        title: "Mission Cleared: " + originalScene.title,
+        body: "Outstanding work! The real-world mission is complete and Luca’s Trainer record has been updated.",
+        cueId: cue.id
+      }
+    ];
+  }
+
+  function applyTheatricalRelays(sequence) {
+    sequence.scenes = sequence.scenes.reduce(function (scenes, scene) {
+      var cueId = relayCueByChallengeId[scene.id];
+      if (!cueId) return scenes.concat(scene);
+      var cue = window.CREEKSIDE_CAST_CORES && window.CREEKSIDE_CAST_CORES[cueId];
+      if (!cue) {
+        return scenes.concat({
+          id: scene.id + "-handoff",
+          type: "cast-handoff",
+          audience: "adult",
+          title: "Mission Recovery",
+          body: "The cast cue could not be loaded. Open Parent Mode and return to the preceding scene.",
+          performerName: "Lead Adult",
+          handoffLabel: "Adult: Hold to open recovery instructions"
+        });
+      }
+      return scenes.concat(buildRelayScenes(scene, cue));
+    }, []);
+  }
+
+  config.chapters.forEach(applyTheatricalRelays);
+  applyTheatricalRelays(config.checkpoint);
+  applyTheatricalRelays(config.epilogue);
+
+  window.CREEKSIDE_CONFIG = config;
 })();
