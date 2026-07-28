@@ -100,6 +100,8 @@ function stateAt(sequence, sceneIndex) {
 }
 
 assert.deepStrictEqual(Object.keys(cues).sort(), Object.keys(approvedPerformers).sort());
+assert.strictEqual(config.settings.soundEnabled, false, "The V3 experience must remain sound-off by default");
+assert.strictEqual(config.settings.respectReducedMotion, true, "V3 must preserve reduced-motion support");
 const monicaEntrance = locateScene("monica-entrance").scene;
 assert.strictEqual(monicaEntrance.character, "Professor Monica");
 assert.ok(monicaEntrance.title.startsWith("Professor Monica"));
