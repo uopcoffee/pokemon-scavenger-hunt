@@ -13,7 +13,7 @@
       phoneCaptain: "Patrick",
       entranceCue: "Patrick privately opens this cue before Luca enters. Stand ready with the Trainer Kit, Ranger Code Card, pencil, and a clearly labeled Save for Celebration container.",
       spokenLines: [
-        "Trainer Luca! A new region has appeared, and the Pokémon League chose you to investigate.",
+        "Luca—we’ve been waiting for you. Professor Oak asked for you by name.",
         "Promise to protect Pokémon, help your friends, play fairly, and never give up.",
         "Now show me how an official Trainer protects one special card!"
       ],
@@ -35,7 +35,7 @@
       rewardOwners: ["Ariel"],
       rewardPreparation: "Keep the Trainer Kit, Ranger Code Card, pencil, and Save for Celebration container together. Hand over the kit immediately after success and visibly store the first booster.",
       fallback: "Hold the sleeve or top loader while Luca slides the card into place. If time is short, protect one card and move on.",
-      transitionLine: "Official Trainer status confirmed. A tiny Fairy signal is waiting in the garden.",
+      transitionLine: "It worked. Oak was right about you—and something in the Fairy Garden just answered.",
       transitionDestination: "Fairy Garden",
       handoffStory: "The League Recruiter is ready to make this mission official.",
       handoffLabel: "Adult: Hold to open Auntie Ariel’s cue",
@@ -51,8 +51,8 @@
       entranceCue: "Nina holds the basket. Ariel quietly gives the longer prompt and lets Nina point, cheer, or use one-word directions.",
       spokenLines: [
         "Nina: Luca, look! Tree! There!",
-        "Ariel: Three Fairy lights fell from the trees. Help Nina return them to her basket.",
-        "Nina: You did it!"
+        "Ariel: These lights fell when Luca’s Trainer signal appeared. Help Nina return them to her basket.",
+        "Nina: They know Luca!"
       ],
       challengeSteps: [
         "Guide Luca toward three large orbs placed at toddler-visible height.",
@@ -71,7 +71,7 @@
       rewardOwners: ["Ariel"],
       rewardPreparation: "Have the Fairy reward ready. After Luca sees the success screen, open the reader and team cards; place the booster in the adult Booster Satchel.",
       fallback: "Place the final orb in full view. If Nina loses interest, she hands Luca the basket and cheers while he finishes. Move indoors if needed.",
-      transitionLine: "The Fairy signal is restored. Professor Oak has detected an urgent water-energy reading.",
+      transitionLine: "The lights are pointing toward Professor Oak’s Lab. They are trying to tell Luca something.",
       transitionDestination: "Professor Oak’s Lab",
       handoffStory: "The youngest Gym Leader is ready, with Auntie Ariel beside her.",
       handoffLabel: "Adult: Hold to open Auntie Ariel’s Fairy Garden cue",
@@ -86,9 +86,9 @@
       waterSafetyAdult: "Dedicated Water Safety Adult — watches Luca continuously and never operates the phone.",
       entranceCue: "Open this private cue before anyone approaches the pool. Professors are ready at the dry research table; the Phone Captain stows the phone safely away before Luca enters the preserve.",
       spokenLines: [
-        "Professor Oak: Shhh… the preserve is unusually active. You must be Trainer Luca.",
-        "Professor Monica: The readings are rising. Use this symbol diagram to find all four samples.",
-        "Professor Oak: Recover the capsules safely and bring the Sky Fragment to our research tray."
+        "Professor Oak: Luca. Just in time. I asked the League to find you.",
+        "Professor Monica: The reading jumped when you arrived. Use this diagram to find four samples.",
+        "Professor Oak: Recover them safely. If the Sky Fragment answers you, this mystery is bigger than I feared."
       ],
       challengeSteps: [
         "The dedicated Water Safety Adult watches Luca continuously and never operates the phone.",
@@ -110,7 +110,7 @@
       rewardOwners: ["Monica", "Bruce"],
       rewardPreparation: "Stage both packages away from the water. After the result screen, open the assigned items and place every sealed booster in the adult Booster Satchel. Hand over the physical fragment without showing its private mark.",
       fallback: "Use swimming only when appropriate, retrieve with the skimmer from the deck, switch to a dry tub, or run one capsule only. Never rush water safety.",
-      transitionLine: "The samples are secure. The energy pattern shows that Pokémon at the Center need help.",
+      transitionLine: "…You actually found it. And the same energy has reached the Pokémon Center.",
       transitionDestination: "Pokémon Center",
       handoffStory: "Two Water Research Professors are waiting at the preserve.",
       handoffLabel: "Adult: Hold to open Professor Bruce and Professor Monica’s cue",
@@ -124,9 +124,9 @@
       phoneCaptain: "Patrick",
       entranceCue: "Patrick privately opens this cue while Luca uses the sheltered reset for drying, changing, bathroom, or water. Wait beside the short treatment activity.",
       spokenLines: [
-        "The Pokémon Center is the safest place to restore your team after the Water Preserve.",
+        "You’re here! The patients have been calmer ever since your signal came close.",
         "Match each patient with the right care, then bring the medicine Poké Ball back to me.",
-        "You may ask for a Nurse Joy hint at any time."
+        "You may ask for a Nurse Joy hint at any time. That is official medical advice—and excellent Trainer strategy."
       ],
       challengeSteps: [
         "Show the three patient cards and matching treatments.",
@@ -144,7 +144,7 @@
       rewardOwners: ["Polly"],
       rewardPreparation: "Keep the field kit ready. After the result screen, open the reader, portfolio, and team card; place the booster in the adult Booster Satchel and hand over the physical fragment privately.",
       fallback: "Remove one wrong option, demonstrate the first match, say two choices aloud, or move the entire activity indoors.",
-      transitionLine: "Your team is healthy again—but Team Rocket has been spotted nearby. Stay alert.",
+      transitionLine: "They trust you, Luca. But that receiver says Team Rocket followed the same trail.",
       transitionDestination: "Team Rocket Base",
       handoffStory: "Nurse Joy has prepared an emergency treatment station.",
       handoffLabel: "Adult: Hold to open Polly’s Nurse Joy cue",
@@ -158,9 +158,9 @@
       phoneCaptain: "Patrick or Auntie Ariel",
       entranceCue: "Stand near the adjustable hoop with the Ranger Dispatch and stolen loot visible but out of reach. There is no formal score.",
       spokenLines: [
-        "So you’re Professor Oak’s new Trainer. This Ranger Dispatch belongs to Team Rocket now.",
-        "Break my basketball defense and attempt the Final Poké Shot.",
-        "Impossible! My defense was scientifically unbeatable!"
+        "So you’re the famous Luca. Oak chose you; Team Rocket chose this extremely secure basketball hoop.",
+        "Break my patented, unstoppable, definitely-not-adjustable defense and attempt the Final Poké Shot!",
+        "Impossible! That defense had a warranty! Fine—take the Dispatch. You still won’t like what the Rangers found."
       ],
       challengeSteps: [
         "Stage 1 — Close Basket: begin at the easiest marker.",
@@ -179,7 +179,7 @@
       rewardOwners: ["Mike"],
       rewardPreparation: "Keep the loot and Ranger Dispatch ready. After the result screen, open the team cards, place the booster in the adult Booster Satchel, and hand over the Dispatch.",
       fallback: "Lower the hoop, use the closest marker, count target hits, accept three soft passes, or use one close shot plus two easy Pokémon questions.",
-      transitionLine: "Those Rangers left something behind. You will never figure out what the fragments are for!",
+      transitionLine: "The Rangers left a warning, not treasure. And somehow, they were waiting for you!",
       transitionDestination: "Secret Ranger Vault",
       handoffStory: "Team Rocket is blocking the route and holding Oak’s Ranger Dispatch.",
       handoffLabel: "Adult: Hold to open Mike’s cue",
@@ -215,7 +215,7 @@
       rewardOwners: ["Designated Adult Escort"],
       rewardPreparation: "Keep the cache staged inside the approved boundary. Outside, open one story item only; the designated bag carrier takes larger items home or to the Professors.",
       fallback: "The escort enters the private information or brings the sealed cache outside and delivers the Ranger transmission verbally.",
-      transitionLine: "The Rangers’ file is secure. Professor Oak needs it and the Sky Fragment immediately.",
+      transitionLine: "The mark on the sealed file matches Luca’s License. Professor Oak must see it immediately.",
       transitionDestination: "Professor Oak’s Lab",
       handoffStory: "The protected Ranger mission requires one designated adult beside Luca.",
       handoffLabel: "Adult: Hold to open the Adult Escort’s cue",
@@ -229,9 +229,9 @@
       phoneCaptain: "Patrick",
       entranceCue: "Run a compact 5–8 minute return: accept the items, one callback, Rayquaza finding, League Authorization, compact reward, then immediate Victory Road departure.",
       spokenLines: [
-        "Professor Oak: You brought back the Sky Fragment and the Rangers’ file—excellent.",
-        "Professor Monica: The research confirms a Mega Rayquaza energy pattern.",
-        "Professor Oak: Tell us one thing you learned today. Any answer counts."
+        "Professor Oak: Luca… the mark on this file matches the License I asked the League to prepare for you.",
+        "Professor Monica: The Fairies, the patients, the fragment—they all trace one path back to Home Base.",
+        "Professor Oak: The signal was testing a path to you. Tell us one thing that helped you reach it."
       ],
       challengeSteps: [
         "Accept the Sky Fragment and sealed Research File.",
@@ -251,7 +251,7 @@
       rewardOwners: ["Monica"],
       rewardPreparation: "Keep the research reward and League Authorization ready. After the result screen, open the book and card, save the booster, and hand over the authorization.",
       fallback: "Ask only one two-choice question or announce that Oak’s scan confirms qualification.",
-      transitionLine: "Research complete. Victory Road is authorized, and Mega Rayquaza is gathering above Home Base.",
+      transitionLine: "The legend points home. Victory Road will reveal whether the signal has truly chosen Luca.",
       transitionDestination: "Victory Road",
       handoffStory: "The research partners are ready to analyze Luca’s evidence.",
       handoffLabel: "Adult: Hold to open Professor Bruce and Professor Monica’s return cue",
@@ -265,9 +265,9 @@
       phoneCaptain: "Patrick",
       entranceCue: "This single private cue covers Victory Road, the Rayquaza reveal and physical encounter, and the Champion summon. Ariel remains ready while the phone briefly returns to Luca between achievements.",
       spokenLines: [
-        "Welcome to Victory Road!",
+        "Luca, the Ranger legend ends here—but the path is watching how you travel it.",
         "Clear the Tall Grass, cross the forest line, hit the target, and recover the Energy Tokens.",
-        "The phone will celebrate Victory Road, then reveal Mega Rayquaza. Every assisted success is completely legitimate Champion behavior!"
+        "Clear each station with courage and the help your team earned. The sky will answer."
       ],
       challengeSteps: [
         "Guide one supported pass through the Tall Grass markers.",
@@ -290,7 +290,7 @@
       rewardOwners: ["Ariel"],
       rewardPreparation: "Keep Patrick and the Champion Chest out of sight until both Victory Road and Rayquaza are complete.",
       fallback: "Shorten the course, widen targets, reveal every token, then move closer to Rayquaza or use a ring or three Sky symbols.",
-      transitionLine: "Mega Rayquaza is calm. The Creekside Champion may now enter.",
+      transitionLine: "Mega Rayquaza recognizes Luca. The Creekside Champion may now enter.",
       transitionDestination: "Champion Arena",
       handoffStory: "Auntie Ariel will referee Victory Road, stay ready through the Luca-facing achievement, then lead Mega Rayquaza and summon the Champion from this one cue.",
       handoffLabel: "Adult: Hold to open Auntie Ariel’s Victory Road and Rayquaza cue",
@@ -304,9 +304,9 @@
       phoneCaptain: "Auntie Ariel",
       entranceCue: "Stay hidden until Ariel completes the one-cue Victory Road and Rayquaza sequence. Ariel remains Phone Captain and summons you with the Champion Chest still hidden.",
       spokenLines: [
-        "Trainer Luca, I watched your whole journey.",
-        "A Champion needs knowledge, skill, and heart. Show me all three.",
-        "The match is over. Luca, you are the new Champion of the Creekside Region."
+        "Trainer Luca, I watched the mystery choose you one clue at a time.",
+        "You answered it with kindness, courage, and your team. Now show me the knowledge, skill, and heart of a Champion.",
+        "I understand why Oak asked for you. Luca, you are the new Champion of the Creekside Region."
       ],
       challengeSteps: [
         "Knowledge: offer friendly type choices; every thoughtful answer counts.",
@@ -339,9 +339,9 @@
       phoneCaptain: "Polly or Auntie Ariel when Patrick guides; Patrick when another adult guides",
       entranceCue: "Only open this cue after an adult deliberately triggers the signal. If Patrick guides the physical trail, Polly or Ariel operates the phone. If another adult guides, Patrick may operate it. Keep Mew separate from the Champion Chest.",
       spokenLines: [
-        "Trainer Luca, the scanner found one more signal.",
-        "Follow the pink energy traces through the prepared Mythical Trail.",
-        "This may be a Pokémon that should be impossible to find."
+        "Luca… this signal is not from the fragment. Oak says it has been following you.",
+        "Follow the pink energy traces quietly. Do not rush the last clue.",
+        "This Pokémon is not waiting to be won. It is choosing whether to be seen."
       ],
       challengeSteps: [
         "Guide Luca to the first visible pink-energy marker.",

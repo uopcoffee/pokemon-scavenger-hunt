@@ -18,7 +18,7 @@
 
   var config = {
     version: 3,
-    release: "3.5",
+    release: "4.0",
     title: "Luca's Creekside Region",
     storageKey: "luca-creekside-v2-progress",
     audiences: ["luca", "adult", "cast"],
@@ -211,7 +211,7 @@
         participantIds: ["hannah","noa"],
         requiresFragments: 4,
         scenes: [
-          { id: "vault-story", type: "story", title: "A Mission Left by the Rangers", body: "Rangers Hannah and Noa are away on expedition. They protected supplies and a sealed research file for a trustworthy Trainer." },
+          { id: "vault-story", type: "story", title: "The Rangers Left a Warning", body: "Rangers Hannah and Noa are away on expedition. They protected supplies and a sealed research file for a trustworthy Trainer." },
           { id: "vault-location", type: "travel-location", title: "Travel with an Adult Escort", body: "Bring the physical Ranger Code Card to the approved front-entry area. The app never asks for the digits." },
           { id: "vault-character", type: "story", title: "A Secure Ranger Transmission", body: "Rangers Hannah and Noa left a protected cache for the Trainer who recovered all four physical fragments. An Adult Escort must stay beside Luca." },
           { id: "vault-fragments", type: "fragment-check", title: "Four Ranger Symbols Recorded", body: "Leaf, Star, Heart, and Wave are complete. Read the private digits only from the physical Ranger Code Card." },
@@ -324,19 +324,19 @@
   var orientationRewards = rewardIdsFrom(orientation, "orientation-reward");
   streamline(orientation, [
     sceneFrom(orientation, "orientation-story", {
-      title: "A New Trainer Is Needed",
-      body: "Unusual energy is spreading through Creekside. Report to League Registration, where Auntie Ariel is ready to welcome one new Trainer, lead the live Trainer Oath, and issue official equipment."
+      title: "Professor Oak Asked for Luca",
+      body: "Professor Oak asked for Luca. A signal appeared in Creekside that no ordinary scanner can explain—and the League has been waiting for exactly this Trainer to arrive."
     }),
     combinedChallenge(orientation, "orientation-challenge", {
       title: "Trainer Oath and Equipment Test",
-      successTitle: "Official Trainer Luca!",
-      successBody: "The Trainer Oath is complete, the equipment test is secured, and Mega Gallade has joined Luca’s team.",
+      successTitle: "You Arrived Just in Time, Luca!",
+      successBody: "Auntie Ariel stares at the activated Trainer card—then breaks into a huge smile. “It worked. Oak was right about you.” Mega Gallade joins Luca’s team.",
       resultLabel: "Trainer License earned",
       revealItems: ["Trainer License earned", "Mega Gallade joined the team", "Leaf fragment ready to record"],
       rewardIds: orientationRewards,
       fragmentSlot: 1,
       rewardHandoff: "Trainer Kit ready! Auntie Ariel hands Luca the TRAINER KIT now. Introduce the Ranger Code Card and pencil, then place the Journey Together booster in the Save for Celebration container.",
-      nextDestination: "Fairy energy is blinking near the backyard trees. The Fairy Garden is next."
+      nextDestination: "But the new Trainer signal has disturbed something in the backyard. Tiny lights are falling from the trees—and Nina saw them first."
     })
   ], {
     "orientation-location": "orientation-story",
@@ -352,22 +352,22 @@
   var fairyRewards = rewardIdsFrom(fairy, "fairy-reward");
   streamline(fairy, [
     sceneFrom(fairy, "fairy-story", {
-      title: "The Fairy Garden Needs Help",
-      body: "Three Fairy Energy Orbs fell among the prepared backyard trees and bushes. Auntie Ariel is ready to guide the search. Nina may point, hold the basket, help with one object, watch, or skip the mission."
+      title: "The Fairies Felt It First",
+      body: "The moment Luca’s Trainer signal activated, three Fairy lights tumbled from the trees. Nina found them flickering—and one keeps pointing toward Professor Oak’s Lab."
     }),
     sceneFrom(fairy, "fairy-warmup", {
       body: "Optional: point to the three glowing Fairy symbols, then put the phone away and begin the real search."
     }),
     combinedChallenge(fairy, "fairy-challenge", {
       title: "Recover the Fairy Energy Orbs",
-      successTitle: "The Fairy Garden Is Glowing!",
-      successBody: "The Fairy signal is restored. Nina’s participation was optional, and Luca’s mission could not fail.",
+      successTitle: "The Lights Remember Luca!",
+      successBody: "Nina gasps and hugs the basket. The three lights flare at once, tracing the same strange path across Creekside. “…They knew you would come!”",
       resultLabel: "Fairy Badge earned",
       revealItems: ["Fairy Badge earned", "Mega Clefable and Alcremie joined the team", "Star fragment ready to record"],
       rewardIds: fairyRewards,
       fragmentSlot: 2,
       rewardHandoff: "Your reward has appeared! Auntie Ariel hands Luca the FAIRY GYM REWARD now. Open the reader and team cards; save the Perfect Order booster for the celebration.",
-      nextDestination: "Professor Bruce and Professor Monica detected research capsules at the Water Research Preserve."
+      nextDestination: "The restored lights point toward Oak’s Water Preserve. If the Fairies were warning Luca, what is waiting beneath the water?"
     })
   ], {
     "fairy-location": "fairy-story",
@@ -383,12 +383,12 @@
   var oakRewards = rewardIdsFrom(oak, "oak-reward");
   streamline(oak, [
     sceneFrom(oak, "oak-travel", {
-      title: "Professor Oak’s Signal Is Locked On",
-      body: "Travel with an adult to Professor Oak’s Lab. Professor Bruce and Professor Monica are stabilizing the Water Preserve signal while Luca brings the Ranger Code Card."
+      title: "Oak Is Waiting for His Chosen Trainer",
+      body: "Professor Oak’s urgent signal matches the Fairy lights exactly. He and Professor Monica are holding the reading steady—but only until Luca arrives."
     }),
     sceneFrom(oak, "oak-story", {
-      title: "Four Capsules Beneath the Signal",
-      body: "The Partner Professors found four missing research capsules. One holds the final Ranger fragment, and another carries a Sky Fragment producing unstable Mega Energy."
+      title: "Something Answered from the Water",
+      body: "Four capsules surfaced where the reading was strongest. One carries an ancient Sky Fragment. Oak does not say what he fears it means; Monica only whispers, “It answered when Luca arrived.”"
     }),
     sceneFrom(oak, "oak-safety", {
       title: "Luca’s Water Preserve Rule",
@@ -396,14 +396,14 @@
     }),
     combinedChallenge(oak, "oak-challenge", {
       title: "Recover the Four Research Capsules",
-      successTitle: "Water Research Complete!",
-      successBody: "Luca is out of the preserve and dry. All four capsules are secure on the dry research table with the Sky Fragment.",
+      successTitle: "“…You Actually Found It.”",
+      successBody: "Oak turns the Sky Fragment over in stunned silence. Monica’s scanner surges. Both Professors look at Luca with relief—and then at each other with new concern.",
       resultLabel: "Water Research Badge earned",
       revealItems: ["Water Research Badge earned", "Sky Fragment added to quest gear", "Record the Wave clue in Slot 4. One Ranger clue is still missing."],
       rewardIds: oakRewards,
       fragmentSlot: 4,
       rewardHandoff: "The Professors hand Luca the critical clue and story reward at the dry research table. A designated adult carries the larger WATER RESEARCH packages for later. Save every booster for the celebration.",
-      nextDestination: "The research signal points to a Pokémon Center emergency. Nurse Joy needs Luca."
+      nextDestination: "The same energy has frightened nearby Pokémon. Nurse Joy can help them—but she needs the Trainer the signal responds to."
     })
   ], {
     "oak-entrance": "oak-story",
@@ -418,19 +418,19 @@
   var centerRewards = rewardIdsFrom(center, "center-reward");
   streamline(center, [
     sceneFrom(center, "center-story", {
-      title: "Three Pokémon Need Luca’s Help",
-      body: "The Pokémon Center is the safest place to restore your team after the Water Preserve. Nurse Joy has a short care mission while Luca can dry off, change, use the bathroom, or drink water."
+      title: "The Signal Left a Trail",
+      body: "Three Pokémon arrived trembling after the surge from Oak’s preserve. Nurse Joy has made the Center warm and safe, but she says they settle whenever Luca comes near."
     }),
     combinedChallenge(center, "center-challenge", {
       title: "Care for the Pokémon Patients",
-      successTitle: "Every Patient Is Feeling Better!",
-      successBody: "Luca matched the treatments, delivered the medicine Poké Ball, and completed the Pokémon Center emergency.",
+      successTitle: "They Trust You, Luca",
+      successBody: "Nurse Joy beams as the last patient relaxes. “Well! I was about to prescribe three blankets and one heroic Trainer.” Then her receiver crackles with an unwanted voice.",
       resultLabel: "Care Badge earned",
       revealItems: ["Care Badge earned", "Scream Tail joined the team", "Heart fragment ready to record"],
       rewardIds: centerRewards,
       fragmentSlot: 3,
       rewardHandoff: "Nurse Joy hands Luca the POKÉMON CENTER FIELD KIT, Care Badge, and Heart clue now. Open the story items and save the included booster for the celebration.",
-      nextDestination: "A loud transmission cuts through the Center. Team Rocket stole Professor Oak’s Ranger Dispatch."
+      nextDestination: "Team Rocket has been following the same energy trail—and Mike claims he knows what the Sky Fragment opens."
     })
   ], {
     "center-location": "center-story",
@@ -447,17 +447,17 @@
   streamline(rocket, [
     sceneFrom(rocket, "rocket-story", {
       title: "Team Rocket Blocks the Route",
-      body: "Travel with an adult to Team Rocket Base. Mike is guarding Professor Oak’s stolen Ranger Dispatch behind a dramatic basketball defense."
+      body: "Mike intercepted Oak’s Ranger Dispatch and wrapped it in Team Rocket’s most advanced security system: one basketball hoop and far too much confidence."
     }),
     combinedChallenge(rocket, "rocket-challenge", {
       title: "Break Team Rocket’s Defense",
-      successTitle: "Team Rocket defeated! Mike must surrender the stolen loot.",
-      successBody: "Luca completed the close basket, comfortable defense target, and the Final Poké Shot he chose. Team Rocket kept no formal score and always had to lose.",
+      successTitle: "Team Rocket’s “Unbeatable” Defense Collapses!",
+      successBody: "Mike gawks at Luca’s final shot. “That defense had a warranty!” As he retreats, the stolen Dispatch falls open to a Ranger symbol older than Creekside.",
       resultLabel: "Rocket Badge earned",
       revealItems: ["Rocket Badge earned", "Nidoking, Incineroar, and Mega Pyroar joined the team", "Ranger Dispatch recovered"],
       rewardIds: rocketRewards,
       rewardHandoff: "Mike must surrender the stolen loot. Hand Luca the RECOVERED TEAM ROCKET LOOT and Ranger Dispatch now. Open the team cards; save the Destined Rivals booster for the celebration.",
-      nextDestination: "The Dispatch reveals the Secret Ranger Vault. Bring the four physical fragments and stay with the Adult Escort."
+      nextDestination: "The Dispatch says the four fragments do not hide treasure. They protect a warning the Rangers believed someone would need. Why did they leave it for Luca?"
     })
   ], {
     "rocket-location": "rocket-story",
@@ -472,19 +472,19 @@
   var vaultRewards = rewardIdsFrom(vault, "vault-reward");
   streamline(vault, [
     sceneFrom(vault, "vault-story", {
-      title: "A Mission Left by the Rangers",
-      body: "Rangers Hannah and Noa protected a cache for a trustworthy Trainer. Travel with the Adult Escort to the approved front-entry area and use only the physical Ranger Code Card."
+      title: "The Rangers Left a Warning",
+      body: "Rangers Hannah and Noa sealed their evidence before leaving. Their message names no Pokémon—only four symbols, the Sky Fragment, and one instruction: bring the file back to Oak unopened."
     }),
     sceneFrom(vault, "vault-fragments"),
     combinedChallenge(vault, "vault-challenge", {
       title: "Recover the Secret Ranger Cache",
-      successTitle: "The Ranger Cache Is Secure!",
-      successBody: "Luca and the Adult Escort recovered the cache, exited the protected area, and confirmed success outside with the sealed Research File.",
+      successTitle: "The Sealed File Was Waiting",
+      successBody: "Outside the protected area, the Adult Escort exhales in relief. The sealed file bears the same mark as Luca’s Trainer License. No one opens it.",
       resultLabel: "Ranger Vault Badge earned",
       revealItems: ["Ranger Vault Badge earned", "Mabosstiff and Electivire joined the team", "Sealed Research File secured"],
       rewardIds: vaultRewards,
       rewardHandoff: "Outside the Ranger boundary, open one story item only. Keep the Research File sealed; the designated bag carrier takes the larger cache home or to the Professors. Save every booster for the celebration.",
-      nextDestination: "Professor Bruce and Professor Monica need the Sky Fragment and sealed Research File back at the Lab."
+      nextDestination: "Oak must see the matching mark immediately. Whatever the Rangers discovered, they expected Professor Oak’s chosen Trainer to finish it."
     })
   ], {
     "vault-location": "vault-story",
@@ -499,8 +499,8 @@
   var championRewards = rewardIdsFrom(victory, "champion-reward");
   streamline(victory, [
     sceneFrom(victory, "victory-story", {
-      title: "Victory Road and Sky Pillar",
-      body: "Return to the prepared Home Base course. Auntie Ariel will referee Victory Road, reveal Mega Rayquaza, and summon the Champion using one private cue.",
+      title: "The Legend Tests the Path",
+      body: "The Ranger legend is true: the signal has gathered above Home Base. Victory Road is not blocking Luca—it is measuring whether he protects, persists, and accepts help.",
       instructions: [
         "Cross the Tall Grass, Forest Line, soft-ball target, and Energy Token stations.",
         "The phone returns for Luca’s Victory Road achievement before the Legendary encounter."
@@ -509,8 +509,8 @@
     combinedChallenge(victory, "victory-challenge-a", {
       title: "Clear Victory Road",
       body: "Complete one forgiving pass through the four League stations with Auntie Ariel.",
-      successTitle: "Victory Road Cleared!",
-      successBody: "Luca completed the final course. The phone is back for the achievement—and a Legendary signal is forming above Sky Pillar.",
+      successTitle: "Victory Road Recognizes Luca",
+      successBody: "Auntie Ariel stares upward in astonishment. Every recovered token ignites, proving the Rangers’ path was real. The sky answers with a Legendary cry.",
       resultLabel: "Victory Road achievement earned",
       revealItems: ["Victory Road complete", "Sky Pillar signal detected", "Mega Rayquaza is approaching"],
       rewardHandoff: "No gift yet—the Champion Chest stays hidden until Luca wins the final match.",
@@ -530,7 +530,7 @@
       type: "relay-result",
       audience: "luca",
       title: "Legendary Success!",
-      body: "Mega Rayquaza is calm. Luca has completed the Legendary encounter and unlocked the Champion Arena.",
+      body: "Mega Rayquaza lowers its guard. It was never attacking—it was waiting to see which Trainer would reach the end of the signal.",
       resultLabel: "Legendary encounter complete",
       revealItems: ["Mega Rayquaza encounter complete", "Legendary success recorded", "Champion Arena unlocked"],
       rewardIds: [],
@@ -538,13 +538,13 @@
       nextDestination: "Auntie Ariel keeps the phone and summons Champion Patrick now."
     },
     sceneFrom(victory, "champion-character", {
-      title: "The Creekside Champion Appears",
-      body: "Victory Road is complete and Rayquaza is calm. Patrick enters as the reigning Champion for one final test of knowledge, skill, and heart."
+      title: "The Champion Recognizes Luca",
+      body: "Patrick steps forward without surprise. He has watched the clues choose Luca all morning. Now he must learn whether Luca understands why he was chosen."
     }),
     combinedChallenge(victory, "champion-challenge", {
       title: "Challenge the Creekside Champion",
-      successTitle: "Luca Is the New Creekside Champion!",
-      successBody: "Knowledge, skill, and heart are complete. Patrick concedes the match and records Luca’s Champion title.",
+      successTitle: "Champion Luca",
+      successBody: "Patrick’s serious expression breaks into pride. Luca showed knowledge, skill, and heart—but most of all, he helped every Pokémon and person who needed him.",
       resultLabel: "Champion title earned",
       revealItems: ["Champion title earned", "Full Trainer record complete", "Champion Chest unlocked"],
       rewardIds: championRewards,
@@ -579,18 +579,18 @@
   streamline(checkpoint, [
     sceneFrom(checkpoint, "oak-return-travel", {
       type: "story",
-      title: "Return to the Partner Professors",
-      body: "Bring the Sky Fragment and sealed Research File back to Professor Bruce and Professor Monica. They are ready for one brief analysis before Victory Road."
+      title: "Oak Has One Last Question",
+      body: "Bring the Sky Fragment and sealed file to the Partner Professors. The mark on the file matches Luca’s License—and Oak finally understands where the signal is leading."
     }),
     combinedChallenge(checkpoint, "oak-return-challenge", {
       title: "Complete the League Analysis",
-      successTitle: "League Authorization Granted!",
-      successBody: "The Sky Fragment and Ranger file confirm Mega Rayquaza energy. Luca’s research officially qualifies him for the Pokémon League.",
+      successTitle: "The Legend Points Home",
+      successBody: "Monica opens the file. Oak goes still: the Fairies, the frightened Pokémon, and the Sky Fragment all point to one place. He looks at Luca with awe. “It was testing the path to you.”",
       resultLabel: "Victory Road authorized",
       revealItems: ["League Authorization earned", "Mega Abomasnow joined the team", "Sky Pillar coordinates revealed"],
       rewardIds: checkpointRewards,
       rewardHandoff: "The Professors give Luca the compact MEGA EVOLUTION RESEARCH FILE reward and League Authorization now. Open the sticker book and Mega Abomasnow card; save the booster for the celebration.",
-      nextDestination: "Mega Rayquaza energy is gathering above Victory Road. Continue there immediately."
+      nextDestination: "The destination is Home Base—but the old Ranger record calls the route Victory Road. Something legendary is waiting at its end."
     })
   ], {
     "oak-return-character": "oak-return-travel",
@@ -605,17 +605,17 @@
     sceneFrom(mew, "mew-glitch"),
     sceneFrom(mew, "mew-transmission", {
       title: "Professor Oak’s Impossible Reading",
-      body: "One final signal appeared after the adventure ended. Follow the prepared pink-energy trail through the backyard tree, bush, and patio route."
+      body: "The reading is not coming from the Sky Fragment. It is small, ancient, and impossibly gentle. Oak sends only two words: “Luca—follow it.”"
     }),
     sceneFrom(mew, "mew-stage"),
     combinedChallenge(mew, "mew-challenge", {
       title: "Follow the Mythical Trail",
-      successTitle: "Mew Has Been Discovered!",
-      successBody: "The impossible signal is real. Mew is registered in Luca’s Hall of Fame.",
+      successTitle: "Mew Chose Luca",
+      successBody: "At the end of the quiet pink trail, Mew is waiting. Not captured. Not earned. It came because Luca kept choosing courage, kindness, and his family all the way home.",
       resultLabel: "Mythical encounter registered",
       revealItems: ["Mew registered", "Hall of Fame updated", "Family celebration unlocked"],
       rewardIds: mewRewards,
-      rewardHandoff: "Your reward has appeared! Reveal the separate MYTHICAL ENCOUNTER box and hand Luca the Mew figure now.",
+      rewardHandoff: "Let the moment stay quiet. Then reveal the separate MYTHICAL ENCOUNTER box and place the Mew figure in Luca’s hands.",
       nextDestination: "Gather the family for popsicles and open the saved Booster Satchel together."
     })
   ], {

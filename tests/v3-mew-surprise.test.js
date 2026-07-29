@@ -29,7 +29,7 @@ const portal = context.window.CAST_PORTAL;
 const finale = config.chapters[config.chapters.length - 1];
 const finalIndex = finale.scenes.findIndex((scene) => scene.type === "champion-final");
 
-assert.strictEqual(config.release, "3.5");
+assert.strictEqual(config.release, "4.0");
 assert.ok(finalIndex >= 0);
 assert.strictEqual(finale.scenes[finalIndex].title, "Champion Luca");
 assert.strictEqual(finale.scenes[finalIndex].body, "Creekside Region Journey Complete");

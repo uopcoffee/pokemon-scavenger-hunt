@@ -21,7 +21,7 @@ const allTrackedText = [
   fs.readFileSync(path.join(root, "cast/cast-data.js"), "utf8"),
 ].join("\n");
 
-assert.strictEqual(config.release, "3.5");
+assert.strictEqual(config.release, "4.0");
 
 const oak = config.chapters.find((chapter) => chapter.id === "professor-oak-lab");
 const safety = oak.scenes.find((scene) => scene.id === "oak-safety");
