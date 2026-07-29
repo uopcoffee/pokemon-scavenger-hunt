@@ -538,6 +538,19 @@ textarea:focus-visible {
   color: var(--ink);
   font: .75rem/1.45 var(--font-label);
 }
+
+.parent-confirm-card {
+  margin: 10px 0;
+  padding: 16px;
+  border: 2px solid var(--mewtwo-x);
+  border-radius: var(--r-md);
+  background: rgba(138, 79, 255, .08);
+}
+
+.parent-confirm-card p {
+  margin: 8px 0 14px;
+  color: var(--ink-soft);
+}
 .storage-warning {
   position: sticky;
   z-index: 80;

@@ -61,7 +61,7 @@ const expectedAfterCounts = {
   "mew-epilogue": 8,
 };
 
-assert.strictEqual(config.release, "3.4");
+assert.strictEqual(config.release, "3.5");
 assert.strictEqual(Object.values(beforeCounts).reduce((sum, count) => sum + count, 0), 128);
 assert.strictEqual(sequences.reduce((sum, sequence) => sum + sequence.scenes.length, 0), 71);
 sequences.forEach((sequence) => {
@@ -173,4 +173,4 @@ sequences.forEach((sequence) => {
   assert.strictEqual(stateEngine.sanitizeState(snapshot).currentSceneId, expectedId, `${oldId} must migrate safely`);
 });
 
-console.log("V3.4 streamlined-flow tests passed.");
+console.log("V3.5 streamlined-flow tests passed.");

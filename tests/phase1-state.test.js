@@ -102,10 +102,17 @@ config.chapters.forEach((chapter, chapterIndex) => {
 
 assert.strictEqual(state.completedChapters.length, 7);
 assert.deepStrictEqual(Array.from(state.collectedFragments).sort(), [1, 2, 3, 4]);
-assert.strictEqual(state.mewUnlocked, true, "Champion completion must unlock Mew");
+assert.strictEqual(state.championEndingComplete, true, "Champion ending must be recorded as complete");
+assert.strictEqual(state.mewUnlocked, false, "Champion completion must not automatically unlock Mew");
 assert.strictEqual(state.mewComplete, false);
-assert.strictEqual(state.activeFlow, "mew", "The glitch must interrupt the apparent ending");
+assert.strictEqual(state.activeFlow, "chapter", "The convincing Champion ending must remain on screen");
 assert.strictEqual(state.fakeCreditsComplete, true);
+const normalTapAtEnding = stateEngine.reducer(state, { type: "ADVANCE_SCENE" });
+assert.strictEqual(normalTapAtEnding.currentSceneId, "champion-transition");
+assert.strictEqual(normalTapAtEnding.mewUnlocked, false);
+state = stateEngine.reducer(state, { type: "PARENT_TRIGGER_MEW" });
+assert.strictEqual(state.mewUnlocked, true, "The confirmed adult action must unlock Mew");
+assert.strictEqual(state.activeFlow, "mew");
 config.epilogue.scenes.forEach((scene) => {
   state = stateEngine.reducer(state, {
     type: ["physical-challenge", "cast-handoff", "cast-cue"].includes(scene.type) ? "COMPLETE_RELAY_HOLD" : "ADVANCE_SCENE",

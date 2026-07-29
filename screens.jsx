@@ -346,7 +346,7 @@ function CreeksideMap({ config, state, dispatch }) {
                   color="var(--mewtwo-x)"
                 />
                 <span style={{ flex: 1 }}>
-                  <small style={{ display: "block", fontFamily: "var(--font-label)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Postgame Event</small>
+                  <small style={{ display: "block", fontFamily: "var(--font-label)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Mythical Signal Revealed</small>
                   <strong style={{ display: "block", fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "1.08rem" }}>
                     {config.epilogue.name}
                   </strong>
@@ -740,13 +740,14 @@ function CreeksideScene({ config, state, dispatch }) {
   const isPhysical = scene.type === "physical-challenge";
   const isFakeCredits = scene.type === "fake-credits";
   const isRewardResult = scene.type === "reward";
-  const isCelebrationResult = ["relay-result", "reward", "inventory-update", "code-fragment-record", "hall-of-heroes", "celebration"].includes(scene.type);
+  const isCelebrationResult = ["relay-result", "reward", "inventory-update", "code-fragment-record", "hall-of-heroes", "celebration", "champion-final"].includes(scene.type);
+  const isChampionFinal = scene.type === "champion-final";
   const isLast = state.currentSceneIndex === sequence.scenes.length - 1;
   const continueLabel = isLast
     ? (state.activeFlow === "mew" ? "Finish the adventure" : state.activeFlow === "checkpoint" ? "Complete checkpoint" : "Complete chapter")
     : scene.type === "reward" ? "Add rewards" : "Continue";
   const footerLabel = state.activeFlow === "mew"
-    ? "Postgame Event"
+    ? "Mythical Signal"
     : state.activeFlow === "checkpoint"
       ? "Oak Return Checkpoint"
       : `Chapter ${sequence.number} · ${sequence.name}`;
@@ -828,7 +829,7 @@ function CreeksideScene({ config, state, dispatch }) {
             {isFakeCredits && (
               <FakeCreditsControl scene={scene} onComplete={() => dispatch({ type: "ADVANCE_SCENE" })} />
             )}
-            {!isPhysical && !isFakeCredits && (
+            {!isPhysical && !isFakeCredits && !isChampionFinal && (
               <Button
                 variant={scene.type === "reward" || scene.type === "celebration" ? "reward" : "primary"}
                 size="lg"
@@ -850,6 +851,7 @@ function CreeksideScene({ config, state, dispatch }) {
 
 function ParentMode({ config, state, dispatch, onClose }) {
   const [confirmReset, setConfirmReset] = React.useState(false);
+  const [confirmMew, setConfirmMew] = React.useState(false);
   const [restoreText, setRestoreText] = React.useState(() => JSON.stringify(state, null, 2));
   const [restoreError, setRestoreError] = React.useState("");
   const panelRef = React.useRef(null);
@@ -990,14 +992,50 @@ function ParentMode({ config, state, dispatch, onClose }) {
           ))}
         </div>
 
-        <h3 style={{ fontFamily: "var(--font-display)", margin: "20px 0 10px" }}>Finale testing</h3>
+        <h3 style={{ fontFamily: "var(--font-display)", margin: "20px 0 10px" }}>Mew surprise</h3>
+        {state.championEndingComplete && !state.mewUnlocked && !confirmMew && (
+          <Button
+            variant="secondary"
+            block
+            onClick={() => setConfirmMew(true)}
+            data-testid="parent-trigger-mew"
+          >
+            Trigger Mew Signal
+          </Button>
+        )}
+        {state.championEndingComplete && !state.mewUnlocked && confirmMew && (
+          <section className="parent-confirm-card" data-testid="confirm-mew-signal">
+            <strong>Trigger the Mew Signal now?</strong>
+            <p>Only continue after Luca has accepted the Champion ending. This immediately begins the visual signal.</p>
+            <div className="parent-mode-grid">
+              <Button variant="ghost" onClick={() => setConfirmMew(false)}>Cancel</Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  if (navigator.vibrate) navigator.vibrate(180);
+                  runAndClose({ type: "PARENT_TRIGGER_MEW" });
+                }}
+                data-testid="confirm-trigger-mew"
+              >
+                Confirm Mew Signal
+              </Button>
+            </div>
+          </section>
+        )}
+        {!state.championEndingComplete && (
+          <p className="mission-warning">The party-day Mew trigger becomes available only after the convincing Champion ending.</p>
+        )}
+        {state.mewUnlocked && !state.mewComplete && (
+          <Button variant="ghost" block onClick={() => runAndClose({ type: "PARENT_REARM_MEW" })}>
+            Mew triggered too early — return to Champion ending
+          </Button>
+        )}
         <Button
-          variant="secondary"
+          variant="ghost"
           block
-          onClick={() => runAndClose({ type: "PARENT_UNLOCK_MEW" })}
-          disabled={state.mewUnlocked}
+          onClick={() => runAndClose({ type: "PARENT_JUMP_MEW", sceneIndex: 0 })}
         >
-          {state.mewUnlocked ? "Mew event already unlocked" : "Unlock Mew event for testing"}
+          Test Mew trail from first signal
         </Button>
 
         <h3 style={{ fontFamily: "var(--font-display)", margin: "20px 0 10px" }}>Export or restore progress</h3>
@@ -1072,6 +1110,7 @@ function CreeksideCelebration({ config, state, dispatch }) {
             {savedBoosters.map((reward) => <span key={reward.label}>{reward.label}</span>)}
           </div>
           <Button variant="reward" size="lg" onClick={() => dispatch({ type: "BACK_TO_MAP" })}>View completed map</Button>
+          <Button variant="secondary" size="lg" onClick={() => dispatch({ type: "REPLAY_HALL" })}>Replay Hall of Heroes</Button>
           <small style={{ color: "rgba(255,255,255,.75)" }}>Restart is available only inside Parent Mode.</small>
         </div>
       </div>

@@ -18,7 +18,7 @@
 
   var config = {
     version: 3,
-    release: "3.4",
+    release: "3.5",
     title: "Luca's Creekside Region",
     storageKey: "luca-creekside-v2-progress",
     audiences: ["luca", "adult", "cast"],
@@ -243,7 +243,7 @@
           { id: "hall-of-heroes", type: "hall-of-heroes", title: "Hall of Heroes", body: "Every person who helped this morning is part of Luca's Champion story.", participantIds: ["ariel","nina","bruce","monica","polly","mike","patrick","hannah","noa"] },
           { id: "group-photo", type: "story", title: "Champion Group Photo", body: "Gather the family and helpers for a Champion photo. The adventure appears to be complete." },
           { id: "fake-credits", type: "fake-credits", title: "Luca's Trainer Journey", body: "A Creekside Region adventure made possible by family, neighbors, courage, and excellent Trainer teamwork.", durationMs: 10000 },
-          { id: "champion-transition", type: "chapter-transition", title: "THE END", body: "Champion record saved. Please remain near the screen for final League processing." },
+          { id: "champion-transition", type: "champion-final", title: "Champion Luca", body: "Creekside Region Journey Complete" },
         ],
       },
     ],
@@ -264,7 +264,7 @@
     },
 
     epilogue: {
-      id: "mew-epilogue", lockedName: "Unknown Signal", name: "The Mythical Signal",
+      id: "mew-epilogue", lockedName: "Hidden", name: "The Mythical Signal",
       type: "psychic", art: "mewtwo.png", locationLabel: "Mythical Trail", scheduleLabel: "11:30–11:36", targetMinutes: 6,
       scenes: [
         { id: "mew-glitch", type: "glitch", title: "SIGNAL DETECTED", body: "The finished screen flickers. Professor Oak's scanner has detected a Pokémon that should be impossible to find." },
@@ -556,7 +556,9 @@
     }),
     sceneFrom(victory, "fake-credits"),
     sceneFrom(victory, "champion-transition", {
-      body: "Champion record saved. The adventure is complete."
+      type: "champion-final",
+      title: "Champion Luca",
+      body: "Creekside Region Journey Complete"
     })
   ], {
     "victory-location": "victory-story",

@@ -351,6 +351,35 @@
         "Offer individual photos at neighbor stations when convenient; the Hall moment gathers everyone who is present for one Champion photo.",
         "Keep the Champion Chest, Mew surprise, and later-story props hidden until their cues."
       ],
+      phoneProtocol: {
+        before: [
+          "Fully charge the phone and carry a battery pack.",
+          "Set Auto-Lock to Never or the longest available time.",
+          "Turn on Do Not Disturb and set useful outdoor brightness.",
+          "Load the site before the adventure.",
+          "Keep a protective case on the phone and a dry towel near the pool.",
+          "Export or verify progress recovery.",
+          "Confirm Parent Mode access and test the deliberate Mew trigger."
+        ],
+        during: [
+          "Patrick keeps the phone by default; the assigned Phone Captain handles exceptions.",
+          "The Water Safety Adult never operates the phone during the pool mission.",
+          "Turn the screen away before opening cast cues.",
+          "Put the phone away during physical play.",
+          "Hand over gifts only after Luca sees the app success.",
+          "Use Parent Mode rather than troubleshooting in front of Luca."
+        ],
+        recovery: [
+          "Page reloads: reload once; saved progress should restore the exact scene.",
+          "Phone locks: unlock and return to the existing browser tab.",
+          "Wrong scene: use Parent Mode → Scene directory.",
+          "Participant unavailable: use the cue’s Easy Backup or have the lead adult perform it.",
+          "Challenge skipped: use Parent Mode → Override / advance only after the adult accepts completion.",
+          "Gift handed over early: keep the story moving and use the next app result as the celebration.",
+          "Mew triggered too early: Parent Mode → return to Champion ending, then trigger again later.",
+          "Internet unavailable: keep the loaded tab open; do not cold-close the browser."
+        ]
+      },
       packages: [
         { id: "TRAINER KIT", owner: "Ariel", moment: "Trainer Orientation" },
         { id: "FAIRY GYM REWARD", owner: "Ariel", moment: "Fairy Garden" },

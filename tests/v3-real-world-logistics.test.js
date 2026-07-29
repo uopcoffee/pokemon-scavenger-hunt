@@ -21,7 +21,7 @@ const allTrackedText = [
   fs.readFileSync(path.join(root, "cast/cast-data.js"), "utf8"),
 ].join("\n");
 
-assert.strictEqual(config.release, "3.4");
+assert.strictEqual(config.release, "3.5");
 
 const oak = config.chapters.find((chapter) => chapter.id === "professor-oak-lab");
 const safety = oak.scenes.find((scene) => scene.id === "oak-safety");
@@ -61,4 +61,4 @@ assert.ok(portal.director.globalOperations.some((item) => /individual photos at 
 assert.doesNotMatch(allTrackedText, /\b(?:code|digit|pin|keypad)\s*[:=]\s*["']?\d{4}\b/i);
 assert.doesNotMatch(allTrackedText, /\b\d{3}[-.)\s]\d{3}[-.\s]\d{4}\b/);
 
-console.log("V3.4 real-world logistics tests passed.");
+console.log("V3.5 real-world logistics tests passed.");

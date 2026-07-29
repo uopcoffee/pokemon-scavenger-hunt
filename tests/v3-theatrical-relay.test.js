@@ -62,7 +62,7 @@ const approvedPhoneCaptains = {
   "oak-return": "Patrick",
   "victory-road": "Patrick",
   champion: "Auntie Ariel",
-  mew: "Polly or Auntie Ariel",
+  mew: "Polly or Auntie Ariel when Patrick guides; Patrick when another adult guides",
 };
 
 function plain(value) {

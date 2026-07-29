@@ -336,8 +336,8 @@
       portalGuide: "champion",
       performerName: "Patrick / Lead Adult",
       characterName: "Mythical Trail Guide",
-      phoneCaptain: "Polly or Auntie Ariel",
-      entranceCue: "Only open this cue after the fake credits and Oak’s signal. Keep the separate Mew reward hidden until the final marker.",
+      phoneCaptain: "Polly or Auntie Ariel when Patrick guides; Patrick when another adult guides",
+      entranceCue: "Only open this cue after an adult deliberately triggers the signal. If Patrick guides the physical trail, Polly or Ariel operates the phone. If another adult guides, Patrick may operate it. Keep Mew separate from the Champion Chest.",
       spokenLines: [
         "Trainer Luca, the scanner found one more signal.",
         "Follow the pink energy traces through the prepared Mythical Trail.",
@@ -349,6 +349,7 @@
         "Lead the final clue to the separate Mew reveal box."
       ],
       runtimeSteps: [
+        "Choose roles: Patrick guides with Polly or Ariel on phone, or another adult guides with Patrick on phone.",
         "Guide Luca through the three visible pink-energy markers.",
         "Give direct warm/cold hints and lead the final clue to Mew."
       ],

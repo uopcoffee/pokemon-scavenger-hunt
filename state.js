@@ -34,6 +34,7 @@
       questItems: [],
       collectedFragments: [],
       checkpointComplete: false,
+      championEndingComplete: false,
       mewUnlocked: false,
       fakeCreditsComplete: false,
       mewComplete: false,
@@ -177,7 +178,12 @@
     var sceneIndex = resolveSceneIndex(selectedSequence, input);
     var allowedViews = ["splash", "onboarding", "map", "scene", "celebration"];
     var finalChapterId = config.chapters[config.chapters.length - 1].id;
-    var mewUnlocked = Boolean(input.mewUnlocked || completedChapters.indexOf(finalChapterId) !== -1);
+    var championEndingComplete = Boolean(
+      input.championEndingComplete || completedChapters.indexOf(finalChapterId) !== -1
+    );
+    var mewUnlocked = Boolean(
+      input.mewUnlocked || input.mewComplete || input.activeFlow === "mew"
+    );
 
     if (activeFlowValue === "mew" && !mewUnlocked) {
       activeFlowValue = "chapter";
@@ -212,6 +218,7 @@
           }))
         : [],
       checkpointComplete: Boolean(input.checkpointComplete),
+      championEndingComplete: championEndingComplete,
       mewUnlocked: mewUnlocked,
       fakeCreditsComplete: Boolean(input.fakeCreditsComplete),
       mewComplete: Boolean(input.mewComplete && mewUnlocked),
@@ -282,6 +289,17 @@
 
     var next = withSceneEffects(state, scene);
     if (state.currentSceneIndex < sequence.scenes.length - 1) {
+      var nextScene = sequence.scenes[state.currentSceneIndex + 1];
+      if (nextScene.type === "champion-final") {
+        var endingCompleted = unique(next.completedChapters.concat(state.currentChapterId));
+        return Object.assign({}, next, {
+          currentSceneIndex: state.currentSceneIndex + 1,
+          currentSceneId: nextScene.id,
+          completedChapters: endingCompleted,
+          championEndingComplete: true,
+          mewUnlocked: state.mewComplete ? true : false,
+        });
+      }
       return Object.assign({}, next, {
         currentSceneIndex: state.currentSceneIndex + 1,
         currentSceneId: sequence.scenes[state.currentSceneIndex + 1].id,
@@ -314,13 +332,10 @@
     var championComplete = state.currentChapterId === config.chapters[config.chapters.length - 1].id;
     var checkpointRequired = state.currentChapterId === config.checkpoint.afterChapterId;
     if (championComplete) {
-      return Object.assign({}, next, {
-        view: "scene",
-        activeFlow: "mew",
-        currentSceneIndex: 0,
-        currentSceneId: config.epilogue.scenes[0].id,
+      return state.championEndingComplete ? state : Object.assign({}, next, {
         completedChapters: completed,
-        mewUnlocked: true,
+        championEndingComplete: true,
+        mewUnlocked: false,
       });
     }
     return Object.assign({}, next, {
@@ -434,6 +449,7 @@
           currentSceneIndex: Math.min(Math.max(action.sceneIndex || 0, 0), getConfig().epilogue.scenes.length - 1),
           currentSceneId: getConfig().epilogue.scenes[Math.min(Math.max(action.sceneIndex || 0, 0), getConfig().epilogue.scenes.length - 1)].id,
           mewUnlocked: true,
+          championEndingComplete: true,
         });
         break;
       case "PARENT_BACK_SCENE":
@@ -444,8 +460,46 @@
           });
         }
         break;
-      case "PARENT_UNLOCK_MEW":
-        next = Object.assign({}, state, { mewUnlocked: true });
+      case "PARENT_TRIGGER_MEW":
+        if (state.championEndingComplete && !state.mewUnlocked) {
+          next = Object.assign({}, state, {
+            view: "scene",
+            activeFlow: "mew",
+            currentSceneIndex: 0,
+            currentSceneId: getConfig().epilogue.scenes[0].id,
+            mewUnlocked: true,
+          });
+        }
+        break;
+      case "PARENT_REARM_MEW":
+        if (state.championEndingComplete && !state.mewComplete) {
+          var championSequence = getConfig().chapters[getConfig().chapters.length - 1];
+          next = Object.assign({}, state, {
+            view: "scene",
+            activeFlow: "chapter",
+            currentChapterId: championSequence.id,
+            currentSceneIndex: championSequence.scenes.length - 1,
+            currentSceneId: championSequence.scenes[championSequence.scenes.length - 1].id,
+            mewUnlocked: false,
+          });
+        }
+        break;
+      case "REPLAY_HALL":
+        if (state.mewComplete) {
+          var finaleSequence = getConfig().chapters[getConfig().chapters.length - 1];
+          var hallIndex = finaleSequence.scenes.findIndex(function (scene) {
+            return scene.id === "hall-of-heroes";
+          });
+          if (hallIndex !== -1) {
+            next = Object.assign({}, state, {
+              view: "scene",
+              activeFlow: "chapter",
+              currentChapterId: finaleSequence.id,
+              currentSceneIndex: hallIndex,
+              currentSceneId: finaleSequence.scenes[hallIndex].id,
+            });
+          }
+        }
         break;
       case "PARENT_RESTORE":
         next = sanitizeState(action.state);
