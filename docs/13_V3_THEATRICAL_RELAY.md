@@ -23,47 +23,50 @@ renderer refuses to display them.
 
 Each physical encounter follows one reusable sequence:
 
-1. Luca sees the story and challenge introduction.
-2. Luca sees the named performer and the lead adult completes a protected
-   1.5-second handoff hold.
+1. Luca sees a narrator story and challenge introduction. The live performer’s
+   entrance lines are not shown.
+2. Luca sees the named performer and the Phone Captain completes a protected
+   1.5-second **open cue** hold while keeping the phone.
 3. The privacy shield says to turn the phone away from Luca.
 4. An adult explicitly opens the cast cue.
-5. The performer reads the concise cue, runs the forgiving challenge, and
-   completes a protected 1.5-second hold.
-6. The return shield says to give the phone back to Luca.
-7. An adult confirms Luca can see the phone.
-8. Luca sees the achievement, reward, inventory, fragment, and transition
+5. The performer reads the concise Quick Card and runs the forgiving challenge.
+6. The Phone Captain completes the protected Mission Complete hold.
+7. The return shield says to turn the screen back toward Luca.
+8. An adult confirms Luca can see the screen; the adult may keep holding the
+   phone.
+9. Luca sees the achievement, reward, inventory, fragment, and transition
    sequence.
 
 The privacy and return shields are independent scenes. Cast instructions are
 not rendered behind them. A refresh restores whichever relay scene was
 actually visible.
 
-## Named handoffs
+## Named cues and Phone Captains
 
-| Encounter | Performer |
-| --- | --- |
-| Trainer Orientation | Auntie Ariel |
-| Fairy Garden | Nina with Auntie Ariel |
-| Water Research mission | Professor Oak and Professor Monica |
-| Pokémon Center | Polly as Nurse Joy |
-| Team Rocket Base | Mike |
-| Ranger Vault | Designated Adult Escort |
-| Oak return | Professor Oak and Professor Monica |
-| Victory Road | Auntie Ariel |
-| Rayquaza | Auntie Ariel |
-| Champion match | Patrick |
-| Mew trail | Patrick or Lead Adult |
+| Encounter | Performer | Phone Captain |
+| --- | --- | --- |
+| Trainer Orientation | Auntie Ariel | Patrick |
+| Fairy Garden | Auntie Ariel with Nina’s optional help | Patrick |
+| Water Research mission | Professor Bruce and Professor Monica | Polly or Auntie Ariel |
+| Pokémon Center | Polly as Nurse Joy | Patrick |
+| Team Rocket Base | Mike | Patrick or Auntie Ariel |
+| Ranger Vault | Designated Adult Escort | Adult Escort |
+| Oak return | Professor Bruce and Professor Monica | Patrick |
+| Victory Road | Auntie Ariel | Patrick |
+| Rayquaza | Auntie Ariel | Patrick |
+| Champion match | Patrick | Auntie Ariel |
+| Mew trail | Patrick or Lead Adult | Polly or Auntie Ariel |
 
-At the Water Research mission, Bruce performs Professor Oak, Monica performs
-Professor Monica and manages research logistics, and a supervising adult owns
-water safety. The safety adult is never required to handle the phone while
-Luca is swimming.
+At the Water Research mission, Bruce and Monica are equal Partner Professors.
+A dedicated Water Safety Adult watches Luca continuously. That person never
+operates the phone while Luca is in or near the pool; Polly or Auntie Ariel is
+the separate Phone Captain.
 
 ## Content ownership
 
-`cast-core.js` is the shared concise source for performer identity, character
-identity, entrance cue, spoken lines, challenge steps, success condition,
+`cast-core.js` is the shared source for performer identity, character identity,
+Phone Captain, optional Water Safety Adult/supporting-role metadata, spoken
+lines, runtime steps, finish action, backup, entrance cue, full operations,
 reward package ownership, fallback, and transition.
 
 `creekside-content.js` derives the live handoff and cast cue scenes from that
@@ -78,6 +81,12 @@ alignment live separately at `/cast/director/`. Participants do not need to
 read the Director view. `cast/cast-data.js` attaches the shared cue objects only
 to the Director operations model, preventing production detail from leaking
 back into the friendly participant pages.
+
+The runtime cast cue copies only performer/character identity, Phone Captain
+metadata, optional supporting-role metadata, Say This, Help Luca Do This, When
+He Finishes, Easy Backup, and the protected Mission Complete label. Package
+IDs, inventory ownership, formal success terminology, safety documentation,
+entrance analysis, and transitions are not mounted in the live Quick Card.
 
 ## Persistence and V2 migration
 
@@ -102,18 +111,21 @@ Parent Mode retains back, override/advance, chapter and scene jumps, Oak return,
 Mew testing, JSON export/restore, map return, and double-confirmed reset.
 
 The current-scene panel and complete directory show chapter, scene ID, title,
-type, audience, and performer. An override from a cast cue advances to the
-return shield. An override from the return shield may reveal Luca's result.
-Scene jumps do not award skipped rewards.
+type, audience, performer, Phone Captain, and Water Safety Adult when
+applicable. An override from a cast cue advances to the return shield. An
+override from the return shield may reveal Luca's result. Scene jumps do not
+award skipped rewards.
 
 ## Party-day operating defaults
 
 1. Lead adult keeps the phone by default.
 2. Luca sees story, challenge, reward, and achievement moments.
 3. Turn the phone away before opening cast instructions.
-4. A safety adult does not handle the phone during pool or movement-heavy play.
-5. Hand over the reward only after Luca sees the result.
-6. Use Parent Mode and the documented fallback if a performer is delayed.
+4. The performer normally does not hold or operate the phone; the assigned
+   Phone Captain opens cues and completes Mission Complete.
+5. The Water Safety Adult does not handle the phone during pool activity.
+6. Hand over the reward only after Luca sees the result.
+7. Use Parent Mode and the documented fallback if a performer is delayed.
 
 Cast screens are high contrast, mostly static, and usable one-handed. Sound is
 off by default and never required. System reduced-motion preferences suppress
@@ -137,12 +149,15 @@ Then serve the repository root from a local static server and review at
 390×844 and 320×568:
 
 1. Start onboarding and open Trainer Orientation.
-2. Confirm an ordinary tap does not complete the handoff hold.
+2. Confirm an ordinary tap does not complete the open-cue hold.
 3. Complete the hold and confirm only the privacy shield appears.
 4. Turn the phone away, open the cue, and confirm the correct performer,
-   speaking lines, steps, success, fallback, reward preparation, and transition.
-5. Complete the cast hold and confirm only the return shield appears.
-6. Return the phone, reveal the result, and continue through the reward.
+   Phone Captain, speaking lines, Luca steps, finish action, and easy backup.
+   Confirm package IDs, ownership, and transition analysis are absent.
+5. Have the Phone Captain complete Mission Complete and confirm only the return
+   shield appears.
+6. Turn the screen back toward Luca, reveal the result, and continue through
+   the reward.
 7. Refresh separately on handoff, privacy, cast, return, and result.
 8. Open Parent Mode and inspect/jump through the full scene directory.
 9. Review the Cast Portal overview and the Bruce/Monica, Polly, Mike, Ariel,

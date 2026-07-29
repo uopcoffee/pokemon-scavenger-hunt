@@ -42,16 +42,29 @@ const portal = context.window.CAST_PORTAL;
 const sequences = [...config.chapters, config.checkpoint, config.epilogue];
 const approvedPerformers = {
   orientation: "Auntie Ariel",
-  fairy: "Nina with Auntie Ariel",
-  "oak-water": "Professor Oak and Professor Monica",
+  fairy: "Auntie Ariel",
+  "oak-water": "Professor Bruce and Professor Monica",
   "nurse-joy": "Polly",
   rocket: "Mike",
   vault: "Designated Adult Escort",
-  "oak-return": "Professor Oak and Professor Monica",
+  "oak-return": "Professor Bruce and Professor Monica",
   "victory-road": "Auntie Ariel",
   rayquaza: "Auntie Ariel",
   champion: "Patrick",
-  mew: "Patrick or Lead Adult",
+  mew: "Patrick / Lead Adult",
+};
+const approvedPhoneCaptains = {
+  orientation: "Patrick",
+  fairy: "Patrick",
+  "oak-water": "Polly or Auntie Ariel",
+  "nurse-joy": "Patrick",
+  rocket: "Patrick or Auntie Ariel",
+  vault: "Adult Escort",
+  "oak-return": "Patrick",
+  "victory-road": "Patrick",
+  rayquaza: "Patrick",
+  champion: "Auntie Ariel",
+  mew: "Polly or Auntie Ariel",
 };
 
 function plain(value) {
@@ -102,13 +115,32 @@ function stateAt(sequence, sceneIndex) {
 assert.deepStrictEqual(Object.keys(cues).sort(), Object.keys(approvedPerformers).sort());
 assert.strictEqual(config.settings.soundEnabled, false, "The V3 experience must remain sound-off by default");
 assert.strictEqual(config.settings.respectReducedMotion, true, "V3 must preserve reduced-motion support");
-const monicaEntrance = locateScene("monica-entrance").scene;
-assert.strictEqual(monicaEntrance.character, "Professor Monica");
-assert.ok(monicaEntrance.title.startsWith("Professor Monica"));
+const narratorTeaserIds = [
+  "orientation-character",
+  "fairy-character",
+  "oak-entrance",
+  "monica-entrance",
+  "center-character",
+  "rocket-character",
+  "vault-character",
+  "oak-return-character",
+  "victory-character",
+  "champion-character",
+  "mew-transmission",
+];
+narratorTeaserIds.forEach((sceneId) => {
+  const teaser = locateScene(sceneId).scene;
+  assert.strictEqual(teaser.type, "story", `${sceneId} must be narrator story, not performer dialogue`);
+  assert.ok(teaser.body, `${sceneId} must retain a Luca-facing story teaser`);
+  assert.strictEqual(teaser.dialogue, undefined, `${sceneId} must not show live performer dialogue`);
+  assert.strictEqual(teaser.character, undefined, `${sceneId} must not present narrator copy as a performer quote`);
+});
 
 Object.entries(cues).forEach(([cueId, cue]) => {
   assert.strictEqual(cue.performerName, approvedPerformers[cueId], `${cueId} performer must be explicitly approved`);
-  assert.ok(cue.handoffLabel.includes("Adult: Hold"), `${cueId} must have an adult handoff label`);
+  assert.strictEqual(cue.phoneCaptain, approvedPhoneCaptains[cueId], `${cueId} must name the approved Phone Captain`);
+  assert.ok(cue.handoffLabel.startsWith("Adult: Hold to open"), `${cueId} must open a cue`);
+  assert.ok(!/hand off|hand the phone|give the phone/i.test(cue.handoffLabel), `${cueId} must not instruct a phone handoff`);
   [
     "characterName",
     "entranceCue",
@@ -118,8 +150,10 @@ Object.entries(cues).forEach(([cueId, cue]) => {
     "transitionLine",
     "transitionDestination",
     "completionLabel",
+    "whenFinished",
+    "runtimeBackup",
   ].forEach((field) => assert.ok(cue[field], `${cueId} is missing ${field}`));
-  ["spokenLines", "challengeSteps", "rewardPackages", "rewardOwners"].forEach((field) => {
+  ["spokenLines", "challengeSteps", "runtimeSteps", "rewardPackages", "rewardOwners"].forEach((field) => {
     assert.ok(Array.isArray(cue[field]) && cue[field].length, `${cueId} is missing ${field}`);
   });
 
@@ -130,17 +164,40 @@ Object.entries(cues).forEach(([cueId, cue]) => {
   const runtimeCue = matchingCastScenes[0];
   assert.strictEqual(runtimeCue.performerName, cue.performerName);
   assert.strictEqual(runtimeCue.characterName, cue.characterName);
-  assert.strictEqual(runtimeCue.entranceCue, cue.entranceCue);
+  assert.strictEqual(runtimeCue.phoneCaptain, cue.phoneCaptain);
+  assert.strictEqual(runtimeCue.waterSafetyAdult, cue.waterSafetyAdult);
+  assert.strictEqual(runtimeCue.supportingRole, cue.supportingRole);
   assert.deepStrictEqual(plain(runtimeCue.spokenLines), plain(cue.spokenLines));
-  assert.deepStrictEqual(plain(runtimeCue.challengeSteps), plain(cue.challengeSteps));
-  assert.strictEqual(runtimeCue.successCondition, cue.successCondition);
-  assert.deepStrictEqual(plain(runtimeCue.rewardPackages), plain(cue.rewardPackages));
-  assert.deepStrictEqual(plain(runtimeCue.rewardOwners), plain(cue.rewardOwners));
-  assert.strictEqual(runtimeCue.rewardPreparation, cue.rewardPreparation);
-  assert.strictEqual(runtimeCue.fallback, cue.fallback);
-  assert.strictEqual(runtimeCue.transitionLine, cue.transitionLine);
-  assert.strictEqual(runtimeCue.transitionDestination, cue.transitionDestination);
+  assert.deepStrictEqual(plain(runtimeCue.helpLucaSteps), plain(cue.runtimeSteps));
+  assert.strictEqual(runtimeCue.whenFinished, cue.whenFinished);
+  assert.strictEqual(runtimeCue.easyBackup, cue.runtimeBackup);
+  assert.strictEqual(runtimeCue.completionLabel, "Phone Captain: Hold Mission Complete");
+  [
+    "entranceCue",
+    "challengeSteps",
+    "successCondition",
+    "rewardPackages",
+    "rewardOwners",
+    "rewardPreparation",
+    "fallback",
+    "transitionLine",
+    "transitionDestination",
+  ].forEach((field) => {
+    assert.strictEqual(runtimeCue[field], undefined, `${cueId} runtime cue must hide Director field ${field}`);
+  });
+  const liveWords = [
+    runtimeCue.spokenLines.join(" "),
+    runtimeCue.helpLucaSteps.join(" "),
+    runtimeCue.whenFinished,
+    runtimeCue.easyBackup,
+  ].join(" ").trim().split(/\s+/).length;
+  assert.ok(liveWords <= 125, `${cueId} runtime cue must stay concise; found ${liveWords} words`);
 });
+
+assert.ok(!cues.fairy.handoffLabel.includes("Nina"), "Nina must never be named as the phone operator");
+assert.ok(/optional/i.test(cues.fairy.supportingRole), "Nina’s participation must remain optional");
+assert.ok(cues["oak-water"].waterSafetyAdult, "Oak Water Research must name a separate Water Safety Adult");
+assert.ok(!cues["oak-water"].waterSafetyAdult.includes(cues["oak-water"].phoneCaptain), "Pool safety and phone roles must remain separate");
 
 let relayCount = 0;
 sequences.forEach((sequence) => {
@@ -166,13 +223,13 @@ sequences.forEach((sequence) => {
     assert.strictEqual(privacy.cueId, scene.cueId);
     assert.strictEqual(returned.cueId, scene.cueId);
     assert.strictEqual(result.cueId, scene.cueId);
+    [handoff, privacy, scene, returned, result].forEach((relayScene) => {
+      assert.strictEqual(relayScene.phoneCaptain, approvedPhoneCaptains[scene.cueId], `${relayScene.id} must retain Phone Captain metadata`);
+    });
 
-    ["spokenLines", "challengeSteps", "successCondition", "rewardPackages", "rewardOwners", "rewardPreparation"].forEach((field) => {
+    ["spokenLines", "helpLucaSteps", "whenFinished", "easyBackup"].forEach((field) => {
       assert.strictEqual(privacy[field], undefined, `${scene.cueId} privacy shield leaks ${field}`);
       assert.strictEqual(handoff[field], undefined, `${scene.cueId} Luca handoff leaks ${field}`);
-      assert.strictEqual(returned[field], undefined, `${scene.cueId} return shield leaks ${field}`);
-    });
-    ["transitionLine", "transitionDestination"].forEach((field) => {
       assert.strictEqual(returned[field], undefined, `${scene.cueId} return shield leaks ${field}`);
     });
 
@@ -264,10 +321,29 @@ const privacySource = screenSource.slice(
   screenSource.indexOf("function CastCueScreen")
 );
 assert.ok(privacySource.includes("Turn the phone away from Luca."));
-assert.ok(privacySource.includes("Phone is turned away — open cast cue"));
-["spokenLines", "challengeSteps", "rewardPackages", "transitionDestination"].forEach((field) => {
+assert.ok(privacySource.includes("Phone is turned away — open private cue"));
+["spokenLines", "helpLucaSteps", "whenFinished", "easyBackup"].forEach((field) => {
   assert.ok(!privacySource.includes(field), `PrivacyShieldScreen must not render ${field}`);
 });
+const runtimeCueSource = screenSource.slice(
+  screenSource.indexOf("function CastCueScreen"),
+  screenSource.indexOf("function ReturnToPlayerScreen")
+);
+["1. Say This", "2. Help Luca Do This", "3. When He Finishes", "4. Easy Backup"].forEach((heading) => {
+  assert.ok(runtimeCueSource.includes(heading), `CastCueScreen must render ${heading}`);
+});
+["entranceCue", "successCondition", "rewardPackages", "rewardOwners", "rewardPreparation", "transitionLine", "transitionDestination"].forEach((field) => {
+  assert.ok(!runtimeCueSource.includes(field), `CastCueScreen must not render Director field ${field}`);
+});
+assert.ok(runtimeCueSource.includes("Phone Captain"));
+assert.ok(runtimeCueSource.includes("performer does not need to operate it"));
+const handoffSource = screenSource.slice(
+  screenSource.indexOf("function RelayHandoffScreen"),
+  screenSource.indexOf("function PrivacyShieldScreen")
+);
+assert.ok(!handoffSource.includes("phoneCaptain"), "Luca-facing handoff must not show Phone Captain operations");
+assert.ok(screenSource.includes("Water Safety Adult"));
+assert.ok(screenSource.includes("Turn the Screen Back to Luca"));
 assert.ok(screenSource.includes('audience="luca"'));
 assert.ok(screenSource.includes('audience="adult"'));
 assert.ok(screenSource.includes('data-audience="cast"'));

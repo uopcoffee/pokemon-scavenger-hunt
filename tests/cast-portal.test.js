@@ -171,9 +171,11 @@ assert(ninaText.includes("without Nina"));
 
 assert(portal.director, "Director data is required");
 assert.strictEqual(portal.director.timeline.length, 11);
+portal.director.timeline.forEach((item) => assert(item.phoneCaptain, `${item.segment} needs a Phone Captain`));
 assert(portal.director.packages.length >= 10);
 assert(portal.director.globalOperations.some((item) => item.includes("Booster Satchel")));
-assert(portal.director.globalOperations.some((item) => item.includes("pool adult")));
+assert(portal.director.globalOperations.some((item) => item.includes("Phone Captain")));
+assert(portal.director.globalOperations.some((item) => item.includes("Water Safety Adult")));
 assert(portal.director.globalOperations.some((item) => item.includes("Ranger Vault information")));
 assert.strictEqual(portal.director.operations.length, slugs.length);
 portal.director.operations.forEach((operation) => {
@@ -182,6 +184,7 @@ portal.director.operations.forEach((operation) => {
   assert(operation.fallback);
   assert(operation.decisions.length);
   assert.strictEqual(operation.runtimeCues.length, operation.cueIds.length);
+  operation.runtimeCues.forEach((cue) => assert(cue.phoneCaptain));
 });
 
 const overview = renderPage("overview").html;
@@ -195,6 +198,8 @@ assert(director.includes("Patrick owns the logistics"));
 assert(director.includes("Run of show"));
 assert(director.includes("Exact package IDs"));
 assert(director.includes("Runtime cue alignment"));
+assert(director.includes("Phone Captain"));
+assert(director.includes("Water Safety Adult"));
 assert(director.includes("Safety owner"));
 assert(director.includes("Patrick to decide"));
 

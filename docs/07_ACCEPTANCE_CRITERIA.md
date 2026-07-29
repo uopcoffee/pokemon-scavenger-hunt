@@ -4,7 +4,12 @@
 
 - [ ] The app supports seven numbered chapters, an Oak return checkpoint, a fake finale, and a Mew epilogue.
 - [ ] Every runtime scene has a unique stable ID and explicit `luca`, `adult`, or `cast` audience.
-- [ ] Every physical encounter follows Luca handoff → privacy shield → cast cue → return shield → Luca result.
+- [ ] Every physical encounter follows Luca narrator story → protected cue opening → privacy shield → cast cue → protected Mission Complete → return shield → Luca result.
+- [ ] No live performer dialogue appears on Luca’s screen before the private cast cue.
+- [ ] Every cue-opening label says “open” the named cue and never instructs an adult to hand the phone to the performer.
+- [ ] Every encounter defines a Phone Captain; Nina is never assigned to operate the phone.
+- [ ] The Oak pool Water Safety Adult and Phone Captain are separate roles.
+- [ ] Runtime cast cues contain only Say This, Help Luca Do This, When He Finishes, Easy Backup, and the protected completion control.
 - [ ] Chapter progression cannot occur accidentally through a single normal tap.
 - [ ] Each physical challenge is completed through an adult press-and-hold interaction.
 - [ ] The current chapter and scene restore correctly after refresh or browser restart.
@@ -52,7 +57,7 @@
 ## Birthday-day rehearsal
 
 - [ ] Complete a full run on the actual phone.
-- [ ] Confirm every named handoff with the intended performer.
+- [ ] Confirm every named cue opening with the intended performer while the Phone Captain keeps the device.
 - [ ] Confirm cast instructions are absent from the privacy shield and its accessibility tree.
 - [ ] Refresh once on each of the five relay scene types.
 - [ ] Confirm Parent Mode override from a cast cue lands on the return shield.

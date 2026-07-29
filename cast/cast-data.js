@@ -6,17 +6,17 @@
   var COSTUME_NOTE = "You do not need a costume. Normal clothes and reading the lines are completely fine. If it sounds fun, here are a few easy ways to play up the character.";
 
   var timeline = [
-    { time: "9:30 a.m.", window: "Ready by 9:25", segment: "Trainer Orientation", cast: "Auntie Ariel", handoff: "Welcome Luca, lead the short oath, and start the adventure.", reward: "TRAINER KIT", responsible: "Ariel", href: "league-recruiter/" },
-    { time: "9:42 a.m.", window: "Ready by 9:38", segment: "Fairy Garden", cast: "Nina with Ariel", handoff: "Help Luca find the three Fairy Orbs.", reward: "FAIRY GYM REWARD", responsible: "Ariel", href: "nina/" },
-    { time: "9:52 a.m.", window: "Travel window", segment: "Travel and reset", cast: "Family team", handoff: "Patrick keeps the phone and supplies moving.", reward: "No gift", responsible: "Patrick" },
-    { time: "10:15 a.m.", window: "Ready by 10:10", segment: "Creekside Research Lab", cast: "Professor Bruce and Professor Monica", handoff: "Help Luca recover the research capsules.", reward: "WATER RESEARCH CAPSULES 1–4 + PROFESSOR OAK’S FIRST PARTNER FILE", responsible: "Monica + Bruce", href: "oak-lab/" },
-    { time: "10:35 a.m.", window: "Ready by 10:30", segment: "Pokémon Center", cast: "Polly", handoff: "Help Luca care for the Pokémon patients.", reward: "POKÉMON CENTER FIELD KIT", responsible: "Polly", href: "nurse-joy/" },
-    { time: "10:47 a.m.", window: "Ready by 10:42", segment: "Team Rocket Base", cast: "Mike", handoff: "Run the playful basketball challenge and lose dramatically.", reward: "RECOVERED TEAM ROCKET LOOT", responsible: "Mike", href: "team-rocket/" },
-    { time: "10:59 a.m.", window: "Escort ready by 10:55", segment: "Ranger Vault", cast: "Designated adult escort", handoff: "Patrick or the escort handles the protected entry mission.", reward: "SECRET RANGER CACHE", responsible: "Adult escort" },
-    { time: "11:09 a.m.", window: "Ready by 11:05", segment: "Research Lab return", cast: "Professor Bruce and Professor Monica", handoff: "Review Luca’s discoveries and send him to Victory Road.", reward: "MEGA EVOLUTION RESEARCH FILE", responsible: "Monica", href: "oak-lab/" },
-    { time: "11:17 a.m.", window: "Ready by 11:12", segment: "Victory Road and Rayquaza", cast: "Auntie Ariel", handoff: "Referee the easy course and call in the Champion.", reward: "League qualification handoff", responsible: "Ariel", href: "league-recruiter/" },
-    { time: "About 11:24 a.m.", window: "Wait out of sight", segment: "Champion match", cast: "Patrick", handoff: "Run the friendly final match and reveal the Champion Chest.", reward: "POKÉMON LEAGUE CHAMPION CHEST", responsible: "Patrick", href: "champion/" },
-    { time: "About 11:30 a.m.", window: "Trail staged before the party", segment: "Mew surprise", cast: "Patrick or lead adult", handoff: "Follow the post-credit signal to the final surprise.", reward: "MYTHICAL ENCOUNTER + FINAL FAMILY CELEBRATION", responsible: "Patrick", href: "champion/" }
+    { time: "9:30 a.m.", window: "Ready by 9:25", segment: "Trainer Orientation", cast: "Auntie Ariel", phoneCaptain: "Patrick", handoff: "Welcome Luca, lead the short oath, and start the adventure.", reward: "TRAINER KIT", responsible: "Ariel", href: "league-recruiter/" },
+    { time: "9:42 a.m.", window: "Ready by 9:38", segment: "Fairy Garden", cast: "Auntie Ariel with Nina’s optional help", phoneCaptain: "Patrick", handoff: "Help Luca find the three Fairy Orbs.", reward: "FAIRY GYM REWARD", responsible: "Ariel", href: "nina/" },
+    { time: "9:52 a.m.", window: "Travel window", segment: "Travel and reset", cast: "Family team", phoneCaptain: "Patrick", handoff: "Patrick keeps the phone and supplies moving.", reward: "No gift", responsible: "Patrick" },
+    { time: "10:15 a.m.", window: "Ready by 10:10", segment: "Creekside Research Lab", cast: "Professor Bruce and Professor Monica", phoneCaptain: "Polly or Auntie Ariel", handoff: "Help Luca recover the research capsules.", reward: "WATER RESEARCH CAPSULES 1–4 + PROFESSOR OAK’S FIRST PARTNER FILE", responsible: "Monica + Bruce", href: "oak-lab/" },
+    { time: "10:35 a.m.", window: "Ready by 10:30", segment: "Pokémon Center", cast: "Polly", phoneCaptain: "Patrick", handoff: "Help Luca care for the Pokémon patients.", reward: "POKÉMON CENTER FIELD KIT", responsible: "Polly", href: "nurse-joy/" },
+    { time: "10:47 a.m.", window: "Ready by 10:42", segment: "Team Rocket Base", cast: "Mike", phoneCaptain: "Patrick or Auntie Ariel", handoff: "Run the playful basketball challenge and lose dramatically.", reward: "RECOVERED TEAM ROCKET LOOT", responsible: "Mike", href: "team-rocket/" },
+    { time: "10:59 a.m.", window: "Escort ready by 10:55", segment: "Ranger Vault", cast: "Designated adult escort", phoneCaptain: "Adult Escort", handoff: "The escort handles the protected entry mission.", reward: "SECRET RANGER CACHE", responsible: "Adult escort" },
+    { time: "11:09 a.m.", window: "Ready by 11:05", segment: "Research Lab return", cast: "Professor Bruce and Professor Monica", phoneCaptain: "Patrick", handoff: "Review Luca’s discoveries and send him to Victory Road.", reward: "MEGA EVOLUTION RESEARCH FILE", responsible: "Monica", href: "oak-lab/" },
+    { time: "11:17 a.m.", window: "Ready by 11:12", segment: "Victory Road and Rayquaza", cast: "Auntie Ariel", phoneCaptain: "Patrick", handoff: "Referee the easy course and call in the Champion.", reward: "League qualification handoff", responsible: "Ariel", href: "league-recruiter/" },
+    { time: "About 11:24 a.m.", window: "Wait out of sight", segment: "Champion match", cast: "Patrick", phoneCaptain: "Auntie Ariel", handoff: "Run the friendly final match and reveal the Champion Chest.", reward: "POKÉMON LEAGUE CHAMPION CHEST", responsible: "Patrick", href: "champion/" },
+    { time: "About 11:30 a.m.", window: "Trail staged before the party", segment: "Mew surprise", cast: "Patrick or lead adult", phoneCaptain: "Polly or Auntie Ariel", handoff: "Follow the post-credit signal to the final surprise.", reward: "MYTHICAL ENCOUNTER + FINAL FAMILY CELEBRATION", responsible: "Patrick", href: "champion/" }
   ];
 
   window.CAST_PORTAL = {
@@ -330,7 +330,7 @@
       timeline: timeline,
       participantOrder: [
         "Auntie Ariel — opening League Recruiter",
-        "Nina with Ariel — Fairy Garden",
+        "Auntie Ariel with Nina’s optional help — Fairy Garden",
         "Professor Bruce and Professor Monica — Research Lab",
         "Polly — Pokémon Center",
         "Mike — Team Rocket Base",
@@ -340,12 +340,13 @@
         "Patrick — Champion and Mew surprise"
       ],
       globalOperations: [
-        "Patrick keeps the phone by default and gives every participant their start and gift signals.",
+        "The phone stays with the assigned Phone Captain. Performers normally do not hold or operate it.",
+        "Patrick is Phone Captain by default; the timeline and runtime cue show every exception.",
         "Patrick brings the important supplies, labeled gifts, clue cards, and printed prompts.",
         "Every sealed booster goes to the adult-held Booster Satchel for the final celebration.",
         "The real Ranger Vault information stays only on the private physical cards. Never copy it into the app or this portal.",
         "Give hints early. Shorten any activity before Luca becomes tired or frustrated.",
-        "The supervising pool adult owns water safety and does not operate the phone during swimming.",
+        "At the pool, the dedicated Water Safety Adult watches Luca continuously and never operates the phone. Polly or Auntie Ariel is Phone Captain.",
         "Keep the Champion Chest, Mew surprise, and later-story props hidden until their cues."
       ],
       packages: [
@@ -367,7 +368,7 @@
           name: "Professor Bruce & Professor Monica",
           cueIds: ["oak-water", "oak-return"],
           setup: ["Four sealed capsules or dry-tub substitutes", "Pool skimmer, towel, and dry tray", "Research gifts and clue card hidden nearby"],
-          safety: "Patrick or another supervising adult owns pool safety and the phone. Bruce and Monica focus on welcoming, clueing, and cheering.",
+          safety: "The dedicated Water Safety Adult watches Luca continuously and never operates the phone. Polly or Auntie Ariel is Phone Captain. Bruce and Monica focus on welcoming, clueing, and cheering.",
           fallback: "Use the skimmer or a dry tub. Use one capsule if time is short.",
           decisions: ["Choose pool or dry-tub version", "Confirm which mini tin goes here", "Decide whether to print Professor badges"]
         },

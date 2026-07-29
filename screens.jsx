@@ -521,7 +521,7 @@ function RelayHandoffScreen({ config, sequence, scene, dispatch }) {
               <strong>{scene.performerName}</strong>
               <small>{scene.characterName}</small>
             </div>
-            <p className="handoff-instruction">Lead adult: keep control of the phone until the hold finishes, then turn it away from Luca.</p>
+            <p className="handoff-instruction">The designated adult keeps the phone. Complete the hold, then turn the screen away from Luca.</p>
             <AdultHoldButton
               duration={config.adultHoldMs}
               label={scene.handoffLabel}
@@ -542,8 +542,8 @@ function PrivacyShieldScreen({ sequence, scene, dispatch }) {
           <section className="relay-shield" data-testid="privacy-shield" aria-labelledby="privacy-shield-title">
             <AudienceIndicator audience="adult" performerName={scene.performerName} />
             <div className="relay-shield__icon" aria-hidden><Icon name="lock" size={64} color="var(--banana)" /></div>
-            <p className="relay-shield__eyebrow">Privacy handoff</p>
-            <h1 id="privacy-shield-title">Adult Cast Screen Ahead</h1>
+            <p className="relay-shield__eyebrow">Private cue ahead</p>
+            <h1 id="privacy-shield-title">Turn the Screen Away</h1>
             <p>Turn the phone away from Luca.</p>
             <Button
               variant="reward"
@@ -552,9 +552,9 @@ function PrivacyShieldScreen({ sequence, scene, dispatch }) {
               onClick={() => dispatch({ type: "ADVANCE_SCENE" })}
               data-testid="open-cast-cue"
             >
-              Phone is turned away — open cast cue
+              Phone is turned away — open private cue
             </Button>
-            <small>The next screen contains speaking lines, challenge operations, and reward preparation.</small>
+            <small>The next screen contains short speaking lines and live challenge steps.</small>
           </section>
         </div>
       </div>
@@ -571,56 +571,40 @@ function CastCueScreen({ config, sequence, scene, dispatch }) {
           <p>Active performer</p>
           <h1>{scene.performerName}</h1>
           <strong>{scene.characterName}</strong>
+          {scene.supportingRole && <small>{scene.supportingRole}</small>}
+          <div className="runtime-cast-meta">
+            <span><b>Phone Captain</b>{scene.phoneCaptain}</span>
+            {scene.waterSafetyAdult && <span><b>Water Safety Adult</b>{scene.waterSafetyAdult}</span>}
+          </div>
         </header>
 
-        <section className="runtime-cue-card runtime-cue-card--entrance">
-          <span>Entrance cue</span>
-          <p>{scene.entranceCue}</p>
-        </section>
-
         <section className="runtime-cue-card">
-          <span>Say this</span>
+          <span>1. Say This</span>
           <div className="runtime-spoken-lines">
             {scene.spokenLines.map((line, index) => <blockquote key={`${scene.id}-spoken-${index}`}>“{line}”</blockquote>)}
           </div>
         </section>
 
         <section className="runtime-cue-card">
-          <span>Run the challenge</span>
+          <span>2. Help Luca Do This</span>
           <ol>
-            {scene.challengeSteps.map((step, index) => <li key={`${scene.id}-step-${index}`}>{step}</li>)}
+            {scene.helpLucaSteps.map((step, index) => <li key={`${scene.id}-step-${index}`}>{step}</li>)}
           </ol>
         </section>
 
         <div className="runtime-cue-grid">
           <section className="runtime-cue-box runtime-cue-box--success">
-            <strong>Success</strong>
-            <p>{scene.successCondition}</p>
+            <strong>3. When He Finishes</strong>
+            <p>{scene.whenFinished}</p>
           </section>
           <section className="runtime-cue-box runtime-cue-box--fallback">
-            <strong>Fallback</strong>
-            <p>{scene.fallback}</p>
+            <strong>4. Easy Backup</strong>
+            <p>{scene.easyBackup}</p>
           </section>
         </div>
 
-        <section className="runtime-cue-card runtime-cue-card--reward">
-          <span>Prepare after Luca sees the result</span>
-          <p>{scene.rewardPreparation}</p>
-          <div className="runtime-package-chips">
-            {scene.rewardPackages.map((packageName, index) => (
-              <strong key={`${scene.id}-package-${index}`}>{packageName} · {scene.rewardOwners[index] || scene.rewardOwners[0]}</strong>
-            ))}
-          </div>
-        </section>
-
-        <section className="runtime-cue-card runtime-cue-card--transition">
-          <span>Final line</span>
-          <blockquote>“{scene.transitionLine}”</blockquote>
-          <small>Transition: {scene.transitionDestination}</small>
-        </section>
-
         <div className="runtime-cast-completion">
-          <p>Either the named performer or supervising adult may operate this control.</p>
+          <p><strong>Phone Captain: {scene.phoneCaptain}.</strong> Keep the phone; the performer does not need to operate it.</p>
           <AdultHoldButton
             duration={config.adultHoldMs}
             label={scene.completionLabel}
@@ -641,8 +625,8 @@ function ReturnToPlayerScreen({ sequence, scene, dispatch }) {
             <AudienceIndicator audience="adult" performerName={scene.performerName} />
             <div className="relay-shield__icon" aria-hidden><Icon name="pokeball" size={68} color="var(--banana)" /></div>
             <p className="relay-shield__eyebrow">Mission result ready</p>
-            <h1 id="return-player-title">Return the phone to Luca</h1>
-            <p>The next screen reveals his accomplishment. Make sure Luca can see it before continuing.</p>
+            <h1 id="return-player-title">Turn the Screen Back to Luca</h1>
+            <p>The adult may keep holding the phone. Make sure Luca can see the next screen before continuing.</p>
             <Button
               variant="reward"
               size="lg"
@@ -650,7 +634,7 @@ function ReturnToPlayerScreen({ sequence, scene, dispatch }) {
               onClick={() => dispatch({ type: "ADVANCE_SCENE" })}
               data-testid="reveal-mission-result"
             >
-              Luca can see the phone — reveal mission result
+              Luca can see the screen — reveal mission result
             </Button>
           </section>
         </div>
@@ -868,6 +852,8 @@ function ParentMode({ config, state, dispatch, onClose }) {
           <span>Type: {currentScene ? currentScene.type : "unavailable"}</span>
           <span>Audience: {currentScene ? currentScene.audience : "unavailable"}</span>
           {currentScene && currentScene.performerName && <span>Performer: {currentScene.performerName}</span>}
+          {currentScene && currentScene.phoneCaptain && <span>Phone Captain: {currentScene.phoneCaptain}</span>}
+          {currentScene && currentScene.waterSafetyAdult && <span>Water Safety Adult: {currentScene.waterSafetyAdult}</span>}
           <small>No keypad code is stored here.</small>
         </section>
 
@@ -928,6 +914,8 @@ function ParentMode({ config, state, dispatch, onClose }) {
                     <strong>{scene.title}</strong>
                     <span>{scene.id} · {scene.type} · {scene.audience}</span>
                     {scene.performerName && <small>Performer: {scene.performerName}</small>}
+                    {scene.phoneCaptain && <small>Phone Captain: {scene.phoneCaptain}</small>}
+                    {scene.waterSafetyAdult && <small>Water Safety Adult: {scene.waterSafetyAdult}</small>}
                   </button>
                 ))}
               </div>
