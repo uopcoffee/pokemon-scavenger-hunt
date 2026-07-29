@@ -56,14 +56,14 @@ const expectedAfterCounts = {
   "pokemon-center": 6,
   "team-rocket-base": 6,
   "secret-ranger-vault": 7,
-  "victory-road": 16,
+  "victory-road": 17,
   "oak-return": 6,
   "mew-epilogue": 8,
 };
 
-assert.strictEqual(config.release, "3.3");
+assert.strictEqual(config.release, "3.4");
 assert.strictEqual(Object.values(beforeCounts).reduce((sum, count) => sum + count, 0), 128);
-assert.strictEqual(sequences.reduce((sum, sequence) => sum + sequence.scenes.length, 0), 70);
+assert.strictEqual(sequences.reduce((sum, sequence) => sum + sequence.scenes.length, 0), 71);
 sequences.forEach((sequence) => {
   assert.strictEqual(sequence.scenes.length, expectedAfterCounts[sequence.id], `${sequence.id} has the wrong streamlined count`);
   assert.ok(sequence.scenes.length < beforeCounts[sequence.id], `${sequence.id} must have fewer runtime screens`);
@@ -79,7 +79,7 @@ const allIds = sequences.flatMap((sequence) => sequence.scenes.map((scene) => sc
 assert.strictEqual(new Set(allIds).size, allIds.length, "All remaining scene IDs must be globally unique");
 
 const results = sequences.flatMap((sequence) => sequence.scenes.filter((scene) => scene.type === "relay-result"));
-assert.strictEqual(results.length, 10, "Every live encounter must end in one combined success screen");
+assert.strictEqual(results.length, 11, "Every live encounter and the connected Legendary beat must end in a success screen");
 results.forEach((scene) => {
   assert.ok(scene.successBody === undefined, "Runtime result must use the consolidated body field");
   assert.ok(scene.body);
@@ -152,7 +152,7 @@ sequences.forEach((sequence) => {
 [
   ["orientation-reward", "orientation-challenge-result", config.chapters[0]],
   ["fairy-fragment", "fairy-challenge-result", config.chapters[1]],
-  ["victory-challenge-b", "victory-challenge-a-handoff", victory],
+  ["victory-challenge-b-privacy", "victory-challenge-b", victory],
   ["champion-reward", "champion-challenge-result", victory],
   ["oak-return-reward", "oak-return-challenge-result", config.checkpoint],
   ["mew-reward", "mew-challenge-result", config.epilogue],
@@ -173,4 +173,4 @@ sequences.forEach((sequence) => {
   assert.strictEqual(stateEngine.sanitizeState(snapshot).currentSceneId, expectedId, `${oldId} must migrate safely`);
 });
 
-console.log("V3.3 streamlined-flow tests passed.");
+console.log("V3.4 streamlined-flow tests passed.");

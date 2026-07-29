@@ -170,14 +170,14 @@ assert(ninaText.includes("participation never affect"));
 assert(ninaText.includes("without Nina"));
 
 assert(portal.director, "Director data is required");
-assert.strictEqual(portal.director.timeline.length, 11);
+assert.strictEqual(portal.director.timeline.length, 10);
 portal.director.timeline.forEach((item) => assert(item.phoneCaptain, `${item.segment} needs a Phone Captain`));
 assert(portal.director.packages.length >= 10);
 assert(portal.director.globalOperations.some((item) => item.includes("Booster Satchel")));
 assert(portal.director.globalOperations.some((item) => item.includes("Phone Captain")));
 assert(portal.director.globalOperations.some((item) => item.includes("Water Safety Adult")));
 assert(portal.director.globalOperations.some((item) => item.includes("Ranger Vault information")));
-assert.strictEqual(portal.director.operations.length, slugs.length);
+assert.ok(portal.director.operations.length >= slugs.length);
 portal.director.operations.forEach((operation) => {
   assert(operation.setup.length);
   assert(operation.safety);

@@ -35,9 +35,9 @@ const validDispositions = ["OPEN NOW", "CARRY FOR LATER", "SAVE FOR CELEBRATION"
 
 assert.deepStrictEqual(Array.from(config.chapters, (chapter) => chapter.name), expectedChapterNames);
 assert.deepStrictEqual(Array.from(config.participants, (participant) => participant.id), requiredParticipants);
-assert.strictEqual(config.release, "3.3");
+assert.strictEqual(config.release, "3.4");
 assert.strictEqual(config.settings.startTime, "9:30 a.m.");
-assert.strictEqual(config.settings.targetChampionTime, "11:30 a.m.");
+assert.strictEqual(config.settings.targetChampionTime, "about 12:15 p.m.");
 assert.ok(config.chapters[2].scheduleLabel.includes("10:15"), "Professor Oak arrival must target 10:15");
 assert.ok(config.checkpoint.scheduleLabel.includes("11:17"), "Oak return checkpoint must finish before noon");
 

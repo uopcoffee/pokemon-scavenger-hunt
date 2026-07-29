@@ -1,5 +1,9 @@
 # 10. Party-Day Prop and Wrapping Checklist
 
+> V3.4 timing and role authority: see `16_LOGISTICS_UPDATE_3.md`. Preserve the
+> 10:15 Oak arrival goal, but allow later chapters to move for walking,
+> readiness, pool drying, gift handling, code use, photos, and child pauses.
+
 Use this as the final parent-facing packing and rehearsal list. The package
 labels below exactly match `packageId` values in `creekside-content.js`.
 

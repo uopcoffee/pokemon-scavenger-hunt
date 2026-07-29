@@ -11,7 +11,7 @@
       performerName: "Auntie Ariel",
       characterName: "Pokémon League Recruiter",
       phoneCaptain: "Patrick",
-      entranceCue: "Stand ready with the Trainer Kit and greet Luca like the League has been waiting specifically for him.",
+      entranceCue: "Patrick privately opens this cue before Luca enters. Stand ready with the Trainer Kit, Ranger Code Card, pencil, and a clearly labeled Save for Celebration container.",
       spokenLines: [
         "Trainer Luca! A new region has appeared, and the Pokémon League chose you to investigate.",
         "Promise to protect Pokémon, help your friends, play fairly, and never give up.",
@@ -20,18 +20,20 @@
       challengeSteps: [
         "Lead Luca through the short Trainer Oath.",
         "Help him sleeve one card and place it in a top loader.",
-        "Help him secure the protected card in the deck box."
+        "Help him secure the protected card in the deck box.",
+        "Introduce the Ranger Code Card and pencil.",
+        "Put the first sealed booster directly into the Save for Celebration container."
       ],
       runtimeSteps: [
         "Lead the short Trainer Oath.",
         "Help Luca sleeve one card and place it in the top loader and deck box."
       ],
-      whenFinished: "Celebrate his new Trainer status. Tell Patrick the oath and card test are complete.",
+      whenFinished: "Give Luca the Trainer Kit immediately, introduce the code card, store the booster, then tell Patrick Luca is ready for the Ariel handoff.",
       runtimeBackup: "Hold the sleeve or top loader for Luca. One protected card is enough.",
       successCondition: "Every sincere oath response counts. Complete each equipment step once, with as much adult help as needed.",
       rewardPackages: ["TRAINER KIT"],
       rewardOwners: ["Ariel"],
-      rewardPreparation: "Keep the Trainer Kit nearby. After Luca sees the victory screen, open the equipment and team card; place the sealed booster in the adult Booster Satchel.",
+      rewardPreparation: "Keep the Trainer Kit, Ranger Code Card, pencil, and Save for Celebration container together. Hand over the kit immediately after success and visibly store the first booster.",
       fallback: "Hold the sleeve or top loader while Luca slides the card into place. If time is short, protect one card and move on.",
       transitionLine: "Official Trainer status confirmed. A tiny Fairy signal is waiting in the garden.",
       transitionDestination: "Fairy Garden",
@@ -45,7 +47,7 @@
       performerName: "Auntie Ariel",
       characterName: "Fairy Garden Guide with Nina’s optional help",
       phoneCaptain: "Patrick",
-      supportingRole: "Nina’s role is optional. She may hold the basket, point, cheer, wander away, or skip the scene.",
+      supportingRole: "Nina never handles the phone. Her role is optional: point, hold the basket, help with one object, cheer, lose interest, or skip the scene.",
       entranceCue: "Nina holds the basket. Ariel quietly gives the longer prompt and lets Nina point, cheer, or use one-word directions.",
       spokenLines: [
         "Nina: Luca, look! Tree! There!",
@@ -58,10 +60,11 @@
         "Place all three orbs in Nina’s basket."
       ],
       runtimeSteps: [
-        "Let Luca find three visible Fairy Orbs and place them in the basket.",
-        "Nina may point or cheer, but Luca never depends on her participation."
+        "Auntie Ariel keeps the phone-facing role and runs the mission.",
+        "Let Luca find visible Fairy Orbs; Nina may point, hold the basket, help with one object, or leave.",
+        "Luca succeeds even if Nina does not participate."
       ],
-      whenFinished: "Celebrate the glowing garden. Tell Patrick the orbs are back in the basket.",
+      whenFinished: "Celebrate first, let Patrick open Luca’s success screen, then hand over the Fairy gift.",
       runtimeBackup: "Put one orb in plain sight or let Luca carry the basket. Run it without Nina if needed.",
       successCondition: "All three orbs reach the basket. Pointing, visible placement, and immediate hints are always allowed.",
       rewardPackages: ["FAIRY GYM REWARD"],
@@ -81,7 +84,7 @@
       characterName: "Partner Professors",
       phoneCaptain: "Polly or Auntie Ariel",
       waterSafetyAdult: "Dedicated Water Safety Adult — watches Luca continuously and never operates the phone.",
-      entranceCue: "Bruce watches the water and delivers Oak’s opening. Monica holds the diagram, manages the research cues, and keeps the mission moving.",
+      entranceCue: "Open this private cue before anyone approaches the pool. Professors are ready at the dry research table; the Phone Captain stows the phone safely away before Luca enters the preserve.",
       spokenLines: [
         "Professor Oak: Shhh… the preserve is unusually active. You must be Trainer Luca.",
         "Professor Monica: The readings are rising. Use this symbol diagram to find all four samples.",
@@ -90,22 +93,23 @@
       challengeSteps: [
         "The dedicated Water Safety Adult watches Luca continuously and never operates the phone.",
         "The Phone Captain keeps the phone and operates the protected controls.",
-        "Professor Monica gives symbol clues and manages the skimmer, towel, and dry tray.",
+        "Professor Bruce and Professor Monica run the clues from the prepared research position.",
+        "Keep a skimmer, towel, and dry research tray ready.",
         "Luca safely retrieves four floating or shallow capsules.",
-        "Professor Oak asks Luca to identify the unstable symbol and place the Sky Fragment in the tray."
+        "Exit the water, dry Luca, and move every capsule to the dry table before the phone returns."
       ],
       runtimeSteps: [
-        "Professor Monica gives clues while Luca retrieves the four capsules.",
-        "Use the skimmer or dry-tub version at any time.",
-        "Professor Bruce asks Luca to place the Sky Fragment in the tray."
+        "Water Safety Adult watches Luca; Phone Captain handles the phone; Professors run clues.",
+        "Stow the phone safely away. Use swimming, the skimmer, or one easy capsule at a time.",
+        "Exit and dry Luca, then move to the dry research table before the phone returns."
       ],
-      whenFinished: "Celebrate the recovered research. Tell the Phone Captain all capsules and the Sky Fragment are secure.",
-      runtimeBackup: "Use the skimmer and one easy capsule at a time. Safety always comes first.",
+      whenFinished: "At the dry table, give the critical reward and Wave clue. A designated adult carries larger packages. Confirm Luca is dry.",
+      runtimeBackup: "Use the skimmer, a dry-tub version, or one capsule only. Safety always comes first.",
       successCondition: "All four objects are safely recovered and the Sky Fragment reaches the tray. Swimming, skimmer, dry tub, hints, and decoys all count.",
       rewardPackages: ["WATER RESEARCH CAPSULES 1–4", "PROFESSOR OAK’S FIRST PARTNER FILE"],
       rewardOwners: ["Monica", "Bruce"],
       rewardPreparation: "Stage both packages away from the water. After the result screen, open the assigned items and place every sealed booster in the adult Booster Satchel. Hand over the physical fragment without showing its private mark.",
-      fallback: "Retrieve every object with the skimmer from the deck, or use four marked tennis balls in a dry tub. Never rush water safety.",
+      fallback: "Use swimming only when appropriate, retrieve with the skimmer from the deck, switch to a dry tub, or run one capsule only. Never rush water safety.",
       transitionLine: "The samples are secure. The energy pattern shows that Pokémon at the Center need help.",
       transitionDestination: "Pokémon Center",
       handoffStory: "Two Water Research Professors are waiting at the preserve.",
@@ -118,9 +122,9 @@
       performerName: "Polly",
       characterName: "Nurse Joy",
       phoneCaptain: "Patrick",
-      entranceCue: "Wait beside the three patient cards and treatments, then greet Luca with warmth and urgency.",
+      entranceCue: "Patrick privately opens this cue while Luca uses the sheltered reset for drying, changing, bathroom, or water. Wait beside the short treatment activity.",
       spokenLines: [
-        "Trainer Luca, I’m glad you’re here. Three Pokémon need help.",
+        "The Pokémon Center is the safest place to restore your team after the Water Preserve.",
         "Match each patient with the right care, then bring the medicine Poké Ball back to me.",
         "You may ask for a Nurse Joy hint at any time."
       ],
@@ -133,7 +137,7 @@
         "Let Luca match each patient with a treatment and give hints immediately.",
         "Guide the short medicine Poké Ball delivery."
       ],
-      whenFinished: "Celebrate every patient feeling better. Tell Patrick the care mission is complete.",
+      whenFinished: "Celebrate every patient feeling better. Tell Patrick the Care Badge and Heart clue are ready.",
       runtimeBackup: "Use one patient and two choices, then make the medicine delivery one step.",
       successCondition: "All patients receive care with unlimited hints. No wrong choice causes failure, and a demonstrated match still counts.",
       rewardPackages: ["POKÉMON CENTER FIELD KIT"],
@@ -152,23 +156,23 @@
       performerName: "Mike",
       characterName: "Team Rocket Boss",
       phoneCaptain: "Patrick or Auntie Ariel",
-      entranceCue: "Stand near the hoop with the Ranger Dispatch out of reach. Begin imposing; become funnier as Luca breaks the defense.",
+      entranceCue: "Stand near the adjustable hoop with the Ranger Dispatch and stolen loot visible but out of reach. There is no formal score.",
       spokenLines: [
         "So you’re Professor Oak’s new Trainer. This Ranger Dispatch belongs to Team Rocket now.",
         "Break my basketball defense and attempt the Final Poké Shot.",
         "Impossible! My defense was scientifically unbeatable!"
       ],
       challengeSteps: [
-        "Start with one very close shot.",
-        "Run one comfortable scoring round; count baskets, rim, backboard, or the prepared target.",
-        "Let Luca choose the Final Poké Shot location.",
-        "Move closer after misses and narrate the defense failing."
+        "Stage 1 — Close Basket: begin at the easiest marker.",
+        "Stage 2 — Defense Target: use any comfortable target; rim or backboard weakens the defense.",
+        "Stage 3 — Final Poké Shot: Luca chooses the spot.",
+        "Move closer or lower the hoop immediately. Luca always wins."
       ],
       runtimeSteps: [
-        "Start with one very close shot and count baskets, rim, backboard, or the target.",
-        "Let Luca choose a Final Poké Shot, then move him closer after any miss."
+        "Close Basket, then one comfortable Defense Target. Rim or backboard weakens the defense.",
+        "Luca chooses the Final Poké Shot. Move closer or lower the hoop until Team Rocket loses."
       ],
-      whenFinished: "Lose dramatically and praise Luca. Tell the Phone Captain Team Rocket is defeated.",
+      whenFinished: "Say Team Rocket is defeated and surrender the stolen loot to Luca after the success screen.",
       runtimeBackup: "Use one close shot, a target hit, or three soft passes. Luca always wins.",
       successCondition: "Mike always loses. A basket, target hit, layup, soft pass, or prepared fallback defeats the defense.",
       rewardPackages: ["RECOVERED TEAM ROCKET LOOT"],
@@ -187,28 +191,29 @@
       performerName: "Designated Adult Escort",
       characterName: "Ranger Vault Escort",
       phoneCaptain: "Adult Escort",
-      entranceCue: "Keep the phone and physical Ranger Code Card with the adults. Stay beside Luca for the entire approved entry-area mission.",
+      entranceCue: "Confirm the approved boundary, keypad fallback, outside fallback, and designated bag carrier. Keep the phone and physical Trainer Code Card with the adults.",
       spokenLines: [
         "Trainer Luca, read the four private marks from your physical Ranger Code Card.",
         "I will stay beside you while we use the real keypad.",
         "Now follow the three Ranger symbols to the protected cache."
       ],
       challengeSteps: [
-        "The escort keeps Luca in the approved front-entry area.",
+        "The escort keeps Luca inside the approved configurable boundary.",
         "Use only the private physical card; the app never receives or displays the entry information.",
         "Follow the three prepared Ranger symbols.",
-        "Recover the cache and sealed Research File without opening the file."
+        "Recover the cache, exit, and confirm success outside.",
+        "Open one story item only; the bag carrier takes larger items home or to the Professors."
       ],
       runtimeSteps: [
-        "Stay beside Luca in the approved entry area and use only the private physical card.",
-        "Follow the three Ranger symbols and recover the cache with the sealed file."
+        "Stay beside Luca inside the approved boundary and use only the private physical Trainer Code Card.",
+        "Recover the cache, exit, and confirm outside. Open one story item; the bag carrier takes the rest."
       ],
-      whenFinished: "Keep the Research File sealed. Hold Mission Complete before revealing the cache result to Luca.",
+      whenFinished: "Outside the protected area, keep the Research File sealed and tell the Phone Captain the cache and bag carrier are ready.",
       runtimeBackup: "Operate the keypad for Luca or bring the sealed cache outside.",
       successCondition: "Adult-accompanied entry and safe recovery of the cache and sealed file. The escort may operate the keypad or bring the cache outside.",
       rewardPackages: ["SECRET RANGER CACHE"],
       rewardOwners: ["Designated Adult Escort"],
-      rewardPreparation: "Keep the cache staged in the approved area. After the result screen, open the approved items, place sealed boosters in the adult Booster Satchel, and carry the sealed Research File.",
+      rewardPreparation: "Keep the cache staged inside the approved boundary. Outside, open one story item only; the designated bag carrier takes larger items home or to the Professors.",
       fallback: "The escort enters the private information or brings the sealed cache outside and delivers the Ranger transmission verbally.",
       transitionLine: "The Rangers’ file is secure. Professor Oak needs it and the Sky Fragment immediately.",
       transitionDestination: "Professor Oak’s Lab",
@@ -222,7 +227,7 @@
       performerName: "Professor Bruce and Professor Monica",
       characterName: "Partner Professors",
       phoneCaptain: "Patrick",
-      entranceCue: "Bruce accepts the Sky Fragment. Monica accepts and opens the sealed Research File. Keep the callback friendly and brief.",
+      entranceCue: "Run a compact 5–8 minute return: accept the items, one callback, Rayquaza finding, League Authorization, compact reward, then immediate Victory Road departure.",
       spokenLines: [
         "Professor Oak: You brought back the Sky Fragment and the Rangers’ file—excellent.",
         "Professor Monica: The research confirms a Mega Rayquaza energy pattern.",
@@ -239,7 +244,7 @@
         "Monica announces the Rayquaza finding; Bruce asks one friendly question.",
         "Any answer counts, then award League Authorization."
       ],
-      whenFinished: "Celebrate Luca’s League qualification. Tell Patrick the authorization is ready.",
+      whenFinished: "Give the compact reward and League Authorization, then send Luca immediately to Victory Road.",
       runtimeBackup: "Ask one two-choice question or simply announce that the scan confirms qualification.",
       successCondition: "Any remembered detail, prompted choice, or sincere answer qualifies Luca for the League.",
       rewardPackages: ["MEGA EVOLUTION RESEARCH FILE"],
@@ -258,24 +263,27 @@
       performerName: "Auntie Ariel",
       characterName: "Victory Road and Mega Rayquaza Referee",
       phoneCaptain: "Patrick",
-      entranceCue: "Stand at the course entrance with whistle and clipboard. This one cue stays open through Victory Road and the connected Rayquaza encounter.",
+      entranceCue: "This single private cue covers Victory Road, the Rayquaza reveal and physical encounter, and the Champion summon. Ariel remains ready while the phone briefly returns to Luca between achievements.",
       spokenLines: [
         "Welcome to Victory Road!",
         "Clear the Tall Grass, cross the forest line, hit the target, and recover the Energy Tokens.",
-        "Then follow the Sky energy to Mega Rayquaza. Every assisted success is completely legitimate Champion behavior!"
+        "The phone will celebrate Victory Road, then reveal Mega Rayquaza. Every assisted success is completely legitimate Champion behavior!"
       ],
       challengeSteps: [
         "Guide one supported pass through the Tall Grass markers.",
         "Cross the ground-level balance line.",
         "Use soft balls at the prepared target.",
         "Reveal or point toward the three Energy Tokens whenever needed.",
-        "Continue directly to the secured Rayquaza target. Move closer after a miss and invoke a Legendary Assist whenever helpful."
+        "Let the phone return for Victory Road cleared, then continue without another full private cue.",
+        "At Rayquaza, move closer after a miss and invoke a Legendary Assist whenever helpful.",
+        "After Legendary success, summon Champion Patrick while Ariel keeps the phone."
       ],
       runtimeSteps: [
         "Guide one easy pass through the markers, ground line, target, and Energy Tokens.",
-        "Continue straight to Rayquaza: use one soft throw, move closer, and give a Legendary Assist whenever helpful."
+        "Return the phone for Victory Road cleared, then use one soft Rayquaza throw or Legendary Assist without a second full cue.",
+        "After the Legendary success screen, summon Champion Patrick."
       ],
-      whenFinished: "Declare Victory Road cleared and Rayquaza calm. Tell Patrick the Champion entrance is ready.",
+      whenFinished: "After Victory Road, use the Phone Captain hold so Luca sees the achievement. Stay ready for Rayquaza and the Champion summon.",
       runtimeBackup: "Shorten the route, reveal every token, then move close to Rayquaza or point to three Sky symbols.",
       successCondition: "One supported pass through each station plus a Rayquaza hit, ring toss, symbol match, or Legendary Assist.",
       rewardPackages: ["League qualification handoff"],
@@ -284,7 +292,7 @@
       fallback: "Shorten the course, widen targets, reveal every token, then move closer to Rayquaza or use a ring or three Sky symbols.",
       transitionLine: "Mega Rayquaza is calm. The Creekside Champion may now enter.",
       transitionDestination: "Champion Arena",
-      handoffStory: "Auntie Ariel will referee Victory Road and lead the connected Mega Rayquaza encounter without another phone break.",
+      handoffStory: "Auntie Ariel will referee Victory Road, stay ready through the Luca-facing achievement, then lead Mega Rayquaza and summon the Champion from this one cue.",
       handoffLabel: "Adult: Hold to open Auntie Ariel’s Victory Road and Rayquaza cue",
       completionLabel: "Phone Captain: Hold Mission Complete"
     },
@@ -294,7 +302,7 @@
       performerName: "Patrick",
       characterName: "Creekside Region Champion",
       phoneCaptain: "Auntie Ariel",
-      entranceCue: "Stay hidden until Ariel clears Rayquaza. Enter with the Champion Chest still out of Luca’s view.",
+      entranceCue: "Stay hidden until Ariel completes the one-cue Victory Road and Rayquaza sequence. Ariel remains Phone Captain and summons you with the Champion Chest still hidden.",
       spokenLines: [
         "Trainer Luca, I watched your whole journey.",
         "A Champion needs knowledge, skill, and heart. Show me all three.",
@@ -310,7 +318,7 @@
         "Use one comfortable target toss or a high-five.",
         "Ask who helped Luca today; every sincere answer counts."
       ],
-      whenFinished: "Concede dramatically and name Luca the new Champion. Ariel opens the result.",
+      whenFinished: "Concede dramatically and name Luca the new Champion. Ariel opens the result and gathers everyone who is here for the Champion photo.",
       runtimeBackup: "Give two choices, use a high-five, and accept any person or Pokémon.",
       successCondition: "Every sincere answer counts. Move the target closer after a miss. Patrick always concedes.",
       rewardPackages: ["POKÉMON LEAGUE CHAMPION CHEST"],
