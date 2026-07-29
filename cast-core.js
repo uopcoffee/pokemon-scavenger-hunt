@@ -80,20 +80,20 @@
     "oak-water": {
       id: "oak-water",
       portalGuide: "oak-lab",
-      performerName: "Professor Bruce and Professor Monica",
+      performerName: "Professor Oak and Professor Monica",
       characterName: "Partner Professors",
       phoneCaptain: "Polly or Auntie Ariel",
       waterSafetyAdult: "Dedicated Water Safety Adult — watches Luca continuously and never operates the phone.",
       entranceCue: "Open this private cue before anyone approaches the pool. Professors are ready at the dry research table; the Phone Captain stows the phone safely away before Luca enters the preserve.",
       spokenLines: [
-        "Professor Bruce: Luca. Just in time. I asked the League to find you.",
+        "Professor Oak: Luca. Just in time. I asked the League to find you.",
         "Professor Monica: The reading jumped when you arrived. Use this diagram to find four samples.",
-        "Professor Monica: Bruce—this reading is not coming only from the water. It is coming from above it."
+        "Professor Monica: Oak—this reading is not coming only from the water. It is coming from above it."
       ],
       challengeSteps: [
         "The dedicated Water Safety Adult watches Luca continuously and never operates the phone.",
         "The Phone Captain keeps the phone and operates the protected controls.",
-        "Professor Bruce and Professor Monica run the clues from the prepared research position.",
+        "Professor Oak and Professor Monica run the clues from the prepared research position.",
         "Keep a skimmer, towel, and dry research tray ready.",
         "Luca safely retrieves four floating or shallow capsules.",
         "Exit the water, dry Luca, and move every capsule to the dry table before the phone returns."
@@ -113,7 +113,7 @@
       transitionLine: "…You actually found it. And the same energy has reached the Pokémon Center.",
       transitionDestination: "Pokémon Center",
       handoffStory: "Two Water Research Professors are waiting at the preserve.",
-      handoffLabel: "Adult: Hold to open Professor Bruce and Professor Monica’s cue",
+      handoffLabel: "Adult: Hold to open Professor Oak and Professor Monica’s cue",
       completionLabel: "Phone Captain: Hold Mission Complete"
     },
     "nurse-joy": {
@@ -224,14 +224,14 @@
     "oak-return": {
       id: "oak-return",
       portalGuide: "oak-lab",
-      performerName: "Professor Bruce and Professor Monica",
+      performerName: "Professor Oak and Professor Monica",
       characterName: "Partner Professors",
       phoneCaptain: "Patrick",
       entranceCue: "Run a compact 5–8 minute return: accept the items, one callback, Rayquaza finding, League Authorization, compact reward, then immediate Victory Road departure.",
       spokenLines: [
-        "Professor Bruce: Luca… the mark on this file matches the License I asked the League to prepare for you.",
+        "Professor Oak: Luca… the mark on this file matches the License I asked the League to prepare for you.",
         "Professor Monica: The Fairies, the patients, and the fragment all point home. The signal is from Mega Rayquaza.",
-        "Professor Bruce: The signal was testing a path to you. Why do you think it kept leading you home?"
+        "Professor Oak: The signal was testing a path to you. Why do you think it kept leading you home?"
       ],
       challengeSteps: [
         "Accept the Sky Fragment and sealed Research File.",
@@ -241,7 +241,7 @@
       ],
       runtimeSteps: [
         "Accept the Sky Fragment and sealed Research File.",
-        "Monica announces the Rayquaza finding; Bruce asks one friendly question.",
+        "Monica announces the Rayquaza finding; Oak asks one friendly question.",
         "Any answer counts, then award League Authorization."
       ],
       whenFinished: "Give the compact reward and League Authorization, then send Luca immediately to Victory Road.",
@@ -254,7 +254,7 @@
       transitionLine: "The legend points home. Victory Road will reveal whether the signal has truly chosen Luca.",
       transitionDestination: "Victory Road",
       handoffStory: "The research partners are ready to analyze Luca’s evidence.",
-      handoffLabel: "Adult: Hold to open Professor Bruce and Professor Monica’s return cue",
+      handoffLabel: "Adult: Hold to open Professor Oak and Professor Monica’s return cue",
       completionLabel: "Phone Captain: Hold Mission Complete"
     },
     "victory-road": {

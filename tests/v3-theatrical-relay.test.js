@@ -43,11 +43,11 @@ const sequences = [...config.chapters, config.checkpoint, config.epilogue];
 const approvedPerformers = {
   orientation: "Auntie Ariel",
   fairy: "Auntie Ariel",
-  "oak-water": "Professor Bruce and Professor Monica",
+  "oak-water": "Professor Oak and Professor Monica",
   "nurse-joy": "Polly",
   rocket: "Mike",
   vault: "Designated Adult Escort",
-  "oak-return": "Professor Bruce and Professor Monica",
+  "oak-return": "Professor Oak and Professor Monica",
   "victory-road": "Auntie Ariel",
   champion: "Patrick",
   mew: "Patrick / Lead Adult",

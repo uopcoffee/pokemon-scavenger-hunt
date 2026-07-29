@@ -55,7 +55,7 @@ assert.ok(victory.scenes.find((scene) => scene.id === "victory-challenge-b"));
 assert.ok(victory.scenes.find((scene) => scene.id === "victory-challenge-b-result"));
 assert.match(cues["victory-road"].entranceCue, /single private cue.*Victory Road.*Rayquaza.*Champion summon/i);
 assert.strictEqual(cues.champion.phoneCaptain, "Auntie Ariel");
-assert.match(victory.scenes.find((scene) => scene.id === "hall-of-heroes").body, /gather everyone who is here for the Champion photo\./i);
+assert.match(victory.scenes.find((scene) => scene.id === "hall-of-heroes").body, /Every name here became part of Luca’s story/i);
 
 assert.ok(portal.director.timeline.some((item) => /20–25 min/.test(item.window)));
 assert.ok(portal.director.timeline.some((item) => /10–15 min sheltered reset/.test(item.window)));

@@ -396,13 +396,14 @@ function FakeCreditsControl({ scene, onComplete }) {
 
 function SceneSpecificContent({ config, state, scene }) {
   if (scene.type === "relay-result") {
+    const isMewResult = state.activeFlow === "mew";
     const projectedFragments = Number.isInteger(scene.fragmentSlot)
       ? Array.from(new Set(state.collectedFragments.concat(scene.fragmentSlot)))
       : state.collectedFragments;
     return (
       <div className="combined-success">
         {!!scene.revealItems.length && (
-          <div className="success-reveal-list" aria-label="Mission achievements">
+          <div className="success-reveal-list" aria-label={isMewResult ? "Mythical encounter" : "Mission achievements"}>
             {scene.revealItems.map((item, index) => (
               <div key={`${scene.id}-reveal-${index}`} style={{ "--reveal-order": index }}>
                 <Icon name="check" size={20} color="var(--tropius-leaf)" />
@@ -419,7 +420,7 @@ function SceneSpecificContent({ config, state, scene }) {
         )}
         {scene.nextDestination && (
           <div className="next-destination">
-            <strong>Next signal</strong>
+            <strong>{isMewResult ? "The adventure continues" : "Next signal"}</strong>
             <p>{scene.nextDestination}</p>
           </div>
         )}
@@ -737,8 +738,9 @@ function CreeksideScene({ config, state, dispatch }) {
     return <ReturnToPlayerScreen sequence={sequence} scene={scene} dispatch={dispatch} />;
   }
 
+  const isMewResult = state.activeFlow === "mew" && scene.type === "relay-result";
   const sceneLabel = scene.type === "relay-result"
-    ? "Mission complete"
+    ? (isMewResult ? "Mythical encounter" : "Mission complete")
     : scene.type === "adult-logistics"
       ? "Adult checklist"
       : scene.type.replace(/-/g, " ");
@@ -803,7 +805,7 @@ function CreeksideScene({ config, state, dispatch }) {
             {(isRewardResult || scene.type === "relay-result") && (
               <div className="mission-result-burst" role="status">
                 <Icon name="sparkle" size={24} color="var(--gold)" />
-                <strong>{scene.type === "relay-result" ? (scene.resultLabel || "Challenge complete!") : "Mission complete!"}</strong>
+                <strong>{scene.type === "relay-result" ? (scene.resultLabel || (isMewResult ? "A Mythical moment" : "Challenge complete!")) : "Mission complete!"}</strong>
               </div>
             )}
             {scene.character && (
@@ -838,10 +840,12 @@ function CreeksideScene({ config, state, dispatch }) {
             )}
             {resultNeedsAdultHold && (
               <div style={{ marginTop: 18 }}>
-                <p style={{ margin: "0 0 12px", fontSize: ".95rem", fontWeight: 700, color: "var(--ink-soft)" }}>Pass the phone to an adult for the physical reward.</p>
+                <p style={{ margin: "0 0 12px", fontSize: ".95rem", fontWeight: 700, color: "var(--ink-soft)" }}>
+                  {isMewResult ? "When Luca is ready, pass the phone quietly to an adult." : "Pass the phone to an adult for the physical reward."}
+                </p>
                 <AdultHoldButton
                   duration={config.adultHoldMs}
-                  label="Adult: Hold for reward handoff"
+                  label={isMewResult ? "Adult: Hold when Luca is ready" : "Adult: Hold for reward handoff"}
                   onComplete={() => dispatch({ type: "ADVANCE_SCENE" })}
                 />
               </div>

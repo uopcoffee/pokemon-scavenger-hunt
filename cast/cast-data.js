@@ -9,11 +9,11 @@
     { time: "9:30 a.m.", window: "10–15 min · ready by 9:25", segment: "Trainer Orientation", cast: "Auntie Ariel", phoneCaptain: "Patrick", handoff: "Private cue, live oath and equipment, Trainer Kit, Code Card, pencil, and first booster stored.", reward: "TRAINER KIT", responsible: "Ariel", href: "league-recruiter/" },
     { time: "About 9:40–9:45", window: "8–12 min · flexible Nina participation", segment: "Fairy Garden", cast: "Auntie Ariel with Nina’s optional help", phoneCaptain: "Patrick", handoff: "Ariel runs the scene; Nina may point, hold the basket, help once, or leave.", reward: "FAIRY GYM REWARD", responsible: "Ariel", href: "nina/" },
     { time: "About 9:50–9:57", window: "18–25 min walking/readiness buffer", segment: "Travel and Oak readiness", cast: "Family team", phoneCaptain: "Patrick", handoff: "Walk, carry gifts, allow a child pause, and preserve the 10:15 Oak arrival goal.", reward: "No gift", responsible: "Patrick" },
-    { time: "10:15 a.m. goal", window: "20–25 min including exit and drying", segment: "Oak Water Research", cast: "Professor Bruce and Professor Monica", phoneCaptain: "Polly or Auntie Ariel", handoff: "Separate Water Safety Adult, Phone Captain, and Professors; finish at the dry table.", reward: "WATER RESEARCH CAPSULES 1–4 + PROFESSOR OAK’S FIRST PARTNER FILE", responsible: "Monica + Bruce", href: "oak-lab/" },
+    { time: "10:15 a.m. goal", window: "20–25 min including exit and drying", segment: "Oak Water Research", cast: "Bruce as Professor Oak + Professor Monica", phoneCaptain: "Polly or Auntie Ariel", handoff: "Separate Water Safety Adult, Phone Captain, and Professors; finish at the dry table.", reward: "WATER RESEARCH CAPSULES 1–4 + PROFESSOR OAK’S FIRST PARTNER FILE", responsible: "Monica + Bruce", href: "oak-lab/" },
     { time: "About 10:35–10:40", window: "10–15 min sheltered reset", segment: "Pokémon Center", cast: "Polly", phoneCaptain: "Patrick", handoff: "Dry/change/bathroom/water as needed, then run the short care challenge.", reward: "POKÉMON CENTER FIELD KIT", responsible: "Polly", href: "nurse-joy/" },
     { time: "About 10:50–11:00", window: "10–15 min plus walking/readiness", segment: "Team Rocket Base", cast: "Mike", phoneCaptain: "Patrick or Auntie Ariel", handoff: "Run Close Basket, Defense Target, and Luca’s Final Poké Shot with no formal score.", reward: "RECOVERED TEAM ROCKET LOOT", responsible: "Mike", href: "team-rocket/" },
     { time: "About 11:05–11:20", window: "12–18 min including travel and exit", segment: "Ranger Vault", cast: "Designated Adult Escort", phoneCaptain: "Adult Escort", handoff: "Use physical Code Card, recover cache, exit, confirm outside; bag carrier takes bulk items.", reward: "SECRET RANGER CACHE", responsible: "Adult escort" },
-    { time: "About 11:20–11:38", window: "5–8 min after return travel", segment: "Oak return", cast: "Professor Bruce and Professor Monica", phoneCaptain: "Patrick", handoff: "Accept items, one callback, Rayquaza finding, authorization, compact reward, immediate departure.", reward: "MEGA EVOLUTION RESEARCH FILE", responsible: "Monica", href: "oak-lab/" },
+    { time: "About 11:20–11:38", window: "5–8 min after return travel", segment: "Oak return", cast: "Bruce as Professor Oak + Professor Monica", phoneCaptain: "Patrick", handoff: "Accept items, one callback, Rayquaza finding, authorization, compact reward, immediate departure.", reward: "MEGA EVOLUTION RESEARCH FILE", responsible: "Monica", href: "oak-lab/" },
     { time: "About 11:35–11:50", window: "25–35 min combined finale", segment: "Victory Road + Rayquaza + Champion", cast: "Auntie Ariel, then Patrick", phoneCaptain: "Patrick; Auntie Ariel for Champion", handoff: "One Ariel cue covers Victory Road, Rayquaza, and Champion summon; allow photos and child pauses.", reward: "POKÉMON LEAGUE CHAMPION CHEST", responsible: "Patrick", href: "league-recruiter/" },
     { time: "About 12:00–12:25", window: "8–12 min after fake-credit pause", segment: "Mew surprise", cast: "Patrick or lead adult", phoneCaptain: "Polly or Auntie Ariel", handoff: "Follow the post-credit signal; bring major rewards out now and bulk packs at celebration.", reward: "MYTHICAL ENCOUNTER + FINAL FAMILY CELEBRATION", responsible: "Patrick", href: "champion/" }
   ];
@@ -26,11 +26,11 @@
       "oak-lab": {
         eyebrow: "Bruce & Monica",
         title: "Bruce & Monica’s Part",
-        subtitle: "You’ll be Professor Bruce and Professor Monica, the Partner Professors who run the Creekside Research Lab.",
+        subtitle: "Bruce plays Professor Oak and Monica plays Professor Monica, equal Partner Professors who run the Creekside Research Lab.",
         arrival: "Luca’s first arrival goal is 10:15 a.m.; the return visit happens later when the group is ready.",
         ready: "Be ready by 10:10 a.m.",
         duration: "20–25 minutes including exit/drying, plus a 5–8 minute return",
-        character: "Professor Bruce and Professor Monica — equal Partner Professors",
+        character: "Professor Oak and Professor Monica — equal Partner Professors",
         firstLine: "Shhh. Something strange is happening in the pool. You must be Trainer Luca.",
         whatLucaDoes: "He finds the sealed research capsules in the pool or with the skimmer.",
         gift: "A research gift and clue card, after Patrick gives the signal",
@@ -49,17 +49,17 @@
           "A dedicated Water Safety Adult watches Luca only. Polly or Ariel is the separate Phone Captain. The Professors run clues and props."
         ],
         arrivalLines: [
-          { speaker: "Professor Bruce", line: "Luca. Just in time. I asked the League to find you." },
+          { speaker: "Professor Oak", line: "Luca. Just in time. I asked the League to find you." },
           { speaker: "Professor Monica", line: "The reading jumped when you arrived. Use this diagram to find four samples." }
         ],
         sayAndDo: [
           "Let Luca retrieve the capsules. Swimming is optional; the skimmer works just as well.",
           "Give him direct clues whenever helpful and cheer when he finds each one.",
-          "You are equal Partner Professors: Bruce welcomes Luca; Monica owns the scan and its biggest discovery."
+          "You are equal Partner Professors: Oak welcomes Luca; Monica owns the scan and its biggest discovery."
         ],
         successLines: [
-          { speaker: "Professor Monica", line: "Bruce—this reading is not coming only from the water. It is coming from above it." },
-          { speaker: "Professor Bruce", line: "Luca, this was waiting for you." }
+          { speaker: "Professor Monica", line: "Oak—this reading is not coming only from the water. It is coming from above it." },
+          { speaker: "Professor Oak", line: "Luca, this was waiting for you." }
         ],
         successInstruction: "After Luca exits and dries, move to the dry table. Hand over the critical reward and clue; a designated adult carries larger packages later.",
         backup: [
@@ -73,9 +73,9 @@
           title: "When Luca Comes Back",
           intro: "The return visit is short and relaxed.",
           lines: [
-            { speaker: "Professor Bruce", line: "Luca, the mark on this file matches the License I asked the League to prepare for you." },
+            { speaker: "Professor Oak", line: "Luca, the mark on this file matches the License I asked the League to prepare for you." },
             { speaker: "Professor Monica", line: "The Fairies, the patients, and the fragment all point home. The signal is from Mega Rayquaza." },
-            { speaker: "Professor Bruce", line: "Why do you think the signal kept leading you home?" }
+            { speaker: "Professor Oak", line: "Why do you think the signal kept leading you home?" }
           ],
           note: "Any answer is great. Patrick will tell you when to hand Luca the final research gift."
         }
@@ -330,11 +330,11 @@
       participantOrder: [
         "Auntie Ariel — opening League Recruiter",
         "Auntie Ariel with Nina’s optional help — Fairy Garden",
-        "Professor Bruce and Professor Monica — Research Lab",
+        "Professor Oak (played by Bruce) and Professor Monica — Research Lab",
         "Polly — Pokémon Center",
         "Mike — Team Rocket Base",
         "Designated adult — Ranger Vault escort",
-        "Professor Bruce and Professor Monica — return visit",
+        "Professor Oak (played by Bruce) and Professor Monica — return visit",
         "Auntie Ariel — Victory Road and Rayquaza",
         "Patrick — Champion and Mew surprise"
       ],
@@ -396,7 +396,7 @@
       operations: [
         {
           slug: "oak-lab",
-          name: "Professor Bruce & Professor Monica",
+          name: "Professor Oak (Bruce) & Professor Monica",
           cueIds: ["oak-water", "oak-return"],
           setup: ["Four sealed capsules or dry-tub substitutes", "Pool skimmer, towel, and dry research table", "Research gifts and clue card hidden away from water"],
           safety: "The dedicated Water Safety Adult watches Luca continuously and never operates the phone. Polly or Auntie Ariel is Phone Captain. Bruce and Monica focus on welcoming, clueing, and cheering.",

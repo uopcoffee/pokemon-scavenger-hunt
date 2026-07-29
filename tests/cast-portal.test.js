@@ -162,7 +162,7 @@ for (const slug of slugs) {
 
 const oakText = JSON.stringify(portal.guides["oak-lab"]);
 assert(oakText.includes("equal Partner Professors"));
-assert(oakText.includes("Professor Bruce and Professor Monica"));
+assert(oakText.includes("Professor Oak and Professor Monica"));
 assert(!/assistant|supporting professor|Bruce’s helper/i.test(oakText));
 
 const ninaText = JSON.stringify(portal.guides.nina);

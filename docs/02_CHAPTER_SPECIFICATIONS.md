@@ -417,7 +417,7 @@ Professor Oak's Lab, pool deck or front area.
 
 ## Characters
 
-Professor Bruce Oak and Professor Monica, equal research partners.
+Professor Oak (played by Bruce) and Professor Monica, equal research partners.
 
 ## Storyline
 

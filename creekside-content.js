@@ -36,7 +36,7 @@
     participants: [
       { id: "ariel", displayName: "Auntie Ariel", role: "League Recruiter and Victory Road Referee" },
       { id: "nina", displayName: "Nina", role: "Fairy Gym Leader and Pikachu's Helper" },
-      { id: "bruce", displayName: "Professor Bruce", role: "Partner Professor" },
+      { id: "bruce", displayName: "Professor Oak", role: "Partner Professor, played by Bruce" },
       { id: "monica", displayName: "Professor Monica", role: "Partner Professor" },
       { id: "polly", displayName: "Nurse Joy", role: "Pokémon Center Leader" },
       { id: "mike", displayName: "Mike", role: "Team Rocket Boss" },
@@ -163,7 +163,7 @@
         participantIds: ["bruce","monica"],
         scenes: [
           { id: "oak-travel", type: "travel-location", title: "Travel to Professor Oak's Lab", body: "Allow travel and costume-reset time. Target arrival: 10:15 a.m. Bring the phone, Ranger Code Card, and an adult." },
-          { id: "oak-entrance", type: "story", title: "The Professors Are Watching the Water", body: "Professor Bruce and Professor Monica are studying a strange signal at the preserve. Something important is moving beneath the surface." },
+          { id: "oak-entrance", type: "story", title: "The Professors Are Watching the Water", body: "Professor Oak and Professor Monica are studying a strange signal at the preserve. Something important is moving beneath the surface." },
           { id: "monica-entrance", type: "story", title: "The Capsule Readings Are Rising", body: "Four sealed research capsules are missing. The Partner Professors need a Trainer before Team Rocket detects the same energy." },
           { id: "oak-story", type: "story", title: "Four Research Capsules", body: "One capsule holds the final Ranger fragment. Another holds a Sky Fragment producing unstable Mega Energy." },
           { id: "oak-safety", type: "challenge-briefing", title: "Water Research Safety Briefing", instructions: ["One supervising adult watches the water continuously.", "No running on the pool deck.", "Retrieve only floating or shallow prepared capsules.", "Use the skimmer immediately if swimming is not the best option."] },
@@ -255,7 +255,7 @@
       participantIds: ["bruce","monica"],
       scenes: [
         { id: "oak-return-travel", type: "travel-location", title: "Return Before Noon", body: "Bring the Sky Fragment and sealed Research File back to Professor Oak's Lab. Target arrival: 11:09 a.m." },
-        { id: "oak-return-character", type: "story", title: "The Partner Professors Are Ready", body: "Professor Bruce and Professor Monica are waiting to analyze the Sky Fragment and sealed Ranger file together." },
+        { id: "oak-return-character", type: "story", title: "The Partner Professors Are Ready", body: "Professor Oak and Professor Monica are waiting to analyze the Sky Fragment and sealed Ranger file together." },
         { id: "oak-return-analysis", type: "checkpoint", title: "Mega Evolution Analysis", instructions: ["Present the Sky Fragment.", "Monica opens the sealed Research File.", "Answer one friendly callback question.", "Receive League Authorization."] },
         { id: "oak-return-challenge", type: "physical-challenge", title: "Qualify for the Pokémon League", body: "Review Luca's badges, team, and earlier missions with Bruce and Monica.", successRule: "Any remembered detail or prompted answer counts.", fallbackText: "Shorten to one callback question if behind schedule.", adultPrompt: "Professor Oak: hold to award League Authorization." },
         { id: "oak-return-reward", type: "reward", title: "Mega Evolution Research File", body: "Open the sticker book and Mega Abomasnow card. Save the booster and carry League Authorization.", rewardIds: ["mega-evolutions-sticker-book","mega-abomasnow-ex","mega-evolution-booster","league-authorization","sky-pillar-coordinates"] },
@@ -386,7 +386,7 @@
   streamline(oak, [
     sceneFrom(oak, "oak-travel", {
       title: "Oak Is Waiting for His Chosen Trainer",
-      body: "The Partner Professors’ urgent signal matches the Fairy lights exactly. Professor Bruce and Professor Monica are holding the reading steady—but only until Luca arrives."
+      body: "The Partner Professors’ urgent signal matches the Fairy lights exactly. Professor Oak and Professor Monica are holding the reading steady—but only until Luca arrives."
     }),
     sceneFrom(oak, "oak-story", {
       title: "Something Answered from the Water",
@@ -504,11 +504,8 @@
   streamline(victory, [
     sceneFrom(victory, "victory-story", {
       title: "The Legend Tests the Path",
-      body: "The Ranger legend is true: the signal has gathered above Home Base. Victory Road is not blocking Luca—it is measuring whether he protects, persists, and accepts help.",
-      instructions: [
-        "Cross the Tall Grass, Forest Line, soft-ball target, and Energy Token stations.",
-        "The phone returns for Luca’s Victory Road achievement before the Legendary encounter."
-      ]
+      body: "The Ranger legend is true: the signal has gathered above Home Base. Victory Road will test four powers Luca has shown all day—courage, kindness, persistence, and trust.",
+      instructions: undefined
     }),
     combinedChallenge(victory, "victory-challenge-a", {
       title: "Clear Victory Road",
@@ -561,7 +558,7 @@
       nextDestination: "A Champion never reaches the end alone. The Hall of Heroes is ready."
     }),
     sceneFrom(victory, "hall-of-heroes", {
-      body: "A Champion never reaches the end alone. Read these names aloud, then gather everyone who is here for the Champion photo.",
+      body: "A Champion never reaches the end alone. Every name here became part of Luca’s story—and every one helped him reach this moment.",
       tributes: {
         ariel: "Made Luca’s first mission official",
         nina: "Found the fallen Fairy lights first",
@@ -632,8 +629,8 @@
     combinedChallenge(mew, "mew-challenge", {
       title: "Follow the Mythical Trail",
       successTitle: "Mew Chose Luca",
-      successBody: "Mew chose to be seen by Luca. Not captured. Not earned.",
-      resultLabel: "Mew chose Luca",
+      successBody: "Mew chose to be seen by Luca. It came because it wanted to.",
+      resultLabel: "A Mythical moment",
       revealItems: ["A quiet Mythical encounter"],
       rewardIds: mewRewards,
       rewardHandoff: "Let the moment stay quiet. Then reveal the separate MYTHICAL ENCOUNTER box and place the Mew figure in Luca’s hands.",

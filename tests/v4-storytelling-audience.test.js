@@ -39,7 +39,7 @@ lucaScenes.forEach((scene) => {
   ].filter(Boolean).join(" ");
   assert.doesNotMatch(
     visibleText,
-    /turn the screen away from Luca|Phone Captain|Adult fallback|Success rule|Real-world reward handoff|bag carrier|SAVE FOR CELEBRATION|OPEN NOW|No gift yet|record updated|League processing|Champion Chest unlocked|Hall of Fame updated|Mew registered/i,
+    /turn the screen away from Luca|Phone Captain|The phone returns|Read these names aloud|Adult fallback|Success rule|Real-world reward handoff|bag carrier|SAVE FOR CELEBRATION|OPEN NOW|No gift yet|record updated|League processing|Champion Chest unlocked|Hall of Fame updated|Mew registered/i,
     `${scene.id} contains adult or software language`
   );
 });
@@ -67,5 +67,13 @@ assert.match(screens, /Hold to begin the mission/);
 assert.match(screens, /Adult: Hold for reward handoff/);
 assert.doesNotMatch(screens, /Finish League processing|Credits rolling…/);
 assert.match(screens, /Close the League record/);
+assert.match(screens, /Mythical encounter/);
+assert.match(screens, /When Luca is ready, pass the phone quietly to an adult/);
+assert.match(screens, /Adult: Hold when Luca is ready/);
+
+const castCores = context.window.CREEKSIDE_CAST_CORES;
+assert.strictEqual(castCores["oak-water"].performerName, "Professor Oak and Professor Monica");
+assert.strictEqual(castCores["oak-return"].performerName, "Professor Oak and Professor Monica");
+assert.doesNotMatch(JSON.stringify(castCores), /Professor Bruce/);
 
 console.log("V4 storytelling audience tests passed.");

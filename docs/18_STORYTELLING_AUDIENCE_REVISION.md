@@ -28,7 +28,8 @@ only on the adult continuation.
 - The four Ranger marks become a mystery beginning in Orientation.
 - Fairy Garden frames Luca as helping Nina reach what she cannot safely reach.
 - Nurse Joy asks Luca to make care decisions with the existing treatment props.
-- Bruce and Monica are presented as equal Partner Professors.
+- Bruce consistently plays Professor Oak, while Monica remains an equal Partner
+  Professor.
 - Monica identifies the skyward signal and later names Mega Rayquaza.
 - The Oak return asks about the mystery; the Champion asks about the people who
   helped Luca.
@@ -44,7 +45,16 @@ only on the adult continuation.
 - Fake credits keep their delay without a visible countdown or processing text.
 - The terminal Champion screen remains after the credits.
 - The Mew epilogue uses Mew art, keeps operational instructions adult-only, and
-  ends with the restrained line: “Not captured. Not earned.”
+  frames the encounter as Mew freely choosing to appear.
+
+## Corrective production pass
+
+- Victory Road no longer shows Luca physical station or phone-handling
+  instructions before Auntie Ariel performs the live introduction.
+- Hall of Heroes uses emotional story framing instead of read-aloud or photo
+  directions.
+- Mew uses Mythical-specific result language and a quiet adult handoff instead
+  of the ordinary mission-completion vocabulary.
 
 ## Verification
 

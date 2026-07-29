@@ -49,11 +49,11 @@ actually visible.
 | --- | --- | --- |
 | Trainer Orientation | Auntie Ariel | Patrick |
 | Fairy Garden | Auntie Ariel with Nina’s optional help | Patrick |
-| Water Research mission | Professor Bruce and Professor Monica | Polly or Auntie Ariel |
+| Water Research mission | Professor Oak (played by Bruce) and Professor Monica | Polly or Auntie Ariel |
 | Pokémon Center | Polly as Nurse Joy | Patrick |
 | Team Rocket Base | Mike | Patrick or Auntie Ariel |
 | Ranger Vault | Designated Adult Escort | Adult Escort |
-| Oak return | Professor Bruce and Professor Monica | Patrick |
+| Oak return | Professor Oak (played by Bruce) and Professor Monica | Patrick |
 | Victory Road + Rayquaza (one continuous cue) | Auntie Ariel | Patrick |
 | Champion match | Patrick | Auntie Ariel |
 | Mew trail | Patrick or Lead Adult | Polly or Auntie Ariel |
