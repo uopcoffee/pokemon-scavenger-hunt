@@ -766,6 +766,83 @@ textarea:focus-visible {
   letter-spacing: .08em;
   text-transform: uppercase;
 }
+.combined-success {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+.success-reveal-list,
+.combined-reward-list {
+  display: grid;
+  gap: 8px;
+}
+.success-reveal-list > div,
+.combined-reward-list .reward-item {
+  animation: combined-reveal .38s ease-out both;
+  animation-delay: calc(var(--reveal-order, 0) * 90ms);
+}
+.success-reveal-list > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
+  background: rgba(59,165,93,.1);
+}
+.combined-reward-list .reward-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  border: 1.5px solid var(--banana);
+  border-radius: var(--r-sm);
+  padding: 10px 11px;
+  background: rgba(247,201,72,.16);
+}
+.combined-fragment {
+  display: grid;
+  gap: 9px;
+  border: 1.5px solid var(--sky);
+  border-radius: var(--r-sm);
+  padding: 12px;
+  background: rgba(79,176,229,.1);
+}
+.combined-fragment > small {
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+.physical-reward-callout,
+.next-destination {
+  border-radius: var(--r-card);
+  padding: 14px;
+}
+.physical-reward-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border: 2px solid var(--gold);
+  background: linear-gradient(135deg, #fff6cf, #fff);
+}
+.physical-reward-callout p,
+.next-destination p {
+  margin: 4px 0 0;
+  line-height: 1.45;
+}
+.physical-reward-callout strong,
+.next-destination strong {
+  font-family: var(--font-label);
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.next-destination {
+  border: 1.5px solid var(--mewtwo-x);
+  background: rgba(138,79,255,.09);
+}
+@keyframes combined-reveal {
+  from { opacity: 0; transform: translateY(8px) scale(.985); }
+  to { opacity: 1; transform: none; }
+}
 .handoff-performer {
   display: grid;
   gap: 2px;
@@ -1105,6 +1182,14 @@ textarea:focus-visible {
     flex: initial !important;
     white-space: normal;
   }
+  .combined-reward-list .reward-item {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .combined-reward-list .reward-disposition {
+    grid-column: 2;
+    justify-self: start;
+    max-width: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1114,6 +1199,10 @@ textarea:focus-visible {
   }
   .relay-field [style*="animation"],
   .runtime-cast-screen [style*="animation"] {
+    animation: none !important;
+  }
+  .success-reveal-list > div,
+  .combined-reward-list .reward-item {
     animation: none !important;
   }
 }

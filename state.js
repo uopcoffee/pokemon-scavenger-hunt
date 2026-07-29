@@ -80,6 +80,13 @@
       Math.max(0, legacyIds.length - 1)
     );
     var legacySceneId = legacyIds[boundedLegacyIndex];
+    var aliasedSceneId = sequence.sceneAliases && sequence.sceneAliases[legacySceneId];
+    if (aliasedSceneId) {
+      var aliasedIndex = sequence.scenes.findIndex(function (scene) {
+        return scene.id === aliasedSceneId && scene.audience === "luca";
+      });
+      if (aliasedIndex !== -1) return aliasedIndex;
+    }
     var handoffIndex = sequence.scenes.findIndex(function (scene) {
       return scene.id === legacySceneId + "-handoff" && scene.audience === "luca";
     });
@@ -106,6 +113,13 @@
         return scene.id === requestedId;
       });
       if (sceneIdIndex !== -1 && validAudience(sequence.scenes[sceneIdIndex])) return sceneIdIndex;
+      var aliasedSceneId = sequence.sceneAliases && sequence.sceneAliases[requestedId];
+      if (aliasedSceneId) {
+        var aliasedIndex = sequence.scenes.findIndex(function (scene) {
+          return scene.id === aliasedSceneId;
+        });
+        if (aliasedIndex !== -1 && validAudience(sequence.scenes[aliasedIndex])) return aliasedIndex;
+      }
     }
     if (input.version === 2) return migrateV2SceneIndex(sequence, input.currentSceneIndex);
     return nearestSafeSceneIndex(sequence, input.currentSceneIndex);
@@ -252,7 +266,7 @@
         else next.inventory = unique(next.inventory.concat(rewardId));
       });
     }
-    if (scene.type === "code-fragment-record" && Number.isInteger(scene.fragmentSlot)) {
+    if (Number.isInteger(scene.fragmentSlot)) {
       next.collectedFragments = unique(state.collectedFragments.concat(scene.fragmentSlot));
     }
     if (scene.type === "fake-credits") next.fakeCreditsComplete = true;
