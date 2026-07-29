@@ -144,6 +144,8 @@
       '<article class="director-cue">',
       '<p class="director-cue__eyebrow">' + escapeHtml(cue.characterName) + "</p>",
       "<h3>" + escapeHtml(cue.performerName) + "</h3>",
+      '<p><strong>Phone Captain:</strong> ' + escapeHtml(cue.phoneCaptain) + "</p>",
+      cue.waterSafetyAdult ? '<p><strong>Water Safety Adult:</strong> ' + escapeHtml(cue.waterSafetyAdult) + "</p>" : "",
       '<p><strong>Entrance:</strong> ' + escapeHtml(cue.entranceCue) + "</p>",
       '<p><strong>Core challenge:</strong> ' + escapeHtml(cue.challengeSteps.join(" ")) + "</p>",
       '<p><strong>Success:</strong> ' + escapeHtml(cue.successCondition) + "</p>",
@@ -164,6 +166,7 @@
         '<div class="timeline-time"><strong>' + escapeHtml(item.time) + "</strong><span>" + escapeHtml(item.window) + "</span></div>",
         '<div class="timeline-copy"><h3>' + escapeHtml(item.segment) + "</h3>",
         '<p><strong>Cast:</strong> ' + escapeHtml(item.cast) + "</p>",
+        '<p><strong>Phone Captain:</strong> ' + escapeHtml(item.phoneCaptain) + "</p>",
         '<p><strong>Handoff:</strong> ' + escapeHtml(item.handoff) + "</p>",
         '<p><strong>Package:</strong> ' + escapeHtml(item.reward) + ' <span class="reward-owner">Owner: ' + escapeHtml(item.responsible) + "</span></p>",
         "</div></article>"

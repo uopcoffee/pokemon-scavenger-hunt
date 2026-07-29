@@ -130,7 +130,7 @@
         scenes: [
           { id: "orientation-story", type: "story", title: "A New Region Appears", body: "Unusual energy is spreading through Creekside. The Pokémon League has invited exactly one new Trainer to investigate." },
           { id: "orientation-location", type: "travel-location", title: "Report to League Registration", body: "Meet the League Recruiter at the prepared front-porch or living-room station." },
-          { id: "orientation-character", type: "character-encounter", title: "Auntie Ariel, League Recruiter", character: "Auntie Ariel", dialogue: ["Trainer Luca! The Creekside Pokémon League has reviewed your record.", "Today, you begin your first official mission!"] },
+          { id: "orientation-character", type: "story", title: "The League Recruiter Is Ready", body: "League Registration is prepared. Auntie Ariel is waiting to welcome Creekside’s newest Trainer and make the mission official." },
           { id: "orientation-briefing", type: "challenge-briefing", title: "Trainer Oath and Equipment Test", instructions: ["Promise to protect Pokémon, help friends, play fairly, and never give up.", "Sleeve one card.", "Place it in a top loader.", "Secure it in the deck box."] },
           { id: "orientation-challenge", type: "physical-challenge", title: "Become an Official Trainer", body: "Take the Trainer Oath and complete the equipment test with Auntie Ariel.", successRule: "Complete each equipment step once. Ariel may help with any fiddly packaging.", fallbackText: "Ariel may hold the sleeve or top loader while Luca slides the card into place.", adultPrompt: "League Recruiter: hold to confirm the oath and equipment test are complete." },
           { id: "orientation-reward", type: "reward", title: "Trainer Kit Earned", body: "Open the Trainer equipment now. Place the booster in the adult-carried Booster Satchel.", rewardIds: ["blue-deck-box","red-card-sleeves","cardboard-gold-top-loaders","one-touch-edge-case","mega-gallade-ex","journey-together-booster","trainer-license","ranger-code-card"] },
@@ -146,7 +146,7 @@
         scenes: [
           { id: "fairy-story", type: "story", title: "Fairy Energy Has Fallen", body: "Three Fairy Energy Orbs have fallen from the trees. The next map signal cannot power on until they are returned." },
           { id: "fairy-location", type: "travel-location", title: "Enter the Fairy Garden", body: "Travel to the prepared backyard tree and bush area. Do not use the garage or side yard." },
-          { id: "fairy-character", type: "character-encounter", title: "Nina, Fairy Gym Leader", character: "Nina", dialogue: ["Luca, look!", "Tree!", "You did it!"] },
+          { id: "fairy-character", type: "story", title: "A Helper Is Waiting in the Garden", body: "Three Fairy lights are missing among the trees. Auntie Ariel is ready to guide the search, and Nina may help with the basket." },
           { id: "fairy-warmup", type: "digital-warmup", title: "Optional Fairy Scan", body: "Optional: point to the three glowing Fairy symbols, then put the phone away." },
           { id: "fairy-briefing", type: "challenge-briefing", title: "Recover Three Fairy Orbs", instructions: ["Find three large prepared orbs at toddler-visible height.", "Hand each orb to Nina.", "Nina places each orb in her basket."] },
           { id: "fairy-challenge", type: "physical-challenge", title: "Help Nina Restore the Garden", body: "Search the prepared low branches and visible bushes with Nina.", successRule: "Find all three, or let Nina point to the final orb after two minutes.", fallbackText: "If Nina loses interest, she hands Luca the basket and cheers while he finishes. Move indoors during bad weather.", adultPrompt: "Fairy Gym Leader's helper: hold to confirm all three orbs are in the basket." },
@@ -162,8 +162,8 @@
         participantIds: ["bruce","monica"],
         scenes: [
           { id: "oak-travel", type: "travel-location", title: "Travel to Professor Oak's Lab", body: "Allow travel and costume-reset time. Target arrival: 10:15 a.m. Bring the phone, Ranger Code Card, and an adult." },
-          { id: "oak-entrance", type: "character-encounter", title: "Professor Oak Watches the Water", character: "Professor Oak", dialogue: ["Shhh... the preserve is unusually active.", "Wait. You must be Trainer Luca."] },
-          { id: "monica-entrance", type: "character-encounter", title: "Professor Monica Reports Rising Energy", character: "Professor Monica", dialogue: ["Professor Oak, the capsule readings are rising.", "Trainer Luca, we need all four samples before Team Rocket finds them."] },
+          { id: "oak-entrance", type: "story", title: "The Professors Are Watching the Water", body: "Professor Bruce and Professor Monica are studying a strange signal at the preserve. Something important is moving beneath the surface." },
+          { id: "monica-entrance", type: "story", title: "The Capsule Readings Are Rising", body: "Four sealed research capsules are missing. The Partner Professors need a Trainer before Team Rocket detects the same energy." },
           { id: "oak-story", type: "story", title: "Four Research Capsules", body: "One capsule holds the final Ranger fragment. Another holds a Sky Fragment producing unstable Mega Energy." },
           { id: "oak-safety", type: "challenge-briefing", title: "Water Research Safety Briefing", instructions: ["One supervising adult watches the water continuously.", "No running on the pool deck.", "Retrieve only floating or shallow prepared capsules.", "Use the skimmer immediately if swimming is not the best option."] },
           { id: "oak-challenge", type: "physical-challenge", title: "Recover the Four Capsules", body: "Use Monica's symbol diagram, retrieve four double-sealed capsules, identify the unstable-energy symbol, and place the Sky Fragment in the research tray.", successRule: "Retrieve all four safely; swimming should be brief and purposeful.", fallbackText: "Use the pool skimmer, float capsules in a tub, or retrieve four marked tennis balls from the deck.", adultPrompt: "Supervising adult: hold to confirm all four research objects are safely recovered." },
@@ -180,7 +180,7 @@
         scenes: [
           { id: "center-story", type: "story", title: "Three Pokémon Need Help", body: "Three patients encountered unstable Mega Energy. A careful Trainer must match each patient with the right treatment." },
           { id: "center-location", type: "travel-location", title: "Report to the Pokémon Center", body: "Travel with an adult to the prepared patio or indoor treatment station." },
-          { id: "center-character", type: "character-encounter", title: "Polly as Nurse Joy", character: "Nurse Joy", dialogue: ["Trainer Luca, I'm glad you're here.", "Three Pokémon need help, and I heard you know how to take care of your team."] },
+          { id: "center-character", type: "story", title: "Nurse Joy Is Waiting", body: "The emergency treatment station is ready. Nurse Joy has three Pokémon patients who need a kind Trainer’s help." },
           { id: "center-briefing", type: "challenge-briefing", title: "Diagnose, Treat, and Deliver", instructions: ["Match tired Pikachu with an Oran Berry.", "Match overheated Charmander with water and rest.", "Match frightened Eevee with comfort and quiet.", "Carry one medicine Poké Ball through the short path."] },
           { id: "center-challenge", type: "physical-challenge", title: "Complete the Emergency Treatment", body: "Inspect the patient cards, match each treatment, and deliver the medicine Poké Ball to Nurse Joy.", successRule: "All three matches are completed with hints allowed. No wrong choice causes failure.", fallbackText: "Nurse Joy removes one incorrect option, demonstrates a match, or moves the activity indoors.", adultPrompt: "Nurse Joy: hold to confirm all patients received care." },
           { id: "center-reward", type: "reward", title: "Pokémon Center Field Kit", body: "Open the reader, portfolio, and Scream Tail card. Keep the included booster sealed.", rewardIds: ["meet-the-crew-reader","mini-portfolio","scream-tail-ex","portfolio-booster","care-badge"] },
@@ -196,7 +196,7 @@
         scenes: [
           { id: "rocket-story", type: "story", title: "Team Rocket Blocks the Route", body: "Mike stole the Ranger Dispatch and built a basketball defense around it." },
           { id: "rocket-location", type: "travel-location", title: "Approach Team Rocket Base", body: "Travel with an adult to the prepared adjustable-hoop station." },
-          { id: "rocket-character", type: "character-encounter", title: "Mike, Team Rocket Boss", character: "Mike", dialogue: ["So you're Professor Oak's new Trainer.", "That Ranger Dispatch belongs to Team Rocket now!"] },
+          { id: "rocket-character", type: "story", title: "The Team Rocket Boss Is Waiting", body: "Team Rocket is guarding the stolen supplies. Their boss is waiting at the Defense Base with Professor Oak’s Ranger Dispatch." },
           { id: "rocket-briefing", type: "challenge-briefing", title: "Break the Three-Round Defense", instructions: ["Round 1: make one comfortable close shot.", "Round 2: score two baskets in five attempts, or earn three points from baskets and target hits.", "Round 3: choose a team card and attempt the Final Poké Shot."] },
           { id: "rocket-challenge", type: "physical-challenge", title: "Defeat Team Rocket's Basketball Base", body: "Complete the three forgiving rounds while Mike delivers dramatic commentary.", successRule: "Basket = 2 points; rim, backboard, or prepared target = 1 point. After two misses, move closer. Mike must eventually lose.", fallbackText: "Lower the hoop, use the closest marker, hit a large backboard target, or let Ariel perform the Team Rocket role.", adultPrompt: "Team Rocket Boss: hold to surrender the stolen Ranger Dispatch." },
           { id: "rocket-reward", type: "reward", title: "Recovered Team Rocket Loot", body: "Open the three team cards. Place the Destined Rivals booster in the Booster Satchel and carry the Ranger Dispatch.", rewardIds: ["rocket-nidoking-ex","incineroar-ex","mega-pyroar-ex","destined-rivals-1","ranger-dispatch","rocket-badge"] },
@@ -212,7 +212,7 @@
         scenes: [
           { id: "vault-story", type: "story", title: "A Mission Left by the Rangers", body: "Rangers Hannah and Noa are away on expedition. They protected supplies and a sealed research file for a trustworthy Trainer." },
           { id: "vault-location", type: "travel-location", title: "Travel with an Adult Escort", body: "Bring the physical Ranger Code Card to the approved front-entry area. The app never asks for the digits." },
-          { id: "vault-character", type: "character-encounter", title: "Ranger Transmission", character: "Rangers Hannah and Noa", dialogue: ["Trainer Luca, you protected all four fragments.", "Use your physical card with an adult, then follow our three Ranger symbols."] },
+          { id: "vault-character", type: "story", title: "A Secure Ranger Transmission", body: "Rangers Hannah and Noa left a protected cache for the Trainer who recovered all four physical fragments. An Adult Escort must stay beside Luca." },
           { id: "vault-fragments", type: "fragment-check", title: "Four Ranger Symbols Recorded", body: "Leaf, Star, Heart, and Wave are complete. Read the private digits only from the physical Ranger Code Card." },
           { id: "vault-briefing", type: "challenge-briefing", title: "Enter the Ranger Vault", instructions: ["An adult stays beside Luca.", "Use the real keypad with the physical card.", "Remain in the approved front-entry area.", "Follow three prepared Ranger symbols to the cache."] },
           { id: "vault-challenge", type: "physical-challenge", title: "Recover the Secret Ranger Cache", body: "Enter with an adult, follow the symbols, recover the gift bag, and find the sealed Research File without opening it.", successRule: "The adult may enter the physical code or lead directly to the approved cache if needed.", fallbackText: "If access or timing changes, the adult brings the sealed cache outside and the mission continues there.", adultPrompt: "Adult escort: hold to confirm the cache and sealed file are safely recovered." },
@@ -229,12 +229,12 @@
         scenes: [
           { id: "victory-story", type: "story", title: "Mega Rayquaza Above Victory Road", body: "Oak's research points to a Sky Pillar signal. Only a League-qualified Trainer can cross the final course." },
           { id: "victory-location", type: "travel-location", title: "Enter Victory Road", body: "Return to the prepared backyard, tree, patio, and yard-game stations. Do not use the garage or side yard." },
-          { id: "victory-character", type: "character-encounter", title: "Auntie Ariel, Victory Road Referee", character: "Auntie Ariel", dialogue: ["The Tall Grass has never seen speed like that!", "Slowpoke penalty! Five very slow steps!", "The League recognizes that as completely legitimate Champion behavior!"] },
+          { id: "victory-character", type: "story", title: "The Victory Road Referee Is Ready", body: "The final League course is open. Auntie Ariel is waiting to referee every obstacle and authorize the Rayquaza encounter." },
           { id: "victory-stage-a", type: "multi-stage-progress", title: "Stage A: Victory Road Course", instructions: ["Weave through the Tall Grass markers.", "Balance along the Forest Crossing line.", "Land three soft balls in the target.", "Find three Energy Tokens near the trees."] },
           { id: "victory-challenge-a", type: "physical-challenge", stage: 1, title: "Clear Victory Road", body: "Complete the four fast stations with Ariel narrating and helping.", successRule: "Complete each station once; accuracy can be assisted and harmless comedy penalties replace failure.", fallbackText: "Move under the patio or indoors. Use a hallway path and larger targets.", adultPrompt: "Victory Road Referee: hold to confirm all four stations are complete." },
           { id: "victory-stage-b", type: "multi-stage-progress", title: "Stage B: Mega Rayquaza", instructions: ["Aim one soft Poké Ball at the hanging Rayquaza target.", "One clear target hit completes the encounter.", "Ariel may invoke a Legendary Assist at any time."] },
           { id: "victory-challenge-b", type: "physical-challenge", stage: 2, title: "Calm Mega Rayquaza", body: "Hit the prepared soft-ball target or complete the alternate ring/symbol challenge.", successRule: "One success, or a Legendary Assist after two minutes.", fallbackText: "Use ring toss or assemble three Sky symbols instead of throwing.", adultPrompt: "Victory Road Referee: hold to confirm Rayquaza is calm." },
-          { id: "champion-character", type: "character-encounter", title: "Patrick, Creekside Region Champion", character: "Patrick", dialogue: ["Trainer Luca, I've watched your entire journey.", "Champions need skill, courage, and people they trust. Show me all three."] },
+          { id: "champion-character", type: "story", title: "The Champion Is Waiting", body: "Victory Road is complete and Rayquaza is calm. The reigning Creekside Champion is waiting just out of sight for the final match." },
           { id: "champion-stage", type: "multi-stage-progress", title: "Stage C: Champion Match", instructions: ["Knowledge: choose a helpful type response.", "Skill: complete one comfortable target toss.", "Heart: name one person or Pokémon who helped today."] },
           { id: "champion-challenge", type: "physical-challenge", stage: 3, title: "Challenge the Champion", body: "Complete the Knowledge, Skill, and Heart rounds with Patrick.", successRule: "Every sincere answer counts. The target moves closer after a miss.", fallbackText: "Patrick supplies two choices, uses the closest marker, and celebrates Luca's effort.", adultPrompt: "Champion: hold to concede the match and award the title." },
           { id: "champion-reward", type: "reward", title: "Pokémon League Champion Chest", body: "Open the League Battle Deck and Rayquaza model. Keep the full booster inventory sealed for the family celebration.", rewardIds: ["mega-lucario-deck","mega-rayquaza-model","perfect-order-bundle","chaos-rising-3","destined-rivals-2","team-reserve","champion-title"] },
@@ -254,7 +254,7 @@
       participantIds: ["bruce","monica"],
       scenes: [
         { id: "oak-return-travel", type: "travel-location", title: "Return Before Noon", body: "Bring the Sky Fragment and sealed Research File back to Professor Oak's Lab. Target arrival: 11:09 a.m." },
-        { id: "oak-return-character", type: "character-encounter", title: "Professor Oak's Final Analysis", character: "Professor Oak", dialogue: ["You came back with the Sky Fragment and the Rangers' file.", "Excellent. Let's see how far you've come."] },
+        { id: "oak-return-character", type: "story", title: "The Partner Professors Are Ready", body: "Professor Bruce and Professor Monica are waiting to analyze the Sky Fragment and sealed Ranger file together." },
         { id: "oak-return-analysis", type: "checkpoint", title: "Mega Evolution Analysis", instructions: ["Present the Sky Fragment.", "Monica opens the sealed Research File.", "Answer one friendly callback question.", "Receive League Authorization."] },
         { id: "oak-return-challenge", type: "physical-challenge", title: "Qualify for the Pokémon League", body: "Review Luca's badges, team, and earlier missions with Bruce and Monica.", successRule: "Any remembered detail or prompted answer counts.", fallbackText: "Shorten to one callback question if behind schedule.", adultPrompt: "Professor Oak: hold to award League Authorization." },
         { id: "oak-return-reward", type: "reward", title: "Mega Evolution Research File", body: "Open the sticker book and Mega Abomasnow card. Save the booster and carry League Authorization.", rewardIds: ["mega-evolutions-sticker-book","mega-abomasnow-ex","mega-evolution-booster","league-authorization","sky-pillar-coordinates"] },
@@ -267,7 +267,7 @@
       type: "psychic", art: "mewtwo.png", locationLabel: "Mythical Trail", scheduleLabel: "11:30–11:36", targetMinutes: 6,
       scenes: [
         { id: "mew-glitch", type: "glitch", title: "SIGNAL DETECTED", body: "The finished screen flickers. Professor Oak's scanner has detected a Pokémon that should be impossible to find." },
-        { id: "mew-transmission", type: "character-encounter", title: "Professor Oak's Impossible Reading", character: "Professor Oak", dialogue: ["Trainer Luca—wait! The scanner found one more signal.", "Follow the pink energy traces. This may be a Mythical Pokémon."] },
+        { id: "mew-transmission", type: "story", title: "Professor Oak’s Impossible Reading", body: "Professor Oak’s scanner has found one final signal after the adventure appeared to be over. Pink energy is moving through the backyard." },
         { id: "mew-location", type: "travel-location", title: "Follow the Mythical Trail", body: "Search only the prepared backyard tree, bush, and patio route. Mew does not appear on the region map." },
         { id: "mew-stage", type: "multi-stage-progress", title: "Three Mew Footprints", instructions: ["Find the first pink-energy marker.", "Follow its clue to the second.", "Use the third marker to locate the translucent discovery box."] },
         { id: "mew-challenge", type: "physical-challenge", title: "Discover the Mythical Pokémon", body: "Complete the three-marker trail and reveal Mew near the prepared family gathering area.", successRule: "Each clue points clearly to the next; an adult may give a warm/cold hint.", fallbackText: "Move all markers under the patio or let Professor Oak transmit the next clue.", adultPrompt: "Adult: hold to confirm Mew has been discovered." },
@@ -315,6 +315,8 @@
         performerName: cue.performerName,
         characterName: cue.characterName,
         handoffLabel: cue.handoffLabel,
+        phoneCaptain: cue.phoneCaptain,
+        waterSafetyAdult: cue.waterSafetyAdult,
         cueId: cue.id
       },
       {
@@ -324,6 +326,8 @@
         title: "Adult Cast Screen Ahead",
         body: "Turn the phone away from Luca.",
         performerName: cue.performerName,
+        phoneCaptain: cue.phoneCaptain,
+        waterSafetyAdult: cue.waterSafetyAdult,
         cueId: cue.id
       },
       {
@@ -333,26 +337,25 @@
         title: originalScene.title,
         performerName: cue.performerName,
         characterName: cue.characterName,
-        entranceCue: cue.entranceCue,
+        phoneCaptain: cue.phoneCaptain,
+        waterSafetyAdult: cue.waterSafetyAdult,
+        supportingRole: cue.supportingRole,
         spokenLines: cue.spokenLines.slice(),
-        challengeSteps: cue.challengeSteps.slice(),
-        successCondition: cue.successCondition,
-        rewardPackages: cue.rewardPackages.slice(),
-        rewardOwners: cue.rewardOwners.slice(),
-        rewardPreparation: cue.rewardPreparation,
-        fallback: cue.fallback,
-        transitionLine: cue.transitionLine,
-        transitionDestination: cue.transitionDestination,
-        completionLabel: cue.completionLabel,
+        helpLucaSteps: cue.runtimeSteps.slice(),
+        whenFinished: cue.whenFinished,
+        easyBackup: cue.runtimeBackup,
+        completionLabel: "Phone Captain: Hold Mission Complete",
         cueId: cue.id
       },
       {
         id: originalScene.id + "-return",
         type: "return-to-player",
         audience: "adult",
-        title: "Return the phone to Luca",
+        title: "Turn the screen back to Luca",
         body: "Do not reveal the result, reward, badge, fragment, or next destination until Luca can see the phone.",
         performerName: cue.performerName,
+        phoneCaptain: cue.phoneCaptain,
+        waterSafetyAdult: cue.waterSafetyAdult,
         cueId: cue.id
       },
       {
@@ -361,6 +364,8 @@
         audience: "luca",
         title: "Mission Cleared: " + originalScene.title,
         body: "Outstanding work! The real-world mission is complete and Luca’s Trainer record has been updated.",
+        phoneCaptain: cue.phoneCaptain,
+        waterSafetyAdult: cue.waterSafetyAdult,
         cueId: cue.id
       }
     ];
