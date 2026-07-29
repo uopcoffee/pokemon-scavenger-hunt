@@ -124,6 +124,14 @@ V3 adds:
 - `return-to-player` — adult-only confirmation before revealing the outcome
 - `relay-result` — Luca-facing achievement immediately after the return shield
 
+V3.3 uses `relay-result` as the combined success record. It may carry
+`rewardIds`, `fragmentSlot`, `revealItems`, `rewardHandoff`, and
+`nextDestination`. The state engine applies the same reward, badge, team,
+inventory, quest-item, and fragment effects when Luca continues.
+
+Sequences may also declare `sceneAliases` for removed V3.2 IDs. Aliases are
+migration metadata only and never create extra runtime screens.
+
 Every scene must also declare one of the configured audience values:
 
 ```js

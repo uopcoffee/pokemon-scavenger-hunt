@@ -16,6 +16,11 @@ The app is a mission controller, not the venue. It should:
 
 ## Required screen inventory
 
+The list below describes supported moments, not a requirement to render each
+moment as a separate tap. Logistics Update 2 combines ordinary mission success,
+badge, reward, inventory, fragment, and transition information into one
+Luca-facing success screen.
+
 1. Splash
 2. Trainer setup
 3. Trainer Oath / Orientation
@@ -64,6 +69,12 @@ uses the matching Luca scene, the nearest preceding Luca scene, or the
 sequence beginning. Trainer identity, completed chapters, rewards, fragments,
 checkpoint state, fake-credit state, and Mew state are retained.
 
+V3.3 also keeps aliases for V3.2 scene IDs removed during consolidation. A save
+on a removed briefing returns to the protected handoff; a save on a removed
+reward, inventory, fragment, or transition screen returns to the combined
+success screen. A save inside the former separate Rayquaza relay returns to the
+Luca-facing start of the combined Victory Road/Rayquaza cue.
+
 Unknown or missing audience values fail safely to a preceding Luca-facing
 scene. The renderer also refuses to render an unknown audience.
 
@@ -81,7 +92,8 @@ Every substantial physical encounter uses this deterministic sequence:
 5. Phone Captain completes the protected Mission Complete hold
 6. Adult-only return-to-player shield; the Phone Captain turns the screen back
    toward Luca without handing over the device
-7. Luca-facing achievement, reward, inventory, fragment, and transition scenes
+7. One Luca-facing combined achievement screen with reward, inventory,
+   fragment, and transition information
 
 The cast cue is a separate scene. It is not mounted behind the privacy shield,
 hidden with CSS, or exposed in the shield's accessibility tree.
@@ -164,7 +176,9 @@ return shield; overriding the return shield may advance to Luca's result.
 - Locked chapters show silhouettes and mysterious labels.
 - Reveal the next destination only when unlocked.
 - The protected destination should appear only as “Secret Ranger Vault,” never as an address or visible access code.
-- Mew is absent from the map until the glitch.
+- Clock times and adult scheduling details are absent from Luca's map.
+- Mew has no locked silhouette or “Unknown Signal” row. It is completely absent
+  from the map until the postgame event unlocks.
 
 ## Code-fragment UX
 

@@ -30,8 +30,7 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 | Team Rocket | Patrick or Auntie Ariel |
 | Ranger Vault | Adult Escort |
 | Oak return | Patrick |
-| Victory Road | Patrick |
-| Rayquaza | Patrick |
+| Victory Road + Rayquaza (one continuous cue) | Patrick |
 | Champion match | Auntie Ariel |
 | Mew trail | Polly or Auntie Ariel |
 

@@ -33,6 +33,10 @@ celebration extend the gathering to roughly two hours.
 3. On Victory Road, use one pass per station, a Legendary Assist after the
    first Rayquaza attempt, and the closest Champion target.
 
+The app keeps Auntie Ariel's Victory Road cue open through Rayquaza. Do not
+turn the phone back to Luca or open a second private cue between those connected
+activities.
+
 ### Emergency compressed route
 
 Use this only when the event is 20–30 minutes behind. Preserve every required
@@ -322,7 +326,8 @@ loose pack; it is not permission to duplicate a pack assigned elsewhere.
    locking for the two-hour window if appropriate.
 2. Load the deployed page on the actual phone, complete one screen, refresh,
    then enable airplane mode and confirm the page still works from cache.
-3. Reset in Parent Mode after that check. Enter Luca's name only on party day.
+3. Reset in Parent Mode after that check. Luca's name is prefilled; edit it only
+   if needed.
 4. Export a clean beginning-state progress record to a private note.
 5. Stage packages using the table above. Keep boosters in the adult Satchel.
 6. Handwrite the four digits on physical fragments only; verify order privately.

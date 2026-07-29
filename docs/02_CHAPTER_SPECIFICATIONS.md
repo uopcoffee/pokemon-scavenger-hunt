@@ -9,19 +9,20 @@
 
 Each numbered chapter follows this rhythm:
 
-1. Story transmission
-2. Destination or location reveal
-3. Narrator teaser establishes the waiting character without showing their
-   live dialogue
-4. Physical challenge briefing or optional digital warmup
-5. Phone Captain completes the named **open cue** hold
-6. Privacy shield and private cast Quick Card
-7. Performer delivers the live entrance and runs the real-world challenge
-8. Phone Captain completes the protected Mission Complete hold
-9. Return shield confirms Luca can see the screen
-10. Reward reveal and inventory update
-11. Code-fragment recording when applicable
-12. Transition or cliffhanger
+1. One concise story/location screen establishes the destination, problem, and
+   waiting character without showing live performer dialogue.
+2. An optional warmup or safety briefing appears only when it adds real value.
+3. The Phone Captain completes the named **open cue** hold.
+4. The privacy shield protects the private cast Quick Card.
+5. The performer delivers the live entrance and runs the real-world challenge.
+6. The Phone Captain completes the protected Mission Complete hold.
+7. The return shield confirms Luca can see the screen.
+8. One combined success screen reveals the achievement, reward disposition,
+   physical gift handoff, team/inventory update, fragment prompt when
+   applicable, and next destination.
+
+Victory Road and Mega Rayquaza are one continuous Auntie Ariel encounter and
+use one private cue. The Champion remains a separate performer encounter.
 
 ---
 
