@@ -11,15 +11,17 @@ Each numbered chapter follows this rhythm:
 
 1. Story transmission
 2. Destination or location reveal
-3. Character entrance
-4. Short in-character dialogue
-5. Physical challenge briefing
-6. Optional digital warmup
-7. Real-world challenge
-8. Adult press-and-hold completion
-9. Reward reveal and inventory update
-10. Code-fragment recording when applicable
-11. Transition or cliffhanger
+3. Narrator teaser establishes the waiting character without showing their
+   live dialogue
+4. Physical challenge briefing or optional digital warmup
+5. Phone Captain completes the named **open cue** hold
+6. Privacy shield and private cast Quick Card
+7. Performer delivers the live entrance and runs the real-world challenge
+8. Phone Captain completes the protected Mission Complete hold
+9. Return shield confirms Luca can see the screen
+10. Reward reveal and inventory update
+11. Code-fragment recording when applicable
+12. Transition or cliffhanger
 
 ---
 

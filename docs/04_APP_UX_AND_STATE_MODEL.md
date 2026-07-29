@@ -71,12 +71,17 @@ scene. The renderer also refuses to render an unknown audience.
 
 Every substantial physical encounter uses this deterministic sequence:
 
-1. Luca-facing story and challenge introduction
-2. Luca-facing named handoff with a 1.5-second adult hold
+1. Luca-facing narrator story and challenge introduction, without the live
+   performer’s spoken lines
+2. Luca-facing named cue-opening control with a 1.5-second adult hold; the
+   designated Phone Captain keeps the phone
 3. Adult-only privacy shield
-4. Cast-only operational cue with a 1.5-second completion hold
-5. Adult-only return-to-player shield
-6. Luca-facing achievement, reward, inventory, fragment, and transition scenes
+4. Cast-only Quick Card: Say This, Help Luca Do This, When He Finishes, and
+   Easy Backup
+5. Phone Captain completes the protected Mission Complete hold
+6. Adult-only return-to-player shield; the Phone Captain turns the screen back
+   toward Luca without handing over the device
+7. Luca-facing achievement, reward, inventory, fragment, and transition scenes
 
 The cast cue is a separate scene. It is not mounted behind the privacy shield,
 hidden with CSS, or exposed in the shield's accessibility tree.
@@ -148,10 +153,10 @@ Controls:
 Parent Mode must not display the house-entry code.
 
 In V3, Parent Mode also shows the current chapter, stable scene ID, scene type,
-audience, and performer. Its scene directory exposes the same metadata for
-every chapter, the Oak return checkpoint, and the Mew epilogue. Overriding a
-cast cue advances only to the return shield; overriding the return shield may
-advance to Luca's result.
+audience, performer, Phone Captain, and Water Safety Adult when applicable. Its
+scene directory exposes the same metadata for every chapter, the Oak return
+checkpoint, and the Mew epilogue. Overriding a cast cue advances only to the
+return shield; overriding the return shield may advance to Luca's result.
 
 ## Map behavior
 

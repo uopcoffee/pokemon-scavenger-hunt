@@ -117,7 +117,8 @@ window.CREEKSIDE_CONFIG = {
 
 V3 adds:
 
-- `cast-handoff` — Luca-facing named phone transfer with protected hold
+- `cast-handoff` — Luca-facing named cue-opening control with protected hold;
+  the Phone Captain keeps the phone
 - `privacy-shield` — adult-only confirmation before any cue is mounted
 - `cast-cue` — concise performer operations
 - `return-to-player` — adult-only confirmation before revealing the outcome
@@ -147,9 +148,15 @@ the Cast Portal:
   portalGuide,
   performerName,
   characterName,
+  phoneCaptain,
+  waterSafetyAdult,
+  supportingRole,
   entranceCue,
   spokenLines,
   challengeSteps,
+  runtimeSteps,
+  whenFinished,
+  runtimeBackup,
   successCondition,
   rewardPackages,
   rewardOwners,
@@ -168,6 +175,13 @@ the Cast Portal:
 guides, and `cast/cast.js` renders their live alignment summary. The Cast Portal
 remains the detailed rehearsal document; the in-adventure cast scene remains a
 short Quick Card.
+
+The runtime scene copies only performer/character identity, Phone Captain
+metadata, optional supporting-role metadata, spoken lines, `runtimeSteps`,
+`whenFinished`, `runtimeBackup`, and the protected completion label. Package
+IDs, reward ownership, formal success rules, entrance analysis, safety
+documentation, and transitions stay in Director data and are not mounted in
+the live cast cue.
 
 ## Reward registry
 

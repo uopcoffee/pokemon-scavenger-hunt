@@ -135,7 +135,8 @@ to the appropriate challenge.
 - Easier fallback: place the last orb in full view and let Nina point.
 - No-prop fallback: Luca identifies three adult-named colors or Fairy symbols.
 - Duration: 4–6 minutes.
-- Adult: Ariel or Polly prompts Nina and holds the completion control.
+- Performer: Ariel runs the scene and prompts Nina only if Nina wants to join.
+- Phone Captain: Patrick opens the cue and completes Mission Complete.
 - Props: three orbs, basket, optional costume piece.
 - Safety: use only low, visible garden areas; no climbing or side-yard access.
 
@@ -147,7 +148,10 @@ to the appropriate challenge.
 - Easier fallback: retrieve everything with the skimmer from the deck.
 - No-prop fallback: use four marked tennis balls in a dry tub or on a towel.
 - Duration: 12–15 minutes plus reward reveal.
-- Adult: one adult watches the water continuously; Monica manages props.
+- Water Safety Adult: one dedicated adult watches Luca continuously and never
+  operates the phone.
+- Phone Captain: Polly or Auntie Ariel opens the cue and completes Mission
+  Complete; Monica manages props.
 - Props: four capsules, diagram, skimmer, towel, tray, Sky Fragment.
 - Safety: no running, no deep diving, no unsupervised water entry, and no
   valuable item without double containment.
@@ -160,7 +164,8 @@ to the appropriate challenge.
 - Easier fallback: remove one wrong option or demonstrate the first match.
 - No-prop fallback: Nurse Joy speaks two choices for each patient; Luca points.
 - Duration: 5–7 minutes.
-- Adult: Polly runs the scene and confirms completion.
+- Performer: Polly runs the scene.
+- Phone Captain: Patrick opens the cue and completes Mission Complete.
 - Props: six cards, soft ball, two path markers.
 - Safety: keep the carry path short, dry, and free of trip hazards.
 
@@ -171,7 +176,9 @@ to the appropriate challenge.
 - Easier fallback: closest marker, lower hoop, or count backboard/target hits.
 - No-prop fallback: three soft underhand passes to Mike break the defense.
 - Duration: 5–7 minutes.
-- Adult: Mike performs and confirms; Ariel can replace him.
+- Performer: Mike performs; Ariel can replace him.
+- Phone Captain: Patrick or Auntie Ariel opens the cue and completes Mission
+  Complete.
 - Props: hoop, soft or child-sized ball, markers, Ranger Dispatch.
 - Safety: clear the shooting lane and keep spectators behind Luca.
 
@@ -184,7 +191,8 @@ to the appropriate challenge.
 - No-prop fallback: adult brings the sealed cache outside and gives the Ranger
   transmission verbally.
 - Duration: 5–7 minutes.
-- Adult: Patrick or another designated escort remains beside Luca.
+- Performer and Phone Captain: the designated Adult Escort remains beside Luca
+  and operates the protected controls.
 - Props: physical fragments, record card, three symbols, cache, sealed file.
 - Safety: approved front-entry area only; never show or enter digits in the app.
 
@@ -195,7 +203,9 @@ to the appropriate challenge.
 - Easier fallback: offer two choices or accept a prompted answer.
 - No-prop fallback: Oak announces the scan result and awards authorization.
 - Duration: 3–6 minutes.
-- Adult: Bruce leads; Monica opens the file and manages rewards.
+- Performers: Bruce and Monica lead as equal Partner Professors; Monica opens
+  the file and manages rewards.
+- Phone Captain: Patrick opens the cue and completes Mission Complete.
 - Props: quest items, authorization card, reward package.
 - Safety: keep the checkpoint dry and away from the pool edge.
 
@@ -207,7 +217,8 @@ to the appropriate challenge.
 - No-prop fallback: weave around adults, follow a visible floor line, point to
   three targets, and retrieve three named objects.
 - Duration: 5–7 minutes.
-- Adult: Ariel referees and confirms.
+- Performer: Ariel referees.
+- Phone Captain: Patrick opens the cue and completes Mission Complete.
 - Props: cones/streamers, line, soft balls, target, three tokens.
 - Safety: no elevated balance beam, hard balls, blind running, or crowded lane.
 
@@ -218,7 +229,8 @@ to the appropriate challenge.
 - Easier fallback: move closer or switch to ring toss.
 - No-prop fallback: assemble or point to three Sky symbols.
 - Duration: 2–3 minutes.
-- Adult: Ariel controls the Assist and confirms.
+- Performer: Ariel controls the Assist.
+- Phone Captain: Patrick opens the cue and completes Mission Complete.
 - Props: target, soft ball; optional rings/symbols.
 - Safety: secure hanging props and keep throws away from faces and windows.
 
@@ -229,7 +241,8 @@ to the appropriate challenge.
 - Easier fallback: Patrick gives two choices and uses the closest marker.
 - No-prop fallback: all three rounds are spoken; the skill round is a high-five.
 - Duration: 3–4 minutes.
-- Adult: Patrick performs, concedes, and confirms.
+- Performer: Patrick performs and concedes.
+- Phone Captain: Auntie Ariel opens the cue and completes Mission Complete.
 - Props: type cards, soft target game, Champion Chest.
 - Safety: use only a soft object and a clear throwing lane.
 
@@ -241,7 +254,9 @@ to the appropriate challenge.
 - No-prop fallback: Professor Oak gives three spoken location clues, ending at
   the adult-held Mew reward.
 - Duration: 5–6 minutes.
-- Adult: Patrick or Ariel shadows the route and confirms.
+- Performer: Patrick or the Lead Adult guides the trail.
+- Phone Captain: Polly or Auntie Ariel opens the cue and completes Mission
+  Complete while Patrick guides Luca.
 - Props: three markers, reveal box, Mew figure.
 - Safety: backyard tree, bush, and patio route only; no climbing or street edge.
 
