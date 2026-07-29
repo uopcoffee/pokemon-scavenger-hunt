@@ -26,7 +26,6 @@ const requiredParticipants = ["ariel", "nina", "bruce", "monica", "polly", "mike
 const requiredChapterSceneTypes = [
   "story",
   "travel-location",
-  "character-encounter",
   "cast-handoff",
   "privacy-shield",
   "cast-cue",
@@ -54,8 +53,9 @@ config.chapters.forEach((chapter) => {
     assert.ok(sceneTypes.includes(sceneType), `${chapter.name} must include ${sceneType}`);
   });
   chapter.scenes.filter((scene) => scene.type === "cast-cue").forEach((scene) => {
-    assert.ok(scene.successCondition, `${scene.title} must define a forgiving success condition`);
-    assert.ok(scene.fallback, `${scene.title} must define an adult fallback`);
+    assert.ok(scene.whenFinished, `${scene.title} must define what happens when Luca finishes`);
+    assert.ok(scene.easyBackup, `${scene.title} must define an easy adult backup`);
+    assert.ok(scene.phoneCaptain, `${scene.title} must define the Phone Captain`);
     assert.ok(scene.completionLabel, `${scene.title} must define a protected completion prompt`);
   });
 });
