@@ -81,10 +81,20 @@ const v2Snapshot = {
 const migrated = stateEngine.sanitizeState(v2Snapshot);
 assert.strictEqual(migrated.version, 3);
 assert.strictEqual(migrated.trainer.name, "Luca");
-assert.strictEqual(migrated.currentSceneId, config.chapters[4].legacyV2SceneIds[3]);
+assert.strictEqual(migrated.currentSceneId, "rocket-challenge-handoff");
 assert.deepStrictEqual(Array.from(migrated.completedChapters), ["trainer-orientation", "fairy-garden"]);
 assert.deepStrictEqual(Array.from(migrated.collectedFragments), [1, 2]);
 assert.deepStrictEqual(Array.from(migrated.earnedRewards), ["mega-gallade-ex", "trainer-license"]);
+
+const v32RewardSnapshot = {
+  ...v2Snapshot,
+  version: 3,
+  currentSceneId: "rocket-reward",
+  currentSceneIndex: 9,
+};
+const v32Migrated = stateEngine.sanitizeState(v32RewardSnapshot);
+assert.strictEqual(v32Migrated.currentSceneId, "rocket-challenge-result", "Removed V3.2 reward screens must migrate to the combined success");
+assert.strictEqual(v32Migrated.trainer.name, "Luca");
 
 const targetSequence = config.chapters[0];
 const invalidAudienceScene = targetSequence.scenes[1];
