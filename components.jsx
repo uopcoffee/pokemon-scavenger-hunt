@@ -576,7 +576,7 @@ function CodeFragmentSlots({ fragments = [], collectedSlots = [], style = {} }) 
           <div key={fragment.id} className={`fragment-slot${collected ? " fragment-slot--collected" : ""}`}>
             <Icon name={collected ? "check" : "lock"} size={22} color={collected ? "var(--tropius-leaf-deep)" : "var(--silver-deep)"} />
             <span>Slot {fragment.slot}</span>
-            <small>{collected ? fragment.displaySymbol : "Physical fragment"}</small>
+            <small>{collected ? fragment.displaySymbol : "Unknown mark"}</small>
           </div>
         );
       })}

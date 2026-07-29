@@ -41,11 +41,13 @@
 
 - [ ] All photographed gifts have a defined chapter allocation.
 - [ ] Booster packs are marked “save for celebration.”
-- [ ] Reward screens distinguish open-now items from save-for-later items.
+- [ ] Adult-only reward checklists distinguish open-now items from
+      save-for-later items; Luca-facing results do not reveal product manifests.
 - [ ] Team-card rewards appear in Luca's digital team inventory.
 - [ ] Mega Lucario deck and Mega Rayquaza model appear in the Champion chapter.
 - [ ] Mew figure appears only in the epilogue.
-- [ ] Every physical gift handoff occurs only after Luca sees the combined success animation.
+- [ ] Every physical gift handoff occurs only after Luca sees the concise
+      emotional success screen and an adult opens the protected reward checklist.
 
 ## UX and reliability
 

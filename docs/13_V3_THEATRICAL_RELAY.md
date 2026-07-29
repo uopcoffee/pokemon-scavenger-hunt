@@ -34,8 +34,10 @@ Each physical encounter follows one reusable sequence:
 7. The return shield says to turn the screen back toward Luca.
 8. An adult confirms Luca can see the screen; the adult may keep holding the
    phone.
-9. Luca sees one combined achievement screen with reward disposition, physical
-   handoff timing, team/inventory/fragment update, and next destination.
+9. Luca sees one concise achievement screen with emotional consequence,
+   symbolic fragment progress when applicable, and the next destination.
+10. The Phone Captain uses a protected hold to open the adult-only reward
+    checklist with product dispositions and physical handoff timing.
 
 The privacy and return shields are independent scenes. Cast instructions are
 not rendered behind them. A refresh restores whichever relay scene was
@@ -123,8 +125,8 @@ award skipped rewards.
 4. The performer normally does not hold or operate the phone; the assigned
    Phone Captain opens cues and completes Mission Complete.
 5. The Water Safety Adult does not handle the phone during pool activity.
-6. Hand over the reward only when the combined result explicitly calls for the
-   real-world handoff.
+6. Let Luca see the emotional result, then open the adult reward checklist and
+   follow its physical handoff instructions.
 7. Use Parent Mode and the documented fallback if a performer is delayed.
 
 Cast screens are high contrast, mostly static, and usable one-handed. Sound is

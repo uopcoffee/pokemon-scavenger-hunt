@@ -50,20 +50,20 @@ const beforeCounts = {
   "mew-epilogue": 11,
 };
 const expectedAfterCounts = {
-  "trainer-orientation": 6,
-  "fairy-garden": 7,
-  "professor-oak-lab": 8,
-  "pokemon-center": 6,
-  "team-rocket-base": 6,
-  "secret-ranger-vault": 7,
-  "victory-road": 17,
-  "oak-return": 6,
-  "mew-epilogue": 8,
+  "trainer-orientation": 7,
+  "fairy-garden": 8,
+  "professor-oak-lab": 9,
+  "pokemon-center": 7,
+  "team-rocket-base": 7,
+  "secret-ranger-vault": 8,
+  "victory-road": 18,
+  "oak-return": 7,
+  "mew-epilogue": 9,
 };
 
 assert.strictEqual(config.release, "4.0");
 assert.strictEqual(Object.values(beforeCounts).reduce((sum, count) => sum + count, 0), 128);
-assert.strictEqual(sequences.reduce((sum, sequence) => sum + sequence.scenes.length, 0), 71);
+assert.strictEqual(sequences.reduce((sum, sequence) => sum + sequence.scenes.length, 0), 80);
 sequences.forEach((sequence) => {
   assert.strictEqual(sequence.scenes.length, expectedAfterCounts[sequence.id], `${sequence.id} has the wrong streamlined count`);
   assert.ok(sequence.scenes.length < beforeCounts[sequence.id], `${sequence.id} must have fewer runtime screens`);
@@ -85,8 +85,15 @@ results.forEach((scene) => {
   assert.ok(scene.body);
   assert.ok(scene.resultLabel);
   assert.ok(Array.isArray(scene.revealItems) && scene.revealItems.length);
-  assert.ok(scene.rewardHandoff);
+  assert.ok(scene.revealItems.length <= 1);
+  assert.strictEqual(scene.rewardHandoff, undefined);
   assert.ok(scene.nextDestination);
+});
+const adultLogistics = sequences.flatMap((sequence) => sequence.scenes.filter((scene) => scene.type === "adult-logistics"));
+assert.strictEqual(adultLogistics.length, 9, "Every reward-bearing relay must have one adult logistics continuation");
+adultLogistics.forEach((scene) => {
+  assert.ok(scene.rewardHandoff);
+  assert.ok(Array.isArray(scene.logisticsRewardIds));
 });
 
 const assignedRewards = sequences.flatMap((sequence) =>
@@ -110,7 +117,7 @@ assert.strictEqual(victory.scenes.some((scene) => scene.cueId === "rayquaza"), f
 const arielCue = victory.scenes.find((scene) => scene.cueId === "victory-road" && scene.type === "cast-cue");
 assert.ok(arielCue.helpLucaSteps.some((step) => /Rayquaza/i.test(step)));
 assert.strictEqual(config.checkpoint.scenes.filter((scene) => scene.type === "cast-cue").length, 1);
-assert.strictEqual(config.checkpoint.scenes.length, 6);
+assert.strictEqual(config.checkpoint.scenes.length, 7);
 
 const lucaRuntimeText = JSON.stringify(sequences.map((sequence) => sequence.scenes));
 assert.doesNotMatch(lucaRuntimeText, /\b\d{1,2}:\d{2}\b/);
@@ -120,7 +127,7 @@ const screens = fs.readFileSync(path.join(repositoryRoot, "screens.jsx"), "utf8"
 assert.match(screens, /React\.useState\("Luca"\)/, "Trainer name must be prefilled");
 assert.doesNotMatch(screens, /sequence\.scheduleLabel|chapter\.scheduleLabel|checkpoint\.scheduleLabel/, "Luca screens must not render operational clock times");
 assert.match(screens, /\{state\.mewUnlocked && \(/, "Mew map entry must not mount before unlock");
-assert.match(screens, /Real-world reward handoff/);
+assert.match(screens, /Reward handoff/);
 assert.match(screens, /Next signal/);
 assert.match(screens, /Parent Mode/);
 assert.match(screens, /scrollRootRef\.current\.scrollTop = 0/, "Each new scene must begin at the top");

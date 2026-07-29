@@ -122,7 +122,6 @@ const narratorTeaserIds = [
   "vault-story",
   "oak-return-travel",
   "victory-story",
-  "champion-character",
   "mew-transmission",
 ];
 narratorTeaserIds.forEach((sceneId) => {
@@ -132,6 +131,7 @@ narratorTeaserIds.forEach((sceneId) => {
   assert.strictEqual(teaser.dialogue, undefined, `${sceneId} must not show live performer dialogue`);
   assert.strictEqual(teaser.character, undefined, `${sceneId} must not present narrator copy as a performer quote`);
 });
+assert.strictEqual(locateScene("champion-character"), null, "The phone must not narrate the Champion's entrance before Patrick speaks");
 
 Object.entries(cues).forEach(([cueId, cue]) => {
   assert.strictEqual(cue.performerName, approvedPerformers[cueId], `${cueId} performer must be explicitly approved`);

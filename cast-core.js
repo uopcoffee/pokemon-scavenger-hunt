@@ -28,7 +28,7 @@
         "Lead the short Trainer Oath.",
         "Help Luca sleeve one card and place it in the top loader and deck box."
       ],
-      whenFinished: "Give Luca the Trainer Kit immediately, introduce the code card, store the booster, then tell Patrick Luca is ready for the Ariel handoff.",
+      whenFinished: "Say, “It worked. Oak was right about you.” Then tell Patrick the result is ready. Present the Trainer Kit only after Luca sees it.",
       runtimeBackup: "Hold the sleeve or top loader for Luca. One protected card is enough.",
       successCondition: "Every sincere oath response counts. Complete each equipment step once, with as much adult help as needed.",
       rewardPackages: ["TRAINER KIT"],
@@ -51,8 +51,8 @@
       entranceCue: "Nina holds the basket. Ariel quietly gives the longer prompt and lets Nina point, cheer, or use one-word directions.",
       spokenLines: [
         "Nina: Luca, look! Tree! There!",
-        "Ariel: These lights fell when Luca’s Trainer signal appeared. Help Nina return them to her basket.",
-        "Nina: They know Luca!"
+        "Ariel: These lights fell where Nina cannot safely reach them. Luca, can you bring them back to her?",
+        "Ariel: Look—the lights know where to send you next."
       ],
       challengeSteps: [
         "Guide Luca toward three large orbs placed at toddler-visible height.",
@@ -64,7 +64,7 @@
         "Let Luca find visible Fairy Orbs; Nina may point, hold the basket, help with one object, or leave.",
         "Luca succeeds even if Nina does not participate."
       ],
-      whenFinished: "Celebrate first, let Patrick open Luca’s success screen, then hand over the Fairy gift.",
+      whenFinished: "Say, “The lights know where to send you next.” Let Patrick open Luca’s result, then prepare the Fairy gift.",
       runtimeBackup: "Put one orb in plain sight or let Luca carry the basket. Run it without Nina if needed.",
       successCondition: "All three orbs reach the basket. Pointing, visible placement, and immediate hints are always allowed.",
       rewardPackages: ["FAIRY GYM REWARD"],
@@ -86,9 +86,9 @@
       waterSafetyAdult: "Dedicated Water Safety Adult — watches Luca continuously and never operates the phone.",
       entranceCue: "Open this private cue before anyone approaches the pool. Professors are ready at the dry research table; the Phone Captain stows the phone safely away before Luca enters the preserve.",
       spokenLines: [
-        "Professor Oak: Luca. Just in time. I asked the League to find you.",
+        "Professor Bruce: Luca. Just in time. I asked the League to find you.",
         "Professor Monica: The reading jumped when you arrived. Use this diagram to find four samples.",
-        "Professor Oak: Recover them safely. If the Sky Fragment answers you, this mystery is bigger than I feared."
+        "Professor Monica: Bruce—this reading is not coming only from the water. It is coming from above it."
       ],
       challengeSteps: [
         "The dedicated Water Safety Adult watches Luca continuously and never operates the phone.",
@@ -103,7 +103,7 @@
         "Stow the phone safely away. Use swimming, the skimmer, or one easy capsule at a time.",
         "Exit and dry Luca, then move to the dry research table before the phone returns."
       ],
-      whenFinished: "At the dry table, give the critical reward and Wave clue. A designated adult carries larger packages. Confirm Luca is dry.",
+      whenFinished: "At the dry table: “Luca, this was waiting for you.” Confirm he is dry, then open the result.",
       runtimeBackup: "Use the skimmer, a dry-tub version, or one capsule only. Safety always comes first.",
       successCondition: "All four objects are safely recovered and the Sky Fragment reaches the tray. Swimming, skimmer, dry tub, hints, and decoys all count.",
       rewardPackages: ["WATER RESEARCH CAPSULES 1–4", "PROFESSOR OAK’S FIRST PARTNER FILE"],
@@ -124,8 +124,8 @@
       phoneCaptain: "Patrick",
       entranceCue: "Patrick privately opens this cue while Luca uses the sheltered reset for drying, changing, bathroom, or water. Wait beside the short treatment activity.",
       spokenLines: [
-        "You’re here! The patients have been calmer ever since your signal came close.",
-        "Match each patient with the right care, then bring the medicine Poké Ball back to me.",
+        "Luca, look—the patients stopped shaking when they heard you coming.",
+        "I will describe each patient. You choose the care it needs, then bring the medicine Poké Ball back to me.",
         "You may ask for a Nurse Joy hint at any time. That is official medical advice—and excellent Trainer strategy."
       ],
       challengeSteps: [
@@ -134,10 +134,10 @@
         "Guide the short medicine Poké Ball delivery path."
       ],
       runtimeSteps: [
-        "Let Luca match each patient with a treatment and give hints immediately.",
+        "Describe each patient; Luca may answer, point, or choose the matching treatment. Give hints immediately.",
         "Guide the short medicine Poké Ball delivery."
       ],
-      whenFinished: "Celebrate every patient feeling better. Tell Patrick the Care Badge and Heart clue are ready.",
+      whenFinished: "Say, “Three blankets, three happy patients, and one heroic Trainer.” Then let Patrick open the result.",
       runtimeBackup: "Use one patient and two choices, then make the medicine delivery one step.",
       successCondition: "All patients receive care with unlimited hints. No wrong choice causes failure, and a demonstrated match still counts.",
       rewardPackages: ["POKÉMON CENTER FIELD KIT"],
@@ -156,7 +156,7 @@
       performerName: "Mike",
       characterName: "Team Rocket Boss",
       phoneCaptain: "Patrick or Auntie Ariel",
-      entranceCue: "Stand near the adjustable hoop with the Ranger Dispatch and stolen loot visible but out of reach. There is no formal score.",
+      entranceCue: "No score. Luca always wins. Stand near the adjustable hoop with the Ranger Dispatch and stolen loot visible but out of reach.",
       spokenLines: [
         "So you’re the famous Luca. Oak chose you; Team Rocket chose this extremely secure basketball hoop.",
         "Break my patented, unstoppable, definitely-not-adjustable defense and attempt the Final Poké Shot!",
@@ -208,7 +208,7 @@
         "Stay beside Luca inside the approved boundary and use only the private physical Trainer Code Card.",
         "Recover the cache, exit, and confirm outside. Open one story item; the bag carrier takes the rest."
       ],
-      whenFinished: "Outside the protected area, keep the Research File sealed and tell the Phone Captain the cache and bag carrier are ready.",
+      whenFinished: "Outside, say, “This file bears the same mark as your License.” Keep it sealed and tell the Phone Captain the result is ready.",
       runtimeBackup: "Operate the keypad for Luca or bring the sealed cache outside.",
       successCondition: "Adult-accompanied entry and safe recovery of the cache and sealed file. The escort may operate the keypad or bring the cache outside.",
       rewardPackages: ["SECRET RANGER CACHE"],
@@ -229,9 +229,9 @@
       phoneCaptain: "Patrick",
       entranceCue: "Run a compact 5–8 minute return: accept the items, one callback, Rayquaza finding, League Authorization, compact reward, then immediate Victory Road departure.",
       spokenLines: [
-        "Professor Oak: Luca… the mark on this file matches the License I asked the League to prepare for you.",
-        "Professor Monica: The Fairies, the patients, the fragment—they all trace one path back to Home Base.",
-        "Professor Oak: The signal was testing a path to you. Tell us one thing that helped you reach it."
+        "Professor Bruce: Luca… the mark on this file matches the License I asked the League to prepare for you.",
+        "Professor Monica: The Fairies, the patients, and the fragment all point home. The signal is from Mega Rayquaza.",
+        "Professor Bruce: The signal was testing a path to you. Why do you think it kept leading you home?"
       ],
       challengeSteps: [
         "Accept the Sky Fragment and sealed Research File.",

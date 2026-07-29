@@ -49,9 +49,9 @@ function Splash({ onStart }) {
             TRAINER <span style={{ color: "var(--banana)" }}>JOURNEY</span>
           </h1>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "1.0625rem", lineHeight: 1.5, color: "rgba(255,255,255,.85)", maxWidth: 360, margin: "0 0 26px" }}>
-            Clear every stop, win every challenge, and claim your Trainer title!
+            A signal no scanner can explain has appeared in Creekside. The Pokémon League asked for you by name.
           </p>
-          <Button variant="reward" size="lg" icon="arrow-right" block onClick={onStart} style={{ maxWidth: 360 }}>Begin your journey</Button>
+          <Button variant="reward" size="lg" icon="arrow-right" block onClick={onStart} style={{ maxWidth: 360 }}>Answer the call</Button>
         </div>
       </div>
     </Field>
@@ -84,7 +84,7 @@ function Onboarding({ config, onDone }) {
           </div>
           <TrainerCard name={name || "Trainer"} avatarSrc={ART + avatar.img} badges={0} totalBadges={config.stops ? config.stops.length : config.chapters.length} style={{ maxWidth: "none" }} />
           <div style={{ marginTop: "auto", paddingTop: 12 }}>
-            <Button variant="reward" size="lg" icon="arrow-right" block disabled={!name.trim()} onClick={() => onDone({ name: name.trim(), avatar })}>Start the hunt</Button>
+            <Button variant="reward" size="lg" icon="arrow-right" block disabled={!name.trim()} onClick={() => onDone({ name: name.trim(), avatar })}>Report to the League</Button>
           </div>
         </div>
       </div>
@@ -266,7 +266,7 @@ function CreeksideMap({ config, state, dispatch }) {
 
           <div>
             <div style={{ fontFamily: "var(--font-label)", color: "#fff", fontWeight: 700, fontSize: ".75rem", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: 8 }}>
-              Physical Ranger Record
+              Ranger Clues
             </div>
             <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={state.collectedFragments} />
           </div>
@@ -385,20 +385,17 @@ function FakeCreditsControl({ scene, onComplete }) {
         <span>Creekside Champion · Patrick</span>
         <span>Pokémon Rangers · Hannah and Noa</span>
       </div>
-      <Button variant={ready ? "reward" : "secondary"} block disabled={!ready} onClick={onComplete} data-testid="finish-fake-credits">
-        {ready ? "Finish League processing" : `Credits rolling… ${Math.ceil(remainingMs / 1000)}s`}
-      </Button>
+      {ready && (
+        <Button variant="reward" block onClick={onComplete} data-testid="finish-fake-credits">
+          Close the League record
+        </Button>
+      )}
     </div>
   );
 }
 
 function SceneSpecificContent({ config, state, scene }) {
   if (scene.type === "relay-result") {
-    const projectedRewardIds = Array.from(new Set(state.earnedRewards.concat(scene.rewardIds || [])));
-    const projectedTeam = projectedRewardIds.filter((rewardId) => config.rewards[rewardId] && config.rewards[rewardId].category === "team-card");
-    const projectedBadges = projectedRewardIds.filter((rewardId) => config.rewards[rewardId] && config.rewards[rewardId].category === "badge");
-    const projectedQuestItems = projectedRewardIds.filter((rewardId) => config.rewards[rewardId] && config.rewards[rewardId].category === "quest-item");
-    const projectedInventory = projectedRewardIds.filter((rewardId) => config.rewards[rewardId] && !["team-card", "badge", "quest-item"].includes(config.rewards[rewardId].category));
     const projectedFragments = Number.isInteger(scene.fragmentSlot)
       ? Array.from(new Set(state.collectedFragments.concat(scene.fragmentSlot)))
       : state.collectedFragments;
@@ -414,9 +411,29 @@ function SceneSpecificContent({ config, state, scene }) {
             ))}
           </div>
         )}
-        {!!scene.rewardIds.length && (
+        {Number.isInteger(scene.fragmentSlot) && (
+          <div className="combined-fragment">
+            <strong>{scene.fragmentStory || `Ranger mark ${scene.fragmentSlot} of 4`}</strong>
+            <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={projectedFragments} />
+          </div>
+        )}
+        {scene.nextDestination && (
+          <div className="next-destination">
+            <strong>Next signal</strong>
+            <p>{scene.nextDestination}</p>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  if (scene.type === "adult-logistics") {
+    const logisticsRewardIds = scene.logisticsRewardIds || [];
+    return (
+      <div className="combined-success">
+        {!!logisticsRewardIds.length && (
           <div className="combined-reward-list">
-            {scene.rewardIds.map((rewardId, index) => {
+            {logisticsRewardIds.map((rewardId, index) => {
               const reward = config.rewards[rewardId];
               return reward ? (
                 <div key={rewardId} className="reward-item" style={{ "--reveal-order": index }}>
@@ -430,29 +447,15 @@ function SceneSpecificContent({ config, state, scene }) {
         )}
         {Number.isInteger(scene.fragmentSlot) && (
           <div className="combined-fragment">
-            <strong>Record physical Fragment {scene.fragmentSlot}</strong>
-            <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={projectedFragments} />
-            <small>Write the private digit only on the physical Ranger Code Card. The app stores the symbol, never the digit.</small>
-          </div>
-        )}
-        {(scene.rewardIds.length > 0 || Number.isInteger(scene.fragmentSlot)) && (
-          <div className="inventory-summary">
-            <span><strong>{projectedTeam.length}</strong> team cards</span>
-            <span><strong>{projectedBadges.length}</strong> badges</span>
-            <span><strong>{projectedQuestItems.length}</strong> quest items</span>
-            <span><strong>{projectedInventory.length}</strong> gifts and packs</span>
+            <strong>Physical Ranger Card</strong>
+            <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={state.collectedFragments} />
+            <small>Write the private mark only on the physical Ranger Code Card. The app records the symbol, never the private information.</small>
           </div>
         )}
         {scene.rewardHandoff && (
           <div className="physical-reward-callout">
             <Icon name="sparkle" size={26} color="var(--gold)" />
-            <div><strong>Real-world reward handoff</strong><p>{scene.rewardHandoff}</p></div>
-          </div>
-        )}
-        {scene.nextDestination && (
-          <div className="next-destination">
-            <strong>Next signal</strong>
-            <p>{scene.nextDestination}</p>
+            <div><strong>Reward handoff</strong><p>{scene.rewardHandoff}</p></div>
           </div>
         )}
       </div>
@@ -537,7 +540,7 @@ function SceneSpecificContent({ config, state, scene }) {
           return participant ? (
             <div key={participant.id}>
               <Icon name="badge" size={24} color="var(--gold)" />
-              <span><strong>{participant.displayName}</strong><small>{participant.role}</small></span>
+              <span><strong>{participant.displayName}</strong><small>{scene.tributes && scene.tributes[participant.id] ? scene.tributes[participant.id] : participant.role}</small></span>
             </div>
           ) : null;
         })}
@@ -546,7 +549,7 @@ function SceneSpecificContent({ config, state, scene }) {
   }
 
   if (scene.type === "glitch") {
-    return <div className="friendly-glitch" aria-label="Friendly scanner interference"><span>SIGNAL DETECTED</span><small>MYTHICAL ENERGY TRACE</small></div>;
+    return <div className="friendly-glitch" aria-label="Friendly scanner interference"><span>SIGNAL DETECTED</span><small>small · moving · close</small></div>;
   }
 
   return null;
@@ -584,14 +587,12 @@ function RelayHandoffScreen({ config, sequence, scene, dispatch }) {
           >
             <p className="luca-story-line">{scene.body}</p>
             <div className="handoff-performer">
-              <span>Next up</span>
-              <strong>{scene.performerName}</strong>
+              <span>Someone is waiting</span>
               <small>{scene.characterName}</small>
             </div>
-            <p className="handoff-instruction">The designated adult keeps the phone. Complete the hold, then turn the screen away from Luca.</p>
             <AdultHoldButton
               duration={config.adultHoldMs}
-              label={scene.handoffLabel}
+              label="Hold to begin the mission"
               onComplete={() => dispatch({ type: "COMPLETE_RELAY_HOLD" })}
             />
           </Card>
@@ -736,12 +737,19 @@ function CreeksideScene({ config, state, dispatch }) {
     return <ReturnToPlayerScreen sequence={sequence} scene={scene} dispatch={dispatch} />;
   }
 
-  const sceneLabel = scene.type.replace(/-/g, " ");
+  const sceneLabel = scene.type === "relay-result"
+    ? "Mission complete"
+    : scene.type === "adult-logistics"
+      ? "Adult checklist"
+      : scene.type.replace(/-/g, " ");
   const isPhysical = scene.type === "physical-challenge";
   const isFakeCredits = scene.type === "fake-credits";
   const isRewardResult = scene.type === "reward";
+  const isAdultLogistics = scene.type === "adult-logistics";
   const isCelebrationResult = ["relay-result", "reward", "inventory-update", "code-fragment-record", "hall-of-heroes", "celebration", "champion-final"].includes(scene.type);
   const isChampionFinal = scene.type === "champion-final";
+  const nextScene = sequence.scenes[state.currentSceneIndex + 1];
+  const resultNeedsAdultHold = scene.type === "relay-result" && nextScene && nextScene.type === "adult-logistics";
   const isLast = state.currentSceneIndex === sequence.scenes.length - 1;
   const continueLabel = isLast
     ? (state.activeFlow === "mew" ? "Finish the adventure" : state.activeFlow === "checkpoint" ? "Complete checkpoint" : "Complete chapter")
@@ -796,7 +804,6 @@ function CreeksideScene({ config, state, dispatch }) {
               <div className="mission-result-burst" role="status">
                 <Icon name="sparkle" size={24} color="var(--gold)" />
                 <strong>{scene.type === "relay-result" ? (scene.resultLabel || "Challenge complete!") : "Mission complete!"}</strong>
-                <span>{scene.type === "relay-result" ? "Story, rewards, and Trainer record updated together" : "New rewards unlocked"}</span>
               </div>
             )}
             {scene.character && (
@@ -829,9 +836,19 @@ function CreeksideScene({ config, state, dispatch }) {
             {isFakeCredits && (
               <FakeCreditsControl scene={scene} onComplete={() => dispatch({ type: "ADVANCE_SCENE" })} />
             )}
-            {!isPhysical && !isFakeCredits && !isChampionFinal && (
+            {resultNeedsAdultHold && (
+              <div style={{ marginTop: 18 }}>
+                <p style={{ margin: "0 0 12px", fontSize: ".95rem", fontWeight: 700, color: "var(--ink-soft)" }}>Pass the phone to an adult for the physical reward.</p>
+                <AdultHoldButton
+                  duration={config.adultHoldMs}
+                  label="Adult: Hold for reward handoff"
+                  onComplete={() => dispatch({ type: "ADVANCE_SCENE" })}
+                />
+              </div>
+            )}
+            {!isPhysical && !isFakeCredits && !isChampionFinal && !resultNeedsAdultHold && (
               <Button
-                variant={scene.type === "reward" || scene.type === "celebration" ? "reward" : "primary"}
+                variant={scene.type === "reward" || scene.type === "celebration" || isAdultLogistics ? "reward" : "primary"}
                 size="lg"
                 icon="arrow-right"
                 block
@@ -1104,7 +1121,7 @@ function CreeksideCelebration({ config, state, dispatch }) {
             totalBadges={config.chapters.length}
             champion
           />
-          <p style={{ color: "#fff", fontSize: "1.08rem", maxWidth: 380 }}>Mew has been registered. Gather the family, bring out the popsicles, and open the saved Booster Satchel together.</p>
+          <p style={{ color: "#fff", fontSize: "1.08rem", maxWidth: 380 }}>Mew chose to be seen. Gather the family, bring out the popsicles, and open the saved Booster Satchel together.</p>
           <div className="celebration-satchel">
             <strong>Booster Satchel · {savedBoosters.length} saved groups</strong>
             {savedBoosters.map((reward) => <span key={reward.label}>{reward.label}</span>)}

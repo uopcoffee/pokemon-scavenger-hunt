@@ -52,8 +52,13 @@ config.chapters.forEach((chapter) => {
   assert.ok(chapter.scenes.length <= (chapter.id === "victory-road" ? 18 : chapter.id === "professor-oak-lab" ? 12 : 10), `${chapter.name} exceeds its V3.3 screen-count target`);
   chapter.scenes.filter((scene) => scene.type === "relay-result").forEach((scene) => {
     assert.ok(scene.resultLabel, `${scene.title} must name its combined achievement`);
-    assert.ok(scene.rewardHandoff, `${scene.title} must state physical reward timing`);
     assert.ok(scene.nextDestination, `${scene.title} must include its story transition`);
+    assert.strictEqual(scene.rewardHandoff, undefined, `${scene.title} must not expose reward logistics to Luca`);
+    assert.ok(scene.revealItems.length <= 1, `${scene.title} must keep Luca's emotional reveal concise`);
+  });
+  chapter.scenes.filter((scene) => scene.type === "adult-logistics").forEach((scene) => {
+    assert.ok(scene.rewardHandoff, `${scene.title} must retain physical reward timing for adults`);
+    assert.ok(Array.isArray(scene.logisticsRewardIds), `${scene.title} must retain the adult reward manifest`);
   });
   chapter.scenes.filter((scene) => scene.type === "cast-cue").forEach((scene) => {
     assert.ok(scene.whenFinished, `${scene.title} must define what happens when Luca finishes`);

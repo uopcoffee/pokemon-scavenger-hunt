@@ -92,8 +92,10 @@ Every substantial physical encounter uses this deterministic sequence:
 5. Phone Captain completes the protected Mission Complete hold
 6. Adult-only return-to-player shield; the Phone Captain turns the screen back
    toward Luca without handing over the device
-7. One Luca-facing combined achievement screen with reward, inventory,
-   fragment, and transition information
+7. One concise Luca-facing achievement screen with emotional consequence,
+   symbolic fragment progress, and transition
+8. A protected hold opens an adult-only reward checklist with the product
+   manifest, dispositions, handoff timing, and private fragment procedure
 
 The cast cue is a separate scene. It is not mounted behind the privacy shield,
 hidden with CSS, or exposed in the shield's accessibility tree.

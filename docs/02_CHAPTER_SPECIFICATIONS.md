@@ -17,9 +17,11 @@ Each numbered chapter follows this rhythm:
 5. The performer delivers the live entrance and runs the real-world challenge.
 6. The Phone Captain completes the protected Mission Complete hold.
 7. The return shield confirms Luca can see the screen.
-8. One combined success screen reveals the achievement, reward disposition,
-   physical gift handoff, team/inventory update, fragment prompt when
-   applicable, and next destination.
+8. One concise Luca-facing success screen reveals the emotional consequence,
+   one achievement, symbolic fragment progress when applicable, and the next
+   destination.
+9. A protected adult continuation shows the product manifest, reward
+   disposition, physical handoff, and private fragment procedure.
 
 Victory Road and Mega Rayquaza are one continuous Auntie Ariel encounter and
 use one private cue. The Champion remains a separate performer encounter.

@@ -17,8 +17,9 @@ A standard encounter now uses:
 4. concise private cast cue and live physical challenge
 5. protected Mission Complete hold
 6. return-to-Luca shield
-7. one combined Luca-facing success screen
-8. map return or the next meaningful story beat
+7. one concise Luca-facing emotional success screen
+8. protected adult-only reward checklist
+9. map return or the next meaningful story beat
 
 The combined success screen may progressively reveal the achievement, badge,
 team/inventory changes, reward disposition, symbolic fragment prompt, physical
@@ -59,9 +60,10 @@ operated by Auntie Ariel.
 
 ## Physical rewards
 
-Every combined success screen names the real package handoff and distinguishes
-`OPEN NOW`, `CARRY FOR LATER`, and `SAVE FOR CELEBRATION`. The adult waits until
-Luca sees the success reveal before handing over the physical package.
+Every adult-only reward checklist names the real package handoff and
+distinguishes `OPEN NOW`, `CARRY FOR LATER`, and `SAVE FOR CELEBRATION`. The
+adult waits until Luca sees the emotional success reveal before opening the
+checklist and handing over the physical package.
 
 ## Persistence
 

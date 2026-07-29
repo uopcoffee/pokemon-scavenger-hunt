@@ -49,17 +49,17 @@
           "A dedicated Water Safety Adult watches Luca only. Polly or Ariel is the separate Phone Captain. The Professors run clues and props."
         ],
         arrivalLines: [
-          { speaker: "Professor Bruce", line: "Shhh. Something strange is happening in the pool. You must be Trainer Luca." },
-          { speaker: "Professor Monica", line: "Perfect timing! Some of our research capsules have gone missing. Luca, can you help us find them?" }
+          { speaker: "Professor Bruce", line: "Luca. Just in time. I asked the League to find you." },
+          { speaker: "Professor Monica", line: "The reading jumped when you arrived. Use this diagram to find four samples." }
         ],
         sayAndDo: [
           "Let Luca retrieve the capsules. Swimming is optional; the skimmer works just as well.",
           "Give him direct clues whenever helpful and cheer when he finds each one.",
-          "Professor Bruce can focus on the welcome and big discoveries. Professor Monica can point out clues and keep the search moving. You are equal partners; divide it however feels natural."
+          "You are equal Partner Professors: Bruce welcomes Luca; Monica owns the scan and its biggest discovery."
         ],
         successLines: [
-          { speaker: "Professor Bruce", line: "Excellent work, Trainer Luca! You saved our research." },
-          { speaker: "Professor Monica", line: "And you discovered an important clue. Keep it safe—you may need it later." }
+          { speaker: "Professor Monica", line: "Bruce—this reading is not coming only from the water. It is coming from above it." },
+          { speaker: "Professor Bruce", line: "Luca, this was waiting for you." }
         ],
         successInstruction: "After Luca exits and dries, move to the dry table. Hand over the critical reward and clue; a designated adult carries larger packages later.",
         backup: [
@@ -73,9 +73,9 @@
           title: "When Luca Comes Back",
           intro: "The return visit is short and relaxed.",
           lines: [
-            { speaker: "Professor Bruce", line: "Trainer Luca, you’ve completed some incredible missions. Which one was your favorite?" },
-            { speaker: "Professor Monica", line: "We’ve reviewed everything you discovered. Your research is officially complete." },
-            { speaker: "Professor Bruce", line: "You are ready for Victory Road!" }
+            { speaker: "Professor Bruce", line: "Luca, the mark on this file matches the License I asked the League to prepare for you." },
+            { speaker: "Professor Monica", line: "The Fairies, the patients, and the fragment all point home. The signal is from Mega Rayquaza." },
+            { speaker: "Professor Bruce", line: "Why do you think the signal kept leading you home?" }
           ],
           note: "Any answer is great. Patrick will tell you when to hand Luca the final research gift."
         }
@@ -88,8 +88,8 @@
         ready: "Be ready for a flexible sheltered reset.",
         duration: "About 10–15 minutes including dry/change/bathroom/water time",
         character: "Nurse Joy",
-        firstLine: "The Pokémon Center is the safest place to restore your team after the Water Preserve.",
-        whatLucaDoes: "He matches three pretend Pokémon patients with simple treatments, then carries a medicine ball back to you.",
+        firstLine: "Luca, look—the patients stopped shaking when they heard you coming.",
+        whatLucaDoes: "He listens to each patient’s symptoms, chooses or points to the care it needs, then carries a medicine ball back to you.",
         gift: "The Pokémon Center gift bag and clue card, after Patrick gives the signal",
         finalLine: "Your Pokémon are feeling better—but Team Rocket has been spotted nearby!",
         yourPart: [
@@ -104,15 +104,15 @@
           "Keep the gift out of sight until Patrick gives you the signal."
         ],
         arrivalLines: [
-          { speaker: "Nurse Joy", line: "Trainer Luca, I’m glad you’re here. Three Pokémon need your help. Will you help me take care of them?" }
+          { speaker: "Nurse Joy", line: "Luca, look—the patients stopped shaking when they heard you coming. Will you help me choose their care?" }
         ],
         sayAndDo: [
-          "Let Luca match each patient with a treatment. You do not need to know the Pokémon—Patrick’s cards explain everything.",
+          "Describe each patient. Luca may answer, point, or choose the matching treatment; Patrick’s cards explain everything.",
           "If he pauses, point to two choices or show him the answer. Then let him carry the medicine ball back to you.",
           "Be warm and encouraging. There are no wrong answers and he cannot fail."
         ],
         successLines: [
-          { speaker: "Nurse Joy", line: "You did it! Every Pokémon is feeling better. That was very kind, Trainer Luca." }
+          { speaker: "Nurse Joy", line: "Three blankets, three happy patients, and one heroic Trainer." }
         ],
         successInstruction: "Hand Luca the Pokémon Center gift bag and clue card. Then give the Team Rocket warning.",
         backup: [
@@ -133,7 +133,7 @@
         firstLine: "So you’re Professor Oak’s new Trainer. You’ll have to beat my basketball defense!",
         whatLucaDoes: "He tries a few easy basketball shots while you pretend your defense is falling apart.",
         gift: "The Team Rocket gift bag and Ranger message, after Patrick gives the signal",
-        finalLine: "Impossible! My defense has been defeated. Fine—take the stolen message!",
+        finalLine: "That defense had a warranty! Fine—take the stolen message.",
         yourPart: [
           "Be a big, silly opponent—not a scary villain.",
           "Give Luca a few easy shots and move him closer whenever useful.",
@@ -154,7 +154,7 @@
           "Make funny comments about your defense malfunctioning. Luca always wins."
         ],
         successLines: [
-          { speaker: "Team Rocket Boss", line: "Impossible! My unbeatable defense has been defeated. Fine—take the stolen message!" }
+          { speaker: "Team Rocket Boss", line: "That defense had a warranty! Fine—take the stolen message. You still won’t like what the Rangers found." }
         ],
         successInstruction: "Hand Luca the Team Rocket gift bag and Ranger message.",
         backup: [
@@ -246,7 +246,7 @@
           "Ask Nina if she wants to hold the basket. It is completely fine if she says no."
         ],
         arrivalLines: [
-          { speaker: "Supporting adult", line: "Three Fairy lights fell from the trees. Luca, can you help us put them in the basket?" },
+          { speaker: "Supporting adult", line: "The lights fell where Nina cannot safely reach them. Luca, can you bring them back to her?" },
           { speaker: "Nina, if she wants", line: "Luca, look! Tree!" }
         ],
         sayAndDo: [

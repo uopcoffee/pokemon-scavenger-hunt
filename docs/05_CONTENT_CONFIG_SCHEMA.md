@@ -123,11 +123,13 @@ V3 adds:
 - `cast-cue` — concise performer operations
 - `return-to-player` — adult-only confirmation before revealing the outcome
 - `relay-result` — Luca-facing achievement immediately after the return shield
+- `adult-logistics` — adult-only reward manifest and physical handoff checklist
 
-V3.3 uses `relay-result` as the combined success record. It may carry
-`rewardIds`, `fragmentSlot`, `revealItems`, `rewardHandoff`, and
-`nextDestination`. The state engine applies the same reward, badge, team,
-inventory, quest-item, and fragment effects when Luca continues.
+The state-bearing `relay-result` retains `rewardIds` for progression but renders
+only the emotional result, one reveal item, symbolic fragment progress, and
+`nextDestination`. The following `adult-logistics` scene renders
+`logisticsRewardIds`, `rewardHandoff`, dispositions, and private fragment
+procedure only after a protected adult hold.
 
 Sequences may also declare `sceneAliases` for removed V3.2 IDs. Aliases are
 migration metadata only and never create extra runtime screens.

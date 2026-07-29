@@ -32,7 +32,11 @@ assert.deepStrictEqual(
 assert.match(cues["oak-water"].runtimeSteps.join(" "), /Water Safety Adult.*Phone Captain.*Professors/);
 assert.match(cues["oak-water"].runtimeSteps.join(" "), /Stow the phone safely away/i);
 assert.match(cues["oak-water"].runtimeBackup, /skimmer.*dry-tub.*one capsule/i);
-assert.match(JSON.stringify(oak.scenes), /Record the Wave clue in Slot 4\. One Ranger clue is still missing\./);
+assert.match(JSON.stringify(oak.scenes), /Three Ranger marks\. The Professors go quiet when they see the Wave\./);
+const oakLogistics = oak.scenes.find((scene) => scene.id === "oak-challenge-logistics");
+assert.strictEqual(oakLogistics.audience, "adult");
+assert.strictEqual(oakLogistics.fragmentSlot, 4);
+assert.match(oakLogistics.rewardHandoff, /WATER RESEARCH packages/i);
 
 assert.match(cues.fairy.supportingRole, /never handles the phone/i);
 assert.match(cues.fairy.supportingRole, /point.*basket.*one object.*lose interest.*skip/i);
@@ -51,7 +55,7 @@ assert.ok(victory.scenes.find((scene) => scene.id === "victory-challenge-b"));
 assert.ok(victory.scenes.find((scene) => scene.id === "victory-challenge-b-result"));
 assert.match(cues["victory-road"].entranceCue, /single private cue.*Victory Road.*Rayquaza.*Champion summon/i);
 assert.strictEqual(cues.champion.phoneCaptain, "Auntie Ariel");
-assert.match(victory.scenes.find((scene) => scene.id === "hall-of-heroes").body, /Gather everyone who is here for the Champion photo\./);
+assert.match(victory.scenes.find((scene) => scene.id === "hall-of-heroes").body, /gather everyone who is here for the Champion photo\./i);
 
 assert.ok(portal.director.timeline.some((item) => /20–25 min/.test(item.window)));
 assert.ok(portal.director.timeline.some((item) => /10–15 min sheltered reset/.test(item.window)));
