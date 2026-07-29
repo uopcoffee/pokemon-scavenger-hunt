@@ -60,7 +60,7 @@ function Splash({ onStart }) {
 
 /* ---------- Onboarding ---------- */
 function Onboarding({ config, onDone }) {
-  const [name, setName] = React.useState("");
+  const [name, setName] = React.useState("Luca");
   const [avatar, setAvatar] = React.useState(config.avatars[0]);
   return (
     <Field hero>
@@ -302,7 +302,7 @@ function CreeksideMap({ config, state, dispatch }) {
                     />
                     <span style={{ flex: 1, minWidth: 0 }}>
                       <small style={{ display: "block", fontFamily: "var(--font-label)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-soft)" }}>
-                        Chapter {chapter.number} · {chapter.scheduleLabel}
+                        Chapter {chapter.number}
                       </small>
                       <strong style={{ display: "block", fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "1.08rem" }}>
                         {locked ? chapter.lockedName : chapter.name}
@@ -321,7 +321,7 @@ function CreeksideMap({ config, state, dispatch }) {
                       <Icon name={state.checkpointComplete ? "check" : state.activeFlow === "checkpoint" ? "sparkle" : "lock"} size={38} color={state.checkpointComplete ? "var(--tropius-leaf)" : "var(--sky)"} />
                       <span style={{ flex: 1, minWidth: 0 }}>
                         <small style={{ display: "block", fontFamily: "var(--font-label)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-soft)" }}>
-                          Checkpoint · {config.checkpoint.scheduleLabel}
+                          Research checkpoint
                         </small>
                         <strong style={{ display: "block", fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "1.08rem" }}>
                           {state.activeFlow === "checkpoint" || state.checkpointComplete ? config.checkpoint.name : config.checkpoint.lockedName}
@@ -333,26 +333,27 @@ function CreeksideMap({ config, state, dispatch }) {
               );
             })}
 
-            <button
-              type="button"
-              className={`creekside-map-card${state.mewComplete ? " creekside-map-card--complete" : ""}${state.mewUnlocked && !state.mewComplete ? " creekside-map-card--active" : ""}`}
-              disabled={!state.mewUnlocked}
-              onClick={() => state.mewUnlocked && dispatch({ type: "OPEN_MEW" })}
-              data-testid="mew-epilogue"
-            >
-              <Icon
-                name={state.mewComplete ? "check" : state.mewUnlocked ? "sparkle" : "lock"}
-                size={38}
-                color={state.mewUnlocked ? "var(--mewtwo-x)" : "var(--silver-deep)"}
-              />
-              <span style={{ flex: 1 }}>
-                <small style={{ display: "block", fontFamily: "var(--font-label)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Postgame Event</small>
-                <strong style={{ display: "block", fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "1.08rem" }}>
-                  {state.mewUnlocked ? config.epilogue.name : config.epilogue.lockedName}
-                </strong>
-              </span>
-              {state.mewUnlocked && <img src={ART + config.epilogue.art} alt="" style={{ width: 46, height: 46, objectFit: "contain", filter: "drop-shadow(0 0 10px rgba(184,146,255,.65))" }} />}
-            </button>
+            {state.mewUnlocked && (
+              <button
+                type="button"
+                className={`creekside-map-card${state.mewComplete ? " creekside-map-card--complete" : ""}${!state.mewComplete ? " creekside-map-card--active" : ""}`}
+                onClick={() => dispatch({ type: "OPEN_MEW" })}
+                data-testid="mew-epilogue"
+              >
+                <Icon
+                  name={state.mewComplete ? "check" : "sparkle"}
+                  size={38}
+                  color="var(--mewtwo-x)"
+                />
+                <span style={{ flex: 1 }}>
+                  <small style={{ display: "block", fontFamily: "var(--font-label)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Postgame Event</small>
+                  <strong style={{ display: "block", fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "1.08rem" }}>
+                    {config.epilogue.name}
+                  </strong>
+                </span>
+                <img src={ART + config.epilogue.art} alt="" style={{ width: 46, height: 46, objectFit: "contain", filter: "drop-shadow(0 0 10px rgba(184,146,255,.65))" }} />
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -392,6 +393,72 @@ function FakeCreditsControl({ scene, onComplete }) {
 }
 
 function SceneSpecificContent({ config, state, scene }) {
+  if (scene.type === "relay-result") {
+    const projectedRewardIds = Array.from(new Set(state.earnedRewards.concat(scene.rewardIds || [])));
+    const projectedTeam = projectedRewardIds.filter((rewardId) => config.rewards[rewardId] && config.rewards[rewardId].category === "team-card");
+    const projectedBadges = projectedRewardIds.filter((rewardId) => config.rewards[rewardId] && config.rewards[rewardId].category === "badge");
+    const projectedQuestItems = projectedRewardIds.filter((rewardId) => config.rewards[rewardId] && config.rewards[rewardId].category === "quest-item");
+    const projectedInventory = projectedRewardIds.filter((rewardId) => config.rewards[rewardId] && !["team-card", "badge", "quest-item"].includes(config.rewards[rewardId].category));
+    const projectedFragments = Number.isInteger(scene.fragmentSlot)
+      ? Array.from(new Set(state.collectedFragments.concat(scene.fragmentSlot)))
+      : state.collectedFragments;
+    return (
+      <div className="combined-success">
+        {!!scene.revealItems.length && (
+          <div className="success-reveal-list" aria-label="Mission achievements">
+            {scene.revealItems.map((item, index) => (
+              <div key={`${scene.id}-reveal-${index}`} style={{ "--reveal-order": index }}>
+                <Icon name="check" size={20} color="var(--tropius-leaf)" />
+                <strong>{item}</strong>
+              </div>
+            ))}
+          </div>
+        )}
+        {!!scene.rewardIds.length && (
+          <div className="combined-reward-list">
+            {scene.rewardIds.map((rewardId, index) => {
+              const reward = config.rewards[rewardId];
+              return reward ? (
+                <div key={rewardId} className="reward-item" style={{ "--reveal-order": index }}>
+                  <Icon name="sparkle" color="var(--gold)" />
+                  <strong>{reward.label}</strong>
+                  <span className={`reward-disposition reward-disposition--${reward.disposition.toLowerCase().replace(/\s+/g, "-")}`}>{reward.disposition}</span>
+                </div>
+              ) : null;
+            })}
+          </div>
+        )}
+        {Number.isInteger(scene.fragmentSlot) && (
+          <div className="combined-fragment">
+            <strong>Record physical Fragment {scene.fragmentSlot}</strong>
+            <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={projectedFragments} />
+            <small>Write the private digit only on the physical Ranger Code Card. The app stores the symbol, never the digit.</small>
+          </div>
+        )}
+        {(scene.rewardIds.length > 0 || Number.isInteger(scene.fragmentSlot)) && (
+          <div className="inventory-summary">
+            <span><strong>{projectedTeam.length}</strong> team cards</span>
+            <span><strong>{projectedBadges.length}</strong> badges</span>
+            <span><strong>{projectedQuestItems.length}</strong> quest items</span>
+            <span><strong>{projectedInventory.length}</strong> gifts and packs</span>
+          </div>
+        )}
+        {scene.rewardHandoff && (
+          <div className="physical-reward-callout">
+            <Icon name="sparkle" size={26} color="var(--gold)" />
+            <div><strong>Real-world reward handoff</strong><p>{scene.rewardHandoff}</p></div>
+          </div>
+        )}
+        {scene.nextDestination && (
+          <div className="next-destination">
+            <strong>Next signal</strong>
+            <p>{scene.nextDestination}</p>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   if (Array.isArray(scene.dialogue)) {
     return (
       <div className="dialogue-lines">
@@ -679,10 +746,10 @@ function CreeksideScene({ config, state, dispatch }) {
     ? (state.activeFlow === "mew" ? "Finish the adventure" : state.activeFlow === "checkpoint" ? "Complete checkpoint" : "Complete chapter")
     : scene.type === "reward" ? "Add rewards" : "Continue";
   const footerLabel = state.activeFlow === "mew"
-    ? `Postgame Event · ${sequence.scheduleLabel}`
+    ? "Postgame Event"
     : state.activeFlow === "checkpoint"
-      ? `Oak Return Checkpoint · ${sequence.scheduleLabel}`
-      : `Chapter ${sequence.number} · ${sequence.name} · ${sequence.scheduleLabel}`;
+      ? "Oak Return Checkpoint"
+      : `Chapter ${sequence.number} · ${sequence.name}`;
 
   return (
     <Field type={sequence.type} className="luca-scene-field" audience={scene.audience}>
@@ -727,8 +794,8 @@ function CreeksideScene({ config, state, dispatch }) {
             {(isRewardResult || scene.type === "relay-result") && (
               <div className="mission-result-burst" role="status">
                 <Icon name="sparkle" size={24} color="var(--gold)" />
-                <strong>{scene.type === "relay-result" ? "Challenge complete!" : "Mission complete!"}</strong>
-                <span>{scene.type === "relay-result" ? "Trainer achievement recorded" : "New rewards unlocked"}</span>
+                <strong>{scene.type === "relay-result" ? (scene.resultLabel || "Challenge complete!") : "Mission complete!"}</strong>
+                <span>{scene.type === "relay-result" ? "Story, rewards, and Trainer record updated together" : "New rewards unlocked"}</span>
               </div>
             )}
             {scene.character && (
@@ -1019,10 +1086,14 @@ function CreeksideApp() {
   const [parentOpen, setParentOpen] = React.useState(false);
   const [storageWarning, setStorageWarning] = React.useState(false);
   const parentTapRef = React.useRef({ count: 0, startedAt: 0 });
+  const scrollRootRef = React.useRef(null);
 
   React.useEffect(() => {
     setStorageWarning(!stateEngine.writeState(state));
   }, [state, stateEngine]);
+  React.useEffect(() => {
+    if (scrollRootRef.current) scrollRootRef.current.scrollTop = 0;
+  }, [state.view, state.currentSceneId]);
 
   const handleParentTap = () => {
     const now = Date.now();
@@ -1041,7 +1112,7 @@ function CreeksideApp() {
   };
 
   return (
-    <div style={{ height: "100%", overflowY: "auto", background: "var(--field-hero)" }}>
+    <div ref={scrollRootRef} style={{ height: "100%", overflowY: "auto", background: "var(--field-hero)" }}>
       {storageWarning && (
         <div className="storage-warning" role="status">
           Progress cannot be saved on this phone. Keep this page open and use Parent Mode export before continuing.

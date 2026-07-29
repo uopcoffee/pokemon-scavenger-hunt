@@ -14,6 +14,7 @@
 - [ ] Each physical challenge is completed through an adult press-and-hold interaction.
 - [ ] The current chapter and scene restore correctly after refresh or browser restart.
 - [ ] Handoff, privacy, cast, return, and Luca-result scenes each restore exactly by stable scene ID.
+- [ ] Removed V3.2 briefing/reward IDs restore to the correct protected handoff or combined success screen.
 - [ ] A valid V2 save migrates without opening a private cast cue or erasing valid progress.
 - [ ] The app can resume from every chapter and the Oak checkpoint through Parent Mode.
 
@@ -44,10 +45,16 @@
 - [ ] Team-card rewards appear in Luca's digital team inventory.
 - [ ] Mega Lucario deck and Mega Rayquaza model appear in the Champion chapter.
 - [ ] Mew figure appears only in the epilogue.
+- [ ] Every physical gift handoff occurs only after Luca sees the combined success animation.
 
 ## UX and reliability
 
 - [ ] All primary controls are usable on an iPhone-sized screen outdoors.
+- [ ] Standard chapters use no more than 10 runtime screens; Oak Water uses no more than 12; Ranger Vault uses no more than 10; Victory Road through Champion uses no more than 18.
+- [ ] Luca's name is prefilled and editable.
+- [ ] Luca-facing map and story screens show no clock times or adult setup language.
+- [ ] Mew is completely absent from the map until the postgame unlock.
+- [ ] One Auntie Ariel cue covers both Victory Road and Mega Rayquaza.
 - [ ] No required content is dependent on audio.
 - [ ] Reduced-motion preferences are respected.
 - [ ] App works after initial load without network access.

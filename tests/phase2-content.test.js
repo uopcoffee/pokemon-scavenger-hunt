@@ -25,20 +25,17 @@ const expectedChapterNames = [
 const requiredParticipants = ["ariel", "nina", "bruce", "monica", "polly", "mike", "patrick", "hannah", "noa"];
 const requiredChapterSceneTypes = [
   "story",
-  "travel-location",
   "cast-handoff",
   "privacy-shield",
   "cast-cue",
   "return-to-player",
   "relay-result",
-  "reward",
-  "inventory-update",
-  "chapter-transition",
 ];
 const validDispositions = ["OPEN NOW", "CARRY FOR LATER", "SAVE FOR CELEBRATION"];
 
 assert.deepStrictEqual(Array.from(config.chapters, (chapter) => chapter.name), expectedChapterNames);
 assert.deepStrictEqual(Array.from(config.participants, (participant) => participant.id), requiredParticipants);
+assert.strictEqual(config.release, "3.3");
 assert.strictEqual(config.settings.startTime, "9:30 a.m.");
 assert.strictEqual(config.settings.targetChampionTime, "11:30 a.m.");
 assert.ok(config.chapters[2].scheduleLabel.includes("10:15"), "Professor Oak arrival must target 10:15");
@@ -51,6 +48,12 @@ config.chapters.forEach((chapter) => {
   const sceneTypes = chapter.scenes.map((scene) => scene.type);
   requiredChapterSceneTypes.forEach((sceneType) => {
     assert.ok(sceneTypes.includes(sceneType), `${chapter.name} must include ${sceneType}`);
+  });
+  assert.ok(chapter.scenes.length <= (chapter.id === "victory-road" ? 18 : chapter.id === "professor-oak-lab" ? 12 : 10), `${chapter.name} exceeds its V3.3 screen-count target`);
+  chapter.scenes.filter((scene) => scene.type === "relay-result").forEach((scene) => {
+    assert.ok(scene.resultLabel, `${scene.title} must name its combined achievement`);
+    assert.ok(scene.rewardHandoff, `${scene.title} must state physical reward timing`);
+    assert.ok(scene.nextDestination, `${scene.title} must include its story transition`);
   });
   chapter.scenes.filter((scene) => scene.type === "cast-cue").forEach((scene) => {
     assert.ok(scene.whenFinished, `${scene.title} must define what happens when Luca finishes`);
@@ -73,7 +76,7 @@ Object.entries(config.rewards).forEach(([rewardId, item]) => {
 });
 
 const fragmentChapters = config.chapters
-  .filter((chapter) => chapter.scenes.some((scene) => scene.type === "code-fragment-record"))
+  .filter((chapter) => chapter.scenes.some((scene) => Number.isInteger(scene.fragmentSlot)))
   .map((chapter) => chapter.number);
 assert.deepStrictEqual(Array.from(fragmentChapters), [1, 2, 3, 4], "All fragments must be earned before the Ranger Vault");
 assert.strictEqual(config.chapters[5].requiresFragments, 4);
@@ -87,9 +90,11 @@ config.codeFragments.forEach((fragment) => {
 assert.strictEqual(config.checkpoint.afterChapterId, "secret-ranger-vault");
 assert.ok(config.chapters[6].scenes.some((scene) => scene.type === "hall-of-heroes"));
 assert.ok(config.chapters[6].scenes.some((scene) => scene.type === "fake-credits" && scene.durationMs >= 8000 && scene.durationMs <= 12000));
+assert.strictEqual(config.chapters[6].scenes.filter((scene) => scene.cueId === "victory-road" && scene.type === "cast-cue").length, 1);
+assert.strictEqual(config.chapters[6].scenes.some((scene) => scene.cueId === "rayquaza"), false);
 assert.strictEqual(config.epilogue.scenes[0].type, "glitch");
 assert.ok(config.epilogue.scenes.some((scene) => scene.id === "mew-challenge"));
-assert.ok(config.epilogue.scenes.some((scene) => scene.type === "celebration"));
+assert.ok(config.epilogue.scenes.some((scene) => scene.type === "relay-result" && scene.rewardIds.includes("mew-figure")));
 
 const publicConfigText = JSON.stringify(config);
 assert.strictEqual(/\b(?:8|9|10|11) Creekside\b/.test(publicConfigText), false, "Player-facing config must not expose household numbers");

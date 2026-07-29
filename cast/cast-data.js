@@ -393,7 +393,7 @@
         {
           slug: "league-recruiter",
           name: "Auntie Ariel",
-          cueIds: ["orientation", "victory-road", "rayquaza"],
+          cueIds: ["orientation", "victory-road"],
           setup: ["Trainer promise and card supplies", "Victory Road markers, ground line, soft target, and tokens", "Rayquaza target plus ring fallback"],
           safety: "Patrick stages the course and removes anything that encourages risky speed.",
           fallback: "One promise, one protected card, one supported pass per station, and a direct Rayquaza assist.",

@@ -256,69 +256,36 @@
       id: "victory-road",
       portalGuide: "league-recruiter",
       performerName: "Auntie Ariel",
-      characterName: "Victory Road Referee",
+      characterName: "Victory Road and Mega Rayquaza Referee",
       phoneCaptain: "Patrick",
-      entranceCue: "Stand at the course entrance with whistle and clipboard. Be loud, funny, and completely encouraging.",
+      entranceCue: "Stand at the course entrance with whistle and clipboard. This one cue stays open through Victory Road and the connected Rayquaza encounter.",
       spokenLines: [
         "Welcome to Victory Road!",
         "Clear the Tall Grass, cross the forest line, hit the target, and recover the Energy Tokens.",
-        "The League recognizes every assisted success as completely legitimate Champion behavior!"
+        "Then follow the Sky energy to Mega Rayquaza. Every assisted success is completely legitimate Champion behavior!"
       ],
       challengeSteps: [
         "Guide one supported pass through the Tall Grass markers.",
         "Cross the ground-level balance line.",
         "Use soft balls at the prepared target.",
-        "Reveal or point toward the three Energy Tokens whenever needed."
+        "Reveal or point toward the three Energy Tokens whenever needed.",
+        "Continue directly to the secured Rayquaza target. Move closer after a miss and invoke a Legendary Assist whenever helpful."
       ],
       runtimeSteps: [
         "Guide one easy pass through the markers, ground line, target, and Energy Tokens.",
-        "Point, widen targets, and help whenever Luca needs it."
+        "Continue straight to Rayquaza: use one soft throw, move closer, and give a Legendary Assist whenever helpful."
       ],
-      whenFinished: "Declare Victory Road cleared. Tell Patrick to open the result before the Rayquaza stage.",
-      runtimeBackup: "Shorten the route to one pass per station and reveal every token.",
-      successCondition: "One supported pass through each station. Accuracy never hard-fails, and harmless comedy replaces penalties.",
+      whenFinished: "Declare Victory Road cleared and Rayquaza calm. Tell Patrick the Champion entrance is ready.",
+      runtimeBackup: "Shorten the route, reveal every token, then move close to Rayquaza or point to three Sky symbols.",
+      successCondition: "One supported pass through each station plus a Rayquaza hit, ring toss, symbol match, or Legendary Assist.",
       rewardPackages: ["League qualification handoff"],
       rewardOwners: ["Ariel"],
-      rewardPreparation: "Confirm the Rayquaza target is ready before returning the phone. No physical package is opened at this stage.",
-      fallback: "Shorten the route, widen the target, reveal every token, or use an indoor hallway path.",
-      transitionLine: "Victory Road is cleared. One Legendary encounter remains before the Champion can appear.",
-      transitionDestination: "Sky Pillar",
-      handoffStory: "The Victory Road Referee is ready to judge the final course.",
-      handoffLabel: "Adult: Hold to open Auntie Ariel’s Victory Road cue",
-      completionLabel: "Phone Captain: Hold Mission Complete"
-    },
-    rayquaza: {
-      id: "rayquaza",
-      portalGuide: "league-recruiter",
-      performerName: "Auntie Ariel",
-      characterName: "Legendary Encounter Referee",
-      phoneCaptain: "Patrick",
-      entranceCue: "Reset Luca at the closest safe throwing point and make the Rayquaza target feel enormous and dramatic.",
-      spokenLines: [
-        "Mega Rayquaza is above Sky Pillar!",
-        "One clear hit will calm the Legendary energy.",
-        "If the signal fights back, the League authorizes a Legendary Assist!"
-      ],
-      challengeSteps: [
-        "Use one soft Poké Ball at the secured Rayquaza target.",
-        "Move the throwing point closer after a miss.",
-        "Invoke a Legendary Assist after two minutes or whenever Luca needs it."
-      ],
-      runtimeSteps: [
-        "Give Luca one soft throw at the secured Rayquaza target.",
-        "Move closer after a miss and use a Legendary Assist whenever helpful."
-      ],
-      whenFinished: "Declare Rayquaza calm. Tell Patrick the Champion entrance is ready.",
-      runtimeBackup: "Move close, switch to ring toss, or point to three Sky symbols.",
-      successCondition: "One hit, ring toss, symbol match, or Legendary Assist completes the encounter.",
-      rewardPackages: ["League qualification handoff"],
-      rewardOwners: ["Ariel"],
-      rewardPreparation: "Keep Patrick and the Champion Chest out of sight until the result screen and transition call for the Champion.",
-      fallback: "Move closer, switch to ring toss, or let Luca assemble or point to three Sky symbols.",
+      rewardPreparation: "Keep Patrick and the Champion Chest out of sight until both Victory Road and Rayquaza are complete.",
+      fallback: "Shorten the course, widen targets, reveal every token, then move closer to Rayquaza or use a ring or three Sky symbols.",
       transitionLine: "Mega Rayquaza is calm. The Creekside Champion may now enter.",
       transitionDestination: "Champion Arena",
-      handoffStory: "A Legendary signal has appeared above Sky Pillar.",
-      handoffLabel: "Adult: Hold to open Auntie Ariel’s Rayquaza cue",
+      handoffStory: "Auntie Ariel will referee Victory Road and lead the connected Mega Rayquaza encounter without another phone break.",
+      handoffLabel: "Adult: Hold to open Auntie Ariel’s Victory Road and Rayquaza cue",
       completionLabel: "Phone Captain: Hold Mission Complete"
     },
     champion: {

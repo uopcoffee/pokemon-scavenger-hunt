@@ -49,7 +49,6 @@ const approvedPerformers = {
   vault: "Designated Adult Escort",
   "oak-return": "Professor Bruce and Professor Monica",
   "victory-road": "Auntie Ariel",
-  rayquaza: "Auntie Ariel",
   champion: "Patrick",
   mew: "Patrick / Lead Adult",
 };
@@ -62,7 +61,6 @@ const approvedPhoneCaptains = {
   vault: "Adult Escort",
   "oak-return": "Patrick",
   "victory-road": "Patrick",
-  rayquaza: "Patrick",
   champion: "Auntie Ariel",
   mew: "Polly or Auntie Ariel",
 };
@@ -116,15 +114,14 @@ assert.deepStrictEqual(Object.keys(cues).sort(), Object.keys(approvedPerformers)
 assert.strictEqual(config.settings.soundEnabled, false, "The V3 experience must remain sound-off by default");
 assert.strictEqual(config.settings.respectReducedMotion, true, "V3 must preserve reduced-motion support");
 const narratorTeaserIds = [
-  "orientation-character",
-  "fairy-character",
-  "oak-entrance",
-  "monica-entrance",
-  "center-character",
-  "rocket-character",
-  "vault-character",
-  "oak-return-character",
-  "victory-character",
+  "orientation-story",
+  "fairy-story",
+  "oak-story",
+  "center-story",
+  "rocket-story",
+  "vault-story",
+  "oak-return-travel",
+  "victory-story",
   "champion-character",
   "mew-transmission",
 ];
@@ -198,6 +195,8 @@ assert.ok(!cues.fairy.handoffLabel.includes("Nina"), "Nina must never be named a
 assert.ok(/optional/i.test(cues.fairy.supportingRole), "Nina’s participation must remain optional");
 assert.ok(cues["oak-water"].waterSafetyAdult, "Oak Water Research must name a separate Water Safety Adult");
 assert.ok(!cues["oak-water"].waterSafetyAdult.includes(cues["oak-water"].phoneCaptain), "Pool safety and phone roles must remain separate");
+assert.ok(/Rayquaza/i.test(cues["victory-road"].characterName), "One Ariel cue must cover Victory Road and Rayquaza");
+assert.ok(cues["victory-road"].runtimeSteps.some((step) => /Rayquaza/i.test(step)), "The combined Ariel cue must include the Rayquaza activity");
 
 let relayCount = 0;
 sequences.forEach((sequence) => {
@@ -263,11 +262,15 @@ sequences.forEach((sequence) => {
       );
 
       const parentAdvanced = stateEngine.reducer(exactState, { type: "PARENT_ADVANCE" });
-      assert.strictEqual(
-        parentAdvanced.currentSceneIndex,
-        index - 1 + offset,
-        `Parent Mode must advance one scene from ${relayScene.id}`
-      );
+      if (relayScene === result && index + 2 === sequence.scenes.length - 1) {
+        assert.notStrictEqual(parentAdvanced.view, "scene", `Parent Mode must finish the sequence from ${relayScene.id}`);
+      } else {
+        assert.strictEqual(
+          parentAdvanced.currentSceneIndex,
+          index - 1 + offset,
+          `Parent Mode must advance one scene from ${relayScene.id}`
+        );
+      }
 
       memory.clear();
       assert.strictEqual(stateEngine.writeState(exactState), true);
