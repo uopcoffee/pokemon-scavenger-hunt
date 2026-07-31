@@ -109,7 +109,7 @@ Object.values(config.rewards).forEach((reward) => {
 const fragmentResults = config.chapters
   .filter((chapter) => chapter.scenes.some((scene) => Number.isInteger(scene.fragmentSlot)))
   .map((chapter) => chapter.number);
-assert.deepStrictEqual(Array.from(fragmentResults), [1, 2, 3, 4]);
+assert.deepStrictEqual(Array.from(fragmentResults), [2, 3, 4, 5]);
 
 const victory = config.chapters.find((chapter) => chapter.id === "victory-road");
 assert.strictEqual(victory.scenes.filter((scene) => scene.cueId === "victory-road" && scene.type === "cast-cue").length, 1);
@@ -159,6 +159,7 @@ sequences.forEach((sequence) => {
 [
   ["orientation-reward", "orientation-challenge-result", config.chapters[0]],
   ["fairy-fragment", "fairy-challenge-result", config.chapters[1]],
+  ["rocket-fragment", "rocket-challenge-result", config.chapters[4]],
   ["victory-challenge-b-privacy", "victory-challenge-b", victory],
   ["champion-reward", "champion-challenge-result", victory],
   ["oak-return-reward", "oak-return-challenge-result", config.checkpoint],

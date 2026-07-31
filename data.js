@@ -62,12 +62,20 @@ window.LUCA_CONFIG = {
 };
 
 /* ============================================================
-   Creekside V2 fallback configuration
+   Creekside V2 configuration — PRESERVED BUT UNUSED. DO NOT RENDER.
 
    The V1 configuration above remains intact. The production Creekside
    story, challenge, participant, and reward configuration is loaded from
-   creekside-content.js immediately after this file. This fallback remains
-   available so the Phase 1 foundation is preserved for reference.
+   creekside-content.js immediately after this file, which overwrites
+   window.CREEKSIDE_CONFIG entirely. This block is kept only as a record of
+   the Phase 1 foundation.
+
+   It is NOT a runtime fallback and must never be rendered to Luca. Its
+   code-fragment scenes still carry the retired slot layout (orientation /
+   oak / family / rocket) and adult-operational body text, both of which are
+   wrong for the shipped V3/V4 mapping (Slot 1 Fairy Garden, Slot 2 Oak's
+   Lab, Slot 3 Pokémon Center, Slot 4 Team Rocket Base). If a screen ever
+   needs a fallback config, fix that screen — do not read this block.
 
    PATRICK — CODE FRAGMENT NOTE:
    `displaySymbol` is only a harmless symbol shown in the app. The active

@@ -2,7 +2,7 @@
 
 ## Product statement
 
-Luca's Creekside Region transforms a familiar cul-de-sac into a two-hour Pokémon campaign. Luca begins as a new Trainer, recruits a team, earns four Ranger Code fragments, helps Professor Oak investigate a pool anomaly, defeats a theatrical Team Rocket member, enters a secret Ranger vault, completes Victory Road, defeats the Champion, and then discovers Mew after everyone believes the adventure is over.
+Luca's Creekside Region transforms a familiar cul-de-sac into a two-hour Pokémon campaign. Luca begins as a new Trainer, recruits a team, earns four Ranger Code fragments one chapter at a time while he helps Professor Oak investigate a pool anomaly and defeats a theatrical Team Rocket member, enters a secret Ranger vault, completes Victory Road, defeats the Champion, and then discovers Mew after everyone believes the adventure is over.
 
 ## Player and audience
 

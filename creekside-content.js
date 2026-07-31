@@ -136,7 +136,6 @@
           { id: "orientation-challenge", type: "physical-challenge", title: "Become an Official Trainer", body: "Take the Trainer Oath and complete the equipment test with Auntie Ariel.", successRule: "Complete each equipment step once. Ariel may help with any fiddly packaging.", fallbackText: "Ariel may hold the sleeve or top loader while Luca slides the card into place.", adultPrompt: "League Recruiter: hold to confirm the oath and equipment test are complete." },
           { id: "orientation-reward", type: "reward", title: "Trainer Kit Earned", body: "Open the Trainer equipment now. Place the booster in the adult-carried Booster Satchel.", rewardIds: ["blue-deck-box","red-card-sleeves","cardboard-gold-top-loaders","one-touch-edge-case","mega-gallade-ex","journey-together-booster","trainer-license","ranger-code-card"] },
           { id: "orientation-inventory", type: "inventory-update", title: "Trainer Profile Activated", body: "Mega Gallade joins the team. The Trainer License and Ranger Code Card are ready." },
-          { id: "orientation-fragment", type: "code-fragment-record", title: "Ranger Fragment 1", body: "Write the private physical digit in Slot 1 on the Ranger Code Card. The app records only the Leaf symbol.", fragmentSlot: 1 },
           { id: "orientation-transition", type: "chapter-transition", title: "A Tiny Signal in the Garden", body: "Fairy energy is blinking near the backyard trees. The youngest Gym Leader needs help!" },
         ],
       },
@@ -153,7 +152,7 @@
           { id: "fairy-challenge", type: "physical-challenge", title: "Help Nina Restore the Garden", body: "Search safe low branches, bushes, and backyard hiding places with Nina.", successRule: "Bring all eight battery tea lights to the Fairy Table. An adult quietly arranges them into an arrow.", fallbackText: "Move every remaining light into plain sight or let an adult give the clues. Use fewer lights if needed, then complete the arrow.", adultPrompt: "Fairy Garden Guide: hold to confirm the eight lights form an arrow on the table." },
           { id: "fairy-reward", type: "reward", title: "Fairy Gym Reward", body: "Open the reader and team cards now. Save the Perfect Order booster for the final celebration.", rewardIds: ["sweet-surprise-reader","mega-clefable-ex","alcremie-ex","perfect-order-loose-1","fairy-badge"] },
           { id: "fairy-inventory", type: "inventory-update", title: "Fairy Team Update", body: "Mega Clefable and Alcremie join the team. The Fairy Badge is recorded." },
-          { id: "fairy-fragment", type: "code-fragment-record", title: "Ranger Fragment 2", body: "Record the second physical digit on the Ranger Code Card. The app records only the Star symbol.", fragmentSlot: 2 },
+          { id: "fairy-fragment", type: "code-fragment-record", title: "Ranger Fragment 1", body: "Write the first private physical digit in Slot 1 on the Ranger Code Card. The app records only the Leaf symbol.", fragmentSlot: 1 },
           { id: "fairy-transition", type: "chapter-transition", title: "Professor Oak Requests Assistance", body: "A priority transmission reports research objects beneath the Water Research Preserve. Travel begins now for a 10:15 arrival." },
         ],
       },
@@ -165,12 +164,12 @@
           { id: "oak-travel", type: "travel-location", title: "Travel to Professor Oak's Lab", body: "Allow travel and costume-reset time. Target arrival: 10:15 a.m. Bring the phone, Ranger Code Card, and an adult." },
           { id: "oak-entrance", type: "story", title: "The Professors Are Watching the Water", body: "Professor Oak and Professor Monica are studying a strange signal at the preserve. Something important is moving beneath the surface." },
           { id: "monica-entrance", type: "story", title: "The Capsule Readings Are Rising", body: "Four sealed research capsules are missing. The Partner Professors need a Trainer before Team Rocket detects the same energy." },
-          { id: "oak-story", type: "story", title: "Four Research Capsules", body: "One capsule holds the final Ranger fragment. Another holds a Sky Fragment producing unstable Mega Energy." },
+          { id: "oak-story", type: "story", title: "Four Research Capsules", body: "One capsule holds a Ranger fragment the Professors cannot explain. Another holds a Sky Fragment producing unstable Mega Energy." },
           { id: "oak-safety", type: "challenge-briefing", title: "Water Research Safety Briefing", instructions: ["One supervising adult watches the water continuously.", "No running on the pool deck.", "Retrieve only floating or shallow prepared capsules.", "Use the skimmer immediately if swimming is not the best option."] },
           { id: "oak-challenge", type: "physical-challenge", title: "Recover the Four Capsules", body: "Use Monica's symbol diagram, retrieve four double-sealed capsules, identify the unstable-energy symbol, and place the Sky Fragment in the research tray.", successRule: "Retrieve all four safely; swimming should be brief and purposeful.", fallbackText: "Use the pool skimmer, float capsules in a tub, or retrieve four marked tennis balls from the deck.", adultPrompt: "Supervising adult: hold to confirm all four research objects are safely recovered." },
           { id: "oak-reward", type: "reward", title: "Professor Oak's Field Research Reward", body: "Open the books, collection, and water mini tin as directed. Every booster goes unopened into the Booster Satchel.", rewardIds: ["water-mini-tin","chaos-rising-1","water-mini-tin-packs","sky-fragment","first-partner-collection","new-journey-reader","adventures-collector-02","first-partner-boosters","water-research-badge"] },
           { id: "oak-inventory", type: "inventory-update", title: "Research Inventory Updated", body: "The Sky Fragment and Water Research Badge are secured for the larger mystery." },
-          { id: "oak-fragment", type: "code-fragment-record", title: "Ranger Fragment 4", body: "Record the final physical digit in Slot 4. The app records only the Wave symbol.", fragmentSlot: 4 },
+          { id: "oak-fragment", type: "code-fragment-record", title: "Ranger Fragment 2", body: "Record the second physical digit in Slot 2 on the Ranger Code Card. The app records only the Star symbol.", fragmentSlot: 2 },
           { id: "oak-transition", type: "chapter-transition", title: "A Pokémon Center Emergency", body: "Oak's readings reveal Pokémon affected by unstable Mega Energy. Nurse Joy needs Luca next." },
         ],
       },
@@ -202,6 +201,7 @@
           { id: "rocket-challenge", type: "physical-challenge", title: "Defeat Team Rocket's Basketball Base", body: "Complete the three forgiving rounds while Mike delivers dramatic commentary.", successRule: "Basket = 2 points; rim, backboard, or prepared target = 1 point. After two misses, move closer. Mike must eventually lose.", fallbackText: "Lower the hoop, use the closest marker, hit a large backboard target, or let Ariel perform the Team Rocket role.", adultPrompt: "Team Rocket Boss: hold to surrender the stolen Ranger Dispatch." },
           { id: "rocket-reward", type: "reward", title: "Recovered Team Rocket Loot", body: "Open the three team cards. Place the Destined Rivals booster in the Booster Satchel and carry the Ranger Dispatch.", rewardIds: ["rocket-nidoking-ex","incineroar-ex","mega-pyroar-ex","destined-rivals-1","ranger-dispatch","rocket-badge"] },
           { id: "rocket-inventory", type: "inventory-update", title: "Rocket Defeated", body: "Nidoking, Incineroar, and Mega Pyroar join the team. The stolen dispatch explains the Ranger fragments." },
+          { id: "rocket-fragment", type: "code-fragment-record", title: "Ranger Fragment 4", body: "Record the final physical digit in Slot 4. The card is now complete. The app records only the Wave symbol.", fragmentSlot: 4 },
           { id: "rocket-transition", type: "chapter-transition", title: "The Secret Ranger Vault", body: "Rangers Hannah and Noa left a protected cache. The four physical digits now have a purpose." },
         ],
       },
@@ -330,13 +330,11 @@
     combinedChallenge(orientation, "orientation-challenge", {
       title: "Trainer Oath and Equipment Test",
       successTitle: "You Arrived Just in Time, Luca!",
-      successBody: "The Trainer License activates. Mega Gallade joins Luca’s team, and the first Ranger mark appears.",
+      successBody: "The Trainer License activates and Mega Gallade joins Luca’s team. Auntie Ariel also hands over a blank card nobody will explain.",
       resultLabel: "Trainer License earned",
       revealItems: ["Trainer License activated"],
       rewardIds: orientationRewards,
-      fragmentSlot: 1,
-      fragmentStory: "The first Ranger mark appears. Three remain—and nobody knows what they open.",
-      rewardHandoff: "Trainer Kit ready! Auntie Ariel hands Luca the TRAINER KIT now. Introduce the Ranger Code Card and pencil, then place the Journey Together booster in the Save for Celebration container.",
+      rewardHandoff: "Trainer Kit ready! Auntie Ariel hands Luca the TRAINER KIT now. Introduce the Ranger Code Card and pencil as League-issue equipment — the card is completely blank and Ariel does not say what it is for. Then place the Journey Together booster in the Save for Celebration container.",
       nextDestination: "But the new Trainer signal has disturbed something in the backyard. Tiny lights are falling from the trees—and Nina saw them first."
     })
   ], {
@@ -345,7 +343,6 @@
     "orientation-briefing": "orientation-challenge-handoff",
     "orientation-reward": "orientation-challenge-result",
     "orientation-inventory": "orientation-challenge-result",
-    "orientation-fragment": "orientation-challenge-result",
     "orientation-transition": "orientation-challenge-result"
   });
 
@@ -366,8 +363,8 @@
       resultLabel: "Fairy Badge earned",
       revealItems: ["The glowing arrow points toward the Partner Professors’ Lab"],
       rewardIds: fairyRewards,
-      fragmentSlot: 2,
-      fragmentStory: "Two Ranger marks. Perhaps the lights know what the card will open.",
+      fragmentSlot: 1,
+      fragmentStory: "The first Ranger mark appears on the blank card. Nobody in the garden has seen the symbol before.",
       rewardHandoff: "Your reward has appeared! Auntie Ariel hands Luca the FAIRY GYM REWARD now. Open the reader and team cards; save the Perfect Order booster for the celebration.",
       nextDestination: "Follow the Fairy Lights. Professor Oak and Professor Monica may know why the garden chose this path."
     })
@@ -403,8 +400,8 @@
       resultLabel: "Water Research Badge earned",
       revealItems: ["The Sky Fragment answered Luca"],
       rewardIds: oakRewards,
-      fragmentSlot: 4,
-      fragmentStory: "Three Ranger marks. The Professors go quiet when they see the Wave.",
+      fragmentSlot: 2,
+      fragmentStory: "A second mark. The Professors go very quiet when the Star appears.",
       rewardHandoff: "The Professors hand Luca the critical clue and story reward at the dry research table. A designated adult carries the larger WATER RESEARCH packages for later. Save every booster for the celebration.",
       nextDestination: "The same energy has frightened nearby Pokémon. Nurse Joy can help them—but she needs the Trainer the signal responds to."
     })
@@ -432,7 +429,7 @@
       revealItems: ["Every patient is safe"],
       rewardIds: centerRewards,
       fragmentSlot: 3,
-      fragmentStory: "Four Ranger marks. The card is complete. Now something has to open.",
+      fragmentStory: "Three marks. One empty space left, and still nobody will say what the card opens.",
       rewardHandoff: "Nurse Joy hands Luca the POKÉMON CENTER FIELD KIT, Care Badge, and Heart clue now. Open the story items and save the included booster for the celebration.",
       nextDestination: "Team Rocket has been following the same energy trail—and Mike claims he knows what the Sky Fragment opens."
     })
@@ -456,12 +453,14 @@
     combinedChallenge(rocket, "rocket-challenge", {
       title: "Break Team Rocket’s Defense",
       successTitle: "Team Rocket’s “Unbeatable” Defense Collapses!",
-      successBody: "Team Rocket’s “unbeatable” defense collapses. The stolen Dispatch falls open to a Ranger symbol older than Creekside.",
+      successBody: "Team Rocket’s “unbeatable” defense collapses. The stolen Dispatch falls open to four Ranger symbols — the same four now filling Luca’s card, right as the last one is marked.",
       resultLabel: "Rocket Badge earned",
       revealItems: ["The stolen Ranger Dispatch is recovered"],
       rewardIds: rocketRewards,
-      rewardHandoff: "Mike must surrender the stolen loot. Hand Luca the RECOVERED TEAM ROCKET LOOT and Ranger Dispatch now. Open the team cards; save the Destined Rivals booster for the celebration.",
-      nextDestination: "The Dispatch says the four fragments do not hide treasure. They protect a warning the Rangers believed someone would need. Why did they leave it for Luca?"
+      fragmentSlot: 4,
+      fragmentStory: "The last mark. The card is full — and the Dispatch in Luca’s hands finally says what it opens.",
+      rewardHandoff: "Mike must surrender the stolen loot. Hand Luca the RECOVERED TEAM ROCKET LOOT and Ranger Dispatch now, then the last physical fragment card for Slot 4. Open the team cards; save the Destined Rivals booster for the celebration.",
+      nextDestination: "The completed card is the key to the Secret Ranger Vault. The four marks hide no treasure — they protect a warning Rangers Hannah and Noa left for whoever finished the card. Go there now."
     })
   ], {
     "rocket-location": "rocket-story",
@@ -469,6 +468,7 @@
     "rocket-briefing": "rocket-challenge-handoff",
     "rocket-reward": "rocket-challenge-result",
     "rocket-inventory": "rocket-challenge-result",
+    "rocket-fragment": "rocket-challenge-result",
     "rocket-transition": "rocket-challenge-result"
   });
 

@@ -177,7 +177,7 @@
       successCondition: "Mike always loses. A basket, target hit, layup, soft pass, or prepared fallback defeats the defense.",
       rewardPackages: ["RECOVERED TEAM ROCKET LOOT"],
       rewardOwners: ["Mike"],
-      rewardPreparation: "Keep the loot and Ranger Dispatch ready. After the result screen, open the team cards, place the booster in the adult Booster Satchel, and hand over the Dispatch.",
+      rewardPreparation: "Keep the loot, Ranger Dispatch, and the last physical fragment card ready. After the result screen, open the team cards, place the booster in the adult Booster Satchel, then hand over the Dispatch and the final fragment together without showing its private mark.",
       fallback: "Lower the hoop, use the closest marker, count target hits, accept three soft passes, or use one close shot plus two easy Pokémon questions.",
       transitionLine: "The Rangers left a warning, not treasure. And somehow, they were waiting for you!",
       transitionDestination: "Secret Ranger Vault",

@@ -32,10 +32,10 @@ assert.deepStrictEqual(
 assert.match(cues["oak-water"].runtimeSteps.join(" "), /Water Safety Adult.*Phone Captain.*Professors/);
 assert.match(cues["oak-water"].runtimeSteps.join(" "), /Stow the phone safely away/i);
 assert.match(cues["oak-water"].runtimeBackup, /skimmer.*dry-tub.*one capsule/i);
-assert.match(JSON.stringify(oak.scenes), /Three Ranger marks\. The Professors go quiet when they see the Wave\./);
+assert.match(JSON.stringify(oak.scenes), /A second mark\. The Professors go very quiet when the Star appears\./);
 const oakLogistics = oak.scenes.find((scene) => scene.id === "oak-challenge-logistics");
 assert.strictEqual(oakLogistics.audience, "adult");
-assert.strictEqual(oakLogistics.fragmentSlot, 4);
+assert.strictEqual(oakLogistics.fragmentSlot, 2);
 assert.match(oakLogistics.rewardHandoff, /WATER RESEARCH packages/i);
 
 assert.match(cues.fairy.supportingRole, /never handles the phone/i);

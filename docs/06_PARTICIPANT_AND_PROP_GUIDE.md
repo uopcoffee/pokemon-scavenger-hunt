@@ -35,6 +35,8 @@ Props:
 - clipboard
 - League badge or jacket
 - obstacle-course scorecard
+- blank Ranger Code Record Card and pencil, handed over during League Registration with no explanation of what it is for. Ariel carries no fragment card at Registration.
+- Physical Code Fragment 1, kept private until the Fairy Garden reward handoff
 
 ## Nina
 
@@ -134,6 +136,7 @@ Props:
 - basketball
 - three shooting markers
 - reward envelope and Ranger Dispatch
+- Physical Code Fragment 4, prepared privately and kept hidden. **New prop for Mike.** He surrenders it together with the Dispatch, completing Luca's card in the same moment the Dispatch explains what it opens.
 
 ## Patrick
 
@@ -158,7 +161,7 @@ Props:
 
 - Four vacuum-sealed or double-sealed capsules
 - Large visible capsule numbers
-- Physical Code Fragment 4
+- Physical Code Fragment 2
 - Chaos Rising pack
 - Water-themed mini tin
 - Sky Fragment prop

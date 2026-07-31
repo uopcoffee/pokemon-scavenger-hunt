@@ -42,7 +42,8 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 
 - [ ] Keep the real entry digits off phones, computers, photographs, and the repository.
 - [ ] Handwrite one private digit on each of the four physical fragment cards only.
-- [ ] Give Luca a physical Ranger Code Record Card with four blank slots.
+- [ ] Give Luca a physical Ranger Code Record Card with four blank slots in Chapter 1. It is handed over completely blank and nobody explains what it is for.
+- [ ] Marks are earned one per chapter in Chapters 2–5: Slot 1 Fairy Garden, Slot 2 Oak's Lab, Slot 3 Pokémon Center, Slot 4 Team Rocket Base.
 - [ ] The app should display only Leaf, Star, Heart, and Wave.
 - [ ] An adult accompanies Luca throughout the Ranger Vault entry.
 
@@ -56,7 +57,7 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 - [ ] Ultra Pro One-Touch Edge case — **OPEN NOW**
 - [ ] Mega Gallade ex — **OPEN NOW**
 - [ ] Trainer License — **CARRY FOR LATER**
-- [ ] Ranger Code Record Card — **CARRY FOR LATER**
+- [ ] Ranger Code Record Card, blank, with pencil — **CARRY FOR LATER** (no fragment card here; Chapter 1 no longer records a slot)
 - [ ] Journey Together booster — **SAVE FOR CELEBRATION**
 
 ### FAIRY GYM REWARD — Chapter 2 — Fairy Garden
@@ -66,6 +67,7 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 - [ ] Alcremie ex — **OPEN NOW**
 - [ ] Fairy Badge — **CARRY FOR LATER**
 - [ ] Loose Perfect Order booster — **SAVE FOR CELEBRATION**
+- [ ] Physical Fragment 1 card, privately prepared
 
 ### WATER RESEARCH CAPSULES 1–4 — Chapter 3 — Professor Oak's Lab
 
@@ -74,7 +76,7 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 - [ ] Sky Fragment prop — **CARRY FOR LATER**
 - [ ] Chaos Rising booster — **SAVE FOR CELEBRATION**
 - [ ] Packs inside the water mini tin — **SAVE FOR CELEBRATION**
-- [ ] Physical Fragment 4 card, privately prepared
+- [ ] Physical Fragment 2 card, privately prepared
 
 ### PROFESSOR OAK'S FIRST PARTNER FILE — Chapter 3 — Professor Oak's Lab
 
@@ -100,6 +102,7 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 - [ ] Ranger Dispatch — **CARRY FOR LATER**
 - [ ] Rocket Badge — **CARRY FOR LATER**
 - [ ] Destined Rivals booster — **SAVE FOR CELEBRATION**
+- [ ] Physical Fragment 4 card, privately prepared — **NEW for Mike.** The final mark is now earned here, at the same moment the Ranger Dispatch is surrendered. Mike hands over the Dispatch and this card together; the card is complete and the Ranger Vault is the immediate next stop.
 
 ### SECRET RANGER CACHE — Chapter 6 — Ranger Vault
 
@@ -155,7 +158,7 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 - [ ] Eight safe hiding places Nina knows ahead of time
 - [ ] Fairy Table with room for Polly, Ariel, or Patrick to build the arrow
 - [ ] Confirm every light is reachable from the ground; no tree, fence, furniture, or ladder climbing
-- [ ] Two privately prepared fragment cards for Slots 1 and 2
+- [ ] One privately prepared fragment card for Slot 1 (Fairy Garden only — League Registration carries no fragment card)
 - [ ] Indoor backup locations identified
 
 ### Professor Oak's Lab
@@ -165,13 +168,14 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 - [ ] Monica's four-symbol diagram
 - [ ] Dedicated water-safety adult
 - [ ] Professor Oak and Monica scripts
-- [ ] Physical fragment card for Slot 4
+- [ ] Physical fragment card for Slot 2
 
 ### Pokémon Center and Team Rocket Base
 
 - [ ] Three patient cards and three matching treatments
 - [ ] Medicine Poké Ball and short delivery path
 - [ ] Physical fragment card for Slot 3
+- [ ] Physical fragment card for Slot 4, carried by Mike — new prop for him this year
 - [ ] Adjustable basketball hoop, soft ball, close-shot markers, and large fallback target
 - [ ] Team Rocket costume pieces and Ranger Dispatch
 
