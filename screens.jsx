@@ -38,20 +38,39 @@ function Splash({ onStart }) {
   return (
     <Field hero>
       <div style={{ ...shell }}>
-        <div style={{ ...pad, justifyContent: "center", alignItems: "center", textAlign: "center", gap: 10 }}>
+        <div style={{ ...pad, alignItems: "center", textAlign: "center", gap: 10, paddingTop: 20, paddingBottom: 24 }}>
           <div style={{ animation: "tj-float 5s ease-in-out infinite" }}>
-            <HeroMedallion size={230}><HeroArt src={STICKERS + "tropius.png"} label="Tropius" size={150} bob /></HeroMedallion>
+            <HeroMedallion size={150}><HeroArt src={STICKERS + "tropius.png"} label="Tropius" size={100} bob /></HeroMedallion>
           </div>
-          <div style={{ fontFamily: "var(--font-label)", fontSize: "0.85rem", letterSpacing: "0.28em", textTransform: "uppercase", color: "var(--banana)", fontWeight: 700, marginTop: 6, display: "flex", alignItems: "center", gap: 10 }}>
-            <img src={ART + "mega-icon.png"} alt="" style={{ width: 22, height: 22 }} />Luca's<img src={ART + "mega-icon.png"} alt="" style={{ width: 22, height: 22, transform: "scaleX(-1)" }} />
+          <div style={{ fontFamily: "var(--font-label)", fontSize: "0.78rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--banana)", fontWeight: 700, marginTop: 4 }}>
+            A birthday message for Luca
           </div>
-          <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontStyle: "italic", fontSize: "3rem", lineHeight: 0.95, margin: "0 0 8px", color: "#fff", textShadow: "0 4px 24px rgba(138,79,255,.6), 0 2px 3px rgba(0,0,0,.3)" }}>
-            TRAINER <span style={{ color: "var(--banana)" }}>JOURNEY</span>
+          <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontStyle: "italic", fontSize: "2.15rem", lineHeight: 1, margin: "0 0 6px", color: "#fff", textShadow: "0 4px 24px rgba(138,79,255,.6), 0 2px 3px rgba(0,0,0,.3)", maxWidth: 390 }}>
+            WELCOME TO THE <span style={{ color: "var(--banana)" }}>CREEKSIDE POKÉMON REGION!</span>
           </h1>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "1.0625rem", lineHeight: 1.5, color: "rgba(255,255,255,.85)", maxWidth: 360, margin: "0 0 26px" }}>
-            A signal no scanner can explain has appeared in Creekside. The Pokémon League asked for you by name.
-          </p>
-          <Button variant="reward" size="lg" icon="arrow-right" block onClick={onStart} style={{ maxWidth: 360 }}>Answer the call</Button>
+          <div style={{ width: "100%", maxWidth: 390, padding: "18px 18px 16px", borderRadius: "var(--r-card)", background: "rgba(255,255,255,.94)", boxShadow: "var(--shadow-float)", color: "var(--ink)", textAlign: "left" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.45, margin: "0 0 12px" }}>
+              Today, Creekside Court has disappeared. In its place is the <strong>Creekside Pokémon Region</strong>—a world filled with Pokémon, Trainer challenges, hidden clues, and birthday surprises.
+            </p>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.45, margin: "0 0 14px" }}>
+              Some of your family and friends have become characters in the Pokémon world. They’ll meet you along the way, help on your journey, and reveal pieces of a special adventure created just for you.
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 14 }} aria-label="Today's adventure">
+              {["Explore the region", "Meet Pokémon characters", "Take on Trainer challenges", "Earn badges and rewards"].map((item) => (
+                <div key={item} style={{ display: "flex", alignItems: "center", gap: 7, padding: "8px 9px", borderRadius: 12, background: "var(--paper-alt)", fontFamily: "var(--font-body)", fontSize: ".82rem", lineHeight: 1.2, fontWeight: 700 }}>
+                  <Icon name="sparkle" size={17} color="var(--mewtwo-x)" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: ".95rem", lineHeight: 1.4, margin: "0 0 12px" }}>
+              Your family is your Trainer team. They can help whenever you need them, and every challenge is designed for you to succeed.
+            </p>
+            <div style={{ padding: "11px 12px", borderRadius: 12, background: "rgba(138,79,255,.1)", borderLeft: "4px solid var(--mewtwo-x)", fontFamily: "var(--font-body)", fontSize: ".95rem", lineHeight: 1.4 }}>
+              But first, Professor Oak has a special message. <strong>He asked for you by name.</strong>
+            </div>
+          </div>
+          <Button variant="reward" size="lg" icon="arrow-right" block onClick={onStart} style={{ maxWidth: 390, marginTop: 4 }}>Answer the Call</Button>
         </div>
       </div>
     </Field>
