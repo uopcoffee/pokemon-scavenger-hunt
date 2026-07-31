@@ -255,8 +255,89 @@ window.TrainerApp = TrainerApp;
    ============================================================ */
 window.V1TrainerApp = TrainerApp;
 
+const TRAINER_OATH = [
+  "I will protect Pokémon.",
+  "I will help my friends.",
+  "I will play fairly.",
+  "I will never give up.",
+];
+
+function TrainerLicenseCard({ trainerName = "Luca", flipped = false, oathCount = 4, buddy = true, issued = true, onFlip, ceremony = false, onName, onBirthday, onBuddy, onOath }) {
+  return (
+    <div className={`trainer-license${flipped ? " trainer-license--flipped" : ""}${ceremony ? " trainer-license--ceremony" : ""}`}>
+      <div className="trainer-license__inner">
+        <section className="trainer-license__face trainer-license__front" aria-hidden={flipped}>
+          <span className="trainer-license__holo" aria-hidden />
+          <header><img src="assets/ui/gym-badge-ink.png" alt="" /><span><b>Creekside League</b><small>Trainer License</small></span></header>
+          <div className="trainer-license__identity">
+            <button type="button" className={`trainer-license__buddy${buddy ? " is-filled" : ""}`} onClick={onBuddy} disabled={!onBuddy || buddy}>
+              {buddy ? <img src={ART + "tropius.png"} alt="Tropius" /> : <><b>＋</b><small>Tap to assign buddy</small></>}
+            </button>
+            <div>
+              <small>Trainer name</small>
+              {ceremony && !issued && trainerName === "" ? <button type="button" className="license-slot" onClick={onName}>Tap as he says his name</button> : <h2>{trainerName || "Luca"}</h2>}
+              <small>Date of birth</small>
+              {ceremony && !issued ? <button type="button" className="license-slot" onClick={onBirthday} disabled={!trainerName}>Tap as he says his birthday</button> : <strong>August 1 · 2026</strong>}
+            </div>
+          </div>
+          <div className={`trainer-license__birthday${issued ? " is-revealed" : ""}`}>
+            <div><b>7</b><sup>th</sup></div><span>Happy<br/>Birthday<small>Trainer {trainerName || "Luca"}</small></span>
+          </div>
+          <footer><b>NO. CRK-2026-007</b><span>Issued by Auntie Ariel</span></footer>
+        </section>
+        <section className="trainer-license__face trainer-license__back" aria-hidden={!flipped}>
+          <header><img src="assets/stamps/ui/stamp_completed.png" alt="" /><span><b>The Trainer Oath</b><small>{oathCount} / 4 sworn</small></span></header>
+          <div className="trainer-license__oath">
+            {TRAINER_OATH.map((line, index) => {
+              const complete = index < oathCount;
+              const active = index === oathCount && oathCount < 4;
+              return <button type="button" key={line} className={`${complete ? "is-complete" : ""}${active ? " is-active" : ""}`} disabled={!onOath || !active} onClick={() => onOath(index)}><span>{complete ? "✓" : index + 1}</span><strong>{complete ? line : active ? `Tap after he repeats line ${index + 1}` : `Line ${index + 1} locked`}</strong></button>;
+            })}
+          </div>
+          {oathCount === 4 && <div className="trainer-license__stamp"><img src="assets/stamps/ui/stamp_completed.png" alt="" />Oath sworn — registered Trainer</div>}
+          <footer><b>Buddy Pokémon</b><span>{buddy ? "Tropius" : "Awaiting assignment"}</span></footer>
+        </section>
+      </div>
+      {onFlip && <button type="button" className="trainer-license__flip" onClick={onFlip}>{flipped ? "Flip to front" : "Flip card over"} ⇄</button>}
+    </div>
+  );
+}
+
+function LicenseCeremony({ state, dispatch }) {
+  const storageKey = "creekside-license-ceremony-v1";
+  const saved = (() => { try { return JSON.parse(localStorage.getItem(storageKey) || "null"); } catch (_) { return null; } })();
+  const [ceremony, setCeremony] = React.useState(saved || { name: "", birthday: false, calculating: false, issued: false, flipped: false, oathCount: 0, buddy: false, equipment: false });
+  React.useEffect(() => { try { localStorage.setItem(storageKey, JSON.stringify(ceremony)); } catch (_) {} }, [ceremony]);
+  const update = (values) => setCeremony((current) => ({ ...current, ...values }));
+  const issueReady = ceremony.birthday && ceremony.oathCount === 4 && ceremony.buddy && ceremony.equipment;
+  const step = !ceremony.name ? "Step 1 — state your name" : !ceremony.birthday ? (ceremony.calculating ? "Calculating League record…" : "Step 2 — state your birthday") : ceremony.oathCount < 4 ? (ceremony.flipped ? "Step 3 — one oath line at a time" : "Step 3 — flip the card over") : !ceremony.buddy ? (ceremony.flipped ? "Step 4 — flip back to the front" : "Step 4 — assign a buddy") : !ceremony.equipment ? "Step 5 — complete the equipment test" : "License complete · welcome, Trainer";
+  const revealBirthday = () => {
+    if (!ceremony.name || ceremony.calculating || ceremony.birthday) return;
+    update({ calculating: true });
+    setTimeout(() => update({ calculating: false, birthday: true, issued: true }), 3000);
+  };
+  const reset = () => { const fresh = { name: "", birthday: false, calculating: false, issued: false, flipped: false, oathCount: 0, buddy: false, equipment: false }; setCeremony(fresh); try { localStorage.removeItem(storageKey); } catch (_) {} };
+  return (
+    <div className="license-ceremony-screen" data-audience="cast">
+      <div className="license-ceremony-screen__shell">
+        <AudienceIndicator audience="cast" performerName="Auntie Ariel" />
+        <header><div><small>Creekside League</small><h1>Trainer Oath</h1></div><span>Ariel taps · Luca speaks</span></header>
+        <p className="license-ceremony-step">{step}</p>
+        <TrainerLicenseCard trainerName={ceremony.name} flipped={ceremony.flipped} oathCount={ceremony.oathCount} buddy={ceremony.buddy} issued={ceremony.issued} ceremony onName={() => update({ name: state.trainer.name || "Luca" })} onBirthday={revealBirthday} onBuddy={() => update({ buddy: true })} onOath={() => update({ oathCount: ceremony.oathCount + 1 })} onFlip={() => update({ flipped: !ceremony.flipped })} />
+        {ceremony.calculating && <div className="license-calculating" role="status"><img src={ART + "pokeball.png"} alt="" /><b>Calculating age</b><span><i/><i/><i/></span></div>}
+        <div className="license-ceremony-actions">
+          <button type="button" className="license-reset" onClick={reset} aria-label="Reset ceremony">↻</button>
+          {ceremony.birthday && ceremony.oathCount === 4 && ceremony.buddy && !ceremony.equipment ? <AdultHoldButton duration={1500} label="Auntie Ariel: equipment test complete" onComplete={() => update({ equipment: true })} /> : issueReady ? <Button variant="reward" block onClick={() => { try { localStorage.removeItem(storageKey); } catch (_) {} dispatch({ type: "ADVANCE_SCENE" }); }}>License issued — continue</Button> : <small>Complete the birthday reveal, all four oath lines, and buddy assignment.</small>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CreeksideMap({ config, state, dispatch }) {
   const [mapView, setMapView] = React.useState("map");
+  const [licenseOpen, setLicenseOpen] = React.useState(false);
+  const [licenseFlipped, setLicenseFlipped] = React.useState(false);
   const currentChapter = window.CreeksideState.chapterById(state.currentChapterId);
   const activeType = state.activeFlow === "mew"
     ? config.epilogue.type
@@ -299,14 +380,7 @@ function CreeksideMap({ config, state, dispatch }) {
 
           {mapView === "record" ? (
             <section className="trainer-record-view" aria-label="Trainer Record">
-              <TrainerCard
-                name={state.trainer.name || "Trainer Luca"}
-                avatarSrc={ART + avatar.img}
-                badges={state.completedChapters.length}
-                totalBadges={config.chapters.length}
-                champion={state.completedChapters.includes(finalChapterId)}
-                style={{ maxWidth: "none" }}
-              />
+              {state.earnedRewards.includes("trainer-license") ? <button type="button" className="trainer-license-record" onClick={() => { setLicenseFlipped(false); setLicenseOpen(true); }}><img src={ART + "tropius.png"} alt=""/><span><small>Trainer License</small><strong>{state.trainer.name || "Luca"}</strong><b>NO. CRK-2026-007 · Issued by Auntie Ariel</b></span><i>View & flip ›</i></button> : <TrainerCard name={state.trainer.name || "Trainer Luca"} avatarSrc={ART + avatar.img} badges={state.completedChapters.length} totalBadges={config.chapters.length} style={{ maxWidth: "none" }} />}
               <h2>Earned Awards</h2>
               <div className="trainer-award-grid">
                 {state.earnedRewards.map((rewardId) => (
@@ -425,6 +499,7 @@ function CreeksideMap({ config, state, dispatch }) {
           </div>
           </>}
         </div>
+        {licenseOpen && <div className="trainer-license-modal" role="dialog" aria-modal="true" aria-label="Trainer License"><button type="button" className="trainer-license-modal__close" onClick={() => setLicenseOpen(false)} aria-label="Close license">×</button><TrainerLicenseCard trainerName={state.trainer.name || "Luca"} flipped={licenseFlipped} onFlip={() => setLicenseFlipped(!licenseFlipped)} /></div>}
       </div>
     </Field>
   );
@@ -801,6 +876,7 @@ function CreeksideScene({ config, state, dispatch }) {
     return <PrivacyShieldScreen sequence={sequence} scene={scene} dispatch={dispatch} />;
   }
   if (scene.type === "cast-cue") {
+    if (sequence.id === "trainer-orientation") return <LicenseCeremony state={state} dispatch={dispatch} />;
     return <CastCueScreen config={config} sequence={sequence} scene={scene} dispatch={dispatch} />;
   }
   if (scene.type === "return-to-player") {
