@@ -303,14 +303,14 @@ function TrainerLicenseCard({ trainerName = "Luca", flipped = false, oathCount =
   );
 }
 
-function LicenseCeremony({ state, dispatch }) {
+function LicenseCeremony({ state, dispatch, onComplete }) {
   const storageKey = "creekside-license-ceremony-v1";
   const saved = (() => { try { return JSON.parse(localStorage.getItem(storageKey) || "null"); } catch (_) { return null; } })();
   const [ceremony, setCeremony] = React.useState(saved || { name: "", birthday: false, calculating: false, issued: false, flipped: false, oathCount: 0, buddy: false, equipment: false });
   React.useEffect(() => { try { localStorage.setItem(storageKey, JSON.stringify(ceremony)); } catch (_) {} }, [ceremony]);
   const update = (values) => setCeremony((current) => ({ ...current, ...values }));
-  const issueReady = ceremony.birthday && ceremony.oathCount === 4 && ceremony.buddy && ceremony.equipment;
-  const step = !ceremony.name ? "Step 1 — state your name" : !ceremony.birthday ? (ceremony.calculating ? "Calculating League record…" : "Step 2 — state your birthday") : ceremony.oathCount < 4 ? (ceremony.flipped ? "Step 3 — one oath line at a time" : "Step 3 — flip the card over") : !ceremony.buddy ? (ceremony.flipped ? "Step 4 — flip back to the front" : "Step 4 — assign a buddy") : !ceremony.equipment ? "Step 5 — complete the equipment test" : "License complete · welcome, Trainer";
+  const issueReady = ceremony.birthday && ceremony.oathCount === 4 && ceremony.buddy;
+  const step = !ceremony.name ? "Step 1 — state your name" : !ceremony.birthday ? (ceremony.calculating ? "Calculating League record…" : "Step 2 — state your birthday") : ceremony.oathCount < 4 ? (ceremony.flipped ? "Step 3 — one oath line at a time" : "Step 3 — flip the card over") : !ceremony.buddy ? (ceremony.flipped ? "Step 4 — flip back to the front" : "Step 4 — assign a buddy") : "License complete · welcome, Trainer";
   const revealBirthday = () => {
     if (!ceremony.name || ceremony.calculating || ceremony.birthday) return;
     update({ calculating: true });
@@ -327,7 +327,7 @@ function LicenseCeremony({ state, dispatch }) {
         {ceremony.calculating && <div className="license-calculating" role="status"><img src={ART + "pokeball.png"} alt="" /><b>Calculating age</b><span><i/><i/><i/></span></div>}
         <div className="license-ceremony-actions">
           <button type="button" className="license-reset" onClick={reset} aria-label="Reset ceremony">↻</button>
-          {ceremony.birthday && ceremony.oathCount === 4 && ceremony.buddy && !ceremony.equipment ? <AdultHoldButton duration={1500} label="Auntie Ariel: equipment test complete" onComplete={() => update({ equipment: true })} /> : issueReady ? <Button variant="reward" block onClick={() => { try { localStorage.removeItem(storageKey); } catch (_) {} dispatch({ type: "ADVANCE_SCENE" }); }}>License issued — continue</Button> : <small>Complete the birthday reveal, all four oath lines, and buddy assignment.</small>}
+          {issueReady ? <Button variant="reward" block onClick={() => { try { localStorage.removeItem(storageKey); } catch (_) {} if (onComplete) onComplete({ name: ceremony.name || "Luca", avatarId: "tropius" }); else dispatch({ type: "ADVANCE_SCENE" }); }}>License issued — begin the quest</Button> : <small>Complete the birthday reveal, all four oath lines, and buddy assignment.</small>}
         </div>
       </div>
     </div>
@@ -876,7 +876,6 @@ function CreeksideScene({ config, state, dispatch }) {
     return <PrivacyShieldScreen sequence={sequence} scene={scene} dispatch={dispatch} />;
   }
   if (scene.type === "cast-cue") {
-    if (sequence.id === "trainer-orientation") return <LicenseCeremony state={state} dispatch={dispatch} />;
     return <CastCueScreen config={config} sequence={sequence} scene={scene} dispatch={dispatch} />;
   }
   if (scene.type === "return-to-player") {
@@ -1324,12 +1323,7 @@ function CreeksideApp() {
         </div>
       )}
       {state.view === "splash" && <Splash onStart={() => dispatch({ type: "START_ONBOARDING" })} />}
-      {state.view === "onboarding" && (
-        <Onboarding
-          config={config}
-          onDone={(trainer) => dispatch({ type: "SET_TRAINER", name: trainer.name, avatarId: trainer.avatar.id })}
-        />
-      )}
+      {state.view === "onboarding" && <LicenseCeremony state={state} dispatch={dispatch} onComplete={(trainer) => dispatch({ type: "SET_TRAINER", name: trainer.name, avatarId: trainer.avatarId })} />}
       {state.view === "map" && <CreeksideMap config={config} state={state} dispatch={dispatch} />}
       {state.view === "scene" && <CreeksideScene config={config} state={state} dispatch={dispatch} />}
       {state.view === "celebration" && <CreeksideCelebration config={config} state={state} dispatch={dispatch} />}

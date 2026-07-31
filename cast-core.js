@@ -14,23 +14,21 @@
       entranceCue: "Patrick privately opens this cue before Luca enters. Stand ready with the Trainer Kit, Ranger Code Card, pencil, and a clearly labeled Save for Celebration container.",
       spokenLines: [
         "Luca—we’ve been waiting for you. Professor Oak asked for you by name.",
-        "Promise to protect Pokémon, help your friends, play fairly, and never give up.",
+        "Your Trainer License is official. Now let’s prepare your first field card.",
         "Now show me how an official Trainer protects one special card!"
       ],
       challengeSteps: [
-        "Lead Luca through the short Trainer Oath.",
         "Help him sleeve one card and place it in a top loader.",
         "Help him secure the protected card in the deck box.",
         "Introduce the Ranger Code Card and pencil.",
         "Put the first sealed booster directly into the Save for Celebration container."
       ],
       runtimeSteps: [
-        "Lead the short Trainer Oath.",
         "Help Luca sleeve one card and place it in the top loader and deck box."
       ],
       whenFinished: "Say, “It worked. Oak was right about you.” Then tell Patrick the result is ready. Present the Trainer Kit only after Luca sees it.",
       runtimeBackup: "Hold the sleeve or top loader for Luca. One protected card is enough.",
-      successCondition: "Every sincere oath response counts. Complete each equipment step once, with as much adult help as needed.",
+      successCondition: "Complete each equipment step once, with as much adult help as needed. The oath was completed during license registration.",
       rewardPackages: ["TRAINER KIT"],
       rewardOwners: ["Ariel"],
       rewardPreparation: "Keep the Trainer Kit, Ranger Code Card, pencil, and Save for Celebration container together. Hand over the kit immediately after success and visibly store the first booster.",
