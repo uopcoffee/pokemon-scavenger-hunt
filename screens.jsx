@@ -255,6 +255,22 @@ window.TrainerApp = TrainerApp;
    ============================================================ */
 window.V1TrainerApp = TrainerApp;
 
+/* ============================================================
+   Paper League — shared design constants
+
+   Artwork sizes and the ceremony timings below were hand-tuned in the
+   design handoff. Treat them as fixed values, not starting points.
+   ============================================================ */
+const PAPER_LEAGUE_ART = { hero: 156, plate: 90, detail: 72, tile: 46, license: 56 };
+const CEREMONY_GOLD_SATURATION = 100;
+const CEREMONY_CALC_SECONDS = 3;
+const AWARD_REVEAL_PACE_MS = 600;
+
+const LICENSE_BIRTHDAY = "AUGUST 1 · 2026";
+const LICENSE_BIRTHDAY_STRIP = "AUGUST 1, 2026";
+const LICENSE_AGE = 7;
+const LICENSE_NUMBER = "CRK-2026-007";
+
 const TRAINER_OATH = [
   "I will protect Pokémon.",
   "I will help my friends.",
@@ -262,75 +278,464 @@ const TRAINER_OATH = [
   "I will never give up.",
 ];
 
-function TrainerLicenseCard({ trainerName = "Luca", flipped = false, oathCount = 4, buddy = true, issued = true, onFlip, ceremony = false, onName, onBirthday, onBuddy, onOath }) {
+const CEREMONY_BLANK = {
+  name: "", nameStarted: false, nameDone: false,
+  date: "", dateStarted: false, dateDone: false,
+  calc: false, flood: false, badge: false,
+  flipped: false,
+  oathAt: 0, oathText: ["", "", "", ""], typing: null, oathDone: false,
+  buddy: false,
+};
+
+function ceremonyIssued(trainerName) {
+  return Object.assign({}, CEREMONY_BLANK, {
+    name: trainerName, nameStarted: true, nameDone: true,
+    date: LICENSE_BIRTHDAY, dateStarted: true, dateDone: true,
+    flood: true, badge: true,
+    oathAt: TRAINER_OATH.length, oathText: TRAINER_OATH.slice(), oathDone: true,
+    buddy: true,
+  });
+}
+
+/* Only settled steps persist. Partial typewriter buffers are rebuilt from the
+   flags on load, so a refresh mid-word resumes on a whole field. */
+function loadCeremony(storageKey, trainerName) {
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem(storageKey) || "null"); } catch (_) { saved = null; }
+  if (!saved) return Object.assign({}, CEREMONY_BLANK);
+  const oathAt = Math.max(0, Math.min(TRAINER_OATH.length, saved.oathAt || 0));
+  return Object.assign({}, CEREMONY_BLANK, {
+    name: saved.nameDone ? trainerName : "", nameStarted: !!saved.nameDone, nameDone: !!saved.nameDone,
+    date: saved.dateDone ? LICENSE_BIRTHDAY : "", dateStarted: !!saved.dateDone, dateDone: !!saved.dateDone,
+    flood: !!saved.badge, badge: !!saved.badge,
+    oathAt: oathAt,
+    oathText: TRAINER_OATH.map((line, index) => (index < oathAt ? line : "")),
+    oathDone: oathAt === TRAINER_OATH.length,
+    buddy: !!saved.buddy,
+  });
+}
+
+function LicenseRevealZone({ ceremony }) {
   return (
-    <div className={`trainer-license${flipped ? " trainer-license--flipped" : ""}${ceremony ? " trainer-license--ceremony" : ""}`}>
-      <div className="trainer-license__inner">
-        <section className="trainer-license__face trainer-license__front" aria-hidden={flipped}>
-          <span className="trainer-license__holo" aria-hidden />
-          <header><img src="assets/ui/gym-badge-ink.png" alt="" /><span><b>Creekside League</b><small>Trainer License</small></span></header>
-          <div className="trainer-license__identity">
-            <button type="button" className={`trainer-license__buddy${buddy ? " is-filled" : ""}`} onClick={onBuddy} disabled={!onBuddy || buddy}>
-              {buddy ? <img src={ART + "tropius.png"} alt="Tropius" /> : <><b>＋</b><small>Tap to assign buddy</small></>}
-            </button>
-            <div>
-              <small>Trainer name</small>
-              {ceremony && !issued && trainerName === "" ? <button type="button" className="license-slot" onClick={onName}>Tap as he says his name</button> : <h2>{trainerName || "Luca"}</h2>}
-              <small>Date of birth</small>
-              {ceremony && !issued ? <button type="button" className="license-slot" onClick={onBirthday} disabled={!trainerName}>Tap as he says his birthday</button> : <strong>August 1 · 2026</strong>}
+    <div className="trainer-license__reveal" aria-live="polite">
+      {ceremony.calc && (
+        <div className="license-calculating">
+          <span className="license-calculating__scan" aria-hidden />
+          <div className="license-calculating__body">
+            <img src={ART + "pokeball.png"} alt="" />
+            <b>Calculating age</b>
+            <span className="license-calculating__dots" aria-hidden><i /><i /><i /></span>
+            <span className="license-calculating__bar"><span style={{ "--calc-duration": CEREMONY_CALC_SECONDS + "s" }} /></span>
+            <span className="license-calculating__note">Cross-checking League records…</span>
+          </div>
+        </div>
+      )}
+      {(ceremony.flood || ceremony.badge) && (
+        <div className="license-flood-fx" aria-hidden>
+          <img className="license-flood-fx__burst" src="assets/fx/starburst_medium.png" alt="" />
+          <img className="license-flood-fx__glow" src="assets/fx/glow_bright.png" alt="" />
+          <span className="license-flood-fx__sheen" />
+        </div>
+      )}
+      {ceremony.badge && (
+        <div className="license-badge">
+          <span className="license-badge__confetti" aria-hidden />
+          <img className="license-badge__flare" src="assets/fx/flare_6_point_white.png" alt="" aria-hidden />
+          <img className="license-badge__star" src="assets/stickers/star-3.png" alt="" aria-hidden />
+          <img className="license-badge__sparkle" src="assets/fx/sparkle.png" alt="" aria-hidden />
+          <div className="license-badge__body">
+            <div className="license-badge__numeral"><b>{LICENSE_AGE}</b><sup>th</sup></div>
+            <div className="license-badge__words">
+              <strong>Happy<br />Birthday</strong>
+              <small>Trainer {ceremony.name || "Luca"}</small>
+              <img src={ART + "pokeball.png"} alt="" />
             </div>
           </div>
-          <div className={`trainer-license__birthday${issued ? " is-revealed" : ""}`}>
-            <div><b>7</b><sup>th</sup></div><span>Happy<br/>Birthday<small>Trainer {trainerName || "Luca"}</small></span>
+          <div className="license-badge__strip">
+            <b>{LICENSE_BIRTHDAY_STRIP}</b><span>Creekside League Record</span>
           </div>
-          <footer><b>NO. CRK-2026-007</b><span>Issued by Auntie Ariel</span></footer>
-        </section>
-        <section className="trainer-license__face trainer-license__back" aria-hidden={!flipped}>
-          <header><img src="assets/stamps/ui/stamp_completed.png" alt="" /><span><b>The Trainer Oath</b><small>{oathCount} / 4 sworn</small></span></header>
-          <div className="trainer-license__oath">
-            {TRAINER_OATH.map((line, index) => {
-              const complete = index < oathCount;
-              const active = index === oathCount && oathCount < 4;
-              return <button type="button" key={line} className={`${complete ? "is-complete" : ""}${active ? " is-active" : ""}`} disabled={!onOath || !active} onClick={() => onOath(index)}><span>{complete ? "✓" : index + 1}</span><strong>{complete ? line : active ? `Tap after he repeats line ${index + 1}` : `Line ${index + 1} locked`}</strong></button>;
-            })}
-          </div>
-          {oathCount === 4 && <div className="trainer-license__stamp"><img src="assets/stamps/ui/stamp_completed.png" alt="" />Oath sworn — registered Trainer</div>}
-          <footer><b>Buddy Pokémon</b><span>{buddy ? "Tropius" : "Awaiting assignment"}</span></footer>
-        </section>
-      </div>
-      {onFlip && <button type="button" className="trainer-license__flip" onClick={onFlip}>{flipped ? "Flip to front" : "Flip card over"} ⇄</button>}
+        </div>
+      )}
     </div>
   );
 }
 
+function TrainerLicenseCard({ trainerName = "Luca", ceremony, interactive = false, onFlip, onName, onBirthday, onBuddy, onOath }) {
+  const c = ceremony;
+  const goldSaturation = { "--ceremony-gold-sat": CEREMONY_GOLD_SATURATION + "%" };
+  return (
+    <div className={`trainer-license${c.flipped ? " trainer-license--flipped" : ""}`} style={goldSaturation}>
+      <div className="trainer-license__inner">
+        <section className="trainer-license__face trainer-license__front" aria-hidden={c.flipped}>
+          <span className="trainer-license__holo" aria-hidden />
+          {(c.flood || c.badge) && <span className="trainer-license__flood" aria-hidden />}
+          <div className="trainer-license__column">
+            <div className="trainer-license__brand">
+              <img src="assets/ui/gym-badge-ink.png" alt="" />
+              <b>Creekside League</b>
+              <span>Trainer License</span>
+            </div>
+
+            <div className="trainer-license__identity">
+              <div className="trainer-license__buddy-col">
+                {c.buddy ? (
+                  <div className="trainer-license__buddy trainer-license__buddy--filled">
+                    <span className="trainer-license__buddy-burst" aria-hidden><img src="assets/fx/starburst_medium.png" alt="" /></span>
+                    <span className="trainer-license__buddy-bleed"><img src={ART + "tropius.png"} alt="Tropius" /></span>
+                  </div>
+                ) : (
+                  <button type="button" className="trainer-license__buddy trainer-license__buddy--empty" onClick={onBuddy} disabled={!interactive}>
+                    <b aria-hidden>＋</b>
+                    <small>Tap to<br />assign buddy</small>
+                  </button>
+                )}
+                <div className="trainer-license__buddy-caption">{c.buddy ? "Buddy · Tropius" : "Buddy Pokémon"}</div>
+              </div>
+
+              <div className="trainer-license__fields">
+                <div>
+                  <small>Trainer name</small>
+                  {c.nameStarted ? (
+                    <div className="license-typed">
+                      <b>{c.name}</b>
+                      {!c.nameDone && <span className="license-caret" aria-hidden />}
+                    </div>
+                  ) : (
+                    <button type="button" className="license-slot" onClick={onName} disabled={!interactive}>
+                      Tap as he says his name
+                    </button>
+                  )}
+                </div>
+                <div>
+                  <small>Date of birth</small>
+                  {c.dateStarted ? (
+                    <div className="license-typed license-typed--date"><b>{c.date}</b></div>
+                  ) : (
+                    <button
+                      type="button"
+                      className={`license-slot${c.nameDone ? "" : " license-slot--locked"}`}
+                      onClick={onBirthday}
+                      disabled={!interactive || !c.nameDone}
+                    >
+                      {c.nameDone ? "Tap as he says his birthday" : "Waiting for his name"}
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="trainer-license__foot">
+              <div><small>No.</small><b>{c.nameStarted ? LICENSE_NUMBER : "— — — — —"}</b></div>
+              <div><small>Issued by</small><i>Auntie Ariel</i></div>
+            </div>
+          </div>
+
+          {(c.calc || c.flood || c.badge) && <LicenseRevealZone ceremony={c} />}
+        </section>
+
+        <section className="trainer-license__face trainer-license__back" aria-hidden={!c.flipped}>
+          <div className="trainer-license__oath-head">
+            <b>The Trainer Oath</b>
+            <span>{c.oathAt} / {TRAINER_OATH.length} sworn</span>
+          </div>
+          <div className="trainer-license__oath">
+            {TRAINER_OATH.map((line, index) => {
+              const typing = c.typing === index;
+              const sworn = index < c.oathAt;
+              const started = sworn || typing;
+              const live = index === c.oathAt && c.typing === null;
+              const rowClass = typing ? "oath-row oath-row--typing" : sworn ? "oath-row oath-row--sworn" : live ? "oath-row oath-row--live" : "oath-row";
+              return (
+                <div className={rowClass} key={line}>
+                  <span className="oath-row__pip">{sworn ? "✓" : index + 1}</span>
+                  <div className="oath-row__body">
+                    {started ? (
+                      <div className="oath-row__line">
+                        <b>{c.oathText[index]}</b>
+                        {typing && <span className="license-caret license-caret--sm" aria-hidden />}
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        className="oath-row__slot"
+                        onClick={() => onOath && onOath(index)}
+                        disabled={!interactive || !live}
+                      >
+                        {live ? `Tap after he repeats line ${index + 1}` : `Line ${index + 1} locked`}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          {c.oathDone && (
+            <div className="trainer-license__stamp">
+              <span className="sheen" aria-hidden />
+              <img src="assets/stamps/ui/stamp_completed.png" alt="" />
+              <span>Oath sworn — {c.name ? titleCase(c.name) : "Luca"} is a registered Trainer.</span>
+            </div>
+          )}
+        </section>
+      </div>
+      {onFlip && (
+        <div className="license-ceremony-actions">
+          <button type="button" className={`license-flip${c.flipped ? " license-flip--back" : ""}`} onClick={onFlip}>
+            <span>{c.flipped ? "Flip to front" : "Flip card over"}</span><span aria-hidden>⇄</span>
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function titleCase(value) {
+  return value.charAt(0) + value.slice(1).toLowerCase();
+}
+
 function LicenseCeremony({ state, dispatch, onComplete }) {
   const storageKey = "creekside-license-ceremony-v1";
-  const saved = (() => { try { return JSON.parse(localStorage.getItem(storageKey) || "null"); } catch (_) { return null; } })();
-  const [ceremony, setCeremony] = React.useState(saved || { name: "", birthday: false, calculating: false, issued: false, flipped: false, oathCount: 0, buddy: false, equipment: false });
-  React.useEffect(() => { try { localStorage.setItem(storageKey, JSON.stringify(ceremony)); } catch (_) {} }, [ceremony]);
-  const update = (values) => setCeremony((current) => ({ ...current, ...values }));
-  const issueReady = ceremony.birthday && ceremony.oathCount === 4 && ceremony.buddy;
-  const step = !ceremony.name ? "Step 1 — state your name" : !ceremony.birthday ? (ceremony.calculating ? "Calculating League record…" : "Step 2 — state your birthday") : ceremony.oathCount < 4 ? (ceremony.flipped ? "Step 3 — one oath line at a time" : "Step 3 — flip the card over") : !ceremony.buddy ? (ceremony.flipped ? "Step 4 — flip back to the front" : "Step 4 — assign a buddy") : "License complete · welcome, Trainer";
-  const revealBirthday = () => {
-    if (!ceremony.name || ceremony.calculating || ceremony.birthday) return;
-    update({ calculating: true });
-    setTimeout(() => update({ calculating: false, birthday: true, issued: true }), 3000);
+  const trainerName = (state.trainer.name || "Luca").toUpperCase();
+  const [ceremony, setCeremony] = React.useState(() => loadCeremony(storageKey, trainerName));
+  const timers = React.useRef([]);
+
+  const after = (fn, ms) => { timers.current.push(setTimeout(fn, ms)); };
+  const clearTimers = () => { timers.current.forEach(clearTimeout); timers.current = []; };
+  React.useEffect(() => clearTimers, []);
+
+  React.useEffect(() => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify({
+        nameDone: ceremony.nameDone, dateDone: ceremony.dateDone,
+        badge: ceremony.badge, oathAt: ceremony.oathAt, buddy: ceremony.buddy,
+      }));
+    } catch (_) {}
+  }, [ceremony]);
+
+  const update = (values) => setCeremony((current) => Object.assign({}, current, values));
+
+  const typeName = () => {
+    if (ceremony.nameStarted) return;
+    update({ nameStarted: true, name: "" });
+    for (let i = 1; i <= trainerName.length; i++) {
+      after(() => update({ name: trainerName.slice(0, i) }), i * 150);
+    }
+    after(() => update({ nameDone: true }), trainerName.length * 150 + 500);
   };
-  const reset = () => { const fresh = { name: "", birthday: false, calculating: false, issued: false, flipped: false, oathCount: 0, buddy: false, equipment: false }; setCeremony(fresh); try { localStorage.removeItem(storageKey); } catch (_) {} };
+
+  const typeBirthday = () => {
+    if (!ceremony.nameDone || ceremony.dateStarted) return;
+    update({ dateStarted: true, date: "" });
+    for (let i = 1; i <= LICENSE_BIRTHDAY.length; i++) {
+      after(() => update({ date: LICENSE_BIRTHDAY.slice(0, i) }), i * 70);
+    }
+    const typedMs = LICENSE_BIRTHDAY.length * 70;
+    const calcMs = CEREMONY_CALC_SECONDS * 1000;
+    after(() => update({ dateDone: true, calc: true }), typedMs + 320);
+    after(() => update({ calc: false, flood: true }), typedMs + 320 + calcMs);
+    after(() => update({ badge: true }), typedMs + 1020 + calcMs);
+  };
+
+  const typeOathLine = (index) => {
+    if (ceremony.oathAt !== index || ceremony.typing !== null) return;
+    const line = TRAINER_OATH[index];
+    update({ typing: index });
+    for (let ch = 1; ch <= line.length; ch++) {
+      after(() => setCeremony((current) => {
+        const oathText = current.oathText.slice();
+        oathText[index] = line.slice(0, ch);
+        return Object.assign({}, current, { oathText: oathText });
+      }), ch * 48);
+    }
+    after(() => update({
+      typing: null,
+      oathAt: index + 1,
+      oathDone: index === TRAINER_OATH.length - 1,
+    }), line.length * 48 + 380);
+  };
+
+  const reset = () => {
+    clearTimers();
+    setCeremony(Object.assign({}, CEREMONY_BLANK));
+    try { localStorage.removeItem(storageKey); } catch (_) {}
+  };
+
+  const issued = ceremony.badge && ceremony.oathDone && ceremony.buddy;
+  const step = !ceremony.nameStarted ? "Step 1 — state your name"
+    : !ceremony.dateDone ? "Step 2 — state your birthday"
+    : ceremony.calc ? "Calculating…"
+    : !ceremony.badge ? "League record incoming…"
+    : !ceremony.oathDone ? (ceremony.flipped ? "Step 3 — one oath line at a time" : "Step 3 — flip the card over")
+    : !ceremony.buddy ? (ceremony.flipped ? "Step 4 — flip back to the front" : "Step 4 — assign a buddy")
+    : "License complete · welcome, Trainer";
+
   return (
     <div className="license-ceremony-screen" data-audience="luca">
       <div className="license-ceremony-screen__shell">
-        <div className="license-ceremony-host"><span>Auntie Ariel leads</span><b>Luca’s Trainer License Ceremony</b></div>
-        <header><div><small>Creekside League</small><h1>Trainer Oath</h1></div><span>Ariel taps · Luca speaks</span></header>
+        <div className="license-ceremony-host"><span>Auntie Ariel leads</span><b>Chapter 1</b></div>
+        <header>
+          <div><small>Creekside League</small><h1>Trainer Oath</h1></div>
+          <span>Ariel taps · Luca speaks</span>
+        </header>
         <p className="license-ceremony-step">{step}</p>
-        <TrainerLicenseCard trainerName={ceremony.name} flipped={ceremony.flipped} oathCount={ceremony.oathCount} buddy={ceremony.buddy} issued={ceremony.issued} ceremony onName={() => update({ name: state.trainer.name || "Luca" })} onBirthday={revealBirthday} onBuddy={() => update({ buddy: true })} onOath={() => update({ oathCount: ceremony.oathCount + 1 })} onFlip={() => update({ flipped: !ceremony.flipped })} />
-        {ceremony.calculating && <div className="license-calculating" role="status"><img src={ART + "pokeball.png"} alt="" /><b>Calculating age</b><span><i/><i/><i/></span></div>}
-        <div className="license-ceremony-actions">
-          <button type="button" className="license-reset" onClick={reset} aria-label="Reset ceremony">↻</button>
-          {issueReady ? <Button variant="reward" block onClick={() => { try { localStorage.removeItem(storageKey); } catch (_) {} if (onComplete) onComplete({ name: ceremony.name || "Luca", avatarId: "tropius" }); else dispatch({ type: "ADVANCE_SCENE" }); }}>License issued — begin the quest</Button> : <small>Complete the birthday reveal, all four oath lines, and buddy assignment.</small>}
-        </div>
+
+        <TrainerLicenseCard
+          trainerName={trainerName}
+          ceremony={ceremony}
+          interactive
+          onName={typeName}
+          onBirthday={typeBirthday}
+          onBuddy={() => update({ buddy: true })}
+          onOath={typeOathLine}
+        />
+
+        {issued ? (
+          <div className="license-issued">
+            <div className="license-issued__strip">
+              <img src="assets/stamps/ui/stamp_completed.png" alt="" />
+              <span>License issued. Chapter 1 cleared — Nina is waiting at the Fairy Garden.</span>
+            </div>
+            <div className="license-issued__row">
+              <button type="button" className="license-reset" onClick={reset} aria-label="Run the ceremony again">↻</button>
+              <button
+                type="button"
+                className="license-issued__go"
+                data-testid="license-back-to-map"
+                onClick={() => {
+                  clearTimers();
+                  try { localStorage.removeItem(storageKey); } catch (_) {}
+                  if (onComplete) onComplete({ name: titleCase(trainerName), avatarId: "tropius" });
+                  else dispatch({ type: "ADVANCE_SCENE" });
+                }}
+              >
+                <small>Chapter 2 · Fairy Garden</small>
+                <span>Back to the Quest Map →</span>
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="license-ceremony-actions">
+            <button type="button" className="license-reset" onClick={reset} aria-label="Reset ceremony">↻</button>
+            <button
+              type="button"
+              className={`license-flip${ceremony.flipped ? " license-flip--back" : ""}`}
+              onClick={() => update({ flipped: !ceremony.flipped })}
+            >
+              <span>{ceremony.flipped ? "Flip to front" : "Flip card over"}</span><span aria-hidden>⇄</span>
+            </button>
+          </div>
+        )}
       </div>
     </div>
+  );
+}
+
+/* ============================================================
+   Award model — derived from the config, never hardcoded.
+   Class I is the License, Class II the Gym Badges, Class III the
+   Ranger code fragments. Ranger symbols are not a collected class;
+   each one points to the next stop and is then done.
+   ============================================================ */
+const AWARD_CLASSES = {
+  license: { label: "Class I · License", accent: "#2F6F9F" },
+  badge: { label: "Class II · Badge", accent: "#B8922E" },
+  fragment: { label: "Class III · Fragment", accent: "#B07A2E" },
+};
+const BADGE_TILE_FRAMES = ["badge_frame_3", "badge_frame_4", "badge_frame_5", "badge_frame_6", "badge_frame_2", "badge_frame_1", "badge_frame_0"];
+const NEUTRAL_FRAME = "assets/frames/badge_frame_0.png";
+const BADGE_ART = {
+  "fairy-badge": "pikachu.png",
+  "water-research-badge": "mega-blastoise.png",
+  "care-badge": "premierball.png",
+  "rocket-badge": "mega-charizard-x.png",
+  "ranger-vault-badge": "ultraball.png",
+  "champion-title": "mega-rayquaza.png",
+  "mew-figure": "mew.png",
+};
+
+function sequenceCast(config, sequence) {
+  return (sequence.participantIds || [])
+    .map((id) => (config.participants.find((item) => item.id === id) || {}).displayName)
+    .filter(Boolean)
+    .join(" & ");
+}
+
+function badgeAwards(config) {
+  const owners = {};
+  const collect = (sequence) => {
+    (sequence.scenes || []).forEach((scene) => {
+      (scene.rewardIds || []).forEach((rewardId) => {
+        if (!owners[rewardId]) owners[rewardId] = { sequence: sequence, scene: scene };
+      });
+    });
+  };
+  config.chapters.forEach(collect);
+  if (config.checkpoint) collect(config.checkpoint);
+  if (config.epilogue) collect(config.epilogue);
+
+  return Object.keys(config.rewards)
+    .filter((rewardId) => rewardId !== "trainer-license"
+      && ["badge", "mythical"].indexOf(config.rewards[rewardId].category) !== -1)
+    .map((rewardId, index) => {
+      const owner = owners[rewardId] || {};
+      const sequence = owner.sequence || {};
+      return {
+        id: rewardId,
+        kind: "badge",
+        name: config.rewards[rewardId].label,
+        art: ART + (BADGE_ART[rewardId] || sequence.art || "pokeball.png"),
+        type: sequence.type || "normal",
+        frame: "assets/frames/" + BADGE_TILE_FRAMES[index % BADGE_TILE_FRAMES.length] + ".png",
+        cast: sequenceCast(config, sequence) || "Creekside League",
+        story: (owner.scene && owner.scene.body) || sequence.name || "",
+        chapterLabel: sequence.number ? "Chapter " + sequence.number : (sequence.name || ""),
+      };
+    });
+}
+
+function AwardDetailSheet({ award, onClose }) {
+  if (!award) return null;
+  return (
+    <button type="button" className="award-sheet" onClick={onClose} aria-label="Close award details">
+      <div className="award-sheet__card">
+        <div className="award-sheet__grab" aria-hidden />
+        <div className="award-sheet__top">
+          <div className="award-sheet__art">
+            <img className="frame" src={award.frame || NEUTRAL_FRAME} alt="" />
+            <img className="art" src={award.art} alt="" style={{ "--detail-art-size": PAPER_LEAGUE_ART.detail + "px" }} />
+          </div>
+          <div style={{ minWidth: 0, flex: 1 }}>
+            <div className="award-sheet__class" style={{ color: (AWARD_CLASSES[award.kind] || AWARD_CLASSES.badge).accent }}>
+              {(AWARD_CLASSES[award.kind] || AWARD_CLASSES.badge).label}
+            </div>
+            <div className="award-sheet__name">{award.name}</div>
+            <div className="award-sheet__cast">{award.cast}</div>
+          </div>
+        </div>
+        {award.story && <div className="award-sheet__story">{award.story}</div>}
+        <span className="award-sheet__close">Close</span>
+      </div>
+    </button>
+  );
+}
+
+function QuestRow({ row, index }) {
+  return (
+    <button
+      type="button"
+      className={`creekside-map-card${row.complete ? " creekside-map-card--complete" : ""}${row.active ? " creekside-map-card--active" : ""}`}
+      disabled={!row.onOpen}
+      onClick={() => row.onOpen && row.onOpen()}
+      data-testid={row.testId}
+      style={{ animationDelay: index * 70 + "ms" }}
+    >
+      <span className="quest-row__dot">{row.dot}</span>
+      <span className="quest-row__text">
+        <strong>{row.name}</strong>
+        <small>{row.meta}</small>
+      </span>
+      <img className="quest-row__type" src={`assets/types/${row.type}.png`} alt="" style={{ opacity: row.complete || row.active ? 1 : 0.3 }} />
+    </button>
   );
 }
 
@@ -338,6 +743,7 @@ function CreeksideMap({ config, state, dispatch }) {
   const [mapView, setMapView] = React.useState("map");
   const [licenseOpen, setLicenseOpen] = React.useState(false);
   const [licenseFlipped, setLicenseFlipped] = React.useState(false);
+  const [openAwardId, setOpenAwardId] = React.useState(null);
   const currentChapter = window.CreeksideState.chapterById(state.currentChapterId);
   const activeType = state.activeFlow === "mew"
     ? config.epilogue.type
@@ -345,21 +751,70 @@ function CreeksideMap({ config, state, dispatch }) {
       ? config.checkpoint.type
       : (currentChapter ? currentChapter.type : "psychic");
   const avatar = config.avatars.find((item) => item.id === state.trainer.avatarId) || config.avatars[0];
-  const finalChapterId = config.chapters[config.chapters.length - 1].id;
   const activeChapter = state.activeFlow === "checkpoint"
     ? config.checkpoint
     : state.activeFlow === "mew"
       ? config.epilogue
       : currentChapter;
-  const awardArt = (rewardId) => {
-    const reward = config.rewards[rewardId] || {};
-    if (rewardId === "champion-title") return ART + "masterball.png";
-    if (rewardId === "mew-figure") return ART + "mew.png";
-    if (reward.category === "badge") return "assets/ui/gym-badge.png";
-    if (reward.category === "quest-item") return "assets/items/Bag_Sinnoh_Stone_Sprite.png";
-    if (reward.category === "team-card") return ART + "pokeball.png";
-    return "assets/items/GiftBox.png";
+
+  const trainerName = state.trainer.name || "Luca";
+  const licensed = state.earnedRewards.includes("trainer-license");
+  const badges = React.useMemo(() => badgeAwards(config), [config]);
+  const earnedBadges = badges.filter((award) => state.earnedRewards.indexOf(award.id) !== -1);
+  const openAward = badges.find((award) => award.id === openAwardId) || null;
+
+  const showView = (next) => {
+    setMapView(next);
+    setOpenAwardId(null);
   };
+
+  const questRows = [];
+  config.chapters.forEach((chapter) => {
+    const complete = state.completedChapters.includes(chapter.id);
+    const fragmentRequirementMet = !chapter.requiresFragments || state.collectedFragments.length >= chapter.requiresFragments;
+    const checkpointRequirementMet = !chapter.requiresCheckpoint || state.checkpointComplete;
+    const active = !complete
+      && state.activeFlow === "chapter"
+      && chapter.id === state.currentChapterId
+      && fragmentRequirementMet
+      && checkpointRequirementMet;
+    const locked = !complete && !active;
+    const blockedMeta = chapter.requiresFragments && !fragmentRequirementMet
+      ? `${chapter.requiresFragments} fragments required`
+      : chapter.requiresCheckpoint && !checkpointRequirementMet
+        ? "Research analysis required"
+        : "Signal blocked";
+    questRows.push({
+      key: chapter.id,
+      testId: `chapter-${chapter.number}`,
+      dot: complete ? "✓" : locked ? "?" : String(chapter.number),
+      name: locked ? chapter.lockedName : chapter.name,
+      meta: complete
+        ? `${chapter.locationLabel || chapter.name} · Cleared`
+        : active
+          ? sequenceCast(config, chapter) || chapter.locationLabel || "Next stop"
+          : blockedMeta,
+      type: chapter.type,
+      complete: complete,
+      active: active,
+      onOpen: active ? () => dispatch({ type: "OPEN_CURRENT_CHAPTER" }) : null,
+    });
+    if (chapter.id === config.checkpoint.afterChapterId) {
+      const checkpointActive = state.activeFlow === "checkpoint" && !state.checkpointComplete;
+      questRows.push({
+        key: "oak-return",
+        testId: "oak-return-checkpoint",
+        dot: state.checkpointComplete ? "✓" : checkpointActive ? "◆" : "?",
+        name: checkpointActive || state.checkpointComplete ? config.checkpoint.name : config.checkpoint.lockedName,
+        meta: state.checkpointComplete ? "Research checkpoint · Cleared" : "Research checkpoint",
+        type: config.checkpoint.type,
+        complete: state.checkpointComplete,
+        active: checkpointActive,
+        onOpen: checkpointActive ? () => dispatch({ type: "OPEN_CHECKPOINT" }) : null,
+      });
+    }
+  });
+
   return (
     <Field type={activeType} className="creekside-map-field">
       <div className="paper-league-shell" style={{ ...shell }}>
@@ -370,138 +825,306 @@ function CreeksideMap({ config, state, dispatch }) {
           style={{ background: "rgba(255,255,255,.94)", backdropFilter: "blur(6px)" }}
         />
         <div className="paper-league-content" style={{ ...pad, gap: 16 }}>
-          <button type="button" className="trainer-record-bar" onClick={() => setMapView(mapView === "map" ? "record" : "map")} aria-expanded={mapView === "record"}>
+          <button type="button" className="trainer-record-bar" onClick={() => showView(mapView === "map" ? "record" : "map")} aria-expanded={mapView === "record"}>
             <span className="trainer-record-bar__shine" aria-hidden />
             <img src="assets/ui/gym-badge-ink.png" alt="" />
-            <span><small>Trainer Record</small><strong>{state.trainer.name || "Luca"}</strong></span>
-            <span className="trainer-record-bar__count"><b>{state.earnedBadges.length + state.collectedFragments.length}</b><small>Awards</small></span>
+            <span><small>Trainer Record</small><strong>{trainerName}</strong></span>
+            <span className="trainer-record-bar__count">
+              <b>{earnedBadges.length + state.collectedFragments.length}</b>
+              <small>{licensed ? "Licensed" : "Awards"}</small>
+            </span>
             <span aria-hidden>{mapView === "record" ? "⌃" : "›"}</span>
           </button>
 
           {mapView === "record" ? (
             <section className="trainer-record-view" aria-label="Trainer Record">
-              {state.earnedRewards.includes("trainer-license") ? <button type="button" className="trainer-license-record" onClick={() => { setLicenseFlipped(false); setLicenseOpen(true); }}><img src={ART + "tropius.png"} alt=""/><span><small>Trainer License</small><strong>{state.trainer.name || "Luca"}</strong><b>NO. CRK-2026-007 · Issued by Auntie Ariel</b></span><i>View & flip ›</i></button> : <TrainerCard name={state.trainer.name || "Trainer Luca"} avatarSrc={ART + avatar.img} badges={state.completedChapters.length} totalBadges={config.chapters.length} style={{ maxWidth: "none" }} />}
-              <h2>Earned Awards</h2>
-              <div className="trainer-award-grid">
-                {state.earnedRewards.map((rewardId) => (
-                  <div className="trainer-award-tile" key={rewardId}>
-                    <img className="trainer-award-tile__frame" src="assets/frames/badge_frame_0.png" alt="" />
-                    <img className="trainer-award-tile__art" src={awardArt(rewardId)} alt="" />
-                    <strong>{config.rewards[rewardId].label}</strong>
-                    <small>{config.rewards[rewardId].category.replace(/-/g, " ")}</small>
-                  </div>
-                ))}
+              <div className="record-class">
+                <div className="record-class__head" style={{ color: AWARD_CLASSES.license.accent }}>
+                  <i aria-hidden /><span>{AWARD_CLASSES.license.label}</span>
+                </div>
+                {licensed ? (
+                  <button type="button" className="record-license" onClick={() => { setLicenseFlipped(false); setLicenseOpen(true); }}>
+                    <span className="record-license__inner">
+                      <span className="record-license__well">
+                        <img src={ART + "tropius.png"} alt="" style={{ "--license-art-size": PAPER_LEAGUE_ART.license + "px" }} />
+                      </span>
+                      <span className="record-license__body">
+                        <span className="record-license__id">Creekside League · ID 0801</span>
+                        <span className="record-license__name">{trainerName}</span>
+                        <span className="record-license__stats">
+                          <span>Rank<b>Trainer</b></span>
+                          <span>Issued<b>08 · 01</b></span>
+                          <span>Status<b className="is-active">Active</b></span>
+                        </span>
+                      </span>
+                    </span>
+                  </button>
+                ) : (
+                  <TrainerCard name={trainerName} avatarSrc={ART + avatar.img} badges={state.completedChapters.length} totalBadges={config.chapters.length} style={{ maxWidth: "none" }} />
+                )}
               </div>
-              {state.earnedRewards.length === 0 && <p className="trainer-record-empty">Your first award will appear here after League Registration.</p>}
-              <h2>Ranger Fragments</h2>
-              <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={state.collectedFragments} />
+
+              <div className="record-class">
+                <div className="record-class__head" style={{ color: AWARD_CLASSES.badge.accent }}>
+                  <i aria-hidden /><span>Class II · Gym Badges</span>
+                  <b>{earnedBadges.length} / {badges.length}</b>
+                </div>
+                <div className="record-badge-grid">
+                  {badges.map((award) => {
+                    const earned = state.earnedRewards.indexOf(award.id) !== -1;
+                    const content = (
+                      <>
+                        <span className="record-tile__sheen" aria-hidden />
+                        <img className="record-tile__frame" src={award.frame} alt="" />
+                        <img className="record-tile__art" src={award.art} alt="" style={{ "--tile-art-size": PAPER_LEAGUE_ART.tile + "px" }} />
+                      </>
+                    );
+                    return earned ? (
+                      <button type="button" className="record-tile" key={award.id} title={award.name} onClick={() => setOpenAwardId(award.id)}>{content}</button>
+                    ) : (
+                      <div className="record-tile record-tile--locked" key={award.id} title="Not yet earned" aria-label={`${award.name} — not yet earned`}>{content}</div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="record-class">
+                <div className="record-class__head" style={{ color: AWARD_CLASSES.fragment.accent }}>
+                  <i aria-hidden /><span>Class III · Code Fragments</span>
+                  <b>{state.collectedFragments.length} / {config.codeFragments.length}</b>
+                </div>
+                <div className="record-frag-grid">
+                  {config.codeFragments.map((fragment) => {
+                    const held = state.collectedFragments.indexOf(fragment.slot) !== -1;
+                    return (
+                      <div className={`record-frag${held ? "" : " record-frag--locked"}`} key={fragment.id}>
+                        <b aria-hidden>{held ? fragment.displaySymbol.charAt(0) : "?"}</b>
+                        <small>{held ? fragment.displaySymbol : "Locked"}</small>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <p className="record-note">Ranger symbols aren’t collected — each one points Luca to the next stop, then it’s done. The four real digits stay on the physical Ranger Code Card.</p>
+              {!licensed && earnedBadges.length === 0 && (
+                <p className="trainer-record-empty">Your first award will appear here after League Registration.</p>
+              )}
             </section>
           ) : <>
 
           {activeChapter && (
             <section className="destination-plate" aria-label="Next destination">
-              <div className="destination-plate__label"><span>Go here next</span><b aria-hidden>› › ›</b></div>
+              <span className="destination-plate__sheen" aria-hidden />
+              <div className="destination-plate__label">
+                <span>Go here next</span>
+                <span className="destination-plate__chevrons" aria-hidden><span>▸</span><span>▸</span><span>▸</span></span>
+              </div>
               <div className="destination-plate__body">
                 <div className="destination-plate__emblem">
                   <img className="destination-plate__frame" src="assets/frames/badge_frame_4.png" alt="" />
-                  <img className="destination-plate__art" src={ART + (activeChapter.art || "mega-icon-violet.png")} alt="" />
+                  <img className="destination-plate__art" src={ART + (activeChapter.art || "mega-icon-violet.png")} alt="" style={{ "--plate-art-size": PAPER_LEAGUE_ART.plate + "px" }} />
                   <img className="destination-plate__type" src={`assets/types/${activeChapter.type || activeType}.png`} alt="" />
                 </div>
-                <div><h2>{activeChapter.locationLabel || activeChapter.name}</h2><small>{state.activeFlow === "chapter" && activeChapter.number ? `Chapter ${activeChapter.number}` : "Special mission"}</small><p>{activeChapter.name}</p></div>
+                <div className="destination-plate__text">
+                  <h2>{activeChapter.locationLabel || activeChapter.name}</h2>
+                  <div className="destination-plate__meta">
+                    {state.activeFlow === "chapter" && activeChapter.number ? `Chapter ${activeChapter.number}` : "Special mission"}
+                  </div>
+                  <div className="destination-plate__cast">{sequenceCast(config, activeChapter) || activeChapter.name}</div>
+                </div>
               </div>
-              <div className="destination-plate__hint"><img src={ART + "tropius.png"} alt="" /><span>Open the active mission when your adult team is ready.</span></div>
+              <div className="destination-plate__hint">
+                <img src={ART + "tropius.png"} alt="" />
+                <span>Open the active mission when your adult team is ready.</span>
+              </div>
             </section>
           )}
 
-          <h2 className="quest-map-heading" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontStyle: "italic", fontSize: "1.65rem", margin: "2px 0 0" }}>
-            Creekside Region Map
+          <h2 className="quest-map-heading">
+            <span style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontStyle: "italic", fontSize: "26px", lineHeight: 1 }}>Quest Map</span>
+            <small>Creekside Region</small>
           </h2>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            {config.chapters.map((chapter) => {
-              const complete = state.completedChapters.includes(chapter.id);
-              const fragmentRequirementMet = !chapter.requiresFragments || state.collectedFragments.length >= chapter.requiresFragments;
-              const checkpointRequirementMet = !chapter.requiresCheckpoint || state.checkpointComplete;
-              const active = !complete
-                && state.activeFlow === "chapter"
-                && chapter.id === state.currentChapterId
-                && fragmentRequirementMet
-                && checkpointRequirementMet;
-              const locked = !complete && !active;
-              return (
-                <React.Fragment key={chapter.id}>
-                  <button
-                    type="button"
-                    className={`creekside-map-card${complete ? " creekside-map-card--complete" : ""}${active ? " creekside-map-card--active" : ""}`}
-                    disabled={!active}
-                    onClick={() => active && dispatch({ type: "OPEN_CURRENT_CHAPTER" })}
-                    data-testid={`chapter-${chapter.number}`}
-                  >
-                    <Icon
-                      name={complete ? "check" : locked ? "lock" : "badge-slot"}
-                      size={38}
-                      color={complete ? "var(--tropius-leaf)" : active ? "var(--mewtwo-x)" : "var(--silver-deep)"}
-                    />
-                    <span style={{ flex: 1, minWidth: 0 }}>
-                      <small style={{ display: "block", fontFamily: "var(--font-label)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-soft)" }}>
-                        Chapter {chapter.number}
-                      </small>
-                      <strong style={{ display: "block", fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "1.08rem" }}>
-                        {locked ? chapter.lockedName : chapter.name}
-                      </strong>
-                    </span>
-                    {chapter.art && <img src={ART + chapter.art} alt="" style={{ width: 46, height: 46, objectFit: "contain", filter: locked ? "brightness(0) opacity(.3)" : "drop-shadow(0 3px 6px rgba(27,36,48,.22))" }} />}
-                  </button>
-                  {chapter.id === config.checkpoint.afterChapterId && (
-                    <button
-                      type="button"
-                      className={`creekside-map-card${state.checkpointComplete ? " creekside-map-card--complete" : ""}${state.activeFlow === "checkpoint" && !state.checkpointComplete ? " creekside-map-card--active" : ""}`}
-                      disabled={state.checkpointComplete || state.activeFlow !== "checkpoint"}
-                      onClick={() => dispatch({ type: "OPEN_CHECKPOINT" })}
-                      data-testid="oak-return-checkpoint"
-                    >
-                      <Icon name={state.checkpointComplete ? "check" : state.activeFlow === "checkpoint" ? "sparkle" : "lock"} size={38} color={state.checkpointComplete ? "var(--tropius-leaf)" : "var(--sky)"} />
-                      <span style={{ flex: 1, minWidth: 0 }}>
-                        <small style={{ display: "block", fontFamily: "var(--font-label)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-soft)" }}>
-                          Research checkpoint
-                        </small>
-                        <strong style={{ display: "block", fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "1.08rem" }}>
-                          {state.activeFlow === "checkpoint" || state.checkpointComplete ? config.checkpoint.name : config.checkpoint.lockedName}
-                        </strong>
-                      </span>
-                    </button>
-                  )}
-                </React.Fragment>
-              );
-            })}
-
+          <div className="quest-list">
+            <svg className="quest-list__route" viewBox="0 0 4 560" preserveAspectRatio="none" aria-hidden>
+              <path d="M2 0 V560" stroke="#C7CDD4" strokeWidth="4" strokeDasharray="560" strokeDashoffset="560" />
+            </svg>
+            {questRows.map((row, index) => <QuestRow key={row.key} row={row} index={index} />)}
             {state.mewUnlocked && (
-              <button
-                type="button"
-                className={`creekside-map-card${state.mewComplete ? " creekside-map-card--complete" : ""}${!state.mewComplete ? " creekside-map-card--active" : ""}`}
-                onClick={() => dispatch({ type: "OPEN_MEW" })}
-                data-testid="mew-epilogue"
-              >
-                <Icon
-                  name={state.mewComplete ? "check" : "sparkle"}
-                  size={38}
-                  color="var(--mewtwo-x)"
-                />
-                <span style={{ flex: 1 }}>
-                  <small style={{ display: "block", fontFamily: "var(--font-label)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Mythical Signal Revealed</small>
-                  <strong style={{ display: "block", fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "1.08rem" }}>
-                    {config.epilogue.name}
-                  </strong>
-                </span>
-                <img src={ART + config.epilogue.art} alt="" style={{ width: 46, height: 46, objectFit: "contain", filter: "drop-shadow(0 0 10px rgba(184,146,255,.65))" }} />
-              </button>
+              <QuestRow
+                index={questRows.length}
+                row={{
+                  testId: "mew-epilogue",
+                  dot: state.mewComplete ? "✓" : "★",
+                  name: config.epilogue.name,
+                  meta: state.mewComplete ? "Mythical encounter · Registered" : "Mythical signal revealed",
+                  type: config.epilogue.type,
+                  complete: state.mewComplete,
+                  active: !state.mewComplete,
+                  onOpen: () => dispatch({ type: "OPEN_MEW" }),
+                }}
+              />
             )}
           </div>
           </>}
         </div>
-        {licenseOpen && <div className="trainer-license-modal" role="dialog" aria-modal="true" aria-label="Trainer License"><button type="button" className="trainer-license-modal__close" onClick={() => setLicenseOpen(false)} aria-label="Close license">×</button><TrainerLicenseCard trainerName={state.trainer.name || "Luca"} flipped={licenseFlipped} onFlip={() => setLicenseFlipped(!licenseFlipped)} /></div>}
+        <AwardDetailSheet award={openAward} onClose={() => setOpenAwardId(null)} />
+        {licenseOpen && (
+          <div className="trainer-license-modal" role="dialog" aria-modal="true" aria-label="Trainer License">
+            <button type="button" className="trainer-license-modal__close" onClick={() => setLicenseOpen(false)} aria-label="Close license">×</button>
+            <TrainerLicenseCard
+              trainerName={trainerName}
+              ceremony={Object.assign(ceremonyIssued(trainerName.toUpperCase()), { flipped: licenseFlipped })}
+              onFlip={() => setLicenseFlipped(!licenseFlipped)}
+            />
+          </div>
+        )}
       </div>
     </Field>
+  );
+}
+
+/* The Luca-facing celebration right after a chapter's real-world mission.
+   Rendered for `relay-result` scenes: the hero award zooms in, secondary
+   awards pop in on a stagger, and everything is derived from scene data. */
+function AwardEarnedScreen({ config, state, sequence, scene, nextScene, isLast, dispatch }) {
+  const [replayKey, setReplayKey] = React.useState(0);
+  const [openAwardId, setOpenAwardId] = React.useState(null);
+
+  const isMewResult = state.activeFlow === "mew";
+  const rewardIds = scene.rewardIds || [];
+  const badges = React.useMemo(() => badgeAwards(config), [config]);
+  const cast = sequenceCast(config, sequence);
+  const hero = badges.find((award) => rewardIds.indexOf(award.id) !== -1);
+
+  const chips = rewardIds
+    .filter((rewardId) => {
+      const reward = config.rewards[rewardId];
+      return reward && reward.category === "quest-item";
+    })
+    .map((rewardId) => ({
+      id: rewardId,
+      kind: "fragment",
+      name: config.rewards[rewardId].label,
+      art: "assets/items/Bag_Sinnoh_Stone_Sprite.png",
+      frame: NEUTRAL_FRAME,
+      cast: cast || "Creekside League",
+      story: scene.body || "",
+      glyph: "◆",
+      cta: "Carry this",
+    }));
+
+  const heroAward = hero && {
+    id: hero.id, kind: "badge", name: hero.name, art: hero.art, frame: hero.frame,
+    cast: cast || hero.cast, story: scene.body || hero.story,
+  };
+  const openAward = [heroAward].concat(chips).filter(Boolean).find((award) => award.id === openAwardId) || null;
+
+  const awardCount = (hero ? 1 : 0) + chips.length;
+  const headline = awardCount
+    ? [awardCount === 1 ? "1 Award" : `${awardCount} Awards`, "Unlocked"]
+    : [isMewResult ? "A Mythical" : "Mission", isMewResult ? "Moment" : "Complete"];
+
+  const chipLabel = isMewResult
+    ? "Mythical encounter"
+    : state.activeFlow === "checkpoint"
+      ? "Checkpoint cleared"
+      : sequence.number ? `Chapter ${sequence.number} cleared` : "Mission cleared";
+
+  const resultNeedsAdultHold = nextScene && nextScene.type === "adult-logistics";
+  const nextChapter = config.chapters.find((chapter) => !state.completedChapters.includes(chapter.id) && chapter.id !== sequence.id);
+  const ctaLabel = isLast
+    ? (isMewResult ? "Finish the adventure" : state.activeFlow === "checkpoint" ? "Complete checkpoint" : "Complete chapter")
+    : nextChapter ? `To ${nextChapter.locationLabel || nextChapter.name} →` : "Continue →";
+
+  return (
+    <div className="award-earned paper-league-content" data-audience={scene.audience}>
+      <span className="award-earned__fx" aria-hidden>
+        <span className="award-earned__wash" />
+        <img className="award-earned__burst" src="assets/fx/starburst_medium.png" alt="" />
+      </span>
+
+      <div className="award-earned__head">
+        <div className="award-earned__chip">
+          <img src="assets/stamps/ui/stamp_completed.png" alt="" />
+          <span>{chipLabel}</span>
+        </div>
+        <div className="award-earned__headline">{headline[0]}<br />{headline[1]}</div>
+      </div>
+
+      <div className="award-earned__stage" key={replayKey}>
+        <span className="award-earned__ring" aria-hidden />
+        <span className="award-earned__ring award-earned__ring--violet" aria-hidden />
+        <img className="award-earned__flare award-earned__flare--a" src="assets/fx/flare_6_point_white.png" alt="" aria-hidden />
+        <img className="award-earned__flare award-earned__flare--b" src="assets/fx/flare_6_point_white.png" alt="" aria-hidden />
+        <div className="award-earned__hero">
+          <img className="frame" src={hero ? hero.frame : "assets/frames/badge_frame_3.png"} alt="" />
+          <img
+            className="art"
+            src={hero ? hero.art : ART + (sequence.art || "pokeball.png")}
+            alt={hero ? hero.name : sequence.name}
+            style={{ "--hero-art-size": PAPER_LEAGUE_ART.hero + "px" }}
+          />
+          <img className="type" src={`assets/types/${sequence.type || "normal"}.png`} alt="" />
+        </div>
+      </div>
+
+      <div className="award-earned__title">
+        <strong>{hero ? hero.name : (scene.resultLabel || scene.title)}</strong>
+        {cast && <small>{cast}</small>}
+      </div>
+
+      {!!chips.length && (
+        <div className="award-earned__grid">
+          {chips.map((chip, index) => (
+            <button
+              type="button"
+              className="award-earned__card"
+              key={chip.id}
+              onClick={() => setOpenAwardId(chip.id)}
+              style={{ animationDelay: 900 + index * AWARD_REVEAL_PACE_MS + "ms" }}
+            >
+              <span>
+                <em style={{ color: AWARD_CLASSES[chip.kind].accent }}>{AWARD_CLASSES[chip.kind].label}</em>
+                <i style={{ color: AWARD_CLASSES[chip.kind].accent }} aria-hidden>{chip.glyph}</i>
+              </span>
+              <strong>{chip.name}</strong>
+              <small>{chip.cta}</small>
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className="award-earned__scene">
+        <SceneSpecificContent config={config} state={state} scene={scene} />
+      </div>
+
+      {resultNeedsAdultHold ? (
+        <div className="award-earned__handoff">
+          <p>{isMewResult ? "When Luca is ready, pass the phone quietly to an adult." : "Pass the phone to an adult for the physical reward."}</p>
+          <AdultHoldButton
+            duration={config.adultHoldMs}
+            label={isMewResult ? "Adult: Hold when Luca is ready" : "Adult: Hold for reward handoff"}
+            onComplete={() => dispatch({ type: "ADVANCE_SCENE" })}
+          />
+        </div>
+      ) : (
+        <div className="award-earned__actions">
+          <button
+            type="button"
+            className="award-earned__replay"
+            onClick={() => { setOpenAwardId(null); setReplayKey(replayKey + 1); }}
+            aria-label="Replay the reveal"
+          >↻</button>
+          <button type="button" className="award-earned__cta" data-testid="continue-scene" onClick={() => dispatch({ type: "ADVANCE_SCENE" })}>
+            {ctaLabel}
+          </button>
+        </div>
+      )}
+
+      <AwardDetailSheet award={openAward} onClose={() => setOpenAwardId(null)} />
+    </div>
   );
 }
 
@@ -880,6 +1503,19 @@ function CreeksideScene({ config, state, dispatch }) {
   }
   if (scene.type === "return-to-player") {
     return <ReturnToPlayerScreen sequence={sequence} scene={scene} dispatch={dispatch} />;
+  }
+  if (scene.type === "relay-result") {
+    return (
+      <AwardEarnedScreen
+        config={config}
+        state={state}
+        sequence={sequence}
+        scene={scene}
+        nextScene={sequence.scenes[state.currentSceneIndex + 1]}
+        isLast={state.currentSceneIndex === sequence.scenes.length - 1}
+        dispatch={dispatch}
+      />
+    );
   }
 
   const isMewResult = state.activeFlow === "mew" && scene.type === "relay-result";
