@@ -93,5 +93,5 @@ Additional sealed packs are inside:
 ### Deliver to Secret Ranger Vault
 
 - Secret Ranger Cache gift bag
-- Three Ranger trail symbols inside approved entry area
+- Combination box set to `0151` in Hannah and Noa's yard
 - Sealed Research File

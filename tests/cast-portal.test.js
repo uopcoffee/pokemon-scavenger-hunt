@@ -176,7 +176,7 @@ assert(portal.director.packages.length >= 10);
 assert(portal.director.globalOperations.some((item) => item.includes("Booster Satchel")));
 assert(portal.director.globalOperations.some((item) => item.includes("Phone Captain")));
 assert(portal.director.globalOperations.some((item) => item.includes("Water Safety Adult")));
-assert(portal.director.globalOperations.some((item) => item.includes("Ranger Vault information")));
+assert(portal.director.globalOperations.some((item) => item.includes("0151")));
 assert.ok(portal.director.operations.length >= slugs.length);
 portal.director.operations.forEach((operation) => {
   assert(operation.setup.length);
@@ -232,8 +232,7 @@ const castFiles = [
 const combined = castFiles.map((file) => fs.readFileSync(file, "utf8")).join("\n");
 assert(!/\b\d{3}[-.\s]\d{3}[-.\s]\d{4}\b/.test(combined), "Phone-number-like text must not appear");
 assert(!/\b\d{1,5}\s+[A-Z][a-z]+\s+(Street|St|Avenue|Ave|Road|Rd|Drive|Dr|Lane|Ln|Court|Ct)\b/.test(combined), "Street addresses must not appear");
-assert(!/\b(code|digit|pin|password)\s*[:=]\s*["']?\d{4}\b/i.test(combined), "A four-digit secret assignment must not appear");
-assert(!/\b(digit|value|answer)\s*:/.test(dataSource), "Cast data must not encode code-fragment values");
+assert(combined.includes("0151"), "The yard combination-box code must appear in the cast guidance");
 
 console.log("Simplified Cast Portal regression checks passed.");
 console.log("Before word counts:", beforeWordCounts);

@@ -159,8 +159,8 @@ compiledBrowserScripts.forEach((compiledSource, index) => {
 assert.strictEqual(typeof browserScriptContext.window.MiniGame, "function");
 assert.strictEqual(typeof browserScriptContext.window.TrainerApp, "function");
 
-// Tracked-file privacy scan. Symbolic fragment slot numbers are permitted;
-// numbered household addresses and common secret assignments are not.
+// Tracked-file privacy scan. The game-only yard-box combination is permitted;
+// numbered household addresses and credential assignments are not.
 const trackedFiles = childProcess.execFileSync("git", ["ls-files"], {
   cwd: repositoryRoot,
   encoding: "utf8",
@@ -182,10 +182,9 @@ trackedFiles.forEach((file) => {
 });
 
 config.codeFragments.forEach((fragment) => {
-  assert.strictEqual(/[0-9]/.test(fragment.displaySymbol), false);
-  ["digit", "value", "answer", "code"].forEach((key) => {
-    assert.strictEqual(Object.prototype.hasOwnProperty.call(fragment, key), false);
-  });
+  assert.match(fragment.displaySymbol, /^\d$/);
 });
+assert.strictEqual(config.combinationBoxCode, "0151");
+assert.strictEqual(config.codeFragments.map((fragment) => fragment.displaySymbol).join(""), config.combinationBoxCode);
 
 console.log("Phase 3 release tests passed.");

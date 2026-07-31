@@ -164,7 +164,7 @@ Controls:
 - restore progress from saved JSON text
 - reset entire game with double confirmation
 
-Parent Mode must not display the house-entry code.
+Parent Mode may display the game-only yard-box combination `0151`; it must not contain household access information.
 
 In V3, Parent Mode also shows the current chapter, stable scene ID, scene type,
 audience, performer, Phone Captain, and Water Safety Adult when applicable. Its
@@ -177,26 +177,26 @@ return shield; overriding the return shield may advance to Luca's result.
 - Use an illustrated Creekside Region path rather than a literal street map.
 - Locked chapters show silhouettes and mysterious labels.
 - Reveal the next destination only when unlocked.
-- The protected destination should appear only as “Secret Ranger Vault,” never as an address or visible access code.
+- The destination should appear as “Secret Ranger Vault,” a combination box in Hannah and Noa's yard.
 - Clock times and adult scheduling details are absent from Luca's map.
 - Mew has no locked silhouette or “Unknown Signal” row. It is completely absent
   from the map until the postgame event unlocks.
 
 ## Code-fragment UX
 
-The app never asks for or displays the digits.
+The app reveals one game-only box digit after each fragment is earned.
 
 After each of Chapters 1-4:
 
 1. Show the numbered fragment slot.
-2. Say: “Write the digit from your physical fragment in Slot X on your Ranger Code Card.”
-3. Adult confirms that Luca recorded it.
-4. App marks only the slot as complete.
+2. Reveal the corresponding digit from `0`, `1`, `5`, `1`.
+3. Adult confirms that Luca received the fragment.
+4. App marks the slot as complete and keeps the digit visible.
 
 At Chapter 6:
 
-- Show four completed symbolic fragment icons.
-- Instruct Luca to read his physical code card and use the real keypad with an adult.
+- Show the completed combination `0151`.
+- Instruct Luca to use it on the prepared combination box in Hannah and Noa's yard with an adult.
 - No virtual keypad is needed.
 
 ## Fake finale and glitch

@@ -193,30 +193,30 @@
       performerName: "Designated Adult Escort",
       characterName: "Ranger Vault Escort",
       phoneCaptain: "Adult Escort",
-      entranceCue: "Confirm the approved boundary, keypad fallback, outside fallback, and designated bag carrier. Keep the phone and physical Trainer Code Card with the adults.",
+      entranceCue: "Confirm the combination box is staged in Hannah and Noa's yard, the lock fallback is ready, and the designated bag carrier is present.",
       spokenLines: [
-        "Trainer Luca, read the four private marks from your physical Ranger Code Card.",
-        "I will stay beside you while we use the real keypad.",
-        "Now follow the three Ranger symbols to the protected cache."
+        "Trainer Luca, your four Ranger fragments reveal 0-1-5-1.",
+        "I will stay beside you while you set the combination lock.",
+        "Open the box and recover the protected Ranger cache."
       ],
       challengeSteps: [
-        "The escort keeps Luca inside the approved configurable boundary.",
-        "Use only the private physical card; the app never receives or displays the entry information.",
-        "Follow the three prepared Ranger symbols.",
-        "Recover the cache, exit, and confirm success outside.",
+        "The escort keeps Luca beside the prepared box in Hannah and Noa's yard.",
+        "Help Luca set the game-only combination to 0151.",
+        "Open the prepared box.",
+        "Recover the cache and confirm success.",
         "Open one story item only; the bag carrier takes larger items home or to the Professors."
       ],
       runtimeSteps: [
-        "Stay beside Luca inside the approved boundary and use only the private physical Trainer Code Card.",
-        "Recover the cache, exit, and confirm outside. Open one story item; the bag carrier takes the rest."
+        "Stay beside Luca at the prepared yard box and help set the combination to 0151.",
+        "Recover the cache and confirm success. Open one story item; the bag carrier takes the rest."
       ],
       whenFinished: "Outside, say, “This file bears the same mark as your License.” Keep it sealed and tell the Phone Captain the result is ready.",
-      runtimeBackup: "Operate the keypad for Luca or bring the sealed cache outside.",
-      successCondition: "Adult-accompanied entry and safe recovery of the cache and sealed file. The escort may operate the keypad or bring the cache outside.",
+      runtimeBackup: "Help set the combination or open the prepared box for Luca.",
+      successCondition: "Adult-accompanied opening of the combination box and safe recovery of the cache and sealed file.",
       rewardPackages: ["SECRET RANGER CACHE"],
       rewardOwners: ["Designated Adult Escort"],
-      rewardPreparation: "Keep the cache staged inside the approved boundary. Outside, open one story item only; the designated bag carrier takes larger items home or to the Professors.",
-      fallback: "The escort enters the private information or brings the sealed cache outside and delivers the Ranger transmission verbally.",
+      rewardPreparation: "Keep the cache staged in the combination box. Open one story item only; the designated bag carrier takes larger items home or to the Professors.",
+      fallback: "The escort opens the prepared combination box and delivers the Ranger transmission verbally.",
       transitionLine: "The mark on the sealed file matches Luca’s License. Professor Oak must see it immediately.",
       transitionDestination: "Professor Oak’s Lab",
       handoffStory: "The protected Ranger mission requires one designated adult beside Luca.",

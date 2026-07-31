@@ -46,7 +46,7 @@ V2 is a complete design and implementation specification for:
 - One mid-game Professor Oak return checkpoint
 - One fake Champion finale
 - One Mew epilogue
-- Four physical code fragments with no digital secret storage
+- Four in-app Ranger digits that reveal the game-only yard-box combination `0151`
 - Adult-confirmed physical challenges
 - Reward inventory and wrapping allocation
 - Persistent progress and moderator recovery controls

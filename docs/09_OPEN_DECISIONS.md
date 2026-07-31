@@ -2,7 +2,7 @@
 
 These decisions do not block design work. Use reasonable placeholders until Patrick confirms them.
 
-1. Exact actual digits on the four physical fragments
+1. ~~Exact digits on the four Ranger fragments~~ — decided: `0`, `1`, `5`, `1`
 2. Exact safe hiding spots for the eight glowing Fairy Lights
 3. Exact location of the Pokémon Center chapter within Home Base
 4. Exact water depth and whether capsules float or sit in a shallow area

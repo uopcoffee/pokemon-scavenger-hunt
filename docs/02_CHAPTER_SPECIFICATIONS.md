@@ -337,7 +337,7 @@ Round 3: **Final Poké Shot**
 
 **Quest item:**
 
-- Ranger Dispatch stating that the four collected fragments form the entry code for the Secret Ranger Vault
+- Ranger Dispatch stating that the four collected fragments form the `0151` combination for the Secret Ranger Vault box
 
 ## App update
 
@@ -347,7 +347,7 @@ Round 3: **Final Poké Shot**
 
 ## Transition
 
-Mike drops the Dispatch while retreating. The app reveals that Hannah and Noa, two Creekside Rangers currently away on expedition, left a protected cache inside their front entry.
+Mike drops the Dispatch while retreating. The app reveals that Hannah and Noa, two Creekside Rangers currently away on expedition, left a protected combination box in their yard.
 
 ---
 
@@ -355,15 +355,15 @@ Mike drops the Dispatch while retreating. The app reveals that Hannah and Noa, t
 
 ## Location
 
-Secret Ranger Vault, approved front entry only.
+Secret Ranger Vault, a prepared combination box in Hannah and Noa's yard.
 
 ## Characters
 
 Hannah and Noa appear through an app message as **Rangers Hannah and Noa**. They are away physically, which is part of the story.
 
-## Security rule
+## Combination rule
 
-The actual entry code is never stored in the app, repository, documentation, comments, or assets. Luca uses the four physical fragments collected earlier. An adult accompanies him and may take over if needed.
+The game-only box combination is `0151`, a reference to Mew's National Pokédex number, #151. It is not a door or household access code. An adult accompanies Luca and may help with the lock if needed.
 
 ## Storyline
 
@@ -371,10 +371,10 @@ The Rangers knew Team Rocket was searching for the Sky Fragment, so they secured
 
 ## Interaction and challenge
 
-1. The app displays four empty code positions labeled Fragment 1 through Fragment 4.
-2. Luca reads the physical digits from his Ranger Code Record Card.
-3. He enters the code on the real keypad with an adult beside him.
-4. Inside the approved entry area, he follows three Ranger symbols to the prepared gift bag.
+1. The app reveals the four Ranger digits in order: `0`, `1`, `5`, `1`.
+2. Luca goes to the prepared combination box in Hannah and Noa's yard with an adult.
+3. He sets the combination lock to `0151`.
+4. He opens the box and recovers the prepared gift bag.
 5. The app asks him to locate the sealed Research File inside the bag but not open it until Professor Oak analyzes it.
 
 ## Reward earned

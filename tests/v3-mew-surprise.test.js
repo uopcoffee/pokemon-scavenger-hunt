@@ -104,7 +104,7 @@ const styles = fs.readFileSync(path.join(root, "styles.css"), "utf8");
 assert.match(styles, /prefers-reduced-motion/);
 assert.strictEqual(config.settings.soundEnabled, false);
 
-const tracked = [screens, fs.readFileSync(path.join(root, "state.js"), "utf8"), fs.readFileSync(path.join(root, "cast/cast-data.js"), "utf8")].join("\n");
-assert.doesNotMatch(tracked, /\b(?:code|digit|pin|keypad)\s*[:=]\s*["']?\d{4}\b/i);
+assert.strictEqual(config.combinationBoxCode, "0151");
+assert.match(screens, /Ranger combination box code/);
 
 console.log("V3.5 adult-triggered Mew surprise tests passed.");
