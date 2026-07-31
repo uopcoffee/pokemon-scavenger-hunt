@@ -85,6 +85,13 @@ const fragmentChapters = config.chapters
   .map((chapter) => chapter.number);
 assert.deepStrictEqual(Array.from(fragmentChapters), [1, 2, 3, 4], "All fragments must be earned before the Ranger Vault");
 assert.strictEqual(config.chapters[5].requiresFragments, 4);
+const fairy = config.chapters.find((chapter) => chapter.id === "fairy-garden");
+const fairyStory = fairy.scenes.find((scene) => scene.id === "fairy-story");
+const fairyResult = fairy.scenes.find((scene) => scene.id === "fairy-challenge-result");
+assert.match(fairyStory.body, /Eight glowing Fairy Lights.*Nina knows where they are/i);
+assert.match(fairyResult.body, /eight lights.*formed an arrow/i);
+assert.match(fairyResult.nextDestination, /Professor Oak and Professor Monica/i);
+assert.strictEqual(fairyResult.rewardIds.length, 5, "Fairy rewards must remain unchanged");
 config.codeFragments.forEach((fragment) => {
   ["digit", "value", "answer", "code"].forEach((forbiddenKey) => {
     assert.strictEqual(Object.prototype.hasOwnProperty.call(fragment, forbiddenKey), false);

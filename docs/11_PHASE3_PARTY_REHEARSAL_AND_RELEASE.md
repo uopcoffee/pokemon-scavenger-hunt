@@ -43,7 +43,7 @@ Use this only when the event is 20–30 minutes behind. Preserve every required
 story beat:
 
 - Skip every optional digital warmup.
-- Run Fairy Garden with one visible orb and have Nina present the other two.
+- Run Fairy Garden with the eight lights already visible and let Nina point directly to each one. An adult still forms the arrow.
 - Use the pool skimmer or a dry tub; retrieve all four Oak capsules in one pass.
 - Nurse Joy demonstrates the first match; Luca completes one match and carries
   the medicine ball directly back.
@@ -81,8 +81,16 @@ brief enough to reach physical play in about 15–45 seconds.
 Nina may point, pause, or use only one line at a time. Ariel or Polly gives the
 longer setup.
 
-> Luca, look! Fairy lights fell down. Tree! There! Put them in my basket. You
-> did it!
+> Luca! Lights! I can’t reach! Tree! There! Up high! Table! You did it!
+
+Ariel or the supporting adult explains:
+
+> Eight Fairy lights are glowing in the garden. Nina knows where they are.
+> Follow her clues and bring every light to the Fairy Table.
+
+After the eighth light reaches the table:
+
+> Luca, step back. The lights made an arrow. They know where to send you next.
 
 ### Bruce — Professor Oak, first visit
 
@@ -134,15 +142,15 @@ to the appropriate challenge.
 
 ### Fairy Garden Rescue
 
-- Primary setup: three large orbs at toddler-visible height; Nina has a basket.
-- Success: all three reach the basket, with pointing allowed after two minutes.
-- Easier fallback: place the last orb in full view and let Nina point.
-- No-prop fallback: Luca identifies three adult-named colors or Fairy symbols.
+- Primary setup: eight glowing flameless battery tea lights hidden in safe backyard locations; Nina knows all eight; a designated adult quietly forms an arrow on the Fairy Table.
+- Success: all eight lights reach the table and the arrow is revealed. Nina and adults may point immediately.
+- Easier fallback: place every remaining light in full view and let Nina point directly to each one.
+- No-prop fallback: use eight paper Fairy symbols and form the same arrow.
 - Duration: 4–6 minutes.
 - Performer: Ariel runs the scene and prompts Nina only if Nina wants to join.
 - Phone Captain: Patrick opens the cue and completes Mission Complete.
-- Props: three orbs, basket, optional costume piece.
-- Safety: use only low, visible garden areas; no climbing or side-yard access.
+- Props: eight battery tea lights, Fairy Table, optional costume piece.
+- Safety: use flameless lights only. Every hiding place must be reachable from the ground. No tree, fence, furniture, or ladder climbing and no side-yard access.
 
 ### Professor Oak pool research mission
 

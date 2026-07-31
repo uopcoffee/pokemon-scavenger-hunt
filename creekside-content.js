@@ -145,12 +145,12 @@
         type: "psychic", art: "pikachu.png", locationLabel: "Fairy Garden", scheduleLabel: "9:42–9:52", targetMinutes: 10,
         participantIds: ["nina"],
         scenes: [
-          { id: "fairy-story", type: "story", title: "Fairy Energy Has Fallen", body: "Three Fairy Energy Orbs have fallen from the trees. The next map signal cannot power on until they are returned." },
+          { id: "fairy-story", type: "story", title: "The Fairy Lights Are Missing", body: "Eight glowing Fairy Lights are hidden throughout the garden. Nina knows where they appeared, but some are too high for the youngest Gym Leader to reach." },
           { id: "fairy-location", type: "travel-location", title: "Enter the Fairy Garden", body: "Travel to the prepared backyard tree and bush area. Do not use the garage or side yard." },
-          { id: "fairy-character", type: "story", title: "A Helper Is Waiting in the Garden", body: "Three Fairy lights are missing among the trees. Auntie Ariel is ready to guide the search, and Nina may help with the basket." },
-          { id: "fairy-warmup", type: "digital-warmup", title: "Optional Fairy Scan", body: "Optional: point to the three glowing Fairy symbols, then put the phone away." },
-          { id: "fairy-briefing", type: "challenge-briefing", title: "Recover Three Fairy Orbs", instructions: ["Find three large prepared orbs at toddler-visible height.", "Hand each orb to Nina.", "Nina places each orb in her basket."] },
-          { id: "fairy-challenge", type: "physical-challenge", title: "Help Nina Restore the Garden", body: "Search the prepared low branches and visible bushes with Nina.", successRule: "Find all three, or let Nina point to the final orb after two minutes.", fallbackText: "If Nina loses interest, she hands Luca the basket and cheers while he finishes. Move indoors during bad weather.", adultPrompt: "Fairy Gym Leader's helper: hold to confirm all three orbs are in the basket." },
+          { id: "fairy-character", type: "story", title: "The Fairy Gym Leader Knows the Way", body: "Nina knows all eight hiding places. Follow her clues, recover each glowing light, and bring it to the Fairy Table." },
+          { id: "fairy-warmup", type: "digital-warmup", title: "Optional Fairy Scan", body: "Optional: count eight glowing Fairy symbols, then put the phone away." },
+          { id: "fairy-briefing", type: "challenge-briefing", title: "Recover Eight Fairy Lights", instructions: ["Follow Nina’s pointing and short clues.", "Retrieve each battery tea light from a safe, reachable hiding place.", "Bring every light to the Fairy Table."] },
+          { id: "fairy-challenge", type: "physical-challenge", title: "Help Nina Restore the Garden", body: "Search safe low branches, bushes, and backyard hiding places with Nina.", successRule: "Bring all eight battery tea lights to the Fairy Table. An adult quietly arranges them into an arrow.", fallbackText: "Move every remaining light into plain sight or let an adult give the clues. Use fewer lights if needed, then complete the arrow.", adultPrompt: "Fairy Garden Guide: hold to confirm the eight lights form an arrow on the table." },
           { id: "fairy-reward", type: "reward", title: "Fairy Gym Reward", body: "Open the reader and team cards now. Save the Perfect Order booster for the final celebration.", rewardIds: ["sweet-surprise-reader","mega-clefable-ex","alcremie-ex","perfect-order-loose-1","fairy-badge"] },
           { id: "fairy-inventory", type: "inventory-update", title: "Fairy Team Update", body: "Mega Clefable and Alcremie join the team. The Fairy Badge is recorded." },
           { id: "fairy-fragment", type: "code-fragment-record", title: "Ranger Fragment 2", body: "Record the second physical digit on the Ranger Code Card. The app records only the Star symbol.", fragmentSlot: 2 },
@@ -353,23 +353,23 @@
   var fairyRewards = rewardIdsFrom(fairy, "fairy-reward");
   streamline(fairy, [
     sceneFrom(fairy, "fairy-story", {
-      title: "The Fairies Felt It First",
-      body: "The moment Luca’s Trainer signal activated, three Fairy lights tumbled where Nina cannot safely reach them. She found them flickering—and one keeps pointing toward the Partner Professors’ Lab."
+      title: "The Fairy Lights Are Missing",
+      body: "Eight glowing Fairy Lights appeared throughout the garden. Nina knows where they are—but some are too high for the youngest Gym Leader to reach."
     }),
     sceneFrom(fairy, "fairy-warmup", {
-      body: "Optional: point to the three glowing Fairy symbols, then put the phone away and begin the real search."
+      body: "Optional: count eight glowing Fairy symbols, then put the phone away and begin the real search."
     }),
     combinedChallenge(fairy, "fairy-challenge", {
-      title: "Recover the Fairy Energy Orbs",
-      successTitle: "The Lights Remember Luca!",
-      successBody: "The three lights flare at once, tracing the same strange path across Creekside.",
+      title: "Recover the Eight Fairy Lights",
+      successTitle: "The Lights Are Showing the Way!",
+      successBody: "Nina stares at the Fairy Table. The eight lights are not scattered anymore. They have formed an arrow.",
       resultLabel: "Fairy Badge earned",
-      revealItems: ["The Fairy lights point toward the water"],
+      revealItems: ["The glowing arrow points toward the Partner Professors’ Lab"],
       rewardIds: fairyRewards,
       fragmentSlot: 2,
       fragmentStory: "Two Ranger marks. Perhaps the lights know what the card will open.",
       rewardHandoff: "Your reward has appeared! Auntie Ariel hands Luca the FAIRY GYM REWARD now. Open the reader and team cards; save the Perfect Order booster for the celebration.",
-      nextDestination: "The restored lights point toward Oak’s Water Preserve. If the Fairies were warning Luca, what is waiting beneath the water?"
+      nextDestination: "Follow the Fairy Lights. Professor Oak and Professor Monica may know why the garden chose this path."
     })
   ], {
     "fairy-location": "fairy-story",
