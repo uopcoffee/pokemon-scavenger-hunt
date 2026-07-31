@@ -1,4 +1,7 @@
-/* Dependency-free V3 theatrical relay validation.
+/* Dependency-free paper-cast relay validation.
+   The performer cue cards are printed, so the runtime relay is two
+   player-facing screens: a mission brief whose protected hold means "the
+   real-world mission is FINISHED", and the reveal it unlocks.
    Run from the repository root with: node tests/v3-theatrical-relay.test.js */
 const assert = require("assert");
 const fs = require("fs");
@@ -63,6 +66,25 @@ const approvedPhoneCaptains = {
   "victory-road": "Patrick",
   champion: "Auntie Ariel",
   mew: "Polly or Auntie Ariel when Patrick guides; Patrick when another adult guides",
+};
+
+const MISSION_COMPLETE_HOLD_LABEL = "Adult: Hold when the mission is complete";
+/* A mission brief is read aloud to a seven-year-old, so no stage direction or
+   operator vocabulary may appear in it. */
+const FORBIDDEN_BRIEF_WORDS = /\b(cue|adult|phone|referee|optional)\b/i;
+
+/* The challenge IDs the removed relay screens were named after. */
+const relayChallengeIdByCueId = {
+  orientation: "orientation-challenge",
+  fairy: "fairy-challenge",
+  "oak-water": "oak-challenge",
+  "nurse-joy": "center-challenge",
+  rocket: "rocket-challenge",
+  vault: "vault-challenge",
+  "oak-return": "oak-return-challenge",
+  "victory-road": "victory-challenge-a",
+  champion: "champion-challenge",
+  mew: "mew-challenge",
 };
 
 function plain(value) {
@@ -136,7 +158,9 @@ assert.strictEqual(locateScene("champion-character"), null, "The phone must not 
 Object.entries(cues).forEach(([cueId, cue]) => {
   assert.strictEqual(cue.performerName, approvedPerformers[cueId], `${cueId} performer must be explicitly approved`);
   assert.strictEqual(cue.phoneCaptain, approvedPhoneCaptains[cueId], `${cueId} must name the approved Phone Captain`);
-  assert.ok(cue.handoffLabel.startsWith("Adult: Hold to open"), `${cueId} must open a cue`);
+  /* The cast core is what gets printed; its own labels stay adult-facing and
+     must never reach a runtime screen. */
+  assert.ok(cue.handoffLabel.startsWith("Adult: Hold to open"), `${cueId} printed guide must keep its adult label`);
   assert.ok(!/hand off|hand the phone|give the phone/i.test(cue.handoffLabel), `${cueId} must not instruct a phone handoff`);
   [
     "characterName",
@@ -154,22 +178,35 @@ Object.entries(cues).forEach(([cueId, cue]) => {
     assert.ok(Array.isArray(cue[field]) && cue[field].length, `${cueId} is missing ${field}`);
   });
 
-  const matchingCastScenes = sequences.flatMap((sequence) =>
-    sequence.scenes.filter((scene) => scene.type === "cast-cue" && scene.cueId === cueId)
+  /* No cast cue is rendered any more. Each printed guide backs exactly one
+     player-facing mission brief, and that brief must leak none of the guide. */
+  assert.strictEqual(
+    sequences.flatMap((sequence) => sequence.scenes.filter((scene) => scene.type === "cast-cue")).length,
+    0,
+    "The runtime cast cue screen is printed, not rendered"
   );
-  assert.strictEqual(matchingCastScenes.length, 1, `${cueId} must power exactly one runtime cast cue`);
-  const runtimeCue = matchingCastScenes[0];
-  assert.strictEqual(runtimeCue.performerName, cue.performerName);
-  assert.strictEqual(runtimeCue.characterName, cue.characterName);
-  assert.strictEqual(runtimeCue.phoneCaptain, cue.phoneCaptain);
-  assert.strictEqual(runtimeCue.waterSafetyAdult, cue.waterSafetyAdult);
-  assert.strictEqual(runtimeCue.supportingRole, cue.supportingRole);
-  assert.deepStrictEqual(plain(runtimeCue.spokenLines), plain(cue.spokenLines));
-  assert.deepStrictEqual(plain(runtimeCue.helpLucaSteps), plain(cue.runtimeSteps));
-  assert.strictEqual(runtimeCue.whenFinished, cue.whenFinished);
-  assert.strictEqual(runtimeCue.easyBackup, cue.runtimeBackup);
-  assert.strictEqual(runtimeCue.completionLabel, "Phone Captain: Hold Mission Complete");
+  const matchingBriefs = sequences.flatMap((sequence) =>
+    sequence.scenes.filter((scene) => scene.type === "cast-handoff" && scene.cueId === cueId)
+  );
+  assert.strictEqual(matchingBriefs.length, 1, `${cueId} must power exactly one player-facing mission brief`);
+  const brief = matchingBriefs[0];
+  assert.strictEqual(brief.audience, "luca");
+  assert.strictEqual(brief.handoffLabel, MISSION_COMPLETE_HOLD_LABEL, `${cueId} brief must hold AFTER the mission`);
+  assert.ok(brief.body, `${cueId} brief must tell Luca what is about to happen`);
+  assert.ok(brief.characterName, `${cueId} brief must name who is waiting`);
+  assert.ok(brief.body.trim().split(/\s+/).length < 25, `${cueId} brief must stay under 25 words`);
+  assert.doesNotMatch(brief.body, FORBIDDEN_BRIEF_WORDS, `${cueId} brief must stay in Luca's world`);
+  assert.doesNotMatch(brief.characterName, FORBIDDEN_BRIEF_WORDS, `${cueId} brief must not name an operator role`);
   [
+    "performerName",
+    "phoneCaptain",
+    "waterSafetyAdult",
+    "supportingRole",
+    "spokenLines",
+    "helpLucaSteps",
+    "whenFinished",
+    "easyBackup",
+    "completionLabel",
     "entranceCue",
     "challengeSteps",
     "successCondition",
@@ -180,15 +217,15 @@ Object.entries(cues).forEach(([cueId, cue]) => {
     "transitionLine",
     "transitionDestination",
   ].forEach((field) => {
-    assert.strictEqual(runtimeCue[field], undefined, `${cueId} runtime cue must hide Director field ${field}`);
+    assert.strictEqual(brief[field], undefined, `${cueId} mission brief must hide Director field ${field}`);
   });
-  const liveWords = [
-    runtimeCue.spokenLines.join(" "),
-    runtimeCue.helpLucaSteps.join(" "),
-    runtimeCue.whenFinished,
-    runtimeCue.easyBackup,
+  const printedWords = [
+    cue.spokenLines.join(" "),
+    cue.runtimeSteps.join(" "),
+    cue.whenFinished,
+    cue.runtimeBackup,
   ].join(" ").trim().split(/\s+/).length;
-  assert.ok(liveWords <= 125, `${cueId} runtime cue must stay concise; found ${liveWords} words`);
+  assert.ok(printedWords <= 125, `${cueId} printed guide must stay concise; found ${printedWords} words`);
 });
 
 assert.ok(!cues.fairy.handoffLabel.includes("Nina"), "Nina must never be named as the phone operator");
@@ -201,86 +238,75 @@ assert.ok(cues["victory-road"].runtimeSteps.some((step) => /Rayquaza/i.test(step
 let relayCount = 0;
 sequences.forEach((sequence) => {
   sequence.scenes.forEach((scene, index) => {
-    if (scene.type !== "cast-cue") return;
+    if (scene.type !== "cast-handoff") return;
     relayCount += 1;
-    const handoff = sequence.scenes[index - 2];
-    const privacy = sequence.scenes[index - 1];
-    const returned = sequence.scenes[index + 1];
-    const result = sequence.scenes[index + 2];
+    const result = sequence.scenes[index + 1];
 
     assert.deepStrictEqual(
-      [handoff.type, privacy.type, scene.type, returned.type, result.type],
-      ["cast-handoff", "privacy-shield", "cast-cue", "return-to-player", "relay-result"],
-      `${scene.cueId} must preserve the five-beat relay`
+      [scene.type, result.type],
+      ["cast-handoff", "relay-result"],
+      `${scene.id} must preserve the two-beat player-facing relay`
     );
     assert.deepStrictEqual(
-      [handoff.audience, privacy.audience, scene.audience, returned.audience, result.audience],
-      ["luca", "adult", "cast", "adult", "luca"],
-      `${scene.cueId} must preserve audience boundaries`
+      [scene.audience, result.audience],
+      ["luca", "luca"],
+      `${scene.id} must keep both beats player-facing`
     );
-    assert.strictEqual(handoff.cueId, scene.cueId);
-    assert.strictEqual(privacy.cueId, scene.cueId);
-    assert.strictEqual(returned.cueId, scene.cueId);
-    assert.strictEqual(result.cueId, scene.cueId);
-    [handoff, privacy, scene, returned, result].forEach((relayScene) => {
-      assert.strictEqual(relayScene.phoneCaptain, approvedPhoneCaptains[scene.cueId], `${relayScene.id} must retain Phone Captain metadata`);
+    if (scene.cueId) assert.strictEqual(result.cueId, scene.cueId, `${scene.id} must pair with its own reveal`);
+
+    /* Neither beat may carry the operator metadata that used to ride along on
+       the private screens. */
+    ["spokenLines", "helpLucaSteps", "whenFinished", "easyBackup", "performerName", "phoneCaptain", "waterSafetyAdult", "rewardHandoff", "logisticsRewardIds"].forEach((field) => {
+      assert.strictEqual(scene[field], undefined, `${scene.id} leaks ${field}`);
+      assert.strictEqual(result[field], undefined, `${result.id} leaks ${field}`);
     });
 
-    ["spokenLines", "helpLucaSteps", "whenFinished", "easyBackup"].forEach((field) => {
-      assert.strictEqual(privacy[field], undefined, `${scene.cueId} privacy shield leaks ${field}`);
-      assert.strictEqual(handoff[field], undefined, `${scene.cueId} Luca handoff leaks ${field}`);
-      assert.strictEqual(returned[field], undefined, `${scene.cueId} return shield leaks ${field}`);
-    });
-
-    let relayState = stateAt(sequence, index - 2);
-    const blockedHandoff = stateEngine.reducer(relayState, { type: "ADVANCE_SCENE" });
-    assert.strictEqual(blockedHandoff.currentSceneId, handoff.id, `${scene.cueId} handoff must resist an ordinary tap`);
+    /* The hold is the only way past a brief: an ordinary tap must not confirm a
+       real-world mission that has not happened yet. */
+    let relayState = stateAt(sequence, index);
+    const blockedBrief = stateEngine.reducer(relayState, { type: "ADVANCE_SCENE" });
+    assert.strictEqual(blockedBrief.currentSceneId, scene.id, `${scene.id} must resist an ordinary tap`);
 
     relayState = stateEngine.reducer(relayState, { type: "COMPLETE_RELAY_HOLD" });
-    assert.strictEqual(relayState.currentSceneId, privacy.id);
-    relayState = stateEngine.reducer(relayState, { type: "ADVANCE_SCENE" });
-    assert.strictEqual(relayState.currentSceneId, scene.id);
+    assert.strictEqual(relayState.currentSceneId, result.id, `${scene.id} must reveal the result once the hold completes`);
 
-    const blockedCue = stateEngine.reducer(relayState, { type: "ADVANCE_SCENE" });
-    assert.strictEqual(blockedCue.currentSceneId, scene.id, `${scene.cueId} cast cue must resist an ordinary tap`);
+    const parentAdvanced = stateEngine.reducer(stateAt(sequence, index), { type: "PARENT_ADVANCE" });
+    assert.strictEqual(parentAdvanced.currentSceneId, result.id, `Parent Mode must advance past ${scene.id}`);
 
-    const parentAdvancedCue = stateEngine.reducer(relayState, { type: "PARENT_ADVANCE" });
-    assert.strictEqual(parentAdvancedCue.currentSceneId, returned.id, `${scene.cueId} Parent Mode must advance to the return shield`);
-
-    relayState = stateEngine.reducer(relayState, { type: "COMPLETE_RELAY_HOLD" });
-    assert.strictEqual(relayState.currentSceneId, returned.id);
-    relayState = stateEngine.reducer(relayState, { type: "ADVANCE_SCENE" });
-    assert.strictEqual(relayState.currentSceneId, result.id);
-
-    [handoff, privacy, scene, returned, result].forEach((relayScene, offset) => {
-      const exactState = stateAt(sequence, index - 2 + offset);
+    [scene, result].forEach((relayScene, offset) => {
+      const exactState = stateAt(sequence, index + offset);
       const backedUp = stateEngine.reducer(exactState, { type: "PARENT_BACK_SCENE" });
       assert.strictEqual(
         backedUp.currentSceneIndex,
-        index - 3 + offset,
+        index - 1 + offset,
         `Parent Mode must go back one scene from ${relayScene.id}`
       );
-
-      const parentAdvanced = stateEngine.reducer(exactState, { type: "PARENT_ADVANCE" });
-      if (relayScene === result && index + 2 === sequence.scenes.length - 1) {
-        assert.notStrictEqual(parentAdvanced.view, "scene", `Parent Mode must finish the sequence from ${relayScene.id}`);
-      } else {
-        assert.strictEqual(
-          parentAdvanced.currentSceneIndex,
-          index - 1 + offset,
-          `Parent Mode must advance one scene from ${relayScene.id}`
-        );
-      }
 
       memory.clear();
       assert.strictEqual(stateEngine.writeState(exactState), true);
       const restored = stateEngine.readState();
       assert.strictEqual(restored.currentSceneId, relayScene.id, `${relayScene.id} must survive refresh exactly`);
-      assert.strictEqual(restored.currentSceneIndex, index - 2 + offset);
+      assert.strictEqual(restored.currentSceneIndex, index + offset);
     });
   });
 });
-assert.strictEqual(relayCount, Object.keys(cues).length, "Every cast cue must have one theatrical relay");
+/* Ten printed guides plus the merged Legendary encounter, which absorbed the
+   hold that used to live on its own adult control screen. */
+assert.strictEqual(relayCount, Object.keys(cues).length + 1, "Every printed guide plus Rayquaza must gate on one hold");
+
+/* Every scene ID the paper-cast rebuild removed must still resolve, so a
+   mid-event refresh can never land on a screen that no longer exists. */
+const removedSceneIds = Object.keys(cues)
+  .flatMap((cueId) => ["-privacy", "", "-return", "-logistics"].map((suffix) => relayChallengeIdByCueId[cueId] + suffix))
+  .concat(["victory-challenge-b-control"]);
+assert.strictEqual(removedSceneIds.length, 41, "Forty relay screens plus the merged Legendary control were removed");
+removedSceneIds.forEach((removedId) => {
+  const owner = sequences.find((sequence) => Object.prototype.hasOwnProperty.call(sequence.sceneAliases || {}, removedId));
+  assert.ok(owner, `${removedId} must have an alias so a refresh cannot strand anyone`);
+  const target = owner.scenes.find((candidate) => candidate.id === owner.sceneAliases[removedId]);
+  assert.ok(target, `${removedId} must alias to a scene that exists`);
+  assert.strictEqual(target.audience, "luca", `${removedId} must alias to a player-facing scene`);
+});
 
 portal.director.operations.forEach((operation) => {
   operation.cueIds.forEach((cueId, index) => {
@@ -288,7 +314,7 @@ portal.director.operations.forEach((operation) => {
   });
 });
 
-const rocketLocation = locateScene("rocket-challenge");
+const rocketLocation = locateScene("rocket-challenge-handoff");
 const v2ChallengeIndex = rocketLocation.sequence.legacyV2SceneIds.indexOf("rocket-challenge");
 const v2Snapshot = {
   version: 2,
@@ -306,8 +332,12 @@ const v2Snapshot = {
   mewComplete: true,
 };
 const migrated = stateEngine.sanitizeState(v2Snapshot);
-assert.strictEqual(migrated.currentSceneId, "rocket-challenge-handoff", "V2 challenge progress must migrate to the Luca handoff");
-assert.notStrictEqual(migrated.currentSceneId, "rocket-challenge", "V2 challenge progress must never open on a cast cue");
+assert.strictEqual(migrated.currentSceneId, "rocket-challenge-handoff", "V2 challenge progress must migrate to the Luca mission brief");
+assert.strictEqual(
+  rocketLocation.sequence.scenes.some((scene) => scene.id === "rocket-challenge"),
+  false,
+  "The Rocket cast cue screen must be gone from the runtime"
+);
 assert.strictEqual(migrated.trainer.name, "Luca");
 assert.deepStrictEqual(plain(migrated.completedChapters), plain(v2Snapshot.completedChapters));
 assert.deepStrictEqual(plain(migrated.earnedRewards), plain(v2Snapshot.earnedRewards));
@@ -319,37 +349,38 @@ assert.strictEqual(migrated.mewComplete, true);
 
 const screenSource = fs.readFileSync(path.join(repositoryRoot, "screens.jsx"), "utf8");
 const componentSource = fs.readFileSync(path.join(repositoryRoot, "components.jsx"), "utf8");
-const privacySource = screenSource.slice(
-  screenSource.indexOf("function PrivacyShieldScreen"),
-  screenSource.indexOf("function CastCueScreen")
-);
-assert.ok(privacySource.includes("Turn the phone away from Luca."));
-assert.ok(privacySource.includes("Phone is turned away — open private cue"));
-["spokenLines", "helpLucaSteps", "whenFinished", "easyBackup"].forEach((field) => {
-  assert.ok(!privacySource.includes(field), `PrivacyShieldScreen must not render ${field}`);
+/* The three private relay renderers are deleted outright. */
+["function PrivacyShieldScreen", "function CastCueScreen", "function ReturnToPlayerScreen"].forEach((declaration) => {
+  assert.ok(!screenSource.includes(declaration), `${declaration} must be deleted`);
 });
-const runtimeCueSource = screenSource.slice(
-  screenSource.indexOf("function CastCueScreen"),
-  screenSource.indexOf("function ReturnToPlayerScreen")
-);
-["1. Say This", "2. Help Luca Do This", "3. When He Finishes", "4. Easy Backup"].forEach((heading) => {
-  assert.ok(runtimeCueSource.includes(heading), `CastCueScreen must render ${heading}`);
+['scene.type === "privacy-shield"', 'scene.type === "cast-cue"', 'scene.type === "return-to-player"'].forEach((branch) => {
+  assert.ok(!screenSource.includes(branch), `CreeksideScene must not dispatch on ${branch}`);
 });
-["entranceCue", "successCondition", "rewardPackages", "rewardOwners", "rewardPreparation", "transitionLine", "transitionDestination"].forEach((field) => {
-  assert.ok(!runtimeCueSource.includes(field), `CastCueScreen must not render Director field ${field}`);
+["Turn the Screen Away", "Phone is turned away — open private cue", "Turn the Screen Back to Luca", "1. Say This", "2. Help Luca Do This", "3. When He Finishes", "4. Easy Backup"].forEach((copy) => {
+  assert.ok(!screenSource.includes(copy), `Removed private-screen copy still present: ${copy}`);
 });
-assert.ok(runtimeCueSource.includes("Phone Captain"));
-assert.ok(runtimeCueSource.includes("performer does not need to operate it"));
+assert.ok(!screenSource.includes('data-audience="cast"'), "No screen renders to the cast any more");
+
+/* The mission brief screen: the hold confirms a FINISHED mission, and the brief
+   still shows nothing operational. */
 const handoffSource = screenSource.slice(
   screenSource.indexOf("function RelayHandoffScreen"),
-  screenSource.indexOf("function PrivacyShieldScreen")
+  screenSource.indexOf("function CreeksideScene")
 );
-assert.ok(!handoffSource.includes("phoneCaptain"), "Luca-facing handoff must not show Phone Captain operations");
+assert.ok(handoffSource.includes(MISSION_COMPLETE_HOLD_LABEL), "The hold must read as a completion confirmation");
+assert.ok(!handoffSource.includes("Hold to begin the mission"), "The old start-of-mission hold must be gone");
+assert.ok(handoffSource.includes("Put the phone away and go"), "The brief must send Luca out into the world");
+assert.ok(!handoffSource.includes("Ready for the real-world mission"), "The pre-mission meta line must be gone");
+assert.ok(!handoffSource.includes("phoneCaptain"), "The mission brief must not show Phone Captain operations");
+assert.ok(!handoffSource.includes("AudienceIndicator"), "A fully player-facing brief needs no audience chrome");
+
+/* The audience guard and Parent Mode audiences survive untouched. */
+assert.ok(screenSource.includes("function AudienceIndicator"), "The indicator stays available for adult surfaces");
+assert.ok(screenSource.includes("config.audiences.indexOf(scene.audience) === -1"), "The unknown-audience guard must remain");
+assert.deepStrictEqual(Array.from(config.audiences), ["luca", "adult", "cast"], "Parent Mode still needs every audience name");
+assert.ok(screenSource.includes('scene.type === "physical-challenge"'), "Parent Mode may still jump to a physical challenge");
 assert.ok(screenSource.includes("Water Safety Adult"));
-assert.ok(screenSource.includes("Turn the Screen Back to Luca"));
 assert.ok(screenSource.includes('audience="luca"'));
-assert.ok(screenSource.includes('audience="adult"'));
-assert.ok(screenSource.includes('data-audience="cast"'));
 assert.ok(componentSource.includes("onPointerUp={endHold}"));
 assert.ok(componentSource.includes("onPointerCancel={cancelHold}"));
 assert.ok(componentSource.includes("onLostPointerCapture={endHold}"));
@@ -363,4 +394,4 @@ assert.strictEqual(
   "AdultHoldButton must have one completion call site"
 );
 
-console.log("V3 theatrical relay tests passed.");
+console.log("Paper-cast relay tests passed.");

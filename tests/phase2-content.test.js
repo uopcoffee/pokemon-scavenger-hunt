@@ -23,14 +23,10 @@ const expectedChapterNames = [
   "Victory Road and Champion Battle",
 ];
 const requiredParticipants = ["ariel", "nina", "bruce", "monica", "polly", "mike", "patrick", "hannah", "noa"];
-const requiredChapterSceneTypes = [
-  "story",
-  "cast-handoff",
-  "privacy-shield",
-  "cast-cue",
-  "return-to-player",
-  "relay-result",
-];
+/* The paper-cast rebuild leaves two runtime beats per live encounter: the
+   player-facing mission brief and the player-facing reveal. */
+const requiredChapterSceneTypes = ["story", "cast-handoff", "relay-result"];
+const removedSceneTypes = ["privacy-shield", "cast-cue", "return-to-player", "adult-logistics"];
 const validDispositions = ["OPEN NOW", "CARRY FOR LATER", "SAVE FOR CELEBRATION"];
 
 assert.deepStrictEqual(Array.from(config.chapters, (chapter) => chapter.name), expectedChapterNames);
@@ -49,22 +45,36 @@ config.chapters.forEach((chapter) => {
   requiredChapterSceneTypes.forEach((sceneType) => {
     assert.ok(sceneTypes.includes(sceneType), `${chapter.name} must include ${sceneType}`);
   });
-  assert.ok(chapter.scenes.length <= (chapter.id === "victory-road" ? 18 : chapter.id === "professor-oak-lab" ? 12 : 10), `${chapter.name} exceeds its V3.3 screen-count target`);
+  removedSceneTypes.forEach((removedType) => {
+    assert.ok(!sceneTypes.includes(removedType), `${chapter.name} must not ship a ${removedType} screen`);
+  });
+  chapter.scenes.forEach((scene) => {
+    assert.strictEqual(scene.audience, "luca", `${scene.id} must be player-facing`);
+  });
+  assert.ok(chapter.scenes.length <= (chapter.id === "victory-road" ? 10 : 5), `${chapter.name} exceeds its paper-cast screen-count target`);
   chapter.scenes.filter((scene) => scene.type === "relay-result").forEach((scene) => {
     assert.ok(scene.resultLabel, `${scene.title} must name its combined achievement`);
     assert.ok(scene.nextDestination, `${scene.title} must include its story transition`);
     assert.strictEqual(scene.rewardHandoff, undefined, `${scene.title} must not expose reward logistics to Luca`);
     assert.ok(scene.revealItems.length <= 1, `${scene.title} must keep Luca's emotional reveal concise`);
   });
-  chapter.scenes.filter((scene) => scene.type === "adult-logistics").forEach((scene) => {
-    assert.ok(scene.rewardHandoff, `${scene.title} must retain physical reward timing for adults`);
-    assert.ok(Array.isArray(scene.logisticsRewardIds), `${scene.title} must retain the adult reward manifest`);
+  /* Reward logistics now live on the printed gift map, so no runtime screen may
+     carry them and every mission brief must stay short enough to read aloud. */
+  chapter.scenes.forEach((scene) => {
+    assert.strictEqual(scene.rewardHandoff, undefined, `${scene.id} must not carry reward logistics`);
+    assert.strictEqual(scene.logisticsRewardIds, undefined, `${scene.id} must not carry an adult reward manifest`);
+    assert.strictEqual(scene.spokenLines, undefined, `${scene.id} must not carry performer lines`);
+    assert.strictEqual(scene.helpLucaSteps, undefined, `${scene.id} must not carry live challenge steps`);
   });
-  chapter.scenes.filter((scene) => scene.type === "cast-cue").forEach((scene) => {
-    assert.ok(scene.whenFinished, `${scene.title} must define what happens when Luca finishes`);
-    assert.ok(scene.easyBackup, `${scene.title} must define an easy adult backup`);
-    assert.ok(scene.phoneCaptain, `${scene.title} must define the Phone Captain`);
-    assert.ok(scene.completionLabel, `${scene.title} must define a protected completion prompt`);
+  chapter.scenes.filter((scene) => scene.type === "cast-handoff").forEach((scene) => {
+    assert.ok(scene.body, `${scene.title} must tell Luca what is about to happen`);
+    assert.ok(scene.body.trim().split(/\s+/).length < 25, `${scene.title} must stay under 25 words`);
+    assert.ok(scene.characterName, `${scene.title} must name who is waiting`);
+    assert.strictEqual(
+      scene.handoffLabel,
+      "Adult: Hold when the mission is complete",
+      `${scene.title} must hold AFTER the real-world mission, never before it`
+    );
   });
 });
 
@@ -94,12 +104,13 @@ assert.strictEqual(
   false,
   "Trainer Orientation must hand over a blank card with no fragment moment"
 );
-// One mark per chapter. Within a chapter the slot appears on both the Luca-facing
-// result screen and the adult logistics screen, so collapse to distinct values.
-const chapterSlots = (chapter) =>
-  Array.from(new Set(
-    chapter.scenes.filter((scene) => Number.isInteger(scene.fragmentSlot)).map((scene) => scene.fragmentSlot)
-  ));
+// One mark per chapter, recorded once on the Luca-facing result screen. The
+// duplicate on the old adult logistics screen is gone, so this must stay unique.
+const chapterSlots = (chapter) => {
+  const slots = chapter.scenes.filter((scene) => Number.isInteger(scene.fragmentSlot)).map((scene) => scene.fragmentSlot);
+  assert.strictEqual(new Set(slots).size, slots.length, `${chapter.id} must record each mark on exactly one screen`);
+  return slots;
+};
 const orderedSlots = Array.from(config.chapters).flatMap(chapterSlots);
 assert.deepStrictEqual(orderedSlots, [1, 2, 3, 4], "Fragment slots must fill chronologically with no duplicates");
 const rocketChapter = config.chapters.find((chapter) => chapter.id === "team-rocket-base");
@@ -127,10 +138,11 @@ config.codeFragments.forEach((fragment) => {
 assert.strictEqual(config.checkpoint.afterChapterId, "secret-ranger-vault");
 assert.ok(config.chapters[6].scenes.some((scene) => scene.type === "hall-of-heroes"));
 assert.ok(config.chapters[6].scenes.some((scene) => scene.type === "fake-credits" && scene.durationMs >= 8000 && scene.durationMs <= 12000));
-assert.strictEqual(config.chapters[6].scenes.filter((scene) => scene.cueId === "victory-road" && scene.type === "cast-cue").length, 1);
+assert.strictEqual(config.chapters[6].scenes.filter((scene) => scene.cueId === "victory-road" && scene.type === "cast-handoff").length, 1);
 assert.strictEqual(config.chapters[6].scenes.some((scene) => scene.cueId === "rayquaza"), false);
 assert.strictEqual(config.epilogue.scenes[0].type, "glitch");
-assert.ok(config.epilogue.scenes.some((scene) => scene.id === "mew-challenge"));
+assert.strictEqual(config.epilogue.scenes.some((scene) => scene.id === "mew-challenge"), false, "The Mew cast cue screen is printed, not rendered");
+assert.ok(config.epilogue.scenes.some((scene) => scene.id === "mew-challenge-handoff" && scene.type === "cast-handoff"));
 assert.ok(config.epilogue.scenes.some((scene) => scene.type === "relay-result" && scene.rewardIds.includes("mew-figure")));
 
 const publicConfigText = JSON.stringify(config);
