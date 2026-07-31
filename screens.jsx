@@ -237,6 +237,7 @@ window.TrainerApp = TrainerApp;
 window.V1TrainerApp = TrainerApp;
 
 function CreeksideMap({ config, state, dispatch }) {
+  const [mapView, setMapView] = React.useState("map");
   const currentChapter = window.CreeksideState.chapterById(state.currentChapterId);
   const activeType = state.activeFlow === "mew"
     ? config.epilogue.type
@@ -245,24 +246,79 @@ function CreeksideMap({ config, state, dispatch }) {
       : (currentChapter ? currentChapter.type : "psychic");
   const avatar = config.avatars.find((item) => item.id === state.trainer.avatarId) || config.avatars[0];
   const finalChapterId = config.chapters[config.chapters.length - 1].id;
+  const activeChapter = state.activeFlow === "checkpoint"
+    ? config.checkpoint
+    : state.activeFlow === "mew"
+      ? config.epilogue
+      : currentChapter;
+  const awardArt = (rewardId) => {
+    const reward = config.rewards[rewardId] || {};
+    if (rewardId === "champion-title") return ART + "masterball.png";
+    if (rewardId === "mew-figure") return ART + "mew.png";
+    if (reward.category === "badge") return "assets/ui/gym-badge.png";
+    if (reward.category === "quest-item") return "assets/items/Bag_Sinnoh_Stone_Sprite.png";
+    if (reward.category === "team-card") return ART + "pokeball.png";
+    return "assets/items/GiftBox.png";
+  };
   return (
-    <Field type={activeType}>
-      <div style={{ ...shell }}>
+    <Field type={activeType} className="creekside-map-field">
+      <div className="paper-league-shell" style={{ ...shell }}>
         <Header
           total={config.chapters.length}
           earned={state.completedChapters.length}
           iconSrc={ART + "mega-icon-violet.png"}
           style={{ background: "rgba(255,255,255,.94)", backdropFilter: "blur(6px)" }}
         />
-        <div style={{ ...pad, gap: 16 }}>
-          <TrainerCard
-            name={state.trainer.name || "Trainer Luca"}
-            avatarSrc={ART + avatar.img}
-            badges={state.completedChapters.length}
-            totalBadges={config.chapters.length}
-            champion={state.completedChapters.includes(finalChapterId)}
-            style={{ maxWidth: "none" }}
-          />
+        <div className="paper-league-content" style={{ ...pad, gap: 16 }}>
+          <button type="button" className="trainer-record-bar" onClick={() => setMapView(mapView === "map" ? "record" : "map")} aria-expanded={mapView === "record"}>
+            <span className="trainer-record-bar__shine" aria-hidden />
+            <img src="assets/ui/gym-badge-ink.png" alt="" />
+            <span><small>Trainer Record</small><strong>{state.trainer.name || "Luca"}</strong></span>
+            <span className="trainer-record-bar__count"><b>{state.earnedBadges.length + state.collectedFragments.length}</b><small>Awards</small></span>
+            <span aria-hidden>{mapView === "record" ? "⌃" : "›"}</span>
+          </button>
+
+          {mapView === "record" ? (
+            <section className="trainer-record-view" aria-label="Trainer Record">
+              <TrainerCard
+                name={state.trainer.name || "Trainer Luca"}
+                avatarSrc={ART + avatar.img}
+                badges={state.completedChapters.length}
+                totalBadges={config.chapters.length}
+                champion={state.completedChapters.includes(finalChapterId)}
+                style={{ maxWidth: "none" }}
+              />
+              <h2>Earned Awards</h2>
+              <div className="trainer-award-grid">
+                {state.earnedRewards.map((rewardId) => (
+                  <div className="trainer-award-tile" key={rewardId}>
+                    <img className="trainer-award-tile__frame" src="assets/frames/badge_frame_0.png" alt="" />
+                    <img className="trainer-award-tile__art" src={awardArt(rewardId)} alt="" />
+                    <strong>{config.rewards[rewardId].label}</strong>
+                    <small>{config.rewards[rewardId].category.replace(/-/g, " ")}</small>
+                  </div>
+                ))}
+              </div>
+              {state.earnedRewards.length === 0 && <p className="trainer-record-empty">Your first award will appear here after League Registration.</p>}
+              <h2>Ranger Fragments</h2>
+              <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={state.collectedFragments} />
+            </section>
+          ) : <>
+
+          {activeChapter && (
+            <section className="destination-plate" aria-label="Next destination">
+              <div className="destination-plate__label"><span>Go here next</span><b aria-hidden>› › ›</b></div>
+              <div className="destination-plate__body">
+                <div className="destination-plate__emblem">
+                  <img className="destination-plate__frame" src="assets/frames/badge_frame_4.png" alt="" />
+                  <img className="destination-plate__art" src={ART + (activeChapter.art || "mega-icon-violet.png")} alt="" />
+                  <img className="destination-plate__type" src={`assets/types/${activeChapter.type || activeType}.png`} alt="" />
+                </div>
+                <div><h2>{activeChapter.locationLabel || activeChapter.name}</h2><small>{state.activeFlow === "chapter" && activeChapter.number ? `Chapter ${activeChapter.number}` : "Special mission"}</small><p>{activeChapter.name}</p></div>
+              </div>
+              <div className="destination-plate__hint"><img src={ART + "tropius.png"} alt="" /><span>Open the active mission when your adult team is ready.</span></div>
+            </section>
+          )}
 
           <div>
             <div style={{ fontFamily: "var(--font-label)", color: "#fff", fontWeight: 700, fontSize: ".75rem", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: 8 }}>
@@ -271,7 +327,7 @@ function CreeksideMap({ config, state, dispatch }) {
             <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={state.collectedFragments} />
           </div>
 
-          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontStyle: "italic", fontSize: "1.65rem", margin: "2px 0 0", color: "#fff", textShadow: "0 2px 10px rgba(0,0,0,.3)" }}>
+          <h2 className="quest-map-heading" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontStyle: "italic", fontSize: "1.65rem", margin: "2px 0 0" }}>
             Creekside Region Map
           </h2>
 
@@ -355,6 +411,7 @@ function CreeksideMap({ config, state, dispatch }) {
               </button>
             )}
           </div>
+          </>}
         </div>
       </div>
     </Field>
