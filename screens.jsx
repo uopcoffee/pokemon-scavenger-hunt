@@ -567,7 +567,7 @@ function LicenseCeremony({ state, dispatch, onComplete }) {
     : !ceremony.badge ? "League record incoming…"
     : !ceremony.oathDone ? (ceremony.flipped ? "Step 3 — one oath line at a time" : "Step 3 — flip the card over")
     : !ceremony.buddy ? (ceremony.flipped ? "Step 4 — flip back to the front" : "Step 4 — assign a buddy")
-    : "License complete · welcome, Trainer";
+    : "License complete · now find the Recruiter";
 
   return (
     <div className="license-ceremony-screen" data-audience="luca">
@@ -593,7 +593,7 @@ function LicenseCeremony({ state, dispatch, onComplete }) {
           <div className="license-issued">
             <div className="license-issued__strip">
               <img src="assets/stamps/ui/stamp_completed.png" alt="" />
-              <span>License issued. Chapter 1 cleared — Nina is waiting at the Fairy Garden.</span>
+              <span>License issued. The League Recruiter is waiting outside to make it official.</span>
             </div>
             <div className="license-issued__row">
               <button type="button" className="license-reset" onClick={reset} aria-label="Run the ceremony again">↻</button>
@@ -608,8 +608,8 @@ function LicenseCeremony({ state, dispatch, onComplete }) {
                   else dispatch({ type: "ADVANCE_SCENE" });
                 }}
               >
-                <small>Chapter 2 · Fairy Garden</small>
-                <span>Back to the Quest Map →</span>
+                <small>Chapter 1 · League Registration</small>
+                <span>Find the Recruiter →</span>
               </button>
             </div>
           </div>

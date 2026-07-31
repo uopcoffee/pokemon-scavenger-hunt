@@ -147,7 +147,7 @@
           { id: "fairy-story", type: "story", title: "The Fairy Lights Are Missing", body: "Eight glowing Fairy Lights are hidden throughout the garden. Nina knows where they appeared, but some are too high for the youngest Gym Leader to reach." },
           { id: "fairy-location", type: "travel-location", title: "Enter the Fairy Garden", body: "Travel to the prepared backyard tree and bush area. Do not use the garage or side yard." },
           { id: "fairy-character", type: "story", title: "The Fairy Gym Leader Knows the Way", body: "Nina knows all eight hiding places. Follow her clues, recover each glowing light, and bring it to the Fairy Table." },
-          { id: "fairy-warmup", type: "digital-warmup", title: "Optional Fairy Scan", body: "Optional: count eight glowing Fairy symbols, then put the phone away." },
+          { id: "fairy-warmup", type: "digital-warmup", title: "Eight Lights Are Missing", body: "Optional: count eight glowing Fairy symbols, then put the phone away." },
           { id: "fairy-briefing", type: "challenge-briefing", title: "Recover Eight Fairy Lights", instructions: ["Follow Nina’s pointing and short clues.", "Retrieve each battery tea light from a safe, reachable hiding place.", "Bring every light to the Fairy Table."] },
           { id: "fairy-challenge", type: "physical-challenge", title: "Help Nina Restore the Garden", body: "Search safe low branches, bushes, and backyard hiding places with Nina.", successRule: "Bring all eight battery tea lights to the Fairy Table. An adult quietly arranges them into an arrow.", fallbackText: "Move every remaining light into plain sight or let an adult give the clues. Use fewer lights if needed, then complete the arrow.", adultPrompt: "Fairy Garden Guide: hold to confirm the eight lights form an arrow on the table." },
           { id: "fairy-reward", type: "reward", title: "Fairy Gym Reward", body: "Open the reader and team cards now. Save the Perfect Order booster for the final celebration.", rewardIds: ["sweet-surprise-reader","mega-clefable-ex","alcremie-ex","perfect-order-loose-1","fairy-badge"] },
@@ -354,7 +354,7 @@
       body: "Eight glowing Fairy Lights appeared throughout the garden. Nina knows where they are—but some are too high for the youngest Gym Leader to reach."
     }),
     sceneFrom(fairy, "fairy-warmup", {
-      body: "Optional: count eight glowing Fairy symbols, then put the phone away and begin the real search."
+      body: "Eight Fairy Lights fell somewhere in the garden. Count them here, then go find every one."
     }),
     combinedChallenge(fairy, "fairy-challenge", {
       title: "Recover the Eight Fairy Lights",
@@ -387,7 +387,7 @@
     }),
     sceneFrom(oak, "oak-story", {
       title: "Something Answered from the Water",
-      body: "Four capsules surfaced where the reading was strongest. One carries an ancient Sky Fragment. Neither Professor says what they fear it means."
+      body: "Four capsules surfaced where the reading was strongest. The Professors’ instruments show two signals — one enormous and far above, one small and very close. Neither Professor will say anything about the small one."
     }),
     sceneFrom(oak, "oak-safety", {
       title: "Luca’s Water Preserve Rule",
@@ -514,7 +514,7 @@
       successBody: "Every recovered token ignites, proving the Rangers’ path was real. The sky answers with a Legendary cry.",
       resultLabel: "Victory Road achievement earned",
       revealItems: ["The recovered energy forms a green spiral overhead"],
-      nextDestination: "Stay with Auntie Ariel. The same referee cue continues into the Rayquaza encounter."
+      nextDestination: "Don’t leave the path. Auntie Ariel is watching the sky."
     }),
     sceneFrom(victory, "victory-challenge-b", {
       type: "story",

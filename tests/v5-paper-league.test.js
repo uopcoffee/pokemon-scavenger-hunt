@@ -42,8 +42,8 @@ assert.match(screens, /Creekside League Record/);
 assert.strictEqual((screens.match(/\{LICENSE_AGE\}/g) || []).length, 1);
 
 /* --- Ceremony: completion hands the party back to the quest --- */
-assert.match(screens, /License issued\. Chapter 1 cleared — Nina is waiting at the Fairy Garden\./);
-assert.match(screens, /Back to the Quest Map →/);
+assert.match(screens, /License issued\. The League Recruiter is waiting outside to make it official\./);
+assert.match(screens, /Find the Recruiter →/);
 assert.match(screens, /data-testid="license-back-to-map"/);
 
 /* Every pending typewriter timer must be cancellable on reset and unmount. */
