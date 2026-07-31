@@ -59,4 +59,4 @@ internet loss.
 - Release tag: `v3.5-mew-surprise`
 - Release tag message: `Add adult-triggered Mew postgame surprise`
 
-The Ranger digits form `0151`, the game-only combination for the prepared yard box.
+No private Ranger digits belong in the app, portal, tests, or documentation.

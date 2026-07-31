@@ -15,8 +15,8 @@ Before changing code, read every file in `docs/` in numeric order. The chapter s
 3. Luca must feel successful. Challenges may be exciting but cannot hard-fail or stall the adventure.
 4. Preserve the existing polished visual identity. Evolve it rather than redesigning from scratch.
 5. Keep the app mobile-first, fast, offline-friendly, and usable on venue Wi-Fi with no external runtime dependencies.
-6. The Secret Ranger Vault is a combination-locked box staged in Hannah and Noa's yard. Its game-only combination is `0151`, revealed through the four Ranger fragments.
-7. Do not publish surnames, phone numbers, private access codes, or unnecessary household details. The game-only box combination is not a household access code.
+6. Never store or publish the four-digit entry code for Secret Ranger Vault. The code exists only on physical fragments carried by an adult and Luca.
+7. Do not publish surnames, phone numbers, private access codes, or unnecessary household details.
 8. Physical challenges are completed by an adult press-and-hold action. Luca must not be able to skip chapters accidentally.
 9. Add durable progress persistence so a refresh or accidental close does not restart the game.
 10. The apparent Champion ending must be followed by a deliberate fake-credit pause and a Mew glitch epilogue.
@@ -41,7 +41,7 @@ Preserve the no-build model for V2. Do not introduce a framework migration for t
 - Provide a hidden moderator panel with: mark complete, go back one scene, jump to chapter, restore progress, and full reset.
 - Add a visible adult completion control requiring a 1.5-second hold.
 - Support physical-only challenges, optional digital warmups, multi-stage chapters, checkpoint visits, fake finale, and epilogue.
-- Use the four game-only Ranger digits `0`, `1`, `5`, and `1` in order.
+- Use placeholders and generic labels for the four code fragments. Never encode the actual digits.
 - Provide one-tap reduced-motion and sound-off behavior through browser preferences or settings.
 
 ## Do not do
@@ -50,4 +50,4 @@ Preserve the no-build model for V2. Do not introduce a framework migration for t
 - Do not expose locked chapter names too early if doing so spoils Team Rocket, Rayquaza, or Mew.
 - Do not require camera, GPS, account login, network APIs, or location permissions.
 - Do not make chapter completion depend on precise athletic performance.
-- Do not frame the Ranger Vault as a door lock, house entry, or household-access challenge.
+- Do not place the actual house-entry code in source, assets, comments, tests, or documentation.

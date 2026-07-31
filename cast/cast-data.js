@@ -12,7 +12,7 @@
     { time: "10:15 a.m. goal", window: "20–25 min including exit and drying", segment: "Oak Water Research", cast: "Bruce as Professor Oak + Professor Monica", phoneCaptain: "Polly or Auntie Ariel", handoff: "Separate Water Safety Adult, Phone Captain, and Professors; finish at the dry table.", reward: "WATER RESEARCH CAPSULES 1–4 + PROFESSOR OAK’S FIRST PARTNER FILE", responsible: "Monica + Bruce", href: "oak-lab/" },
     { time: "About 10:35–10:40", window: "10–15 min sheltered reset", segment: "Pokémon Center", cast: "Polly", phoneCaptain: "Patrick", handoff: "Dry/change/bathroom/water as needed, then run the short care challenge.", reward: "POKÉMON CENTER FIELD KIT", responsible: "Polly", href: "nurse-joy/" },
     { time: "About 10:50–11:00", window: "10–15 min plus walking/readiness", segment: "Team Rocket Base", cast: "Mike", phoneCaptain: "Patrick or Auntie Ariel", handoff: "Run Close Basket, Defense Target, and Luca’s Final Poké Shot with no formal score.", reward: "RECOVERED TEAM ROCKET LOOT", responsible: "Mike", href: "team-rocket/" },
-    { time: "About 11:05–11:20", window: "12–18 min including travel", segment: "Ranger Vault", cast: "Designated Adult Escort", phoneCaptain: "Adult Escort", handoff: "Use 0151 on the combination box in Hannah and Noa's yard; bag carrier takes bulk items.", reward: "SECRET RANGER CACHE", responsible: "Adult escort" },
+    { time: "About 11:05–11:20", window: "12–18 min including travel and exit", segment: "Ranger Vault", cast: "Designated Adult Escort", phoneCaptain: "Adult Escort", handoff: "Use physical Code Card, recover cache, exit, confirm outside; bag carrier takes bulk items.", reward: "SECRET RANGER CACHE", responsible: "Adult escort" },
     { time: "About 11:20–11:38", window: "5–8 min after return travel", segment: "Oak return", cast: "Bruce as Professor Oak + Professor Monica", phoneCaptain: "Patrick", handoff: "Accept items, one callback, Rayquaza finding, authorization, compact reward, immediate departure.", reward: "MEGA EVOLUTION RESEARCH FILE", responsible: "Monica", href: "oak-lab/" },
     { time: "About 11:35–11:50", window: "25–35 min combined finale", segment: "Victory Road + Rayquaza + Champion", cast: "Auntie Ariel, then Patrick", phoneCaptain: "Patrick; Auntie Ariel for Champion", handoff: "One Ariel cue covers Victory Road, Rayquaza, and Champion summon; allow photos and child pauses.", reward: "POKÉMON LEAGUE CHAMPION CHEST", responsible: "Patrick", href: "league-recruiter/" },
     { time: "About 12:00–12:25", window: "8–12 min after fake-credit pause", segment: "Mew surprise", cast: "Patrick or lead adult", phoneCaptain: "Polly or Auntie Ariel", handoff: "Follow the post-credit signal; bring major rewards out now and bulk packs at celebration.", reward: "MYTHICAL ENCOUNTER + FINAL FAMILY CELEBRATION", responsible: "Patrick", href: "champion/" }
@@ -347,11 +347,11 @@
         "Patrick is Phone Captain by default; the timeline and runtime cue show every exception.",
         "Patrick brings the important supplies, labeled gifts, clue cards, and printed prompts.",
         "Every sealed booster goes to the adult-held Booster Satchel for the final celebration.",
-        "The Ranger fragments reveal 0151, the game-only combination for the box in Hannah and Noa's yard.",
+        "The real Ranger Vault information stays only on the private physical cards. Never copy it into the app or this portal.",
         "Give hints early. Shorten any activity before Luca becomes tired or frustrated.",
         "At the pool, the dedicated Water Safety Adult watches Luca continuously and never operates the phone. Polly or Auntie Ariel is Phone Captain.",
         "At the pool, open the private cue before approach, stow the phone safely away, exit and dry Luca, and return the phone only at the dry research table.",
-        "At the Ranger Vault, confirm the yard box is set to 0151, test the lock fallback, and name the bag carrier.",
+        "At the Ranger Vault, confirm the approved boundary, keypad fallback, outside fallback, and bag carrier without recording any private digits.",
         "Offer individual photos at neighbor stations when convenient; the Hall moment gathers everyone who is present for one Champion photo.",
         "Keep the Champion Chest, Mew surprise, and later-story props hidden until their cues."
       ],
@@ -429,10 +429,10 @@
           slug: "ranger-vault",
           name: "Designated Adult Escort",
           cueIds: ["vault"],
-          setup: ["Combination box set to 0151", "Prepared spot in Hannah and Noa's yard", "One story item separated from larger packages", "Designated bag carrier"],
-          safety: "Escort stays beside Luca while he opens the prepared yard box.",
-          fallback: "Adult helps set the combination or opens the box.",
-          decisions: ["Confirm box placement", "Test the 0151 combination", "Confirm lock fallback", "Name the bag carrier"]
+          setup: ["Physical Trainer Code Card", "Approved boundary and cache", "One story item separated from larger packages", "Designated bag carrier"],
+          safety: "Escort stays beside Luca. Confirm the approved boundary and exit before opening the success screen. Never place private digits in the phone or portal.",
+          fallback: "Adult operates the keypad, brings the cache outside, or runs the entire recovery outside.",
+          decisions: ["Confirm approved boundary", "Confirm keypad fallback", "Confirm outside fallback", "Name the bag carrier"]
         },
         {
           slug: "league-recruiter",

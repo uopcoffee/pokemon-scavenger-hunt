@@ -38,14 +38,17 @@ vm.runInContext(fs.readFileSync(path.join(repositoryRoot, "state.js"), "utf8"), 
 
 const config = context.window.CREEKSIDE_CONFIG;
 const stateEngine = context.window.CreeksideState;
+const forbiddenFragmentKeys = ["digit", "value", "answer", "code"];
 
 assert.strictEqual(config.chapters.length, 7, "Creekside must contain seven chapters");
-assert.strictEqual(config.combinationBoxCode, "0151", "The Hannah and Noa yard box must use Mew's Pokédex number");
-assert.strictEqual(config.codeFragments.length, 4, "Creekside must contain four Ranger digit slots");
+assert.strictEqual(config.codeFragments.length, 4, "Creekside must contain four symbolic fragment slots");
 config.codeFragments.forEach((fragment) => {
+  forbiddenFragmentKeys.forEach((key) => {
+    assert.strictEqual(Object.prototype.hasOwnProperty.call(fragment, key), false, `Fragment config must not contain ${key}`);
+  });
   assert.strictEqual(typeof fragment.displaySymbol, "string");
+  assert.strictEqual(/[0-9]/.test(fragment.displaySymbol), false, "Fragment symbols must not contain keypad digits");
 });
-assert.strictEqual(config.codeFragments.map((fragment) => fragment.displaySymbol).join(""), "0151");
 
 let state = stateEngine.initialState();
 assert.strictEqual(state.mewUnlocked, false, "Mew must begin locked");

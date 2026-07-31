@@ -562,7 +562,7 @@ function SceneSpecificContent({ config, state, scene }) {
       <div style={{ marginTop: 16 }}>
         <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={state.collectedFragments} />
         <p style={{ margin: "12px 0 0", padding: 12, borderRadius: "var(--r-sm)", background: "rgba(79,176,229,.12)", border: "1.5px solid var(--sky)", fontSize: ".95rem" }}>
-          Ranger digit {scene.fragmentSlot} is {config.codeFragments.find((fragment) => fragment.slot === scene.fragmentSlot).displaySymbol}. Collect all four to open the combination box.
+          Keep the real digit on the physical Ranger Code Card. This app records only that Slot {scene.fragmentSlot} was completed.
         </p>
       </div>
     );
@@ -573,7 +573,7 @@ function SceneSpecificContent({ config, state, scene }) {
       <div style={{ marginTop: 16 }}>
         <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={state.collectedFragments} />
         {state.collectedFragments.length < 4 && (
-          <p className="mission-warning">The Ranger combination box remains locked until all four digit slots are complete.</p>
+          <p className="mission-warning">The Ranger Vault remains locked until all four symbolic fragment slots are complete.</p>
         )}
       </div>
     );
@@ -1020,7 +1020,7 @@ function ParentMode({ config, state, dispatch, onClose }) {
           {currentScene && currentScene.performerName && <span>Performer: {currentScene.performerName}</span>}
           {currentScene && currentScene.phoneCaptain && <span>Phone Captain: {currentScene.phoneCaptain}</span>}
           {currentScene && currentScene.waterSafetyAdult && <span>Water Safety Adult: {currentScene.waterSafetyAdult}</span>}
-          <small>Ranger combination box code: {config.combinationBoxCode}</small>
+          <small>No keypad code is stored here.</small>
         </section>
 
         <div className="parent-mode-grid">

@@ -73,7 +73,7 @@ Build generic renderers rather than hardcoding each chapter:
 2. Add scene jump and challenge override.
 3. Add progress export/restore.
 4. Test refresh, back navigation, and accidental close.
-5. Store the game-only yard-box combination `0151` in config; never frame it as a door or household access code.
+5. Ensure the actual door code cannot be entered in config.
 
 ## Phase 5: Content integration
 

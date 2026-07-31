@@ -10,7 +10,7 @@
 | 10:15-10:35 | Chapter 3: Professor Oak's Water Research Lab | Professor Oak's Lab, pool | Bruce and Monica |
 | 10:35-10:47 | Chapter 4: Pokémon Center Emergency | Prepared patio/indoor station | Polly |
 | 10:47-10:59 | Chapter 5: Team Rocket Basketball Base | Team Rocket Base, hoop | Mike |
-| 10:59-11:09 | Chapter 6: Secret Ranger Vault | Combination box in Hannah and Noa's yard | Adult escort |
+| 10:59-11:09 | Chapter 6: Secret Ranger Vault | Approved front-entry area | Adult escort |
 | 11:09-11:17 | Oak Return Checkpoint | Professor Oak's Lab | Bruce and Monica |
 | 11:17-11:30 | Chapter 7: Victory Road, Champion, Hall of Heroes, and fake credits | Home Base, backyard/patio | Auntie Ariel and Patrick |
 | 11:30-11:36 | Mew Glitch Epilogue | Home Base, backyard/trees | App and family |

@@ -69,8 +69,12 @@ window.LUCA_CONFIG = {
    creekside-content.js immediately after this file. This fallback remains
    available so the Phase 1 foundation is preserved for reference.
 
-   The Ranger fragments reveal the game-only combination for the box staged
-   in Hannah and Noa's yard. This is not a door or household access code.
+   PATRICK — CODE FRAGMENT NOTE:
+   `displaySymbol` is only a harmless symbol shown in the app. The active
+   symbolic values are in creekside-content.js. You may replace those four
+   symbols locally if desired, but NEVER put the real keypad digits, full
+   code, or code-derived answers in either file.
+   The actual digits belong only on the four physical fragment cards.
    ============================================================ */
 window.CREEKSIDE_CONFIG = {
   version: 2,
@@ -81,10 +85,10 @@ window.CREEKSIDE_CONFIG = {
   avatars: window.LUCA_CONFIG.avatars,
 
   codeFragments: [
-    { slot: 1, id: "fragment-zero", displaySymbol: "0" },
-    { slot: 2, id: "fragment-one", displaySymbol: "1" },
-    { slot: 3, id: "fragment-five", displaySymbol: "5" },
-    { slot: 4, id: "fragment-one-final", displaySymbol: "1" },
+    { slot: 1, id: "fragment-leaf", displaySymbol: "Leaf" },
+    { slot: 2, id: "fragment-wave", displaySymbol: "Wave" },
+    { slot: 3, id: "fragment-star", displaySymbol: "Star" },
+    { slot: 4, id: "fragment-flame", displaySymbol: "Flame" },
   ],
 
   rewards: {
@@ -180,9 +184,9 @@ window.CREEKSIDE_CONFIG = {
       art: "mega-gengar.png",
       scenes: [
         { id: "vault-story", type: "story", title: "A Message from the Rangers", body: "The Rangers left a protected cache for a Trainer who completed all four fragment slots." },
-        { id: "vault-travel", type: "travel-location", title: "Travel with an Adult", body: "Go to the prepared combination box in Hannah and Noa's yard." },
-        { id: "vault-character", type: "character-encounter", title: "Ranger Transmission", character: "Rangers Hannah and Noa", body: "The four Ranger fragments reveal the box combination: 0151." },
-        { id: "vault-challenge", type: "physical-challenge", title: "Open the Ranger Combination Box", body: "Set the yard box combination to 0151 with an adult, open it, and recover the Ranger cache.", adultPrompt: "Adult: confirm the combination box and cache recovery are complete." },
+        { id: "vault-travel", type: "travel-location", title: "Travel with an Adult", body: "Bring the physical Ranger Code Card. The app will never ask for or display its digits." },
+        { id: "vault-character", type: "character-encounter", title: "Ranger Transmission", character: "Rangers Hannah and Noa", body: "Follow the prepared Ranger symbols inside the approved entry area." },
+        { id: "vault-challenge", type: "physical-challenge", title: "Open the Physical Ranger Vault", body: "Read the four digits from the physical card and use the real keypad with an adult. Do not enter anything in this app.", adultPrompt: "Adult: confirm the physical vault visit is complete." },
         { id: "vault-reward", type: "reward", title: "Ranger Cache Found", body: "The protected supplies and sealed research file are secure.", rewardIds: ["ranger-cache"] },
         { id: "vault-inventory", type: "inventory-update", title: "Ranger Inventory Updated", body: "The Ranger Cache has been added to the mission inventory." },
         { id: "vault-transition", type: "chapter-transition", title: "Victory Road Opens", body: "The Creekside League has approved access to Victory Road." },

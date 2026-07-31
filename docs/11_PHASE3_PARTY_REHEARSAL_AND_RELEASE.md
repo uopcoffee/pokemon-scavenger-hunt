@@ -196,17 +196,17 @@ to the appropriate challenge.
 
 ### Secret Ranger Vault
 
-- Primary setup: combination box set to `0151`, adult escort, and cache staged
-  in Hannah and Noa's yard.
-- Success: adult-accompanied opening and safe recovery of cache/research file.
-- Easier fallback: the adult helps set the combination or opens the box.
-- No-lock fallback: adult opens the prepared box and gives the Ranger
+- Primary setup: physical fragment card, adult escort, three Ranger symbols,
+  cache in the approved front-entry area.
+- Success: adult-accompanied entry and safe recovery of cache/research file.
+- Easier fallback: the adult enters the physical code.
+- No-prop fallback: adult brings the sealed cache outside and gives the Ranger
   transmission verbally.
 - Duration: 5–7 minutes.
 - Performer and Phone Captain: the designated Adult Escort remains beside Luca
   and operates the protected controls.
-- Props: combination box, cache, and sealed file.
-- Safety: keep the box in the prepared yard location and have the escort stay beside Luca.
+- Props: physical fragments, record card, three symbols, cache, sealed file.
+- Safety: approved front-entry area only; never show or enter digits in the app.
 
 ### Professor Oak return checkpoint
 
@@ -316,7 +316,7 @@ no duplicate assignment and no unassigned registry item.
 | PROFESSOR OAK'S FIRST PARTNER FILE | Professor Oak's Lab dry station | Open collection/books; satchel boosters | Bruce |
 | POKÉMON CENTER FIELD KIT | Prepared care station | Open reader/portfolio/card; satchel booster | Polly |
 | RECOVERED TEAM ROCKET LOOT | Team Rocket Base | Open cards; carry Dispatch; satchel booster | Mike |
-| SECRET RANGER CACHE | Combination box in Hannah and Noa's yard | Open books/tin/cards; carry file/seal; satchel boosters | Adult escort |
+| SECRET RANGER CACHE | Approved front-entry cache | Open books/tin/cards; carry file/seal; satchel boosters | Adult escort |
 | MEGA EVOLUTION RESEARCH FILE | Oak return station | Open book/card; carry authorization; satchel booster | Monica |
 | POKÉMON LEAGUE CHAMPION CHEST | Home Base, hidden until finale | Open deck/model; carry title; satchel boosters/reserve | Patrick |
 | MYTHICAL ENCOUNTER | Separate Mew hiding place | Open now after trail | Patrick |

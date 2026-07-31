@@ -4,7 +4,7 @@
 
 V3.4 makes the theatrical relay practical on party day. It preserves the
 static architecture, story order, physical challenges, rewards, persistence,
-Parent Mode, Mew gating, and the Ranger combination-box sequence while clarifying
+Parent Mode, Mew gating, and protected Ranger information while clarifying
 phone ownership, safety, gift handling, flexible timing, and adult duties.
 
 ## Realistic operating timeline
@@ -76,4 +76,4 @@ chapters. The player app does not show clock times.
 - Release tag: `v3.4-real-world-logistics`
 - Release tag message: `Finalize real-world chapter logistics`
 
-The Ranger digits are `0`, `1`, `5`, and `1`, forming the game-only combination for the yard box.
+No private Ranger digits belong in the app, portal, tests, or documentation.

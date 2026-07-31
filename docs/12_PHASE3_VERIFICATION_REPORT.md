@@ -55,9 +55,9 @@ browser.
 | Reward registry audit | **PASS** | 60 registered rewards, 60 assignments, zero duplicates, zero unassigned entries. |
 | Package operating audit | **PASS** | All 11 package labels have staging location, behavior, and responsible adult in the Phase 3 guide. |
 | Reserve package contents | **PASS WITH PARTY-DAY CHECK** | The Hall of Fame Team Reserve is documented; Patrick must write its exact physical contents on the private packing slip before sealing. |
-| Ranger digit audit | **PASS** | The four in-app fragments reveal `0`, `1`, `5`, and `1` in order. |
+| Symbolic fragment audit | **PASS** | Leaf, Star, Heart, and Wave only; no digit/value/answer/code fields. |
 | Secret/privacy scan | **PASS** | No numbered Creekside household address, phone-number-like value, or common secret assignment remains in tracked text. Four-digit matches were reviewed as years, dimensions, timeouts, colors, or hash constants. |
-| Yard-box framing | **PASS** | `0151` is identified only as the game combination for the prepared box in Hannah and Noa's yard, never as a door or household access code. |
+| Real entry code absent | **PASS TO THE LIMIT OF AVAILABLE EVIDENCE** | No code value or four-digit code field was found. Because the private code was never provided, exact-value matching was not possible. |
 | GitHub Pages configuration inspection | **PASS** | API reported `built`, legacy deployment from `main` root, public HTTPS URL, no custom domain. |
 | Git diff review | **PASS** | Phase 3 diff reviewed after implementation; no architecture migration, build step, reward reassignment, or Mew-gating change. |
 | Full real-world dress rehearsal with people/props | **NOT TESTED** | Requires Patrick, participants, routes, packages, water setup, and the actual phone. |

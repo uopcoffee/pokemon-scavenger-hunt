@@ -40,4 +40,4 @@ For every screen, specify:
 - outdoor readability
 - reduced-motion behavior
 
-Use `0151` only as the game combination for the box in Hannah and Noa's yard; do not include household access codes or private identifying details.
+Do not include the real house-entry code or private identifying details.

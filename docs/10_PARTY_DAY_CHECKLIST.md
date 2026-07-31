@@ -38,12 +38,13 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 | Champion match | Auntie Ariel |
 | Mew trail | Polly or Auntie Ariel |
 
-## Ranger combination box
+## Security rule
 
-- [ ] Set and test the combination box with `0151`.
-- [ ] Place the box in the prepared spot in Hannah and Noa's yard.
-- [ ] Confirm the app reveals `0`, `1`, `5`, `1` in order.
-- [ ] An adult accompanies Luca throughout the box opening.
+- [ ] Keep the real entry digits off phones, computers, photographs, and the repository.
+- [ ] Handwrite one private digit on each of the four physical fragment cards only.
+- [ ] Give Luca a physical Ranger Code Record Card with four blank slots.
+- [ ] The app should display only Leaf, Star, Heart, and Wave.
+- [ ] An adult accompanies Luca throughout the Ranger Vault entry.
 
 ## Package labels and contents
 
@@ -176,8 +177,8 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 
 ### Ranger Vault, Oak return, and Victory Road
 
-- [ ] Combination box and cache placed in Hannah and Noa's yard
-- [ ] Adult escort briefed and `0151` tested
+- [ ] Three Ranger trail symbols and cache placed in the approved entry area
+- [ ] Adult escort briefed; no garage or side-yard route
 - [ ] Sealed Research File and Sky Fragment ready for Oak's return
 - [ ] Tall Grass markers, balance line, soft-ball target, three Energy Tokens
 - [ ] Hanging Rayquaza target or ring-toss fallback

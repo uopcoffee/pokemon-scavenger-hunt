@@ -2,8 +2,8 @@
    Loaded after data.js so the preserved V1 data remains intact while this
    file is the source of truth for the configurable Creekside engine.
 
-   The Ranger fragments form the game-only combination for a box staged in
-   Hannah and Noa's yard. It is not a door or household access code.
+   SECURITY: symbolic fragment labels are not keypad digits. Never place the
+   real entry code, a code-derived hint, or a digit field in this repository.
 */
 (function () {
   "use strict";
@@ -45,12 +45,11 @@
       { id: "noa", displayName: "Ranger Noa", role: "Absent Pokémon Ranger" },
     ],
 
-    combinationBoxCode: "0151",
     codeFragments: [
-      { slot: 1, id: "fragment-zero", displaySymbol: "0" },
-      { slot: 2, id: "fragment-one", displaySymbol: "1" },
-      { slot: 3, id: "fragment-five", displaySymbol: "5" },
-      { slot: 4, id: "fragment-one-final", displaySymbol: "1" },
+      { slot: 1, id: "fragment-leaf", displaySymbol: "Leaf" },
+      { slot: 2, id: "fragment-star", displaySymbol: "Star" },
+      { slot: 3, id: "fragment-heart", displaySymbol: "Heart" },
+      { slot: 4, id: "fragment-wave", displaySymbol: "Wave" },
     ],
 
     rewards: {
@@ -213,11 +212,11 @@
         requiresFragments: 4,
         scenes: [
           { id: "vault-story", type: "story", title: "The Rangers Left a Warning", body: "Rangers Hannah and Noa are away on expedition. They protected supplies and a sealed research file for a trustworthy Trainer." },
-          { id: "vault-location", type: "travel-location", title: "Travel with an Adult Escort", body: "Go to the prepared combination box in Hannah and Noa's yard." },
-          { id: "vault-character", type: "story", title: "A Secure Ranger Transmission", body: "Rangers Hannah and Noa left a combination-locked cache for the Trainer who recovered all four fragments. An Adult Escort must stay beside Luca." },
-          { id: "vault-fragments", type: "fragment-check", title: "Four Ranger Digits Recorded", body: "The recovered digits form the box combination: 0151." },
-          { id: "vault-briefing", type: "challenge-briefing", title: "Open the Ranger Vault", instructions: ["An adult stays beside Luca.", "Set the combination lock to 0151.", "Open the box in Hannah and Noa's yard.", "Recover the cache and sealed Research File."] },
-          { id: "vault-challenge", type: "physical-challenge", title: "Recover the Secret Ranger Cache", body: "Open the combination box with an adult, recover the gift bag, and find the sealed Research File without opening it.", successRule: "The adult may help set the combination or open the prepared box if needed.", fallbackText: "If the lock sticks, the adult opens the prepared box and the mission continues.", adultPrompt: "Adult escort: hold to confirm the box, cache, and sealed file are safely recovered." },
+          { id: "vault-location", type: "travel-location", title: "Travel with an Adult Escort", body: "Bring the physical Ranger Code Card to the approved front-entry area. The app never asks for the digits." },
+          { id: "vault-character", type: "story", title: "A Secure Ranger Transmission", body: "Rangers Hannah and Noa left a protected cache for the Trainer who recovered all four physical fragments. An Adult Escort must stay beside Luca." },
+          { id: "vault-fragments", type: "fragment-check", title: "Four Ranger Symbols Recorded", body: "Leaf, Star, Heart, and Wave are complete. Read the private digits only from the physical Ranger Code Card." },
+          { id: "vault-briefing", type: "challenge-briefing", title: "Enter the Ranger Vault", instructions: ["An adult stays beside Luca.", "Use the real keypad with the physical card.", "Remain in the approved front-entry area.", "Follow three prepared Ranger symbols to the cache."] },
+          { id: "vault-challenge", type: "physical-challenge", title: "Recover the Secret Ranger Cache", body: "Enter with an adult, follow the symbols, recover the gift bag, and find the sealed Research File without opening it.", successRule: "The adult may enter the physical code or lead directly to the approved cache if needed.", fallbackText: "If access or timing changes, the adult brings the sealed cache outside and the mission continues there.", adultPrompt: "Adult escort: hold to confirm the cache and sealed file are safely recovered." },
           { id: "vault-reward", type: "reward", title: "Secret Ranger Cache", body: "Open the books, mini tin, and team cards. Keep every booster sealed and carry the Research File.", rewardIds: ["five-minute-stories","how-to-draw","fire-mini-tin","mabosstiff-ex","electivire-ex","ascended-heroes","phantasmal-flames","chaos-rising-2","fire-mini-tin-packs","sealed-research-file","league-qualification-seal","ranger-vault-badge"] },
           { id: "vault-inventory", type: "inventory-update", title: "Ranger Mission Complete", body: "The Research File and League Qualification seal unlock Professor Oak's return analysis." },
           { id: "vault-transition", type: "chapter-transition", title: "Return to Professor Oak", body: "Oak requests the Sky Fragment and sealed file before noon. Victory Road remains locked until his analysis." },
