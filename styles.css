@@ -356,6 +356,7 @@ textarea:focus-visible {
 /* Interactive Trainer License ceremony and persistent record card */
 .license-ceremony-screen { min-height: 100dvh; padding: max(14px,env(safe-area-inset-top)) 14px max(18px,env(safe-area-inset-bottom)); background: radial-gradient(circle at 50% 15%,#fffdf7,#f4e9d2 70%); overflow-y: auto; }
 .license-ceremony-screen__shell { width: min(100%,390px); margin: auto; }
+.license-ceremony-host { display:flex; justify-content:space-between; gap:10px; padding:10px 14px; border-radius:999px; background:var(--mewtwo-y); color:#fff; font:700 .58rem var(--font-label); letter-spacing:.1em; text-transform:uppercase; }
 .license-ceremony-screen__shell > header { display:flex; justify-content:space-between; align-items:end; gap:12px; margin:12px 3px 2px; }
 .license-ceremony-screen__shell > header small,.license-ceremony-step { font:700 .64rem var(--font-label); letter-spacing:.16em; text-transform:uppercase; color:var(--mewtwo-y); }
 .license-ceremony-screen__shell h1 { margin:0; font:900 italic 1.55rem var(--font-display); }

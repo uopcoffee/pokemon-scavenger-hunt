@@ -318,9 +318,9 @@ function LicenseCeremony({ state, dispatch, onComplete }) {
   };
   const reset = () => { const fresh = { name: "", birthday: false, calculating: false, issued: false, flipped: false, oathCount: 0, buddy: false, equipment: false }; setCeremony(fresh); try { localStorage.removeItem(storageKey); } catch (_) {} };
   return (
-    <div className="license-ceremony-screen" data-audience="cast">
+    <div className="license-ceremony-screen" data-audience="luca">
       <div className="license-ceremony-screen__shell">
-        <AudienceIndicator audience="cast" performerName="Auntie Ariel" />
+        <div className="license-ceremony-host"><span>Auntie Ariel leads</span><b>Luca’s Trainer License Ceremony</b></div>
         <header><div><small>Creekside League</small><h1>Trainer Oath</h1></div><span>Ariel taps · Luca speaks</span></header>
         <p className="license-ceremony-step">{step}</p>
         <TrainerLicenseCard trainerName={ceremony.name} flipped={ceremony.flipped} oathCount={ceremony.oathCount} buddy={ceremony.buddy} issued={ceremony.issued} ceremony onName={() => update({ name: state.trainer.name || "Luca" })} onBirthday={revealBirthday} onBuddy={() => update({ buddy: true })} onOath={() => update({ oathCount: ceremony.oathCount + 1 })} onFlip={() => update({ flipped: !ceremony.flipped })} />
