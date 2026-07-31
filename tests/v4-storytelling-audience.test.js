@@ -63,6 +63,15 @@ assert.strictEqual(config.epilogue.art, "mew.png");
 assert.ok(fs.existsSync(path.join(root, "assets/pokemon/mew.png")));
 
 const screens = fs.readFileSync(path.join(root, "screens.jsx"), "utf8");
+assert.match(screens, /A birthday message for Luca/);
+assert.match(screens, /WELCOME TO THE/);
+assert.match(screens, /CREEKSIDE POKÉMON REGION!/);
+assert.match(screens, /Today, Creekside Court has disappeared/);
+assert.match(screens, /family and friends have become characters in the Pokémon world/);
+assert.match(screens, /Your family is your Trainer team/);
+assert.match(screens, /every challenge is designed for you to succeed/);
+assert.match(screens, /He asked for you by name/);
+assert.match(screens, /Answer the Call/);
 assert.match(screens, /Hold to begin the mission/);
 assert.match(screens, /Adult: Hold for reward handoff/);
 assert.doesNotMatch(screens, /Finish League processing|Credits rolling…/);
