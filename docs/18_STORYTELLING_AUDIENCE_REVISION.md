@@ -26,7 +26,9 @@ only on the adult continuation.
 - Splash and onboarding frame the adventure as a summons, not a checklist.
 - Ariel reveals that the League requested Luca by name.
 - The four Ranger marks become a mystery beginning in Orientation.
-- Fairy Garden frames Luca as helping Nina reach what she cannot safely reach.
+- Fairy Garden frames Luca as helping Nina recover eight glowing lights she
+  cannot reach. An adult quietly forms the returned lights into an arrow,
+  revealing the next destination only after the final light arrives.
 - Nurse Joy asks Luca to make care decisions with the existing treatment props.
 - Bruce consistently plays Professor Oak, while Monica remains an equal Partner
   Professor.

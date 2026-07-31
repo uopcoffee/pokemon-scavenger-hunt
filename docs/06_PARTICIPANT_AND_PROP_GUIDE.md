@@ -44,13 +44,21 @@ Lines should be one or two words:
 
 - “Luca, look!”
 - “Tree!”
+- “Up high!”
+- “Table!”
 - “You did it!”
 
 Props:
 
 - crown, wings, or pink headband
-- small basket
-- three Fairy Energy Orbs
+- eight flameless battery tea lights
+- Fairy Table for the arrow reveal
+
+Nina knows all eight hiding places ahead of time and points Luca toward them.
+Every light must be reachable from the ground. Nina and the supporting adult
+must never ask Luca to climb a tree, fence, furniture, or ladder. Polly, Ariel,
+or Patrick quietly arranges the returned lights into an arrow on the table
+without explaining the pattern until the final light arrives.
 
 ## Polly
 
@@ -188,6 +196,6 @@ Safety:
 
 - Pool unavailable: use the skimmer from the deck or float capsules in large tubs.
 - Mike unavailable: Ariel performs a Team Rocket takeover using the same hoop.
-- Nina loses interest: she hands Luca the basket and the app asks him to help her finish.
+- Nina loses interest: an adult gives Luca the remaining light clues and quietly completes the arrow while he finishes.
 - Weather issue: move Fairy search and Pokémon Center indoors; run Victory Road under patio/inside using targets and a hallway path.
 - Code issue: accompanying adult enters it while Luca reads the four fragments aloud.

@@ -151,7 +151,10 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 ### League Registration and Fairy Garden
 
 - [ ] Trainer Oath card and Trainer License
-- [ ] Three large Fairy Energy Orbs and Nina's basket
+- [ ] Eight flameless battery tea lights, switched on and tested
+- [ ] Eight safe hiding places Nina knows ahead of time
+- [ ] Fairy Table with room for Polly, Ariel, or Patrick to build the arrow
+- [ ] Confirm every light is reachable from the ground; no tree, fence, furniture, or ladder climbing
 - [ ] Two privately prepared fragment cards for Slots 1 and 2
 - [ ] Indoor backup locations identified
 

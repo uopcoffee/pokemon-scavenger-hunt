@@ -106,17 +106,19 @@ Nina's lines must be extremely short. Polly or Ariel may quietly prompt her.
 
 ## Storyline
 
-Three Fairy Energy Orbs have fallen from the trees. Unless Luca and Nina recover them, the next part of the map cannot be powered.
+Eight glowing battery tea lights have appeared throughout the backyard. Nina knows every hiding place, but some are out of reach for the youngest Gym Leader. Luca follows her clues and brings each light to the Fairy Table. As the search continues, an adult quietly arranges the returned lights into an arrow.
 
 ## Interaction and challenge
 
 1. Nina wears a simple crown, wings, badge, or pink accessory.
-2. Three large colored balls, plastic eggs, or laminated energy symbols are hidden at toddler-visible height around the yard.
-3. Nina carries a basket and gives one-word directions such as “tree,” “there,” or “Luca!”
-4. Luca finds the three objects and hands each one to Nina.
-5. Nina places them in the basket and hands Luca the reward envelope.
+2. Turn on eight flameless battery tea lights and hide them in safe backyard locations before Luca arrives.
+3. Every light must be reachable by Luca from the ground. Use low branches, bushes, planters, or fence hooks within standing reach; never direct Luca to climb a tree, fence, furniture, or ladder.
+4. Nina knows the locations ahead of time and gives one-word directions such as “tree,” “there,” “high,” “Luca,” or “table!”
+5. Luca retrieves each light and carries it to the Fairy Table.
+6. Polly, Ariel, or Patrick quietly arranges each returned light into an arrow while Luca and Nina continue searching. Do not explain the pattern early.
+7. After the eighth light arrives, gather Luca and Nina at the table and reveal that the arrow points toward Professor Oak and Professor Monica’s Lab.
 
-Optional app warmup: tap the three correct Fairy symbols before beginning.
+Optional app warmup: count eight glowing Fairy symbols before beginning.
 
 ## Reward earned
 
@@ -142,7 +144,7 @@ Optional app warmup: tap the three correct Fairy symbols before beginning.
 
 ## Transition
 
-The recovered Fairy energy reveals that one Pokémon is injured. The app directs Luca to the Creekside Pokémon Center, where Nurse Joy is waiting.
+The eight lights form an arrow toward Professor Oak and Professor Monica’s Lab. The app asks why the Fairy Garden chose that path and sends Luca to follow it.
 
 ---
 

@@ -7,7 +7,7 @@
 
   var timeline = [
     { time: "9:30 a.m.", window: "10–15 min · ready by 9:25", segment: "Trainer Orientation", cast: "Auntie Ariel", phoneCaptain: "Patrick", handoff: "Private cue, live oath and equipment, Trainer Kit, Code Card, pencil, and first booster stored.", reward: "TRAINER KIT", responsible: "Ariel", href: "league-recruiter/" },
-    { time: "About 9:40–9:45", window: "8–12 min · flexible Nina participation", segment: "Fairy Garden", cast: "Auntie Ariel with Nina’s optional help", phoneCaptain: "Patrick", handoff: "Ariel runs the scene; Nina may point, hold the basket, help once, or leave.", reward: "FAIRY GYM REWARD", responsible: "Ariel", href: "nina/" },
+    { time: "About 9:40–9:45", window: "8–12 min · flexible Nina participation", segment: "Fairy Garden", cast: "Auntie Ariel with Nina’s optional help", phoneCaptain: "Patrick", handoff: "Nina points to eight glowing lights; Luca brings them to the table while Polly, Ariel, or Patrick quietly forms the arrow.", reward: "FAIRY GYM REWARD", responsible: "Ariel", href: "nina/" },
     { time: "About 9:50–9:57", window: "18–25 min walking/readiness buffer", segment: "Travel and Oak readiness", cast: "Family team", phoneCaptain: "Patrick", handoff: "Walk, carry gifts, allow a child pause, and preserve the 10:15 Oak arrival goal.", reward: "No gift", responsible: "Patrick" },
     { time: "10:15 a.m. goal", window: "20–25 min including exit and drying", segment: "Oak Water Research", cast: "Bruce as Professor Oak + Professor Monica", phoneCaptain: "Polly or Auntie Ariel", handoff: "Separate Water Safety Adult, Phone Captain, and Professors; finish at the dry table.", reward: "WATER RESEARCH CAPSULES 1–4 + PROFESSOR OAK’S FIRST PARTNER FILE", responsible: "Monica + Bruce", href: "oak-lab/" },
     { time: "About 10:35–10:40", window: "10–15 min sheltered reset", segment: "Pokémon Center", cast: "Polly", phoneCaptain: "Patrick", handoff: "Dry/change/bathroom/water as needed, then run the short care challenge.", reward: "POKÉMON CENTER FIELD KIT", responsible: "Polly", href: "nurse-joy/" },
@@ -180,12 +180,12 @@
         yourPart: [
           "Launch Luca’s adventure with lots of energy.",
           "Lead a short Trainer promise and help him protect one card.",
-          "Support Nina while Luca finds the Fairy Orbs.",
+          "Help Nina guide Luca to eight Fairy Lights.",
           "Come back later to cheer him through Victory Road and the Rayquaza target.",
           "Improvise freely—your enthusiasm matters more than the words."
         ],
         before: [
-          "Patrick will bring the promise card, card supplies, Trainer gift bag, Fairy Orbs, and all Victory Road pieces.",
+          "Patrick brings all opening, Fairy Garden, and finale supplies.",
           "At the opening, keep the Trainer gift nearby and hidden.",
           "For later appearances, Patrick will tell you when the course is ready and where to stand."
         ],
@@ -195,7 +195,8 @@
         ],
         sayAndDo: [
           "Help Luca sleeve and protect one special card. Do any fiddly part for him.",
-          "At the Fairy Garden, let Nina point or cheer while you explain that Luca should find three big orbs.",
+          "At the Fairy Garden, Nina points while Luca brings eight lights to the table.",
+          "Polly, Patrick, or you quietly arranges each returned light into an arrow. Keep the pattern secret until all eight arrive.",
           "Give hints immediately. Everything counts and nothing needs to be perfect."
         ],
         successLines: [
@@ -204,7 +205,8 @@
         successInstruction: "Hand Luca the Trainer gift bag and point him toward the Fairy Garden.",
         backup: [
           "Complete one short promise and protect one card.",
-          "Place every Fairy Orb in plain sight or let Luca carry Nina’s basket himself.",
+          "Place every remaining Fairy Light in plain sight and point directly to it.",
+          "Use fewer lights if needed, but still complete and reveal the arrow.",
           "Patrick can prompt any line."
         ],
         optionalPlay: ["Bright hat", "Whistle", "Referee sash", "Clipboard", "Extra-energetic announcer voice"],
@@ -226,42 +228,44 @@
       "nina": {
         eyebrow: "Nina + supporting adult",
         title: "Nina’s Part",
-        subtitle: "Nina can be the Fairy Gym Leader or Pikachu’s Helper—but only if she feels like joining in.",
+        subtitle: "Nina is the Fairy Gym Leader if she feels like joining.",
         arrival: "Luca reaches the Fairy Garden around 9:42 a.m.",
-        ready: "Ariel or Patrick will set everything up.",
+        ready: "Lights and table set before Luca arrives.",
         duration: "About 5 minutes",
         character: "Fairy Gym Leader or Pikachu’s Helper",
         firstLine: "Luca, look! Tree!",
-        whatLucaDoes: "He finds three big, easy-to-see Fairy Orbs and puts them in Nina’s basket.",
+        whatLucaDoes: "He follows Nina’s clues, finds eight glowing Fairy Lights, and brings them to the Fairy Table.",
         gift: "The Fairy Garden gift bag; Ariel or Patrick will handle it",
         finalLine: "You did it!",
         yourPart: [
-          "Nina may hold the basket, point, cheer, or say one short line.",
-          "The supporting adult explains the game and gives Luca hints.",
+          "Nina knows the eight hiding places and may point, cheer, or carry one light.",
+          "The adult explains the game and gives hints.",
           "Nina’s mood, clothes, and participation never affect Luca’s progress."
         ],
         before: [
-          "Patrick will bring the three Fairy Orbs, basket, and gift bag.",
-          "Ariel or Patrick will place the orbs where Luca can see them.",
-          "Ask Nina if she wants to hold the basket. It is completely fine if she says no."
+          "Patrick brings eight flameless tea lights and the gift.",
+          "Hide each light within safe standing reach.",
+          "Show Nina every location; she may still skip the scene.",
+          "Choose Polly, Ariel, or Patrick to build the table arrow."
         ],
         arrivalLines: [
-          { speaker: "Supporting adult", line: "The lights fell where Nina cannot safely reach them. Luca, can you bring them back to her?" },
-          { speaker: "Nina, if she wants", line: "Luca, look! Tree!" }
+          { speaker: "Supporting adult", line: "Eight Fairy lights are glowing in the garden. Nina knows where they are. Follow her clues and bring every light to the Fairy Table." },
+          { speaker: "Nina, if she wants", line: "Luca! Lights! I can’t reach!" }
         ],
         sayAndDo: [
-          "Let Luca find the three orbs and place them in the basket.",
-          "Point directly to an orb whenever he needs help.",
-          "Nina can join, watch, wander away, or skip the scene. The adult keeps it moving."
+          "Nina points to each light using clues like “tree,” “there,” “up high,” and “table.”",
+          "Luca carries each light to the table while an adult quietly builds the arrow.",
+          "Do not explain the arrow until the final light arrives.",
+          "Nina may join, watch, wander away, or skip."
         ],
         successLines: [
-          { speaker: "Nina or supporting adult", line: "You did it! The Fairy Garden is glowing again." }
+          { speaker: "Nina or supporting adult", line: "Luca, step back. The lights made an arrow. They know where to send you next." }
         ],
-        successInstruction: "Ariel or Patrick will give Luca the Fairy Garden gift bag and tell everyone where to go next.",
+        successInstruction: "Reveal that the arrow points toward Professor Oak and Professor Monica’s Lab. Ariel or Patrick then gives Luca the Fairy Garden gift bag.",
         backup: [
-          "Put all three orbs in plain sight.",
-          "Use one orb instead of three.",
-          "Let Luca carry the basket himself.",
+          "Put every remaining light in plain sight.",
+          "Use fewer lights if time is short, then finish the arrow.",
+          "Let an adult give every clue.",
           "Run the whole scene without Nina if she is busy or uninterested."
         ],
         optionalPlay: ["Fairy wings", "Wand", "Headband", "Favorite dress—only if Nina wants to wear it"]
@@ -443,10 +447,10 @@
           slug: "nina",
           name: "Nina + supporting adult",
           cueIds: ["fairy"],
-          setup: ["Three large visible Fairy Orbs", "Basket", "Fairy gift hidden"],
-          safety: "The supporting adult runs the scene whether or not Nina participates.",
-          fallback: "Use one visible orb or run the scene entirely with Ariel.",
-          decisions: ["Choose the orb hiding spots based on Nina’s mood and the weather"]
+          setup: ["Eight tested flameless battery tea lights", "Eight safe hiding places Nina knows", "Fairy Table with space for the arrow", "Fairy gift hidden"],
+          safety: "Every light is reachable from the ground. No tree, fence, furniture, or ladder climbing. The supporting adult runs the scene whether or not Nina participates.",
+          fallback: "Make every remaining light visible, use fewer lights if needed, or run the scene entirely with Ariel while still forming the arrow.",
+          decisions: ["Choose the eight safe light hiding spots", "Name Polly, Ariel, or Patrick as the quiet arrow builder"]
         },
         {
           slug: "champion",

@@ -39,7 +39,12 @@ assert.strictEqual(oakLogistics.fragmentSlot, 4);
 assert.match(oakLogistics.rewardHandoff, /WATER RESEARCH packages/i);
 
 assert.match(cues.fairy.supportingRole, /never handles the phone/i);
-assert.match(cues.fairy.supportingRole, /point.*basket.*one object.*lose interest.*skip/i);
+assert.match(cues.fairy.supportingRole, /eight hiding places.*point.*one-word clues.*one light.*lose interest.*skip/i);
+assert.match(cues.fairy.entranceCue, /eight battery tea lights.*Polly, Ariel, or Patrick.*arrow/i);
+assert.match(cues.fairy.challengeSteps.join(" "), /eight glowing battery tea lights.*Fairy Table.*quietly forms an arrow.*Professor Oak and Professor Monica/i);
+assert.match(cues.fairy.successCondition, /All eight lights.*Fairy Table.*arrow/i);
+assert.match(cues.fairy.fallback, /remaining lights.*full view.*indoors.*arrow/i);
+assert.doesNotMatch(JSON.stringify(cues.fairy), /climb a tree|climb.*fence|ladder/i);
 assert.match(cues.rocket.challengeSteps.join(" "), /Close Basket.*Defense Target.*Final Poké Shot/);
 assert.match(cues.rocket.challengeSteps.join(" "), /rim or backboard weakens/i);
 assert.match(cues.rocket.challengeSteps.join(" "), /Luca always wins/i);

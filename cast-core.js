@@ -47,30 +47,32 @@
       performerName: "Auntie Ariel",
       characterName: "Fairy Garden Guide with Nina’s optional help",
       phoneCaptain: "Patrick",
-      supportingRole: "Nina never handles the phone. Her role is optional: point, hold the basket, help with one object, cheer, lose interest, or skip the scene.",
-      entranceCue: "Nina holds the basket. Ariel quietly gives the longer prompt and lets Nina point, cheer, or use one-word directions.",
+      supportingRole: "Nina never handles the phone. Her role is optional: she knows the eight hiding places and may point, use one-word clues, carry one light, cheer, lose interest, or skip.",
+      entranceCue: "Turn on and safely hide eight battery tea lights before Luca arrives. Nina knows every location. Choose Polly, Ariel, or Patrick to quietly arrange each returned light into an arrow on the Fairy Table without explaining the pattern.",
       spokenLines: [
-        "Nina: Luca, look! Tree! There!",
-        "Ariel: These lights fell where Nina cannot safely reach them. Luca, can you bring them back to her?",
-        "Ariel: Look—the lights know where to send you next."
+        "Nina: Luca! Lights! Can’t reach!",
+        "Ariel: Nina knows where eight Fairy lights are. Follow her clues and bring them to the table.",
+        "Ariel: Step back. They made an arrow!"
       ],
       challengeSteps: [
-        "Guide Luca toward three large orbs placed at toddler-visible height.",
-        "Let Nina point to an orb whenever the search slows.",
-        "Place all three orbs in Nina’s basket."
+        "Let Nina point Luca toward eight glowing battery tea lights hidden in safe backyard locations.",
+        "Luca retrieves each light from the ground or from standing reach and carries it to the Fairy Table.",
+        "Polly, Ariel, or Patrick quietly forms an arrow with the returned lights while the search continues.",
+        "After the eighth light arrives, reveal that the arrow points toward Professor Oak and Professor Monica’s Lab."
       ],
       runtimeSteps: [
-        "Auntie Ariel keeps the phone-facing role and runs the mission.",
-        "Let Luca find visible Fairy Orbs; Nina may point, hold the basket, help with one object, or leave.",
-        "Luca succeeds even if Nina does not participate."
+        "Ariel runs the mission and keeps the phone-facing role.",
+        "Nina gives short clues; Luca brings eight lights to the table.",
+        "An adult quietly builds the arrow and hides the pattern.",
+        "Luca succeeds without Nina."
       ],
-      whenFinished: "Say, “The lights know where to send you next.” Let Patrick open Luca’s result, then prepare the Fairy gift.",
-      runtimeBackup: "Put one orb in plain sight or let Luca carry the basket. Run it without Nina if needed.",
-      successCondition: "All three orbs reach the basket. Pointing, visible placement, and immediate hints are always allowed.",
+      whenFinished: "Reveal the arrow. Say, “The lights know where to send you next.” Patrick opens Luca’s result and prepares the gift.",
+      runtimeBackup: "Move lights into plain sight, use fewer lights, or have an adult give every clue. Still complete the arrow.",
+      successCondition: "All eight lights reach the Fairy Table and the arrow is revealed. Direct pointing, visible placement, and immediate hints are always allowed.",
       rewardPackages: ["FAIRY GYM REWARD"],
       rewardOwners: ["Ariel"],
       rewardPreparation: "Have the Fairy reward ready. After Luca sees the success screen, open the reader and team cards; place the booster in the adult Booster Satchel.",
-      fallback: "Place the final orb in full view. If Nina loses interest, she hands Luca the basket and cheers while he finishes. Move indoors if needed.",
+      fallback: "Place the remaining lights in full view. If Nina loses interest, an adult gives the clues while Luca finishes. Move the search indoors if needed and form the arrow on a table.",
       transitionLine: "The lights are pointing toward Professor Oak’s Lab. They are trying to tell Luca something.",
       transitionDestination: "Professor Oak’s Lab",
       handoffStory: "The youngest Gym Leader is ready, with Auntie Ariel beside her.",

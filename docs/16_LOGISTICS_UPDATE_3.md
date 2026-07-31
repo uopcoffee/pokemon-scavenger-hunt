@@ -46,8 +46,11 @@ chapters. The player app does not show clock times.
 - Orientation issues the Trainer Kit immediately, introduces the physical
   Trainer Code Card and pencil, and places the first sealed booster in the
   Save for Celebration container.
-- Nina may point, hold the basket, help with one object, lose interest, or skip
-  the Fairy scene. Luca cannot fail because of her participation.
+- Nina knows the eight Fairy Light locations and may point, use one-word clues,
+  help with one light, lose interest, or skip the scene. Luca brings each
+  flameless light to the Fairy Table while Polly, Ariel, or Patrick quietly
+  forms an arrow. Every light is reachable from the ground; no climbing is
+  permitted. Luca cannot fail because of Nina’s participation.
 - The Oak cue opens before pool approach. The phone is stowed, Luca follows the
   one-line water rule, then exits and dries before the phone returns at the dry
   research table. Record the Wave clue in Slot 4; one Ranger clue remains.
