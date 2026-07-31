@@ -320,13 +320,6 @@ function CreeksideMap({ config, state, dispatch }) {
             </section>
           )}
 
-          <div>
-            <div style={{ fontFamily: "var(--font-label)", color: "#fff", fontWeight: 700, fontSize: ".75rem", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: 8 }}>
-              Physical Ranger Record
-            </div>
-            <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={state.collectedFragments} />
-          </div>
-
           <h2 className="quest-map-heading" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontStyle: "italic", fontSize: "1.65rem", margin: "2px 0 0" }}>
             Creekside Region Map
           </h2>
