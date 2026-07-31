@@ -9,11 +9,11 @@ Open equipment, books, figures, models, decks, promo collections, and story-crit
 | Chapter / checkpoint | Package label | Open immediately | Save sealed for celebration |
 |---|---|---|---|
 | Chapter 1 | TRAINER KIT | Blue deck box; red sleeves; top loaders; One-Touch case; Mega Gallade ex | Journey Together booster |
-| Chapter 2 | FAIRY GYM REWARD | Sweet Surprise reader; Mega Clefable ex; Alcremie ex | Loose Perfect Order booster |
+| Chapter 2 | FAIRY GYM REWARD | Sweet Surprise reader; Mega Clefable ex; Alcremie ex; Code Fragment 1 | Loose Perfect Order booster |
 | Chapter 3 | POKÉMON CENTER FIELD KIT | Meet the Crew reader; mini portfolio; Scream Tail ex | Portfolio's included booster |
-| Chapter 4 pool capsules | WATER RESEARCH CAPSULES 1-4 | Code Fragment 4; water mini tin; Sky Fragment prop | Chaos Rising booster; mini-tin packs |
+| Chapter 4 pool capsules | WATER RESEARCH CAPSULES 1-4 | Code Fragment 2; water mini tin; Sky Fragment prop | Chaos Rising booster; mini-tin packs |
 | Chapter 4 dry chest | PROFESSOR OAK'S FIRST PARTNER FILE | First Partner Illustration Collection; A New Journey reader; Pokémon Adventures Collector's Edition 02 | Two boosters inside First Partner box |
-| Chapter 5 | RECOVERED TEAM ROCKET LOOT | Team Rocket's Nidoking ex; Incineroar ex; Mega Pyroar ex | Destined Rivals booster |
+| Chapter 5 | RECOVERED TEAM ROCKET LOOT | Team Rocket's Nidoking ex; Incineroar ex; Mega Pyroar ex; Code Fragment 4 | Destined Rivals booster |
 | Chapter 6 | SECRET RANGER CACHE | 5-Minute Stories; How to Draw Adventures; second mini tin; Mabosstiff ex; Electivire ex | Ascended Heroes; Phantasmal Flames blister; Chaos Rising booster; mini-tin packs |
 | Oak return | MEGA EVOLUTION RESEARCH FILE | Mega Evolutions Sticker Book; Mega Abomasnow ex | Mega Evolution booster |
 | Chapter 7 | POKÉMON LEAGUE CHAMPION CHEST | Mega Lucario ex League Battle Deck; Mega Rayquaza model kit | Perfect Order Booster Bundle; Chaos Rising booster; Destined Rivals booster; any remaining loose pack |

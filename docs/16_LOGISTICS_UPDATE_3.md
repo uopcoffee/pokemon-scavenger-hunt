@@ -44,8 +44,10 @@ chapters. The player app does not show clock times.
 ## Chapter operations
 
 - Orientation issues the Trainer Kit immediately, introduces the physical
-  Trainer Code Card and pencil, and places the first sealed booster in the
-  Save for Celebration container.
+  Trainer Code Card and pencil while it is still completely blank, and places
+  the first sealed booster in the Save for Celebration container. No Ranger
+  clue is recorded during Orientation.
+- The Fairy Garden records the first Ranger clue: the Leaf in Slot 1.
 - Nina knows the eight Fairy Light locations and may point, use one-word clues,
   help with one light, lose interest, or skip the scene. Luca brings each
   flameless light to the Fairy Table while Polly, Ariel, or Patrick quietly
@@ -53,7 +55,7 @@ chapters. The player app does not show clock times.
   permitted. Luca cannot fail because of Nina’s participation.
 - The Oak cue opens before pool approach. The phone is stowed, Luca follows the
   one-line water rule, then exits and dries before the phone returns at the dry
-  research table. Record the Wave clue in Slot 4; one Ranger clue remains.
+  research table. Record the Star clue in Slot 2; two Ranger clues remain.
 - The Pokémon Center is a sheltered restoration stop for drying, changing,
   bathroom, and water as well as the short care challenge.
 - Team Rocket uses Close Basket, Defense Target, and Luca’s chosen Final Poké

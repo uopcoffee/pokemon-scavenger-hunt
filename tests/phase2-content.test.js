@@ -83,8 +83,33 @@ Object.entries(config.rewards).forEach(([rewardId, item]) => {
 const fragmentChapters = config.chapters
   .filter((chapter) => chapter.scenes.some((scene) => Number.isInteger(scene.fragmentSlot)))
   .map((chapter) => chapter.number);
-assert.deepStrictEqual(Array.from(fragmentChapters), [1, 2, 3, 4], "All fragments must be earned before the Ranger Vault");
+assert.deepStrictEqual(Array.from(fragmentChapters), [2, 3, 4, 5], "All fragments must be earned before the Ranger Vault");
 assert.strictEqual(config.chapters[5].requiresFragments, 4);
+
+// Ranger Code Card arc: Chapter 1 hands over a blank card; one mark per chapter
+// through Chapters 2–5, in chronological slot order, all before the vault.
+const orientationChapter = config.chapters.find((chapter) => chapter.id === "trainer-orientation");
+assert.strictEqual(
+  orientationChapter.scenes.some((scene) => Number.isInteger(scene.fragmentSlot)),
+  false,
+  "Trainer Orientation must hand over a blank card with no fragment moment"
+);
+// One mark per chapter. Within a chapter the slot appears on both the Luca-facing
+// result screen and the adult logistics screen, so collapse to distinct values.
+const chapterSlots = (chapter) =>
+  Array.from(new Set(
+    chapter.scenes.filter((scene) => Number.isInteger(scene.fragmentSlot)).map((scene) => scene.fragmentSlot)
+  ));
+const orderedSlots = Array.from(config.chapters).flatMap(chapterSlots);
+assert.deepStrictEqual(orderedSlots, [1, 2, 3, 4], "Fragment slots must fill chronologically with no duplicates");
+const rocketChapter = config.chapters.find((chapter) => chapter.id === "team-rocket-base");
+assert.ok(
+  rocketChapter.scenes.some((scene) => scene.fragmentSlot === 4),
+  "The final mark must be earned at the Team Rocket Base alongside the Ranger Dispatch"
+);
+const vaultChapterIndex = config.chapters.findIndex((chapter) => chapter.id === "secret-ranger-vault");
+const slotsBeforeVault = Array.from(config.chapters).slice(0, vaultChapterIndex).flatMap(chapterSlots);
+assert.deepStrictEqual(slotsBeforeVault, [1, 2, 3, 4], "All four slots must be earned before the Secret Ranger Vault");
 const fairy = config.chapters.find((chapter) => chapter.id === "fairy-garden");
 const fairyStory = fairy.scenes.find((scene) => scene.id === "fairy-story");
 const fairyResult = fairy.scenes.find((scene) => scene.id === "fairy-challenge-result");

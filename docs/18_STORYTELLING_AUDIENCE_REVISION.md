@@ -25,7 +25,7 @@ only on the adult continuation.
 
 - Splash and onboarding frame the adventure as a summons, not a checklist.
 - Ariel reveals that the League requested Luca by name.
-- The four Ranger marks become a mystery beginning in Orientation.
+- The Ranger Code Card is issued blank in Orientation with no explanation. The four marks are then earned one per chapter through the Fairy Garden, Oak's Lab, the Pokémon Center, and the Team Rocket Base, where the completed card and the recovered Dispatch land together.
 - Fairy Garden frames Luca as helping Nina recover eight glowing lights she
   cannot reach. An adult quietly forms the returned lights into an arrow,
   revealing the next destination only after the final light arrives.

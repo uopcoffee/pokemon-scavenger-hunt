@@ -75,15 +75,14 @@ A new region has appeared on Professor Oak's map. Unusual energy is spreading th
 
 **Quest item:**
 
-- Ranger Code Record Card with four blank numbered spaces
-- Physical Code Fragment 1, prepared privately by Patrick
+- Ranger Code Record Card with four blank numbered spaces, handed over blank with no explanation of its purpose
 
 ## App update
 
 - Trainer profile created
 - Team count becomes 1
 - Equipment inventory appears
-- Code Fragment Slot 1 becomes recorded, but the app does not display or store the number
+- No code fragment is recorded in this chapter. The symbol strip stays empty until the Fairy Garden.
 - Chapter badge: Trainer License
 
 ## Transition
@@ -134,13 +133,13 @@ Optional app warmup: count eight glowing Fairy symbols before beginning.
 
 **Quest item:**
 
-- Physical Code Fragment 2
+- Physical Code Fragment 1
 
 ## App update
 
 - Team count becomes 3
 - Fairy Badge earned
-- Code Fragment Slot 2 recorded without storing the digit
+- Code Fragment Slot 1 recorded without storing the digit; the Leaf symbol is the first mark to appear on the blank card
 
 ## Transition
 
@@ -203,7 +202,7 @@ The app may provide one hint after an incorrect match. There is no hard failure.
 
 - Field Pokédex/portfolio unlocked
 - Care Badge earned
-- Code Fragment Slot 3 recorded
+- Code Fragment Slot 3 recorded; three marks are showing and one space remains
 
 ## Transition
 
@@ -230,7 +229,7 @@ Bruce is facing the pool, taking notes or using binoculars. He quietly says, “
 
 ## Storyline
 
-Professor Oak's instruments detected four research capsules in the preserve. One contains the final Ranger Code fragment. Another contains a Sky Fragment producing Mega Energy. Team Rocket may be searching for it.
+Professor Oak's instruments detected four research capsules in the preserve. One contains a Ranger Code fragment neither Professor can explain. Another contains a Sky Fragment producing Mega Energy. Team Rocket may be searching for it.
 
 ## Pool challenge
 
@@ -238,7 +237,7 @@ Prepare four clearly numbered, double-sealed or vacuum-sealed research capsules.
 
 Recommended contents:
 
-1. Physical Code Fragment 4
+1. Physical Code Fragment 2
 2. One Chaos Rising booster pack
 3. One water-themed Pokémon mini tin
 4. A laminated or 3D-printed Sky Fragment/Mega Stone prop
@@ -273,12 +272,12 @@ The First Partner box may be opened enough to see the promo cards and sticker sh
 
 **Quest item:**
 
-- Physical Code Fragment 4
+- Physical Code Fragment 2
 - Sky Fragment
 
 ## App update
 
-- Four code slots show as complete, without numbers
+- Two code slots show as complete, without numbers; the Star symbol joins the Leaf
 - First Partner research entry added
 - Water Research Badge earned
 - Sky Fragment added to quest inventory
@@ -337,12 +336,14 @@ Round 3: **Final Poké Shot**
 
 **Quest item:**
 
+- Physical Code Fragment 4, surrendered by Mike together with the Dispatch
 - Ranger Dispatch stating that the four collected fragments form the entry code for the Secret Ranger Vault
 
 ## App update
 
 - Team Rocket defeated
 - Rocket Badge earned
+- Code Fragment Slot 4 recorded; the Wave completes the card in the same beat the Dispatch explains what it opens
 - Secret Ranger Vault unlocked on the map
 
 ## Transition
