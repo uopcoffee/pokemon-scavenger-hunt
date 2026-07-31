@@ -217,7 +217,7 @@
       fallback: "The escort enters the private information or brings the sealed cache outside and delivers the Ranger transmission verbally.",
       transitionLine: "The mark on the sealed file matches Luca’s License. Professor Oak must see it immediately.",
       transitionDestination: "Professor Oak’s Lab",
-      handoffStory: "The protected Ranger mission requires one designated adult beside Luca.",
+      handoffStory: "Rangers never open a cache alone. Bring someone you trust.",
       handoffLabel: "Adult: Hold to open the Adult Escort’s cue",
       completionLabel: "Phone Captain: Hold Mission Complete"
     },
@@ -292,7 +292,7 @@
       fallback: "Shorten the course, widen targets, reveal every token, then move closer to Rayquaza or use a ring or three Sky symbols.",
       transitionLine: "Mega Rayquaza recognizes Luca. The Creekside Champion may now enter.",
       transitionDestination: "Champion Arena",
-      handoffStory: "Auntie Ariel will referee Victory Road, stay ready through the Luca-facing achievement, then lead Mega Rayquaza and summon the Champion from this one cue.",
+      handoffStory: "Auntie Ariel is standing at the start of the path. She says the road decides who passes.",
       handoffLabel: "Adult: Hold to open Auntie Ariel’s Victory Road and Rayquaza cue",
       completionLabel: "Phone Captain: Hold Mission Complete"
     },
