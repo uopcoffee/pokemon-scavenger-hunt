@@ -569,14 +569,14 @@ function AdultHoldButton({
 /* ---------- game/CodeFragmentSlots ---------- */
 function CodeFragmentSlots({ fragments = [], collectedSlots = [], style = {} }) {
   return (
-    <div className="fragment-slots" style={style} aria-label={`${collectedSlots.length} of ${fragments.length} physical fragments recorded`}>
+    <div className="fragment-slots" style={style} aria-label={`${collectedSlots.length} of ${fragments.length} Sky Fragments recovered`}>
       {fragments.map((fragment) => {
         const collected = collectedSlots.includes(fragment.slot);
         return (
           <div key={fragment.id} className={`fragment-slot${collected ? " fragment-slot--collected" : ""}`}>
             <Icon name={collected ? "check" : "lock"} size={22} color={collected ? "var(--tropius-leaf-deep)" : "var(--silver-deep)"} />
-            <span>Slot {fragment.slot}</span>
-            <small>{collected ? fragment.displaySymbol : "Unknown mark"}</small>
+            <span>Fragment {fragment.slot}</span>
+            <small>{collected ? fragment.displaySymbol : "Not found"}</small>
           </div>
         );
       })}

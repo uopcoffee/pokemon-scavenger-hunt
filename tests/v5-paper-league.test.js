@@ -61,14 +61,14 @@ assert.match(styles, /box-shadow: 0 14px 40px rgba\(75,58,143,\.18\)/);
 /* --- Trainer Record: three award classes, derived from config --- */
 assert.match(screens, /Class I · License/);
 assert.match(screens, /Class II · Gym Badges/);
-assert.match(screens, /Class III · Code Fragments/);
+assert.match(screens, /Class III · Sky Fragments/);
 assert.match(screens, /earnedRewards\.includes\("trainer-license"\)/);
 assert.doesNotMatch(screens, /Class IV/, "Ranger clues were folded into wayfinding, not a collected class");
 /* The License is Class I; it must not double as a Class II gym badge. */
 assert.match(screens, /rewardId !== "trainer-license"/);
 /* Fragment chits show the symbolic label only — never a keypad digit. */
 assert.match(screens, /fragment\.displaySymbol\.charAt\(0\)/);
-assert.match(screens, /four real digits stay on the physical Ranger Code Card/);
+assert.match(screens, /the numbers stay on the backs of the physical fragments/);
 
 /* --- Award Earned: rendered for the Luca-facing relay result --- */
 assert.match(screens, /if \(scene\.type === "relay-result"\) \{\n\s*return \(\n\s*<AwardEarnedScreen/);

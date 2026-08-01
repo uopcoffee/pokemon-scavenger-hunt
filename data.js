@@ -72,17 +72,20 @@ window.LUCA_CONFIG = {
 
    It is NOT a runtime fallback and must never be rendered to Luca. Its
    code-fragment scenes still carry the retired slot layout (orientation /
-   oak / family / rocket) and adult-operational body text, both of which are
-   wrong for the shipped V3/V4 mapping (Slot 1 Fairy Garden, Slot 2 Oak's
-   Lab, Slot 3 Pokémon Center, Slot 4 Team Rocket Base). If a screen ever
-   needs a fallback config, fix that screen — do not read this block.
+   oak / family / rocket), the retired symbols, and adult-operational body
+   text, all of which are wrong for the shipped mapping: Fragment 1 Fairy
+   Garden (Leaf), 2 Oak's Lab (Wave), 3 Pokémon Center (Heart), 4 Team Rocket
+   Base (Flame) — four pieces of one Sky Stone, with no card issued in
+   Chapter 1. See docs/19. If a screen ever needs a fallback config, fix that
+   screen — do not read this block.
 
    PATRICK — CODE FRAGMENT NOTE:
    `displaySymbol` is only a harmless symbol shown in the app. The active
    symbolic values are in creekside-content.js. You may replace those four
    symbols locally if desired, but NEVER put the real keypad digits, full
    code, or code-derived answers in either file.
-   The actual digits belong only on the four physical fragment cards.
+   The actual digits belong only on the backs of the four physical Sky
+   Fragments.
    ============================================================ */
 window.CREEKSIDE_CONFIG = {
   version: 2,

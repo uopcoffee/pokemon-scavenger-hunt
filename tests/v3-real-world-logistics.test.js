@@ -32,7 +32,7 @@ assert.deepStrictEqual(
 assert.match(cues["oak-water"].runtimeSteps.join(" "), /Water Safety Adult.*Phone Captain.*Professors/);
 assert.match(cues["oak-water"].runtimeSteps.join(" "), /Stow the phone safely away/i);
 assert.match(cues["oak-water"].runtimeBackup, /skimmer.*dry-tub.*one capsule/i);
-assert.match(JSON.stringify(oak.scenes), /A second mark\. The Professors go very quiet when the Star appears\./);
+assert.match(JSON.stringify(oak.scenes), /A second Sky Fragment, marked with a Wave/);
 /* The Water Research gift handoff moved to the printed gift map. The runtime
    keeps only the player-facing reveal that records the second Ranger mark, and
    the package wording must stay with the cast core that gets printed. */

@@ -11,7 +11,7 @@
       performerName: "Auntie Ariel",
       characterName: "Pokémon League Recruiter",
       phoneCaptain: "Patrick",
-      entranceCue: "Patrick privately opens this cue before Luca enters. Stand ready with the Trainer Kit, Ranger Code Card, pencil, and a clearly labeled Save for Celebration container.",
+      entranceCue: "Patrick privately opens this cue before Luca enters. Stand ready with the Trainer Kit and a clearly labeled Save for Celebration container. There is no code card in this chapter — Luca receives nothing he cannot explain.",
       spokenLines: [
         "Luca—we’ve been waiting for you. Professor Oak asked for you by name.",
         "Your Trainer License is official. Now let’s prepare your first field card.",
@@ -20,7 +20,6 @@
       challengeSteps: [
         "Help him sleeve one card and place it in a top loader.",
         "Help him secure the protected card in the deck box.",
-        "Introduce the Ranger Code Card and pencil.",
         "Put the first sealed booster directly into the Save for Celebration container."
       ],
       runtimeSteps: [
@@ -31,7 +30,7 @@
       successCondition: "Complete each equipment step once, with as much adult help as needed. The oath was completed during license registration.",
       rewardPackages: ["TRAINER KIT"],
       rewardOwners: ["Ariel"],
-      rewardPreparation: "Keep the Trainer Kit, Ranger Code Card, pencil, and Save for Celebration container together. Hand over the kit immediately after success and visibly store the first booster.",
+      rewardPreparation: "Keep the Trainer Kit and the Save for Celebration container together. Hand over the kit immediately after success and visibly store the first booster.",
       fallback: "Hold the sleeve or top loader while Luca slides the card into place. If time is short, protect one card and move on.",
       transitionLine: "It worked. Oak was right about you—and something in the Fairy Garden just answered.",
       transitionDestination: "Fairy Garden",
@@ -50,7 +49,7 @@
       spokenLines: [
         "Nina: Luca! Lights! Can’t reach!",
         "Ariel: Nina knows where eight Fairy lights are. Follow her clues and bring them to the table.",
-        "Ariel: Step back. They made an arrow!"
+        "Ariel: Step back. They made an arrow! …Nina, what is that under the last light?"
       ],
       challengeSteps: [
         "Let Nina point Luca toward eight glowing battery tea lights hidden in safe backyard locations.",
@@ -69,7 +68,7 @@
       successCondition: "All eight lights reach the Fairy Table and the arrow is revealed. Direct pointing, visible placement, and immediate hints are always allowed.",
       rewardPackages: ["FAIRY GYM REWARD"],
       rewardOwners: ["Ariel"],
-      rewardPreparation: "Have the Fairy reward ready. After Luca sees the success screen, open the reader and team cards; place the booster in the adult Booster Satchel.",
+      rewardPreparation: "Have the Fairy reward and SKY FRAGMENT 1 (Leaf) ready. After Luca sees the success screen, open the reader and team cards and place the booster in the Booster Satchel. Hand him the fragment last: say only “This is a Sky Fragment. Keep it safe.” Do NOT mention the number, the other three, or a door — that reveal belongs to Mike in Chapter 5.",
       fallback: "Place the remaining lights in full view. If Nina loses interest, an adult gives the clues while Luca finishes. Move the search indoors if needed and form the arrow on a table.",
       transitionLine: "The lights are pointing toward Professor Oak’s Lab. They are trying to tell Luca something.",
       transitionDestination: "Professor Oak’s Lab",
@@ -88,7 +87,7 @@
       spokenLines: [
         "Professor Oak: Luca. Just in time. I asked the League to find you.",
         "Professor Monica: The reading jumped when you arrived. Use this diagram to find four samples.",
-        "Professor Monica: Oak—this reading is not coming only from the water. It is coming from above it."
+        "Professor Monica: Oak—the edges match. And this reading is coming from above the water, not in it."
       ],
       challengeSteps: [
         "The dedicated Water Safety Adult watches Luca continuously and never operates the phone.",
@@ -100,17 +99,17 @@
       ],
       runtimeSteps: [
         "Water Safety Adult watches Luca; Phone Captain handles the phone; Professors run clues.",
-        "Stow the phone safely away. Use swimming, the skimmer, or one easy capsule at a time.",
+        "Stow the phone safely away. Use the skimmer or one capsule at a time.",
         "Exit and dry Luca, then move to the dry research table before the phone returns."
       ],
-      whenFinished: "At the dry table: “Luca, this was waiting for you.” Confirm he is dry, then open the result.",
-      runtimeBackup: "Use the skimmer, a dry-tub version, or one capsule only. Safety always comes first.",
-      successCondition: "All four objects are safely recovered and the Sky Fragment reaches the tray. Swimming, skimmer, dry tub, hints, and decoys all count.",
+      whenFinished: "At the dry table: “Luca, this was waiting for you.” Let him fit Fragment 2 against the piece he carries. Explain nothing. Open the result.",
+      runtimeBackup: "Use the skimmer, a dry-tub version, or one capsule only. Safety comes first.",
+      successCondition: "All four objects are safely recovered and the marked capsule reaches the tray. Swimming, skimmer, dry tub, hints, and decoys all count.",
       rewardPackages: ["WATER RESEARCH CAPSULES 1–4", "PROFESSOR OAK’S FIRST PARTNER FILE"],
       rewardOwners: ["Monica", "Bruce"],
-      rewardPreparation: "Stage both packages away from the water. After the result screen, open the assigned items and place every sealed booster in the adult Booster Satchel. Hand over the physical fragment without showing its private mark.",
+      rewardPreparation: "Stage both packages away from the water. After the result screen, open the assigned items and place every sealed booster in the Booster Satchel. Hand over SKY FRAGMENT 2 (Wave) at the dry table. Keep its number turned away from anyone but Luca.",
       fallback: "Use swimming only when appropriate, retrieve with the skimmer from the deck, switch to a dry tub, or run one capsule only. Never rush water safety.",
-      transitionLine: "…You actually found it. And the same energy has reached the Pokémon Center.",
+      transitionLine: "…You actually found it. Two pieces of the same stone. And the same energy has reached the Pokémon Center.",
       transitionDestination: "Pokémon Center",
       handoffStory: "Two Water Research Professors are waiting at the preserve.",
       handoffLabel: "Adult: Hold to open Professor Oak and Professor Monica’s cue",
@@ -142,9 +141,9 @@
       successCondition: "All patients receive care with unlimited hints. No wrong choice causes failure, and a demonstrated match still counts.",
       rewardPackages: ["POKÉMON CENTER FIELD KIT"],
       rewardOwners: ["Polly"],
-      rewardPreparation: "Keep the field kit ready. After the result screen, open the reader, portfolio, and team card; place the booster in the adult Booster Satchel and hand over the physical fragment privately.",
+      rewardPreparation: "Keep the field kit ready and hide SKY FRAGMENT 3 (Heart) with the Eevee patient so Luca finds it while caring for her. After the result screen, open the reader, portfolio, and team card and place the booster in the Booster Satchel. Still no explanation — three pieces, no answer.",
       fallback: "Remove one wrong option, demonstrate the first match, say two choices aloud, or move the entire activity indoors.",
-      transitionLine: "They trust you, Luca. But that receiver says Team Rocket followed the same trail.",
+      transitionLine: "They trust you, Luca. But that receiver says Team Rocket followed the same trail—and they claim they know what you have been picking up.",
       transitionDestination: "Team Rocket Base",
       handoffStory: "Nurse Joy has prepared an emergency treatment station.",
       handoffLabel: "Adult: Hold to open Polly’s Nurse Joy cue",
@@ -156,30 +155,34 @@
       performerName: "Mike",
       characterName: "Team Rocket Boss",
       phoneCaptain: "Patrick or Auntie Ariel",
-      entranceCue: "No score. Luca always wins. Stand near the adjustable hoop with the Ranger Dispatch and stolen loot visible but out of reach.",
+      entranceCue: "No score. Luca always wins. Stand near the adjustable hoop with the Ranger Dispatch, the stolen loot, and SKY FRAGMENT 4 (Flame) visible but out of reach. YOU CARRY THE BIGGEST REVEAL OF THE MORNING — read the reveal lines below before you start.",
       spokenLines: [
-        "So you’re the famous Luca. Oak chose you; Team Rocket chose this extremely secure basketball hoop.",
-        "Break my patented, unstoppable, definitely-not-adjustable defense and attempt the Final Poké Shot!",
-        "Impossible! That defense had a warranty! Fine—take the Dispatch. You still won’t like what the Rangers found."
+        "So you’re the famous Luca. Oak chose you; we chose this extremely secure basketball hoop.",
+        "Break my patented, definitely-not-adjustable defense and attempt the Final Poké Shot!",
+        "Impossible! That defense had a warranty! Fine—take it.",
+        "REVEAL, slowly: Those pieces are not four things. They are ONE — a Sky Stone the Rangers smashed apart. Turn them over. Four numbers, in that order, open their front door."
       ],
       challengeSteps: [
         "Stage 1 — Close Basket: begin at the easiest marker.",
         "Stage 2 — Defense Target: use any comfortable target; rim or backboard weakens the defense.",
         "Stage 3 — Final Poké Shot: Luca chooses the spot.",
-        "Move closer or lower the hoop immediately. Luca always wins."
+        "Move closer or lower the hoop immediately. Luca always wins.",
+        "AFTER the loss: surrender Sky Fragment 4, then deliver the REVEAL while Luca fits all four edges together.",
+        "Full reveal script — say it in this order: (1) They are not four things, they are one. (2) A Sky Stone fell over Creekside. (3) The Rangers smashed it into four so Team Rocket could never take it whole. (4) Turn them over — every piece has a number. (5) Those four numbers, in that order, open the Rangers’ front door. (6) You have been carrying their key since the garden.",
+        "This is the biggest reveal of the morning. Slow down. Let him assemble the stone in his own hands while you talk."
       ],
       runtimeSteps: [
-        "Close Basket, then one comfortable Defense Target. Rim or backboard weakens the defense.",
-        "Luca chooses the Final Poké Shot. Move closer or lower the hoop until Team Rocket loses."
+        "Close Basket, then a Defense Target. Move closer or lower the hoop until Team Rocket loses.",
+        "Surrender Fragment 4 and deliver the REVEAL while Luca assembles all four."
       ],
-      whenFinished: "Say Team Rocket is defeated and surrender the stolen loot to Luca after the success screen.",
-      runtimeBackup: "Use one close shot, a target hit, or three soft passes. Luca always wins.",
+      whenFinished: "Surrender the loot and Fragment 4, deliver the REVEAL, and let Luca assemble the stone before he leaves.",
+      runtimeBackup: "One close shot or three soft passes. Luca wins. Never cut the reveal.",
       successCondition: "Mike always loses. A basket, target hit, layup, soft pass, or prepared fallback defeats the defense.",
       rewardPackages: ["RECOVERED TEAM ROCKET LOOT"],
       rewardOwners: ["Mike"],
-      rewardPreparation: "Keep the loot, Ranger Dispatch, and the last physical fragment card ready. After the result screen, open the team cards, place the booster in the adult Booster Satchel, then hand over the Dispatch and the final fragment together without showing its private mark.",
+      rewardPreparation: "Keep the loot, Ranger Dispatch, and SKY FRAGMENT 4 (Flame) ready. After the result screen, open the team cards, place the booster in the Booster Satchel, then hand over the Dispatch and the final fragment together and deliver the reveal. This is the one chapter where the numbers are said out loud — keep the audience to Luca and his escort.",
       fallback: "Lower the hoop, use the closest marker, count target hits, accept three soft passes, or use one close shot plus two easy Pokémon questions.",
-      transitionLine: "The Rangers left a warning, not treasure. And somehow, they were waiting for you!",
+      transitionLine: "Four pieces, four numbers, one door. The Rangers were waiting for whoever put that stone back together—and it turned out to be you!",
       transitionDestination: "Secret Ranger Vault",
       handoffStory: "Team Rocket is blocking the route and holding Oak’s Ranger Dispatch.",
       handoffLabel: "Adult: Hold to open Mike’s cue",
@@ -191,31 +194,31 @@
       performerName: "Designated Adult Escort",
       characterName: "Ranger Vault Escort",
       phoneCaptain: "Adult Escort",
-      entranceCue: "Confirm the approved boundary, keypad fallback, outside fallback, and designated bag carrier. Keep the phone and physical Trainer Code Card with the adults.",
+      entranceCue: "Confirm the approved boundary, keypad fallback, outside fallback, and designated bag carrier. Luca carries the four Sky Fragments; the numbers exist only on their backs.",
       spokenLines: [
-        "Trainer Luca, read the four private marks from your physical Ranger Code Card.",
+        "Trainer Luca, turn your four fragments over. Read me the numbers: Leaf, Wave, Heart, Flame.",
         "I will stay beside you while we use the real keypad.",
         "Now follow the three Ranger symbols to the protected cache."
       ],
       challengeSteps: [
         "The escort keeps Luca inside the approved configurable boundary.",
-        "Use only the private physical card; the app never receives or displays the entry information.",
+        "Use only the numbers stamped on the four physical fragments; the app never receives or displays them.",
         "Follow the three prepared Ranger symbols.",
         "Recover the cache, exit, and confirm success outside.",
         "Open one story item only; the bag carrier takes larger items home or to the Professors."
       ],
       runtimeSteps: [
-        "Stay beside Luca inside the approved boundary and use only the private physical Trainer Code Card.",
+        "Stay beside Luca inside the approved boundary and use only the numbers on the four physical Sky Fragments.",
         "Recover the cache, exit, and confirm outside. Open one story item; the bag carrier takes the rest."
       ],
-      whenFinished: "Outside, say, “This file bears the same mark as your License.” Keep it sealed and tell the Phone Captain the result is ready.",
+      whenFinished: "Outside, let Luca read the file cover himself: RETURN TO PROFESSOR OAK — DO NOT OPEN. Keep it sealed and tell the Phone Captain the result is ready.",
       runtimeBackup: "Operate the keypad for Luca or bring the sealed cache outside.",
       successCondition: "Adult-accompanied entry and safe recovery of the cache and sealed file. The escort may operate the keypad or bring the cache outside.",
       rewardPackages: ["SECRET RANGER CACHE"],
       rewardOwners: ["Designated Adult Escort"],
       rewardPreparation: "Keep the cache staged inside the approved boundary. Outside, open one story item only; the designated bag carrier takes larger items home or to the Professors.",
       fallback: "The escort enters the private information or brings the sealed cache outside and delivers the Ranger transmission verbally.",
-      transitionLine: "The mark on the sealed file matches Luca’s License. Professor Oak must see it immediately.",
+      transitionLine: "The sealed file is addressed to Professor Oak. Only he can say what four fragments make when they go back together.",
       transitionDestination: "Professor Oak’s Lab",
       handoffStory: "Rangers never open a cache alone. Bring someone you trust.",
       handoffLabel: "Adult: Hold to open the Adult Escort’s cue",
@@ -227,20 +230,20 @@
       performerName: "Professor Oak and Professor Monica",
       characterName: "Partner Professors",
       phoneCaptain: "Patrick",
-      entranceCue: "Run a compact 5–8 minute return: accept the items, one callback, Rayquaza finding, League Authorization, compact reward, then immediate Victory Road departure.",
+      entranceCue: "Run a compact 5–8 minute return: Luca assembles all four fragments on the table, Monica opens the file, one callback question, Rayquaza finding, League Authorization, compact reward, then immediate Victory Road departure. The assembly is the payoff for the whole morning — do not rush it.",
       spokenLines: [
         "Professor Oak: Luca… the mark on this file matches the License I asked the League to prepare for you.",
-        "Professor Monica: The Fairies, the patients, and the fragment all point home. The signal is from Mega Rayquaza.",
-        "Professor Oak: The signal was testing a path to you. Why do you think it kept leading you home?"
+        "Professor Monica: Fit them together, Luca. All four. …Oak, it is whole. This is a Sky Stone — it fell from the Sky Pillar.",
+        "Professor Oak: Mega Rayquaza has been circling Creekside looking for this. The signal was testing a path to you. Why do you think it kept leading you home?"
       ],
       challengeSteps: [
-        "Accept the Sky Fragment and sealed Research File.",
-        "Professor Monica opens the file and announces the Rayquaza finding.",
+        "Have Luca fit all four Sky Fragments together into one stone on the table.",
+        "Accept the sealed Research File and let Professor Monica open it and announce the Rayquaza finding.",
         "Professor Oak asks one friendly callback question.",
         "Award League Authorization."
       ],
       runtimeSteps: [
-        "Accept the Sky Fragment and sealed Research File.",
+        "Luca assembles the four fragments; accept the sealed Research File.",
         "Monica announces the Rayquaza finding; Oak asks one friendly question.",
         "Any answer counts, then award League Authorization."
       ],
@@ -249,7 +252,7 @@
       successCondition: "Any remembered detail, prompted choice, or sincere answer qualifies Luca for the League.",
       rewardPackages: ["MEGA EVOLUTION RESEARCH FILE"],
       rewardOwners: ["Monica"],
-      rewardPreparation: "Keep the research reward and League Authorization ready. After the result screen, open the book and card, save the booster, and hand over the authorization.",
+      rewardPreparation: "Keep the research reward and League Authorization ready. After the result screen, open the book and card, save the booster, and hand over the authorization. Luca keeps the assembled Sky Stone — Patrick needs the numbers on it after the credits.",
       fallback: "Ask only one two-choice question or announce that Oak’s scan confirms qualification.",
       transitionLine: "The legend points home. Victory Road will reveal whether the signal has truly chosen Luca.",
       transitionDestination: "Victory Road",
@@ -261,38 +264,38 @@
       id: "victory-road",
       portalGuide: "league-recruiter",
       performerName: "Auntie Ariel",
-      characterName: "Victory Road and Mega Rayquaza Referee",
+      characterName: "Elite Four Wild Card and Mega Rayquaza Referee",
       phoneCaptain: "Patrick",
-      entranceCue: "This single private cue covers Victory Road, the Rayquaza reveal and physical encounter, and the Champion summon. Ariel remains ready while the phone briefly returns to Luca between achievements.",
+      entranceCue: "This single private cue covers Victory Road, the Rayquaza reveal and physical encounter, and the Champion summon. Victory Road is YOUR game — a backyard trick-shot contest you invent live. Nothing is pre-set. Available: slide, swings, ninja spinners, bouncy house, plus any ball or target.",
       spokenLines: [
-        "Luca, the Ranger legend ends here—but the path is watching how you travel it.",
-        "Clear the Tall Grass, cross the forest line, hit the target, and recover the Energy Tokens.",
-        "Clear each station with courage and the help your team earned. The sky will answer."
+        "The last thing standing in your way is ME. Elite Four Wild Card. Undefeated. Allegedly.",
+        "We play POKÉ. I invent a trick, I go first, you copy it. Miss your own trick, take a letter. Four letters and you are OUT.",
+        "P… O… K… …É. É! Defeated by a seven-year-old!"
       ],
       challengeSteps: [
-        "Guide one supported pass through the Tall Grass markers.",
-        "Cross the ground-level balance line.",
-        "Use soft balls at the prepared target.",
-        "Reveal or point toward the three Energy Tokens whenever needed.",
+        "Invent each trick live off what the yard offers: down the slide and land a throw, a shot from the swing, through the ninja spinners, a bounce-house buzzer-beater.",
+        "Do the trick first yourself. Scale it to whatever Luca can land — the trick exists to be copied, not to be hard.",
+        "Take a letter every time you miss your own trick, and miss BIG. P, O, K, É, then go down theatrically.",
+        "Four rounds is the target. Two is fine if the clock is tight.",
         "Let the phone return for Victory Road cleared, then continue without another full private cue.",
         "At Rayquaza, move closer after a miss and invoke a Legendary Assist whenever helpful.",
         "After Legendary success, summon Champion Patrick while Ariel keeps the phone."
       ],
       runtimeSteps: [
-        "Guide one easy pass through the markers, ground line, target, and Energy Tokens.",
-        "Return the phone for Victory Road cleared, then use one soft Rayquaza throw or Legendary Assist without a second full cue.",
+        "Invent trick shots off the slide, swings, spinners, and bouncy house. Luca copies; you miss yours and take P-O-K-É.",
+        "Return the phone for Victory Road cleared, then one soft Rayquaza throw or a Legendary Assist.",
         "After the Legendary success screen, summon Champion Patrick."
       ],
-      whenFinished: "After Victory Road, use the Phone Captain hold so Luca sees the achievement. Stay ready for Rayquaza and the Champion summon.",
-      runtimeBackup: "Shorten the route, reveal every token, then move close to Rayquaza or point to three Sky symbols.",
-      successCondition: "One supported pass through each station plus a Rayquaza hit, ring toss, symbol match, or Legendary Assist.",
+      whenFinished: "Lose loudly, concede the title, then use the Phone Captain hold. Stay ready for Rayquaza and the Champion summon.",
+      runtimeBackup: "Cut to two rounds and lose immediately, then move close to Rayquaza.",
+      successCondition: "Ariel spells P-O-K-É and concedes, plus a Rayquaza hit, ring toss, symbol match, or Legendary Assist. Luca never takes a losing letter.",
       rewardPackages: ["League qualification handoff"],
       rewardOwners: ["Ariel"],
       rewardPreparation: "Keep Patrick and the Champion Chest out of sight until both Victory Road and Rayquaza are complete.",
-      fallback: "Shorten the course, widen targets, reveal every token, then move closer to Rayquaza or use a ring or three Sky symbols.",
+      fallback: "Fewer rounds, easier tricks, or play it seated under the patio. Then move closer to Rayquaza or use a ring or three Sky symbols.",
       transitionLine: "Mega Rayquaza recognizes Luca. The Creekside Champion may now enter.",
       transitionDestination: "Champion Arena",
-      handoffStory: "Auntie Ariel is standing at the start of the path. She says the road decides who passes.",
+      handoffStory: "Auntie Ariel is blocking the last stretch. She has invented a game she is certain she cannot lose.",
       handoffLabel: "Adult: Hold to open Auntie Ariel’s Victory Road and Rayquaza cue",
       completionLabel: "Phone Captain: Hold Mission Complete"
     },
@@ -304,29 +307,33 @@
       phoneCaptain: "Auntie Ariel",
       entranceCue: "Stay hidden until Ariel completes the one-cue Victory Road and Rayquaza sequence. Ariel remains Phone Captain and summons you with the Champion Chest still hidden.",
       spokenLines: [
-        "Trainer Luca, I watched the mystery choose you one clue at a time.",
-        "You answered it with kindness, courage, and your team. Now show me the knowledge, skill, and heart of a Champion.",
-        "I understand why Oak asked for you. Luca, you are the new Champion of the Creekside Region."
+        "A Champion match is two things: what you know, and who you know.",
+        "First, what you know. Three questions about Pokémon.",
+        "Now the part that decides it. I name every person who helped you today, and you tell me what they did.",
+        "Luca, you are the new Champion of the Creekside Region."
       ],
       challengeSteps: [
-        "Knowledge: offer friendly type choices; every thoughtful answer counts.",
-        "Skill: use one comfortable soft target toss or a high-five fallback.",
-        "Heart: ask Luca to name a person or Pokémon who helped today."
+        "Round 1 — Knowledge: three Pokémon trivia questions. Offer two choices whenever he hesitates; every thoughtful answer counts.",
+        "Round 2 — Heart: go around the yard person by person. Name each helper, let Luca say what they did, and let that person hear it. This round IS the appreciation — do not rush it and do not skip anyone present.",
+        "Round 3 — Team: ask which teammate carried him furthest today and why. Any answer wins the match.",
+        "AFTER the Hall of Heroes and the credits, when he thinks it is over: ask him the code question. See the post-credits note below."
       ],
       runtimeSteps: [
-        "Ask one easy knowledge choice.",
-        "Use one comfortable target toss or a high-five.",
-        "Ask who helped Luca today; every sincere answer counts."
+        "Three easy trivia questions, two choices if he hesitates.",
+        "Then name every helper present and let Luca say what each one did.",
+        "Ask which teammate carried him furthest. Concede.",
+        "After the credits, ask the code question."
       ],
-      whenFinished: "Concede dramatically and name Luca the new Champion. Ariel opens the result and gathers everyone who is here for the Champion photo.",
-      runtimeBackup: "Give two choices, use a high-five, and accept any person or Pokémon.",
-      successCondition: "Every sincere answer counts. Move the target closer after a miss. Patrick always concedes.",
+      whenFinished: "Concede dramatically and name Luca Champion. Ariel opens the result and gathers everyone for the photo. Let the credits play all the way out.",
+      runtimeBackup: "Two choices per question; prompt each helper by name. Any sincere answer wins.",
+      successCondition: "Every sincere answer counts. Prompt freely. Patrick always concedes.",
       rewardPackages: ["POKÉMON LEAGUE CHAMPION CHEST"],
       rewardOwners: ["Patrick"],
       rewardPreparation: "Keep the chest hidden until Luca sees the Champion result. Open the deck and model afterward; every booster stays sealed for the family celebration.",
-      fallback: "Give two knowledge choices, use the closest marker, and replace the skill toss with a high-five.",
-      transitionLine: "The Hall of Heroes is ready. Treat the ending as final and do not explain the coming pause.",
+      fallback: "Two choices per trivia question, and Patrick names the helper and the deed together while Luca nods along.",
+      transitionLine: "The Hall of Heroes is ready. Treat the ending as final, let the credits finish, and do not explain the pause that follows.",
       transitionDestination: "Hall of Heroes",
+      postCreditsCue: "POST-CREDITS — this is what starts the Mew epilogue. Wait until the credits have finished and people have started drifting toward the popsicles. Then, casually, to Luca: “Hey — before we put all this away. Do you still remember the code?” Let him turn the four Sky Fragments over and read the numbers out loud himself. The moment he finishes the fourth number, the Phone Captain opens the epilogue and the screen glitches. Never explain that the question was planned.",
       handoffStory: "Victory Road is complete. The reigning Champion is ready.",
       handoffLabel: "Adult: Hold to open Patrick’s Champion cue",
       completionLabel: "Phone Captain: Hold Mission Complete"
@@ -337,9 +344,9 @@
       performerName: "Patrick / Lead Adult",
       characterName: "Mythical Trail Guide",
       phoneCaptain: "Polly or Auntie Ariel when Patrick guides; Patrick when another adult guides",
-      entranceCue: "Only open this cue after an adult deliberately triggers the signal. If Patrick guides the physical trail, Polly or Ariel operates the phone. If another adult guides, Patrick may operate it. Keep Mew separate from the Champion Chest.",
+      entranceCue: "Open this cue only after Luca has said the four numbers out loud in answer to the Champion’s post-credits question. That is the trigger. If Patrick guides the physical trail, Polly or Ariel operates the phone. If another adult guides, Patrick may operate it. Keep Mew separate from the Champion Chest.",
       spokenLines: [
-        "Luca… this signal is not from the fragment. Oak says it has been following you.",
+        "Luca… say those numbers again. …That is not a door code. Oak says something just answered it.",
         "Follow the pink energy traces quietly. Do not rush the last clue.",
         "This Pokémon is not waiting to be won. It is choosing whether to be seen."
       ],

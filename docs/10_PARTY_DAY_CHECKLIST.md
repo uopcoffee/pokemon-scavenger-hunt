@@ -41,10 +41,11 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 ## Security rule
 
 - [ ] Keep the real entry digits off phones, computers, photographs, and the repository.
-- [ ] Handwrite one private digit on each of the four physical fragment cards only.
-- [ ] Give Luca a physical Ranger Code Record Card with four blank slots in Chapter 1. It is handed over completely blank and nobody explains what it is for.
-- [ ] Marks are earned one per chapter in Chapters 2–5: Slot 1 Fairy Garden, Slot 2 Oak's Lab, Slot 3 Pokémon Center, Slot 4 Team Rocket Base.
-- [ ] The app should display only Leaf, Star, Heart, and Wave.
+- [ ] Handwrite one private digit on the back of each of the four physical Sky Fragments only.
+- [ ] Chapter 1 hands over NO code card and NO fragment. Luca receives nothing he cannot explain.
+- [ ] Fragments are earned one per chapter in Chapters 2–5: Fragment 1 Fairy Garden (Leaf), Fragment 2 Oak's Lab (Wave), Fragment 3 Pokémon Center (Heart), Fragment 4 Team Rocket Base (Flame).
+- [ ] Only Mike explains what they are. Everyone before him says "Sky Fragment" and nothing more.
+- [ ] The app should display only Leaf, Wave, Heart, and Flame.
 - [ ] An adult accompanies Luca throughout the Ranger Vault entry.
 
 ## Package labels and contents
@@ -57,7 +58,6 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 - [ ] Ultra Pro One-Touch Edge case — **OPEN NOW**
 - [ ] Mega Gallade ex — **OPEN NOW**
 - [ ] Trainer License — **CARRY FOR LATER**
-- [ ] Ranger Code Record Card, blank, with pencil — **CARRY FOR LATER** (no fragment card here; Chapter 1 no longer records a slot)
 - [ ] Journey Together booster — **SAVE FOR CELEBRATION**
 
 ### FAIRY GYM REWARD — Chapter 2 — Fairy Garden
@@ -67,16 +67,15 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 - [ ] Alcremie ex — **OPEN NOW**
 - [ ] Fairy Badge — **CARRY FOR LATER**
 - [ ] Loose Perfect Order booster — **SAVE FOR CELEBRATION**
-- [ ] Physical Fragment 1 card, privately prepared
+- [ ] Physical Sky Fragment 1 (Leaf), digit on the back
 
 ### WATER RESEARCH CAPSULES 1–4 — Chapter 3 — Professor Oak's Lab
 
 - [ ] Four waterproof or vacuum-sealed capsules
 - [ ] Water-themed Pokémon mini tin — **OPEN NOW**
-- [ ] Sky Fragment prop — **CARRY FOR LATER**
 - [ ] Chaos Rising booster — **SAVE FOR CELEBRATION**
 - [ ] Packs inside the water mini tin — **SAVE FOR CELEBRATION**
-- [ ] Physical Fragment 2 card, privately prepared
+- [ ] Physical Sky Fragment 2 (Wave), digit on the back
 
 ### PROFESSOR OAK'S FIRST PARTNER FILE — Chapter 3 — Professor Oak's Lab
 
@@ -183,8 +182,9 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 
 - [ ] Three Ranger trail symbols and cache placed in the approved entry area
 - [ ] Adult escort briefed; no garage or side-yard route
-- [ ] Sealed Research File and Sky Fragment ready for Oak's return
-- [ ] Tall Grass markers, balance line, soft-ball target, three Energy Tokens
+- [ ] Sealed Research File marked RETURN TO PROFESSOR OAK — DO NOT OPEN
+- [ ] Luca still carrying all four Sky Fragments for Oak to assemble
+- [ ] Victory Road needs NO setup — Ariel invents POKÉ trick shots off the slide, swings, ninja spinners, and bouncy house. Have a ball and any target handy.
 - [ ] Hanging Rayquaza target or ring-toss fallback
 - [ ] Champion Chest and Patrick's Champion script hidden until Victory Road is complete
 

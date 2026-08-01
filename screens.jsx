@@ -632,9 +632,10 @@ function LicenseCeremony({ state, dispatch, onComplete }) {
 
 /* ============================================================
    Award model — derived from the config, never hardcoded.
-   Class I is the License, Class II the Gym Badges, Class III the
-   Ranger code fragments. Ranger symbols are not a collected class;
-   each one points to the next stop and is then done.
+   Class I is the License, Class II the Gym Badges, Class III the four
+   Sky Fragments. The fragments are one broken object, not a collection:
+   the app shows only their symbols, and the digits stamped on their backs
+   live on the physical props alone.
    ============================================================ */
 const AWARD_CLASSES = {
   license: { label: "Class I · License", accent: "#2F6F9F" },
@@ -890,7 +891,7 @@ function CreeksideMap({ config, state, dispatch }) {
 
               <div className="record-class">
                 <div className="record-class__head" style={{ color: AWARD_CLASSES.fragment.accent }}>
-                  <i aria-hidden /><span>Class III · Code Fragments</span>
+                  <i aria-hidden /><span>Class III · Sky Fragments</span>
                   <b>{state.collectedFragments.length} / {config.codeFragments.length}</b>
                 </div>
                 <div className="record-frag-grid">
@@ -906,7 +907,7 @@ function CreeksideMap({ config, state, dispatch }) {
                 </div>
               </div>
 
-              <p className="record-note">Ranger symbols aren’t collected — each one points Luca to the next stop, then it’s done. The four real digits stay on the physical Ranger Code Card.</p>
+              <p className="record-note">Four pieces of one Sky Stone. The app tracks only the symbols — the numbers stay on the backs of the physical fragments.</p>
               {!licensed && earnedBadges.length === 0 && (
                 <p className="trainer-record-empty">Your first award will appear here after League Registration.</p>
               )}
@@ -1218,7 +1219,7 @@ function SceneSpecificContent({ config, state, scene }) {
       <div style={{ marginTop: 16 }}>
         <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={state.collectedFragments} />
         <p style={{ margin: "12px 0 0", padding: 12, borderRadius: "var(--r-sm)", background: "rgba(79,176,229,.12)", border: "1.5px solid var(--sky)", fontSize: ".95rem" }}>
-          Keep the real digit on the physical Ranger Code Card. This app records only that Slot {scene.fragmentSlot} was completed.
+          Keep the number on the back of the physical fragment. This app records only that Sky Fragment {scene.fragmentSlot} was recovered.
         </p>
       </div>
     );
@@ -1229,7 +1230,7 @@ function SceneSpecificContent({ config, state, scene }) {
       <div style={{ marginTop: 16 }}>
         <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={state.collectedFragments} />
         {state.collectedFragments.length < 4 && (
-          <p className="mission-warning">The Ranger Vault remains locked until all four symbolic fragment slots are complete.</p>
+          <p className="mission-warning">The Ranger Vault stays locked until all four Sky Fragments are recovered.</p>
         )}
       </div>
     );

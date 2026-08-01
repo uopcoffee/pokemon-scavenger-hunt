@@ -47,7 +47,7 @@ const REMOVED_SCENE_TYPES = ["privacy-shield", "cast-cue", "return-to-player", "
 /* Only these types refuse an ordinary tap. A cast-handoff hold now means "the
    real-world mission is finished", so the walk below holds through each one. */
 const HOLD_GATED_TYPES = ["physical-challenge", "cast-handoff"];
-const EXPECTED_SCENE_COUNT = 40;
+const EXPECTED_SCENE_COUNT = 41;
 
 /* --- a. Every scene is player-facing --- */
 sequences.forEach((sequence) => {
@@ -83,9 +83,9 @@ const EXPECTED_EARNED_REWARDS = [
   "mega-abomasnow-ex", "mega-clefable-ex", "mega-evolution-booster", "mega-evolutions-sticker-book",
   "mega-gallade-ex", "mega-lucario-deck", "mega-pyroar-ex", "mega-rayquaza-model", "mew-figure",
   "mini-portfolio", "new-journey-reader", "one-touch-edge-case", "perfect-order-bundle",
-  "perfect-order-loose-1", "phantasmal-flames", "popsicles", "portfolio-booster", "ranger-code-card",
+  "perfect-order-loose-1", "phantasmal-flames", "popsicles", "portfolio-booster",
   "ranger-dispatch", "ranger-vault-badge", "red-card-sleeves", "rocket-badge", "rocket-nidoking-ex",
-  "scream-tail-ex", "sealed-research-file", "sky-fragment", "sky-pillar-coordinates",
+  "scream-tail-ex", "sealed-research-file", "sky-pillar-coordinates", "sky-stone",
   "sweet-surprise-reader", "team-reserve", "trainer-license", "water-mini-tin",
   "water-mini-tin-packs", "water-research-badge",
 ];
@@ -155,7 +155,7 @@ assert.deepStrictEqual(Array.from(state.earnedRewards).sort(), EXPECTED_EARNED_R
 assert.strictEqual(state.earnedRewards.length, Object.keys(config.rewards).length, "Every registered reward must be earnable");
 assert.strictEqual(state.team.length, 10);
 assert.strictEqual(state.earnedBadges.length, 7);
-assert.strictEqual(state.questItems.length, 7);
+assert.strictEqual(state.questItems.length, 6);
 
 /* --- f. Every removed scene ID resolves to a real player-facing screen --- */
 const removedChallengeIds = [

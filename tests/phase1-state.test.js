@@ -128,7 +128,7 @@ assert.strictEqual(state.view, "celebration");
 assert.strictEqual(state.earnedRewards.length, Object.keys(config.rewards).length);
 assert.strictEqual(state.team.length, 10);
 assert.strictEqual(state.earnedBadges.length, 7);
-assert.strictEqual(state.questItems.length, 7);
+assert.strictEqual(state.questItems.length, 6);
 
 assert.strictEqual(stateEngine.writeState(state), true);
 const restored = stateEngine.readState();
