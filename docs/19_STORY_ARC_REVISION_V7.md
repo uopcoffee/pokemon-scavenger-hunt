@@ -36,8 +36,13 @@ Each fragment carries its symbol **and** one plain printed digit on the **same
 face**. Keep the digits nondescript: no "1 of 4", no slot number, nothing that
 hints at the order. On their own the four numbers are meaningless.
 
-The combination is **1737**. The stone assembles **Flame → Heart → Leaf → Wave**,
-so the printed digits are Flame **1**, Heart **7**, Leaf **3**, Wave **7**.
+The combination is **0151** — **151 is Mew's Pokédex number**. The stone
+assembles **Flame → Heart → Leaf → Wave**, so the printed digits are Flame **0**,
+Heart **1**, Leaf **5**, Wave **1**.
+
+That is the hinge of the ending. Luca carries Mew's number in his pocket from the
+Fairy Garden onward and nobody names it — Oak opens the vault without remarking
+on it. It lands only after the credits, when Patrick asks and Luca says it aloud.
 
 Assembly order is deliberately **not** collection order — Flame is the last piece
 Luca is given and the first piece in the stone. Remembering the order he picked
@@ -51,7 +56,7 @@ That single correct arrangement is the whole puzzle:
 - Joined **face up and read left to right**, the four digits give the vault
   combination, in order.
 
-Set 1737 on the lock and test it before the party. It lives in
+Set 0151 on the lock and test it before the party. It lives in
 `vaultCombination` in `creekside-content.js`, with the per-fragment digits and
 `assemblyOrder` alongside, and Parent Mode displays it if a fragment goes
 missing. A test asserts the two can never drift apart.
@@ -105,8 +110,9 @@ and it opens.**
 Out comes the Ranger cache, the sealed Research File, and the Mega Evolution
 research reward. Monica names Mega Rayquaza; Oak awards League Authorization.
 
-Budget more than the old eight minutes for this beat — it now carries a puzzle,
-a lock, and the largest single reward unpacking of the morning.
+Budget **about fifteen minutes** for this beat rather than the old eight — it now
+carries a puzzle, a lock, and the largest single reward unpacking of the morning.
+That is accepted; the schedule absorbs it.
 
 Supersedes: `01` and `10` timings for the Oak return, `02` Ch6 security rule and
 interaction, `03` gift map, `04` keypad instructions.
@@ -147,10 +153,13 @@ Patrick asks one casual leftover question:
 
 > "Hey — before we put all this away. Do you still remember the code?"
 
-Luca reads the four numbers off the assembled Sky Stone. On the fourth number
-the Phone Captain opens the epilogue and the screen glitches:
-the fragments were never only a lock combination — spoken in order, they are a
-signal, and something has answered it.
+Luca reads the four numbers off the assembled Sky Stone: zero, one, five, one.
+On the fourth digit the Phone Captain opens the epilogue and the screen
+glitches. One hundred fifty-one is not a lock number — it is a Pokédex number,
+and it has been in his pocket since the Fairy Garden.
+
+If Luca does not catch it himself, Patrick lands it: *"One… fifty… one. Luca.
+That is not a lock number."*
 
 This is why Luca must keep the assembled Sky Stone through the Champion chapter.
 The Champion Chest handoff says so explicitly.

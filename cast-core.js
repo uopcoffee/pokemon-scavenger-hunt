@@ -338,7 +338,7 @@
       fallback: "Two choices per trivia question, and Patrick names the helper and the deed together while Luca nods along.",
       transitionLine: "The Hall of Heroes is ready. Treat the ending as final, let the credits finish, and do not explain the pause that follows.",
       transitionDestination: "Hall of Heroes",
-      postCreditsCue: "POST-CREDITS — this is what starts the Mew epilogue. Wait until the credits have finished and people have started drifting toward the popsicles. Then, casually, to Luca: “Hey — before we put all this away. Do you still remember the code?” Let him turn the four Sky Fragments over and read the numbers out loud himself. The moment he finishes the fourth number, the Phone Captain opens the epilogue and the screen glitches. Never explain that the question was planned.",
+      postCreditsCue: "POST-CREDITS — this starts the Mew epilogue, and the whole morning has been pointing at it. The combination is 0151, and 151 is Mew. Nobody has said that out loud yet; you get to. Wait until the credits finish and people drift toward the popsicles, then casually: “Hey — before we put all this away. Do you still remember the code?” Let Luca read it off the stone himself, digit by digit. On the fourth digit the Phone Captain opens the epilogue and the screen glitches. If he does not catch it, land it yourself: “One… fifty… one. Luca. That is not a lock number.” Never explain that the question was planned.",
       handoffStory: "Victory Road is complete. The reigning Champion is ready.",
       handoffLabel: "Adult: Hold to open Patrick’s Champion cue",
       completionLabel: "Phone Captain: Hold Mission Complete"
@@ -351,7 +351,7 @@
       phoneCaptain: "Polly or Auntie Ariel when Patrick guides; Patrick when another adult guides",
       entranceCue: "Open this cue only after Luca has said the four numbers out loud in answer to the Champion’s post-credits question. That is the trigger. If Patrick guides the physical trail, Polly or Ariel operates the phone. If another adult guides, Patrick may operate it. Keep Mew separate from the Champion Chest.",
       spokenLines: [
-        "Luca… say those numbers again. …That is not a door code. Oak says something just answered it.",
+        "Luca… say those numbers again. One hundred fifty-one. …That is not a lock number, buddy. Oak says something just answered it.",
         "Follow the pink energy traces quietly. Do not rush the last clue.",
         "This Pokémon is not waiting to be won. It is choosing whether to be seen."
       ],

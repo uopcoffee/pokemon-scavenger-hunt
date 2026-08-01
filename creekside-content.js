@@ -14,6 +14,10 @@
    Note that `assemblyOrder` is deliberately NOT collection order. Flame is
    collected last but sits first in the stone, so remembering the order he
    picked them up actively misleads.
+
+   The combination is 0151 because 151 is Mew's Pokédex number. Nobody remarks
+   on it until after the credits, when Luca says it out loud and it turns out he
+   has been carrying Mew's number in his pocket since the Fairy Garden.
 */
 (function () {
   "use strict";
@@ -112,7 +116,7 @@
        left to right. Set the physical lock to this and test it before the party.
        Shown in Parent Mode so an adult can recover it if a fragment goes
        missing. Empty string means Parent Mode reports it is not set. */
-    vaultCombination: "1737",
+    vaultCombination: "0151",
 
     /* The four Sky Fragments are one broken object, not four keepsakes.
 
@@ -127,10 +131,10 @@
        the digits are meaningless; only the jagged fit reveals their order. The
        app renders `displaySymbol` alone and never the digit. */
     codeFragments: [
-      { slot: 1, id: "fragment-leaf",  displaySymbol: "Leaf",  assemblyOrder: 3, digit: "3" },
-      { slot: 2, id: "fragment-wave",  displaySymbol: "Wave",  assemblyOrder: 4, digit: "7" },
-      { slot: 3, id: "fragment-heart", displaySymbol: "Heart", assemblyOrder: 2, digit: "7" },
-      { slot: 4, id: "fragment-flame", displaySymbol: "Flame", assemblyOrder: 1, digit: "1" },
+      { slot: 1, id: "fragment-leaf",  displaySymbol: "Leaf",  assemblyOrder: 3, digit: "5" },
+      { slot: 2, id: "fragment-wave",  displaySymbol: "Wave",  assemblyOrder: 4, digit: "1" },
+      { slot: 3, id: "fragment-heart", displaySymbol: "Heart", assemblyOrder: 2, digit: "1" },
+      { slot: 4, id: "fragment-flame", displaySymbol: "Flame", assemblyOrder: 1, digit: "0" },
     ],
 
     rewards: {
@@ -351,7 +355,7 @@
            question, Luca says the four numbers out loud, and that is what
            wakes the screen back up. */
         { id: "champion-code-question", type: "story", title: "One Last Thing", body: "The Champion has one leftover question. “Before we put all this away — do you still remember the code?”" },
-        { id: "mew-glitch", type: "glitch", title: "SIGNAL DETECTED", body: "Luca says the four numbers out loud. The finished screen flickers awake. The fragments were never only a door key — spoken in order, they are a signal." },
+        { id: "mew-glitch", type: "glitch", title: "SIGNAL DETECTED", body: "Zero. One. Five. One. Luca says it out loud and the finished screen flickers awake. One hundred fifty-one is not a lock number. It is a Pokédex number — and it has been in his pocket since the Fairy Garden." },
         { id: "mew-transmission", type: "story", title: "Professor Oak’s Impossible Reading", body: "Professor Oak’s scanner has found one final signal after the adventure appeared to be over. Pink energy is moving through the backyard." },
         { id: "mew-location", type: "travel-location", title: "Follow the Mythical Trail", body: "Search only the prepared backyard tree, bush, and patio route. Mew does not appear on the region map." },
         { id: "mew-stage", type: "multi-stage-progress", title: "Three Mew Footprints", instructions: ["Find the first pink-energy marker.", "Follow its clue to the second.", "Use the third marker to locate the translucent discovery box."] },
@@ -703,7 +707,7 @@
     sceneFrom(mew, "mew-glitch"),
     sceneFrom(mew, "mew-transmission", {
       title: "Professor Oak’s Impossible Reading",
-      body: "The reading is not coming from the Sky Stone. It is small, ancient, and impossibly gentle. Oak sends only two words: “Luca—follow it.”"
+      body: "The Rangers did not choose those numbers at random, and neither did whatever answered them. The reading is small, ancient, and impossibly gentle. Oak sends only two words: “Luca—follow it.”"
     }),
     sceneFrom(mew, "mew-stage"),
     combinedChallenge(mew, "mew-challenge", {
