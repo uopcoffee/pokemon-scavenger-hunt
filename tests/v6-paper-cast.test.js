@@ -47,7 +47,7 @@ const REMOVED_SCENE_TYPES = ["privacy-shield", "cast-cue", "return-to-player", "
 /* Only these types refuse an ordinary tap. A cast-handoff hold now means "the
    real-world mission is finished", so the walk below holds through each one. */
 const HOLD_GATED_TYPES = ["physical-challenge", "cast-handoff"];
-const EXPECTED_SCENE_COUNT = 40;
+const EXPECTED_SCENE_COUNT = 41;
 
 /* --- a. Every scene is player-facing --- */
 sequences.forEach((sequence) => {
@@ -74,7 +74,7 @@ assert.strictEqual(totalScenes, EXPECTED_SCENE_COUNT, `Expected ${EXPECTED_SCENE
 /* Hard-coded from the pre-refactor build: removing the private relay screens
    must not change a single earned reward. */
 const EXPECTED_EARNED_REWARDS = [
-  "adventures-collector-02", "alcremie-ex", "ascended-heroes", "blue-deck-box", "booster-satchel",
+  "adventures-collector-02", "alcremie-ex", "ascended-heroes", "booster-satchel",
   "cardboard-gold-top-loaders", "care-badge", "champion-title", "chaos-rising-1", "chaos-rising-2",
   "chaos-rising-3", "destined-rivals-1", "destined-rivals-2", "electivire-ex", "fairy-badge",
   "fire-mini-tin", "fire-mini-tin-packs", "first-partner-boosters", "first-partner-collection",
@@ -83,9 +83,9 @@ const EXPECTED_EARNED_REWARDS = [
   "mega-abomasnow-ex", "mega-clefable-ex", "mega-evolution-booster", "mega-evolutions-sticker-book",
   "mega-gallade-ex", "mega-lucario-deck", "mega-pyroar-ex", "mega-rayquaza-model", "mew-figure",
   "mini-portfolio", "new-journey-reader", "one-touch-edge-case", "perfect-order-bundle",
-  "perfect-order-loose-1", "phantasmal-flames", "popsicles", "portfolio-booster", "ranger-code-card",
-  "ranger-dispatch", "ranger-vault-badge", "red-card-sleeves", "rocket-badge", "rocket-nidoking-ex",
-  "scream-tail-ex", "sealed-research-file", "sky-fragment", "sky-pillar-coordinates",
+  "perfect-order-loose-1", "phantasmal-flames", "popsicles", "portfolio-booster",
+  "ranger-dispatch", "ranger-vault-badge", "ranger-vault-box", "red-card-sleeves", "rocket-badge", "rocket-nidoking-ex",
+  "scream-tail-ex", "sealed-research-file", "sky-pillar-coordinates", "sky-stone",
   "sweet-surprise-reader", "team-reserve", "trainer-license", "water-mini-tin",
   "water-mini-tin-packs", "water-research-badge",
 ];

@@ -137,7 +137,7 @@ assert.strictEqual(restored.completedChapters.length, 7);
 
 const migrated = stateEngine.sanitizeState({
   ...stateEngine.initialState(),
-  earnedRewards: ["mega-gallade-ex", "trainer-license", "blue-deck-box"],
+  earnedRewards: ["mega-gallade-ex", "trainer-license", "red-card-sleeves"],
   team: undefined,
   earnedBadges: undefined,
   inventory: undefined,
@@ -145,7 +145,7 @@ const migrated = stateEngine.sanitizeState({
 });
 assert.deepStrictEqual(Array.from(migrated.team), ["mega-gallade-ex"], "Older saves must backfill the team registry");
 assert.deepStrictEqual(Array.from(migrated.earnedBadges), ["trainer-license"], "Older saves must backfill badges");
-assert.deepStrictEqual(Array.from(migrated.inventory), ["blue-deck-box"], "Older saves must backfill inventory");
+assert.deepStrictEqual(Array.from(migrated.inventory), ["red-card-sleeves"], "Older saves must backfill inventory");
 
 memory.set(config.storageKey, "{corrupted");
 const recovered = stateEngine.readState();

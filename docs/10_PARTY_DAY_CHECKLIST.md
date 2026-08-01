@@ -41,23 +41,26 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 ## Security rule
 
 - [ ] Keep the real entry digits off phones, computers, photographs, and the repository.
-- [ ] Handwrite one private digit on each of the four physical fragment cards only.
-- [ ] Give Luca a physical Ranger Code Record Card with four blank slots in Chapter 1. It is handed over completely blank and nobody explains what it is for.
-- [ ] Marks are earned one per chapter in Chapters 2–5: Slot 1 Fairy Garden, Slot 2 Oak's Lab, Slot 3 Pokémon Center, Slot 4 Team Rocket Base.
-- [ ] The app should display only Leaf, Star, Heart, and Wave.
-- [ ] An adult accompanies Luca throughout the Ranger Vault entry.
+- [ ] Handwrite one private digit on the FRONT of each Sky Fragment, beside its symbol. Keep the digits plain and unlabelled — no "1 of 4", no slot numbers, nothing that gives away the order.
+- [ ] Cut the four fragments with jagged interlocking edges so they join exactly one way. Joined and turned over, the backs form the Sky Stone image. Joined face up and read left to right, the digits give the combination.
+- [ ] Set that combination on the luggage lock and TEST IT before the party. Then never open the box again until Professor Oak.
+- [ ] Chapter 1 hands over NO code card and NO fragment. Luca receives nothing he cannot explain.
+- [ ] Fragments are earned one per chapter in Chapters 2–5: Fragment 1 Fairy Garden (Leaf), Fragment 2 Oak's Lab (Wave), Fragment 3 Pokémon Center (Heart), Fragment 4 Team Rocket Base (Flame).
+- [ ] Only Mike explains what they are. Everyone before him says "Sky Fragment" and nothing more.
+- [ ] The app should display only Leaf, Wave, Heart, and Flame.
+- [ ] The vault is a locked box on a luggage combination lock, staged at the Rangers' trampoline. There is no keypad and no house entry.
+- [ ] Luca must FAIL to open it in Chapter 6. Nobody hints at the order before Professor Oak.
+- [ ] An adult accompanies Luca throughout the Ranger Vault recovery.
 
 ## Package labels and contents
 
 ### TRAINER KIT — Chapter 1 — League Registration
 
-- [ ] Blue deck box — **OPEN NOW**
 - [ ] Red Pokémon card sleeves — **OPEN NOW**
 - [ ] Cardboard Gold top loaders — **OPEN NOW**
 - [ ] Ultra Pro One-Touch Edge case — **OPEN NOW**
 - [ ] Mega Gallade ex — **OPEN NOW**
 - [ ] Trainer License — **CARRY FOR LATER**
-- [ ] Ranger Code Record Card, blank, with pencil — **CARRY FOR LATER** (no fragment card here; Chapter 1 no longer records a slot)
 - [ ] Journey Together booster — **SAVE FOR CELEBRATION**
 
 ### FAIRY GYM REWARD — Chapter 2 — Fairy Garden
@@ -67,16 +70,15 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 - [ ] Alcremie ex — **OPEN NOW**
 - [ ] Fairy Badge — **CARRY FOR LATER**
 - [ ] Loose Perfect Order booster — **SAVE FOR CELEBRATION**
-- [ ] Physical Fragment 1 card, privately prepared
+- [ ] Physical Sky Fragment 1 (Leaf), digit on the back
 
 ### WATER RESEARCH CAPSULES 1–4 — Chapter 3 — Professor Oak's Lab
 
 - [ ] Four waterproof or vacuum-sealed capsules
 - [ ] Water-themed Pokémon mini tin — **OPEN NOW**
-- [ ] Sky Fragment prop — **CARRY FOR LATER**
 - [ ] Chaos Rising booster — **SAVE FOR CELEBRATION**
 - [ ] Packs inside the water mini tin — **SAVE FOR CELEBRATION**
-- [ ] Physical Fragment 2 card, privately prepared
+- [ ] Physical Sky Fragment 2 (Wave), digit on the back
 
 ### PROFESSOR OAK'S FIRST PARTNER FILE — Chapter 3 — Professor Oak's Lab
 
@@ -104,16 +106,25 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 - [ ] Destined Rivals booster — **SAVE FOR CELEBRATION**
 - [ ] Physical Fragment 4 card, privately prepared — **NEW for Mike.** The final mark is now earned here, at the same moment the Ranger Dispatch is surrendered. Mike hands over the Dispatch and this card together; the card is complete and the Ranger Vault is the immediate next stop.
 
-### SECRET RANGER CACHE — Chapter 6 — Ranger Vault
+### SECRET RANGER CACHE — found Chapter 6, opened at Oak's return
+
+Everything below is **locked inside the vault**. Only the 5-Minute Stories book
+is reachable in Chapter 6 — strap it to the outside of the lid.
+
+Strapped to the lid (Chapter 6):
 
 - [ ] *Pokémon 5-Minute Stories* — **OPEN NOW**
+- [ ] Ranger Vault Badge — **CARRY FOR LATER**
+- [ ] Lid message: FOUR PIECES, ONE STONE. TAKE THIS TO PROFESSOR OAK.
+
+Locked inside, opened at Oak's return:
+
 - [ ] *Pokémon How to Draw Adventures* — **OPEN NOW**
 - [ ] Second Pokémon mini tin — **OPEN NOW**
 - [ ] Mabosstiff ex — **OPEN NOW**
 - [ ] Electivire ex — **OPEN NOW**
 - [ ] Sealed Mega Evolution Research File — **CARRY FOR LATER**
 - [ ] League Qualification seal — **CARRY FOR LATER**
-- [ ] Ranger Vault Badge — **CARRY FOR LATER**
 - [ ] Ascended Heroes booster — **SAVE FOR CELEBRATION**
 - [ ] Phantasmal Flames blister — **SAVE FOR CELEBRATION**
 - [ ] Second loose Chaos Rising booster — **SAVE FOR CELEBRATION**
@@ -181,10 +192,13 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 
 ### Ranger Vault, Oak return, and Victory Road
 
-- [ ] Three Ranger trail symbols and cache placed in the approved entry area
+- [ ] Three Ranger trail symbols leading to the trampoline
+- [ ] Locked vault staged under or beside the trampoline, combination pre-set and tested
+- [ ] One book strapped to the lid, plus the lid message
 - [ ] Adult escort briefed; no garage or side-yard route
-- [ ] Sealed Research File and Sky Fragment ready for Oak's return
-- [ ] Tall Grass markers, balance line, soft-ball target, three Energy Tokens
+- [ ] Luca arrives at Oak's carrying the still-locked vault and all four Sky Fragments
+- [ ] Clear table or tray at Oak's for assembling the stone
+- [ ] Victory Road needs NO setup — Ariel invents POKÉ trick shots off the slide, swings, ninja spinners, and bouncy house. Have a ball and any target handy.
 - [ ] Hanging Rayquaza target or ring-toss fallback
 - [ ] Champion Chest and Patrick's Champion script hidden until Victory Road is complete
 

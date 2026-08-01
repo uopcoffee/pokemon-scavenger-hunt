@@ -96,13 +96,13 @@ const fragmentChapters = config.chapters
 assert.deepStrictEqual(Array.from(fragmentChapters), [2, 3, 4, 5], "All fragments must be earned before the Ranger Vault");
 assert.strictEqual(config.chapters[5].requiresFragments, 4);
 
-// Ranger Code Card arc: Chapter 1 hands over a blank card; one mark per chapter
+// Sky Fragment arc: Chapter 1 hands over nothing; one fragment per chapter
 // through Chapters 2–5, in chronological slot order, all before the vault.
 const orientationChapter = config.chapters.find((chapter) => chapter.id === "trainer-orientation");
 assert.strictEqual(
   orientationChapter.scenes.some((scene) => Number.isInteger(scene.fragmentSlot)),
   false,
-  "Trainer Orientation must hand over a blank card with no fragment moment"
+  "Trainer Orientation must not hand over a fragment or a placeholder for one"
 );
 // One mark per chapter, recorded once on the Luca-facing result screen. The
 // duplicate on the old adult logistics screen is gone, so this must stay unique.
@@ -140,7 +140,8 @@ assert.ok(config.chapters[6].scenes.some((scene) => scene.type === "hall-of-hero
 assert.ok(config.chapters[6].scenes.some((scene) => scene.type === "fake-credits" && scene.durationMs >= 8000 && scene.durationMs <= 12000));
 assert.strictEqual(config.chapters[6].scenes.filter((scene) => scene.cueId === "victory-road" && scene.type === "cast-handoff").length, 1);
 assert.strictEqual(config.chapters[6].scenes.some((scene) => scene.cueId === "rayquaza"), false);
-assert.strictEqual(config.epilogue.scenes[0].type, "glitch");
+assert.strictEqual(config.epilogue.scenes[0].id, "champion-code-question");
+assert.strictEqual(config.epilogue.scenes[1].type, "glitch");
 assert.strictEqual(config.epilogue.scenes.some((scene) => scene.id === "mew-challenge"), false, "The Mew cast cue screen is printed, not rendered");
 assert.ok(config.epilogue.scenes.some((scene) => scene.id === "mew-challenge-handoff" && scene.type === "cast-handoff"));
 assert.ok(config.epilogue.scenes.some((scene) => scene.type === "relay-result" && scene.rewardIds.includes("mew-figure")));

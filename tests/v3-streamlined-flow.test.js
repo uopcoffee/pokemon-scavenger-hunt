@@ -61,14 +61,14 @@ const expectedAfterCounts = {
   "secret-ranger-vault": 4,
   "victory-road": 10,
   "oak-return": 3,
-  "mew-epilogue": 5,
+  "mew-epilogue": 6,
 };
 const removedSceneTypes = ["privacy-shield", "cast-cue", "return-to-player", "adult-logistics"];
 
 assert.strictEqual(config.release, "4.0");
 assert.strictEqual(Object.values(beforeCounts).reduce((sum, count) => sum + count, 0), 128);
-assert.strictEqual(Object.values(expectedAfterCounts).reduce((sum, count) => sum + count, 0), 40);
-assert.strictEqual(sequences.reduce((sum, sequence) => sum + sequence.scenes.length, 0), 40);
+assert.strictEqual(Object.values(expectedAfterCounts).reduce((sum, count) => sum + count, 0), 41);
+assert.strictEqual(sequences.reduce((sum, sequence) => sum + sequence.scenes.length, 0), 41);
 sequences.forEach((sequence) => {
   assert.strictEqual(sequence.scenes.length, expectedAfterCounts[sequence.id], `${sequence.id} has the wrong streamlined count`);
   assert.ok(sequence.scenes.length < beforeCounts[sequence.id], `${sequence.id} must have fewer runtime screens`);

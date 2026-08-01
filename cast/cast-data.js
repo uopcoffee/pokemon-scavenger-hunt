@@ -6,13 +6,13 @@
   var COSTUME_NOTE = "You do not need a costume. Normal clothes and reading the lines are completely fine. If it sounds fun, here are a few easy ways to play up the character.";
 
   var timeline = [
-    { time: "9:30 a.m.", window: "10–15 min · ready by 9:25", segment: "Trainer Orientation", cast: "Auntie Ariel", phoneCaptain: "Patrick", handoff: "Private cue, live oath and equipment, Trainer Kit, Code Card, pencil, and first booster stored.", reward: "TRAINER KIT", responsible: "Ariel", href: "league-recruiter/" },
+    { time: "9:30 a.m.", window: "10–15 min · ready by 9:25", segment: "Trainer Orientation", cast: "Auntie Ariel", phoneCaptain: "Patrick", handoff: "Private cue, live oath and equipment, Trainer Kit handed over, first booster stored. No code card in this chapter.", reward: "TRAINER KIT", responsible: "Ariel", href: "league-recruiter/" },
     { time: "About 9:40–9:45", window: "8–12 min · flexible Nina participation", segment: "Fairy Garden", cast: "Auntie Ariel with Nina’s optional help", phoneCaptain: "Patrick", handoff: "Nina points to eight glowing lights; Luca brings them to the table while Polly, Ariel, or Patrick quietly forms the arrow.", reward: "FAIRY GYM REWARD", responsible: "Ariel", href: "nina/" },
     { time: "About 9:50–9:57", window: "18–25 min walking/readiness buffer", segment: "Travel and Oak readiness", cast: "Family team", phoneCaptain: "Patrick", handoff: "Walk, carry gifts, allow a child pause, and preserve the 10:15 Oak arrival goal.", reward: "No gift", responsible: "Patrick" },
     { time: "10:15 a.m. goal", window: "20–25 min including exit and drying", segment: "Oak Water Research", cast: "Bruce as Professor Oak + Professor Monica", phoneCaptain: "Polly or Auntie Ariel", handoff: "Separate Water Safety Adult, Phone Captain, and Professors; finish at the dry table.", reward: "WATER RESEARCH CAPSULES 1–4 + PROFESSOR OAK’S FIRST PARTNER FILE", responsible: "Monica + Bruce", href: "oak-lab/" },
     { time: "About 10:35–10:40", window: "10–15 min sheltered reset", segment: "Pokémon Center", cast: "Polly", phoneCaptain: "Patrick", handoff: "Dry/change/bathroom/water as needed, then run the short care challenge.", reward: "POKÉMON CENTER FIELD KIT", responsible: "Polly", href: "nurse-joy/" },
     { time: "About 10:50–11:00", window: "10–15 min plus walking/readiness", segment: "Team Rocket Base", cast: "Mike", phoneCaptain: "Patrick or Auntie Ariel", handoff: "Run Close Basket, Defense Target, and Luca’s Final Poké Shot with no formal score.", reward: "RECOVERED TEAM ROCKET LOOT", responsible: "Mike", href: "team-rocket/" },
-    { time: "About 11:05–11:20", window: "12–18 min including travel and exit", segment: "Ranger Vault", cast: "Designated Adult Escort", phoneCaptain: "Adult Escort", handoff: "Use physical Code Card, recover cache, exit, confirm outside; bag carrier takes bulk items.", reward: "SECRET RANGER CACHE", responsible: "Adult escort" },
+    { time: "About 11:05–11:20", window: "12–18 min including travel and exit", segment: "Ranger Vault", cast: "Designated Adult Escort", phoneCaptain: "Adult Escort", handoff: "Find the locked vault at the trampoline, try the lock, fail, read the lid, carry it to Oak still locked.", reward: "SECRET RANGER CACHE", responsible: "Adult escort" },
     { time: "About 11:20–11:38", window: "5–8 min after return travel", segment: "Oak return", cast: "Bruce as Professor Oak + Professor Monica", phoneCaptain: "Patrick", handoff: "Accept items, one callback, Rayquaza finding, authorization, compact reward, immediate departure.", reward: "MEGA EVOLUTION RESEARCH FILE", responsible: "Monica", href: "oak-lab/" },
     { time: "About 11:35–11:50", window: "25–35 min combined finale", segment: "Victory Road + Rayquaza + Champion", cast: "Auntie Ariel, then Patrick", phoneCaptain: "Patrick; Auntie Ariel for Champion", handoff: "One Ariel cue covers Victory Road, Rayquaza, and Champion summon; allow photos and child pauses.", reward: "POKÉMON LEAGUE CHAMPION CHEST", responsible: "Patrick", href: "league-recruiter/" },
     { time: "About 12:00–12:25", window: "8–12 min after fake-credit pause", segment: "Mew surprise", cast: "Patrick or lead adult", phoneCaptain: "Polly or Auntie Ariel", handoff: "Follow the post-credit signal; bring major rewards out now and bulk packs at celebration.", reward: "MYTHICAL ENCOUNTER + FINAL FAMILY CELEBRATION", responsible: "Patrick", href: "champion/" }
@@ -40,7 +40,7 @@
           "Ask him to recover the sealed capsules and cheer for every find.",
           "Give as many hints as he needs—there is no way for him to fail.",
           "Hand him the research gift and clue after Patrick gives the signal.",
-          "Welcome him back for one quick visit before Victory Road."
+          "Welcome him back carrying a LOCKED vault. You are the only one who can open it — join the four jagged pieces, flip to reveal the Sky Stone, read the numbers left to right, and let Luca dial the lock himself."
         ],
         before: [
           "Patrick will bring the capsules, gifts, clue card, and anything else important.",
@@ -74,7 +74,8 @@
           intro: "The return visit is short and relaxed.",
           lines: [
             { speaker: "Professor Oak", line: "Luca, the mark on this file matches the License I asked the League to prepare for you." },
-            { speaker: "Professor Monica", line: "The Fairies, the patients, and the fragment all point home. The signal is from Mega Rayquaza." },
+            { speaker: "Professor Monica", line: "Fit them together — they only join one way. Turn it over. Oak, it is whole. A Sky Stone." },
+            { speaker: "Professor Oak", line: "Now read it face up, left to right. There is your combination. You found it — you open it." },
             { speaker: "Professor Oak", line: "Why do you think the signal kept leading you home?" }
           ],
           note: "Any answer is great. Patrick will tell you when to hand Luca the final research gift."
@@ -125,69 +126,71 @@
       "team-rocket": {
         eyebrow: "Mike",
         title: "Mike’s Part",
-        subtitle: "You’ll be the funny Team Rocket Boss who challenges Luca to basketball—and loses.",
+        subtitle: "The funny Team Rocket Boss who loses at basketball—then delivers the biggest reveal.",
         arrival: "Luca arrives after the Pokémon Center reset, roughly 10:50–11:00.",
         ready: "Be ready within the flexible arrival window.",
         duration: "About 10–15 minutes",
         character: "Team Rocket Boss",
         firstLine: "So you’re Professor Oak’s new Trainer. You’ll have to beat my basketball defense!",
-        whatLucaDoes: "He tries a few easy basketball shots while you pretend your defense is falling apart.",
-        gift: "The Team Rocket gift bag and Ranger message, after Patrick gives the signal",
-        finalLine: "That defense had a warranty! Fine—take the stolen message.",
+        whatLucaDoes: "He tries a few easy shots while you pretend your defense is falling apart.",
+        gift: "The Team Rocket gift bag, Ranger message, and Sky Fragment 4, after Patrick signals",
+        finalLine: "Those four pieces are ONE thing. And the numbers on them are a combination.",
         yourPart: [
-          "Be a big, silly opponent—not a scary villain.",
-          "Give Luca a few easy shots and move him closer whenever useful.",
-          "React dramatically as your pretend defense breaks.",
-          "Lose on purpose and hand over the gift when Patrick signals."
+          "Be a big, silly opponent, not a scary villain.",
+          "Give Luca easy shots and move him closer whenever useful.",
+          "React dramatically as your defense breaks.",
+          "Lose on purpose, hand over the gift, then deliver the reveal.",
+          "You alone explain the fragments. Never skip it."
         ],
         before: [
-          "Patrick will bring the ball, markers, target, gift bag, and Ranger message.",
+          "Patrick brings the ball, markers, target, gift bag, and message.",
           "Set the hoop low and start with a very close shooting spot.",
-          "Keep the gift and message out of Luca’s sight."
+          "Keep the gift, message, and Sky Fragment 4 out of Luca’s sight.",
+          "Luca carries fragments 1–3 and has no idea what they are."
         ],
         arrivalLines: [
           { speaker: "Team Rocket Boss", line: "So you’re Professor Oak’s new Trainer. You’ll have to beat my basketball defense!" }
         ],
         sayAndDo: [
           "Stage 1: Close Basket. Stage 2: one comfortable Defense Target. Stage 3: Luca chooses the Final Poké Shot.",
-          "After a miss, move him closer or lower the hoop. A rim, backboard, target hit, soft pass, or layup can all count.",
+          "After a miss, move closer or lower the hoop. Rim, backboard, target, soft pass, or layup all count.",
           "Make funny comments about your defense malfunctioning. Luca always wins."
         ],
         successLines: [
-          { speaker: "Team Rocket Boss", line: "That defense had a warranty! Fine—take the stolen message. You still won’t like what the Rangers found." }
+          { speaker: "Team Rocket Boss", line: "That defense had a warranty! Fine—take it." }
         ],
-        successInstruction: "Hand Luca the Team Rocket gift bag and Ranger message.",
+        successInstruction: "Hand over the gift bag, message, and Sky Fragment 4. Then, slowly: (1) Those pieces are not four things—they are ONE. (2) A Sky Stone fell over Creekside. (3) The Rangers smashed it into four so we could never take it whole. (4) Every piece has a number; together they are a combination. (5) We never worked out which comes first. (6) Their vault is hidden at the closest place to the sky in their yard. Never hint at the order or the jagged fit—that is Oak’s.",
         backup: [
           "Use one close shot instead of several.",
           "Count a backboard or target hit.",
-          "Let Luca make three soft passes to defeat the defense.",
-          "If time is short, declare that his first try broke the whole system."
+          "Three soft passes can defeat the defense.",
+          "If time is short, say his first try broke the system—never cut the reveal."
         ],
         optionalPlay: ["Black shirt", "Sunglasses", "Paper Team Rocket “R”", "Hat or gloves"]
       },
       "league-recruiter": {
         eyebrow: "Auntie Ariel",
         title: "Auntie Ariel’s Part",
-        subtitle: "You’ll welcome Luca to the adventure, help Nina in the Fairy Garden, and return later as the energetic Victory Road referee.",
+        subtitle: "You welcome Luca to the adventure, help Nina in the Fairy Garden, and return as the Elite Four Wild Card he beats at your own game.",
         arrival: "Opening at 9:30 a.m.; the connected finale begins later when the group returns to Home Base.",
         ready: "Be ready by 9:25 a.m. Patrick will cue the later appearances.",
         duration: "10–15 minutes at opening; 25–35 minutes for the combined finale with Champion",
-        character: "Pokémon League Recruiter and Victory Road Referee",
+        character: "Pokémon League Recruiter and Elite Four Wild Card",
         firstLine: "Trainer Luca! A new region has appeared, and the Pokémon League chose you.",
         whatLucaDoes: "He takes a playful Trainer promise, protects one card, helps Nina, and later completes an easy obstacle course.",
         gift: "The Trainer gift bag at the opening; Patrick handles the later gifts",
-        finalLine: "Victory Road is cleared. The Champion may enter!",
+        finalLine: "Victory Road cleared. The Champion may enter!",
         yourPart: [
-          "Launch Luca’s adventure with lots of energy.",
-          "Lead a short Trainer promise and help him protect one card.",
+          "Launch the adventure with lots of energy.",
+          "Lead a short Trainer promise and help protect one card.",
           "Help Nina guide Luca to eight Fairy Lights.",
-          "Come back later to cheer him through Victory Road and the Rayquaza target.",
-          "Improvise freely—your enthusiasm matters more than the words."
+          "Come back to play POKÉ, then the Rayquaza target.",
+          "Improvise freely—enthusiasm beats the words."
         ],
         before: [
           "Patrick brings all opening, Fairy Garden, and finale supplies.",
-          "At the opening, keep the Trainer gift nearby and hidden.",
-          "For later appearances, Patrick will tell you when the course is ready and where to stand."
+          "Keep the Trainer gift nearby and hidden.",
+          "For later appearances, Patrick will tell you where to stand."
         ],
         arrivalLines: [
           { speaker: "Auntie Ariel", line: "Trainer Luca! A new region has appeared, and the Pokémon League chose you to investigate." },
@@ -205,24 +208,27 @@
         successInstruction: "Hand Luca the Trainer gift bag and point him toward the Fairy Garden.",
         backup: [
           "Complete one short promise and protect one card.",
-          "Place every remaining Fairy Light in plain sight and point directly to it.",
-          "Use fewer lights if needed, but still complete and reveal the arrow.",
+          "Place remaining Fairy Lights in plain sight and point to them.",
+          "Use fewer lights if needed, but still reveal the arrow.",
           "Patrick can prompt any line."
         ],
         optionalPlay: ["Bright hat", "Whistle", "Referee sash", "Clipboard", "Extra-energetic announcer voice"],
         secondAppearance: {
           title: "Later: Victory Road",
-          intro: "Patrick will reset everything before Luca arrives. One private Ariel cue covers Victory Road, Rayquaza, and the Champion summon.",
+          intro: "Victory Road is YOUR game, nothing pre-built: trick shots invented on the spot off the slide, swings, spinners, and bouncy house.",
           lines: [
-            { speaker: "Auntie Ariel", line: "Welcome to Victory Road! Every assisted success is completely legal League behavior." },
-            { speaker: "Auntie Ariel", line: "Victory Road is cleared! Now follow the Sky signal to Mega Rayquaza." }
+            { speaker: "Auntie Ariel", line: "Between you and the Champion is ME. Elite Four Wild Card. Undefeated." },
+            { speaker: "Auntie Ariel", line: "We play POKÉ. I invent a trick, you copy it. Miss your own and take a letter. Four letters, you are out." },
+            { speaker: "Auntie Ariel", line: "P… O… K… …É! Beaten by a seven-year-old!" }
           ],
           steps: [
-            "Cheer Luca through one easy pass at each station.",
-            "Move targets closer, show him the hidden tokens, and help as much as needed.",
-            "For Rayquaza, one soft hit, ring toss, or direct assist works."
+            "Invent tricks live: slide and throw, shoot from the swing, bounce-house buzzer-beater.",
+            "Go first. Scale it to Luca.",
+            "Miss yours, take a letter, complain loudly. Four rounds, two if rushed.",
+            "Luca never takes a letter. Go down spectacularly and concede.",
+            "Rayquaza: one soft hit, ring toss, or assist."
           ],
-          note: "The phone returns for Victory Road cleared, then Rayquaza appears without a second full cue. After Legendary success, Ariel summons Patrick and remains Phone Captain."
+          note: "Phone returns for Victory Road cleared, then Rayquaza. After Legendary success, summon Patrick and stay Phone Captain."
         }
       },
       "nina": {
@@ -290,25 +296,26 @@
         ],
         before: [
           "Keep the Champion Chest and Mew surprise in separate hiding places.",
+          "POST-CREDITS TRIGGER — this is what starts the Mew epilogue, and it is yours. Wait for the Hall of Heroes and the credits to finish and for people to start drifting toward the popsicles. Then, casually: “Hey — before we put all this away. Do you still remember the code?” Let Luca turn his four fragments over and read the numbers out loud himself. The moment he finishes the fourth number, the Phone Captain opens the epilogue and the screen glitches. Never let on that the question was planned.",
           "Patrick’s Director page contains the detailed timing, supplies, and final setup.",
           "The public Champion part should stay short and celebratory."
         ],
         arrivalLines: [
-          { speaker: "Champion Patrick", line: "Trainer Luca, I’ve watched your whole journey. A Champion needs knowledge, skill, and heart. Show me all three." }
+          { speaker: "Champion Patrick", line: "Trainer Luca, I’ve watched your whole journey. A Champion match is two things: what you know, and who you know." }
         ],
         sayAndDo: [
-          "Knowledge: offer two friendly choices. Any thoughtful answer is great.",
-          "Skill: ask for one comfortable soft toss. Move closer, or use a high-five instead.",
-          "Heart: ask Luca to name a person or Pokémon who helped him today.",
+          "Round 1 — Knowledge: three Pokémon trivia questions. Offer two choices whenever he hesitates.",
+          "Round 2 — Heart: go around the yard person by person. Name each helper out loud and let Luca say what they did. This round IS the thank-you — let each person hear it, and skip nobody who is standing there.",
+          "Round 3 — Team: ask which teammate carried him furthest today and why. Any answer wins the match.",
           "React like Luca has impressed you at every step."
         ],
         successLines: [
           { speaker: "Champion Patrick", line: "The match is over. Luca, you are the new Champion of the Creekside Region!" }
         ],
-        successInstruction: "Reveal the Champion Chest. Gather everyone who is here for the Champion photo.",
+        successInstruction: "Reveal the Champion Chest. Gather everyone for the Champion photo. Do NOT let Luca put his four Sky Fragments away — you need them one more time.",
         backup: [
-          "Ask one question, accept a high-five, and ask who helped him.",
-          "Skip any prop that is not ready.",
+          "Two choices per trivia question. If Luca stalls on a helper, name the deed yourself and let him agree.",
+          "If the group is large, thank the people who are physically present and let the rest come up in the Hall of Heroes.",
           "Keep the ending warm and confident—Luca always becomes Champion."
         ],
         optionalPlay: ["Hat, jacket, cape, or medal", "Dramatic entrance music", "Printed Champion badge", "Normal clothes are completely fine"],
@@ -351,7 +358,7 @@
         "Give hints early. Shorten any activity before Luca becomes tired or frustrated.",
         "At the pool, the dedicated Water Safety Adult watches Luca continuously and never operates the phone. Polly or Auntie Ariel is Phone Captain.",
         "At the pool, open the private cue before approach, stow the phone safely away, exit and dry Luca, and return the phone only at the dry research table.",
-        "At the Ranger Vault, confirm the approved boundary, keypad fallback, outside fallback, and bag carrier without recording any private digits.",
+        "At the Ranger Vault, confirm the approved boundary, the trampoline staging, and the bag carrier. The box must not open until Professor Oak, and no private digits are recorded anywhere.",
         "Offer individual photos at neighbor stations when convenient; the Hall moment gathers everyone who is present for one Champion photo.",
         "Keep the Champion Chest, Mew surprise, and later-story props hidden until their cues."
       ],
@@ -429,16 +436,16 @@
           slug: "ranger-vault",
           name: "Designated Adult Escort",
           cueIds: ["vault"],
-          setup: ["Physical Trainer Code Card", "Approved boundary and cache", "One story item separated from larger packages", "Designated bag carrier"],
+          setup: ["Luca’s four physical Sky Fragments — the numbers are on their backs", "Approved boundary and cache", "Sealed file marked RETURN TO PROFESSOR OAK — DO NOT OPEN", "One story item separated from larger packages", "Designated bag carrier"],
           safety: "Escort stays beside Luca. Confirm the approved boundary and exit before opening the success screen. Never place private digits in the phone or portal.",
-          fallback: "Adult operates the keypad, brings the cache outside, or runs the entire recovery outside.",
-          decisions: ["Confirm approved boundary", "Confirm keypad fallback", "Confirm outside fallback", "Name the bag carrier"]
+          fallback: "Adult points straight to the box, or stages it at the highest safe point in the yard. It stays locked either way.",
+          decisions: ["Confirm approved boundary", "Confirm trampoline staging", "Confirm combination pre-set and tested", "Name the bag carrier"]
         },
         {
           slug: "league-recruiter",
           name: "Auntie Ariel",
           cueIds: ["orientation", "victory-road"],
-          setup: ["Trainer promise and card supplies", "Victory Road markers, ground line, soft target, and tokens", "Rayquaza target plus ring fallback"],
+          setup: ["Trainer promise, sleeves, top loaders, One-Touch case — no deck box", "Nothing to build for Victory Road — Ariel invents POKÉ tricks off the play equipment", "A ball or two and any target", "Rayquaza target plus ring fallback"],
           safety: "Patrick stages the course and removes anything that encourages risky speed.",
           fallback: "One promise, one protected card, one supported pass per station, and a direct Rayquaza assist. One Ariel cue covers the full finale handoff.",
           decisions: ["Choose final Rayquaza activity", "Decide whether to print a League badge"]
