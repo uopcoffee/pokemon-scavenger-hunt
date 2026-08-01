@@ -25,7 +25,7 @@
   var PLAYER_MISSION_BRIEFS = {
     orientation: {
       characterName: "The League Recruiter",
-      body: "Auntie Ariel is waiting to make you a real Trainer. Go take the oath and protect your very first card."
+      body: "Auntie Ariel is waiting to make you a real Trainer. Go take the oath and seal your very first card."
     },
     fairy: {
       characterName: "Nina and Auntie Ariel",
@@ -45,11 +45,11 @@
     },
     vault: {
       characterName: "Rangers Hannah and Noa",
-      body: "Your four fragments are the key to the Rangers’ door. Go with someone you trust and bring out the sealed file."
+      body: "The Rangers hid their vault at the closest place to the sky in their yard. Go with someone you trust and bring it back."
     },
     "oak-return": {
       characterName: "The Partner Professors",
-      body: "The Professors are waiting for your four Sky Fragments and the sealed file. Go show them everything you found."
+      body: "The Professors are waiting. Bring the locked vault and all four fragments — Oak says the answer is inside the stone."
     },
     "victory-road": {
       characterName: "Auntie Ariel",
@@ -110,7 +110,6 @@
     ],
 
     rewards: {
-      "blue-deck-box": reward("Blue deck box", "equipment", OPEN_NOW, "TRAINER KIT"),
       "red-card-sleeves": reward("Red Pokémon card sleeves", "equipment", OPEN_NOW, "TRAINER KIT"),
       "cardboard-gold-top-loaders": reward("Cardboard Gold top loaders", "equipment", OPEN_NOW, "TRAINER KIT"),
       "one-touch-edge-case": reward("Ultra Pro One-Touch Edge case", "equipment", OPEN_NOW, "TRAINER KIT"),
@@ -158,6 +157,7 @@
       "sealed-research-file": reward("Sealed Mega Evolution Research File", "quest-item", CARRY_LATER, "SECRET RANGER CACHE"),
       "league-qualification-seal": reward("League Qualification seal", "quest-item", CARRY_LATER, "SECRET RANGER CACHE"),
       "ranger-vault-badge": reward("Ranger Vault Badge", "badge", CARRY_LATER, "SECRET RANGER CACHE"),
+      "ranger-vault-box": reward("Locked Ranger Vault box", "quest-item", CARRY_LATER, "SECRET RANGER CACHE"),
 
       "mega-evolutions-sticker-book": reward("Official Mega Evolutions Sticker Book", "book", OPEN_NOW, "MEGA EVOLUTION RESEARCH FILE"),
       "mega-abomasnow-ex": reward("Mega Abomasnow ex", "team-card", OPEN_NOW, "MEGA EVOLUTION RESEARCH FILE"),
@@ -188,9 +188,9 @@
           { id: "orientation-story", type: "story", title: "A New Region Appears", body: "Unusual energy is spreading through Creekside. The Pokémon League has invited exactly one new Trainer to investigate." },
           { id: "orientation-location", type: "travel-location", title: "Report to League Registration", body: "Meet the League Recruiter at the prepared front-porch or living-room station." },
           { id: "orientation-character", type: "story", title: "The League Recruiter Is Ready", body: "League Registration is prepared. Auntie Ariel is waiting to welcome Creekside’s newest Trainer and make the mission official." },
-          { id: "orientation-briefing", type: "challenge-briefing", title: "Trainer Oath and Equipment Test", instructions: ["Promise to protect Pokémon, help friends, play fairly, and never give up.", "Sleeve one card.", "Place it in a top loader.", "Secure it in the deck box."] },
+          { id: "orientation-briefing", type: "challenge-briefing", title: "Trainer Oath and Equipment Test", instructions: ["Promise to protect Pokémon, help friends, play fairly, and never give up.", "Sleeve one card.", "Place it in a top loader.", "Seal it in the One-Touch case."] },
           { id: "orientation-challenge", type: "physical-challenge", title: "Become an Official Trainer", body: "Take the Trainer Oath and complete the equipment test with Auntie Ariel.", successRule: "Complete each equipment step once. Ariel may help with any fiddly packaging.", fallbackText: "Ariel may hold the sleeve or top loader while Luca slides the card into place.", adultPrompt: "League Recruiter: hold to confirm the oath and equipment test are complete." },
-          { id: "orientation-reward", type: "reward", title: "Trainer Kit Earned", body: "Open the Trainer equipment now. Place the booster in the adult-carried Booster Satchel.", rewardIds: ["blue-deck-box","red-card-sleeves","cardboard-gold-top-loaders","one-touch-edge-case","mega-gallade-ex","journey-together-booster","trainer-license"] },
+          { id: "orientation-reward", type: "reward", title: "Trainer Kit Earned", body: "Open the Trainer equipment now. Place the booster in the adult-carried Booster Satchel.", rewardIds: ["red-card-sleeves","cardboard-gold-top-loaders","one-touch-edge-case","mega-gallade-ex","journey-together-booster","trainer-license"] },
           { id: "orientation-inventory", type: "inventory-update", title: "Trainer Profile Activated", body: "Mega Gallade joins the team. The Trainer License is active." },
           { id: "orientation-transition", type: "chapter-transition", title: "A Tiny Signal in the Garden", body: "Fairy energy is blinking near the backyard trees. The youngest Gym Leader needs help!" },
         ],
@@ -217,7 +217,7 @@
         type: "water", art: "mega-blastoise.png", locationLabel: "Professor Oak's Lab", scheduleLabel: "Travel 9:52–10:15 · Mission 10:15–10:35", targetMinutes: 43,
         participantIds: ["bruce","monica"],
         scenes: [
-          { id: "oak-travel", type: "travel-location", title: "Travel to Professor Oak's Lab", body: "Allow travel and costume-reset time. Target arrival: 10:15 a.m. Bring the phone, Ranger Code Card, and an adult." },
+          { id: "oak-travel", type: "travel-location", title: "Travel to Professor Oak's Lab", body: "Allow travel and costume-reset time. Target arrival: 10:15 a.m. Bring the phone, the Sky Fragment, and an adult." },
           { id: "oak-entrance", type: "story", title: "The Professors Are Watching the Water", body: "Professor Oak and Professor Monica are studying a strange signal at the preserve. Something important is moving beneath the surface." },
           { id: "monica-entrance", type: "story", title: "The Capsule Readings Are Rising", body: "Four sealed research capsules are missing. The Partner Professors need a Trainer before Team Rocket detects the same energy." },
           { id: "oak-story", type: "story", title: "Four Research Capsules", body: "One capsule holds a broken piece the Professors cannot explain. It looks exactly like the one Nina found in the garden." },
@@ -263,19 +263,19 @@
       },
       {
         id: "secret-ranger-vault", number: 6, name: "Secret Ranger Vault", lockedName: "Protected Ranger Mystery",
-        type: "psychic", art: "mega-gengar.png", locationLabel: "Secret Ranger Vault", scheduleLabel: "10:59–11:09", targetMinutes: 10,
+        type: "psychic", art: "mega-gengar.png", locationLabel: "The Rangers' Trampoline", scheduleLabel: "10:59–11:09", targetMinutes: 10,
         participantIds: ["hannah","noa"],
         requiresFragments: 4,
         scenes: [
-          { id: "vault-story", type: "story", title: "The Rangers Left a Warning", body: "Rangers Hannah and Noa broke the Sky Stone apart on purpose and hid the four pieces so Team Rocket could never take it whole. Behind their door is a sealed file for whoever put it back together." },
-          { id: "vault-location", type: "travel-location", title: "Travel with an Adult Escort", body: "Bring the four physical Sky Fragments to the approved front-entry area. The app never asks for the numbers." },
-          { id: "vault-character", type: "story", title: "A Secure Ranger Transmission", body: "Rangers Hannah and Noa left a protected cache for the Trainer who recovered all four Sky Fragments. An Adult Escort must stay beside Luca." },
-          { id: "vault-fragments", type: "fragment-check", title: "Four Ranger Symbols Recorded", body: "Leaf, Wave, Heart, and Flame are complete. Read the numbers in order, straight off the four physical fragments." },
-          { id: "vault-briefing", type: "challenge-briefing", title: "Enter the Ranger Vault", instructions: ["An adult stays beside Luca.", "Use the real keypad, reading the numbers off the four fragments in order.", "Remain in the approved front-entry area.", "Follow three prepared Ranger symbols to the cache."] },
-          { id: "vault-challenge", type: "physical-challenge", title: "Recover the Secret Ranger Cache", body: "Enter with an adult, follow the symbols, recover the gift bag, and find the sealed Research File. Its cover says RETURN TO PROFESSOR OAK — DO NOT OPEN.", successRule: "The adult may enter the physical code or lead directly to the approved cache if needed.", fallbackText: "If access or timing changes, the adult brings the sealed cache outside and the mission continues there.", adultPrompt: "Adult escort: hold to confirm the cache and sealed file are safely recovered." },
-          { id: "vault-reward", type: "reward", title: "Secret Ranger Cache", body: "Open the books, mini tin, and team cards. Keep every booster sealed and carry the Research File.", rewardIds: ["five-minute-stories","how-to-draw","fire-mini-tin","mabosstiff-ex","electivire-ex","ascended-heroes","phantasmal-flames","chaos-rising-2","fire-mini-tin-packs","sealed-research-file","league-qualification-seal","ranger-vault-badge"] },
-          { id: "vault-inventory", type: "inventory-update", title: "Ranger Mission Complete", body: "The sealed Research File and League Qualification seal unlock Professor Oak's return analysis." },
-          { id: "vault-transition", type: "chapter-transition", title: "Return to Professor Oak", body: "The sealed file is addressed to Professor Oak. Only he can explain what the four fragments really are. Victory Road stays locked until he does." },
+          { id: "vault-story", type: "story", title: "The Closest Place to the Sky", body: "Rangers Hannah and Noa broke the Sky Stone apart so Team Rocket could never take it whole. Then they locked their vault and hid it at the closest place to the sky in their whole yard." },
+          { id: "vault-location", type: "travel-location", title: "Travel with an Adult Escort", body: "Bring the four Sky Fragments to the Rangers' backyard. Look under, on, and around the trampoline — nothing in that yard stands closer to the sky." },
+          { id: "vault-character", type: "story", title: "A Secure Ranger Transmission", body: "The Rangers left their vault for the Trainer who recovered all four Sky Fragments. A combination lock holds it shut. An Adult Escort must stay beside Luca." },
+          { id: "vault-fragments", type: "fragment-check", title: "Four Ranger Symbols Recorded", body: "Leaf, Wave, Heart, and Flame are all recovered. Each one carries a number — but nothing says which number comes first." },
+          { id: "vault-briefing", type: "challenge-briefing", title: "Find the Ranger Vault", instructions: ["An adult stays beside Luca.", "Follow three prepared Ranger symbols to the trampoline.", "Recover the locked box.", "Try the combination lock — it will not open yet.", "Read the message on the lid."] },
+          { id: "vault-challenge", type: "physical-challenge", title: "Recover the Locked Ranger Vault", body: "Follow the Ranger symbols to the trampoline, recover the locked box, and let Luca try the combination himself. It will not open. The lid says: FOUR PIECES, ONE STONE. TAKE THIS TO PROFESSOR OAK.", successRule: "Luca finds the box and reads the lid. Failing to open the lock IS the success — do not let anyone solve it here.", fallbackText: "If the trampoline is unavailable, place the box at the highest safe point in the yard and keep the sky clue.", adultPrompt: "Adult escort: hold to confirm the locked vault is recovered and still locked." },
+          { id: "vault-reward", type: "reward", title: "The Locked Ranger Vault", body: "The Rangers strapped one book to the lid for whoever found it. Open that now. Everything else stays locked inside until Professor Oak.", rewardIds: ["five-minute-stories","ranger-vault-box","ranger-vault-badge"] },
+          { id: "vault-inventory", type: "inventory-update", title: "The Vault Is Found", body: "Luca is carrying a locked Ranger vault and four pieces of a broken stone. Only Professor Oak can turn one into the other." },
+          { id: "vault-transition", type: "chapter-transition", title: "Return to Professor Oak", body: "The lid names Professor Oak. Carry the vault and all four fragments back to the lab — Victory Road stays locked until it opens." },
         ],
       },
       {
@@ -305,16 +305,16 @@
     ],
 
     checkpoint: {
-      id: "oak-return", name: "Professor Oak Return Checkpoint", lockedName: "Research Analysis Required",
+      id: "oak-return", name: "Professor Oak Opens the Vault", lockedName: "Research Analysis Required",
       type: "water", art: "mega-blastoise.png", locationLabel: "Professor Oak's Lab",
       scheduleLabel: "11:09–11:17", targetMinutes: 8, afterChapterId: "secret-ranger-vault",
       participantIds: ["bruce","monica"],
       scenes: [
-        { id: "oak-return-travel", type: "travel-location", title: "Return Before Noon", body: "Bring all four Sky Fragments and the sealed Research File back to Professor Oak's Lab. Target arrival: 11:09 a.m." },
-        { id: "oak-return-character", type: "story", title: "The Partner Professors Are Ready", body: "Professor Oak and Professor Monica are waiting to fit the four Sky Fragments together and open the sealed Ranger file." },
-        { id: "oak-return-analysis", type: "checkpoint", title: "Mega Evolution Analysis", instructions: ["Fit the four Sky Fragments together into one stone.", "Monica opens the sealed Research File.", "Answer one friendly callback question.", "Receive League Authorization."] },
-        { id: "oak-return-challenge", type: "physical-challenge", title: "Qualify for the Pokémon League", body: "Review Luca's badges, team, and earlier missions with Bruce and Monica.", successRule: "Any remembered detail or prompted answer counts.", fallbackText: "Shorten to one callback question if behind schedule.", adultPrompt: "Professor Oak: hold to award League Authorization." },
-        { id: "oak-return-reward", type: "reward", title: "Mega Evolution Research File", body: "Open the sticker book and Mega Abomasnow card. Carry the assembled Sky Stone and League Authorization. Save the booster.", rewardIds: ["mega-evolutions-sticker-book","mega-abomasnow-ex","mega-evolution-booster","sky-stone","league-authorization","sky-pillar-coordinates"] },
+        { id: "oak-return-travel", type: "travel-location", title: "Return Before Noon", body: "Carry the locked vault and all four Sky Fragments back to Professor Oak's Lab. Target arrival: 11:09 a.m." },
+        { id: "oak-return-character", type: "story", title: "The Partner Professors Are Ready", body: "Professor Oak takes one look at the lid and asks for the four pieces. He says the Rangers left the answer in the stone itself." },
+        { id: "oak-return-analysis", type: "checkpoint", title: "Solve the Sky Stone", instructions: ["Fit the four jagged fragments together — they only join one way.", "Turn the joined stone over: the back forms the Sky Stone.", "Turn it face up and read the four numbers left to right. That is the combination.", "Open the vault, then let Monica open the sealed Research File inside."] },
+        { id: "oak-return-challenge", type: "physical-challenge", title: "Open the Ranger Vault", body: "Assemble the Sky Stone with Bruce and Monica, read the combination off the joined face, and let Luca dial the lock himself.", successRule: "Luca turns the last dial and the lock opens. Oak guides the puzzle as much as needed; Luca always opens the lock.", fallbackText: "Oak assembles the stone and reads the numbers aloud while Luca dials.", adultPrompt: "Professor Oak: hold when the vault is open and League Authorization is awarded." },
+        { id: "oak-return-reward", type: "reward", title: "The Vault Is Open", body: "Everything the Rangers locked away is Luca's now. Open the books, tin, and team cards; every booster goes in the Satchel. Carry the Sky Stone and League Authorization.", rewardIds: ["how-to-draw","fire-mini-tin","mabosstiff-ex","electivire-ex","ascended-heroes","phantasmal-flames","chaos-rising-2","fire-mini-tin-packs","sealed-research-file","league-qualification-seal","mega-evolutions-sticker-book","mega-abomasnow-ex","mega-evolution-booster","sky-stone","league-authorization","sky-pillar-coordinates"] },
         { id: "oak-return-transition", type: "chapter-transition", title: "Victory Road Authorized", body: "Mega Rayquaza energy is gathering above Victory Road. Luca is cleared for the final League trial." },
       ],
     },
@@ -513,14 +513,14 @@
     combinedChallenge(rocket, "rocket-challenge", {
       title: "Break Team Rocket’s Defense",
       successTitle: "Team Rocket’s “Unbeatable” Defense Collapses!",
-      successBody: "Team Rocket’s “unbeatable” defense collapses. The Dispatch falls open, and Mike finally says it out loud: four fragments of one Sky Stone, broken apart and hidden by the Rangers. And the four stamped numbers, in order, open their door.",
+      successBody: "Team Rocket’s “unbeatable” defense collapses. The Dispatch falls open, and Mike finally says it out loud: four fragments of one Sky Stone, broken apart by the Rangers. The numbers on them are a combination — and Team Rocket never worked out the order.",
       resultLabel: "Rocket Badge earned",
       revealItems: ["The stolen Ranger Dispatch is recovered"],
       rewardIds: rocketRewards,
       fragmentSlot: 4,
-      fragmentStory: "The fourth Sky Fragment, marked with a Flame. All four edges fit. Luca has been carrying a key all morning without knowing it.",
-      rewardHandoff: "Mike must surrender the stolen loot. Hand Luca the RECOVERED TEAM ROCKET LOOT, the Ranger Dispatch, and Sky Fragment 4. Mike explains the four fragments and the door — this is the reveal, so let him land it. Open the team cards; save the Destined Rivals booster for the celebration.",
-      nextDestination: "Four fragments, four numbers, one door. Rangers Hannah and Noa left something behind it for whoever put the stone back together. Go there now."
+      fragmentStory: "The fourth Sky Fragment, marked with a Flame. Four jagged pieces, four numbers, and no way to tell which number comes first.",
+      rewardHandoff: "Mike must surrender the stolen loot. Hand Luca the RECOVERED TEAM ROCKET LOOT, the Ranger Dispatch, and Sky Fragment 4. Mike explains the four fragments, the locked vault, and the trampoline — but NOT how to work out the order. This is the reveal, so let him land it. Open the team cards; save the Destined Rivals booster for the celebration.",
+      nextDestination: "The Dispatch says the Rangers hid their vault at the closest place to the sky in their whole yard. Go and find it."
     })
   ], {
     "rocket-location": "rocket-story",
@@ -537,18 +537,18 @@
   streamline(vault, [
     sceneFrom(vault, "vault-story", {
       title: "The Rangers Left a Warning",
-      body: "The Rangers broke the Sky Stone apart on purpose so Team Rocket could never take it whole. Their message names no Pokémon—only four symbols and one instruction: bring the sealed file back to Professor Oak unopened."
+      body: "The Rangers broke the Sky Stone apart so Team Rocket could never take it whole, then locked their vault and hid it at the closest place to the sky in their whole yard. Nothing in that yard stands closer than the trampoline."
     }),
     sceneFrom(vault, "vault-fragments"),
     combinedChallenge(vault, "vault-challenge", {
       title: "Recover the Secret Ranger Cache",
-      successTitle: "The Sealed File Was Waiting",
-      successBody: "Outside the protected area, the sealed file shows the same mark as Luca’s Trainer License. Across the front: RETURN TO PROFESSOR OAK — DO NOT OPEN. No one opens it.",
+      successTitle: "It Won’t Open",
+      successBody: "The vault was under the trampoline. Luca tries the lock. Four numbers, four fragments, and no idea which comes first. Carved into the lid: FOUR PIECES, ONE STONE. TAKE THIS TO PROFESSOR OAK.",
       resultLabel: "Ranger Vault Badge earned",
-      revealItems: ["The sealed Research File was waiting for Luca"],
+      revealItems: ["A locked Ranger vault, and a message on the lid"],
       rewardIds: vaultRewards,
-      rewardHandoff: "Outside the Ranger boundary, open one story item only. Keep the Research File sealed and let Luca read the RETURN TO PROFESSOR OAK line himself; the designated bag carrier takes the larger cache home or to the Professors. Save every booster for the celebration.",
-      nextDestination: "The file is addressed to Professor Oak. Only he can say what four fragments make when they finally go back together."
+      rewardHandoff: "Let Luca try the lock himself and fail — that is the beat. Open only the one book strapped to the lid. The vault stays shut and travels to Oak with him; nobody hints at the answer on the way.",
+      nextDestination: "The lid names Professor Oak. Only he knows what four broken pieces do when they finally go back together."
     })
   ], {
     "vault-location": "vault-story",
@@ -652,18 +652,18 @@
   streamline(checkpoint, [
     sceneFrom(checkpoint, "oak-return-travel", {
       type: "story",
-      title: "Oak Has One Last Question",
-      body: "Bring all four Sky Fragments and the sealed file to the Partner Professors. The mark on the file matches Luca’s License—but nobody knows what the four pieces make until they go back together."
+      title: "Oak Reads the Lid",
+      body: "Carry the locked vault and all four fragments to the Partner Professors. Oak reads the lid once, nods, and asks for the pieces."
     }),
     combinedChallenge(checkpoint, "oak-return-challenge", {
-      title: "Complete the League Analysis",
-      successTitle: "The Legend Points Home",
-      successBody: "The four fragments lock into one Sky Stone, and the Professors finally have their answer: it fell from the Sky Pillar, and Mega Rayquaza has been circling Creekside looking for it. The signal was testing the path to Luca.",
+      title: "Open the Ranger Vault",
+      successTitle: "Four Pieces, One Stone",
+      successBody: "The jagged edges only join one way. Turned over, the four faces make a single stone — and read straight across, the four numbers finally have an order. Luca dials it himself and the lock falls open. It fell from the Sky Pillar, and Mega Rayquaza has been circling Creekside looking for it.",
       resultLabel: "Victory Road authorized",
-      revealItems: ["The Sky Stone is whole again", "League Authorization earned", "Sky Pillar coordinates revealed"],
+      revealItems: ["The vault is open"],
       rewardIds: checkpointRewards,
-      rewardHandoff: "Let Luca fit all four fragments together on the table before anything else — this is the payoff for the whole morning. Then the Professors give him the compact MEGA EVOLUTION RESEARCH FILE reward and League Authorization. Open the sticker book and Mega Abomasnow card; save the booster for the celebration.",
-      nextDestination: "The destination is Home Base—but the old Ranger record calls the route Victory Road. Something legendary is waiting at its end."
+      rewardHandoff: "Luca assembles the stone and dials the lock himself — this is the payoff for the whole morning, so give it room. Then open the vault: the SECRET RANGER CACHE and the MEGA EVOLUTION RESEARCH FILE reward come out together. Open the books, tin, and team cards; every booster goes in the Satchel. He keeps the Sky Stone and League Authorization.",
+      nextDestination: "The destination is Home Base—but the Ranger record calls the route Victory Road. Something legendary is waiting at its end."
     })
   ], {
     "oak-return-character": "oak-return-travel",

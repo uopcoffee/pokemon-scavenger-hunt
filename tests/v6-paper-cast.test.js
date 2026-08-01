@@ -74,7 +74,7 @@ assert.strictEqual(totalScenes, EXPECTED_SCENE_COUNT, `Expected ${EXPECTED_SCENE
 /* Hard-coded from the pre-refactor build: removing the private relay screens
    must not change a single earned reward. */
 const EXPECTED_EARNED_REWARDS = [
-  "adventures-collector-02", "alcremie-ex", "ascended-heroes", "blue-deck-box", "booster-satchel",
+  "adventures-collector-02", "alcremie-ex", "ascended-heroes", "booster-satchel",
   "cardboard-gold-top-loaders", "care-badge", "champion-title", "chaos-rising-1", "chaos-rising-2",
   "chaos-rising-3", "destined-rivals-1", "destined-rivals-2", "electivire-ex", "fairy-badge",
   "fire-mini-tin", "fire-mini-tin-packs", "first-partner-boosters", "first-partner-collection",
@@ -84,7 +84,7 @@ const EXPECTED_EARNED_REWARDS = [
   "mega-gallade-ex", "mega-lucario-deck", "mega-pyroar-ex", "mega-rayquaza-model", "mew-figure",
   "mini-portfolio", "new-journey-reader", "one-touch-edge-case", "perfect-order-bundle",
   "perfect-order-loose-1", "phantasmal-flames", "popsicles", "portfolio-booster",
-  "ranger-dispatch", "ranger-vault-badge", "red-card-sleeves", "rocket-badge", "rocket-nidoking-ex",
+  "ranger-dispatch", "ranger-vault-badge", "ranger-vault-box", "red-card-sleeves", "rocket-badge", "rocket-nidoking-ex",
   "scream-tail-ex", "sealed-research-file", "sky-pillar-coordinates", "sky-stone",
   "sweet-surprise-reader", "team-reserve", "trainer-license", "water-mini-tin",
   "water-mini-tin-packs", "water-research-badge",
@@ -155,7 +155,7 @@ assert.deepStrictEqual(Array.from(state.earnedRewards).sort(), EXPECTED_EARNED_R
 assert.strictEqual(state.earnedRewards.length, Object.keys(config.rewards).length, "Every registered reward must be earnable");
 assert.strictEqual(state.team.length, 10);
 assert.strictEqual(state.earnedBadges.length, 7);
-assert.strictEqual(state.questItems.length, 6);
+assert.strictEqual(state.questItems.length, 7);
 
 /* --- f. Every removed scene ID resolves to a real player-facing screen --- */
 const removedChallengeIds = [

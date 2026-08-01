@@ -19,11 +19,11 @@
       ],
       challengeSteps: [
         "Help him sleeve one card and place it in a top loader.",
-        "Help him secure the protected card in the deck box.",
+        "Help him seal the protected card in the One-Touch case.",
         "Put the first sealed booster directly into the Save for Celebration container."
       ],
       runtimeSteps: [
-        "Help Luca sleeve one card and place it in the top loader and deck box."
+        "Help Luca sleeve one card and seal it in the top loader and One-Touch case."
       ],
       whenFinished: "Say, “It worked. Oak was right about you.” Then tell Patrick the result is ready. Present the Trainer Kit only after Luca sees it.",
       runtimeBackup: "Hold the sleeve or top loader for Luca. One protected card is enough.",
@@ -157,10 +157,11 @@
       phoneCaptain: "Patrick or Auntie Ariel",
       entranceCue: "No score. Luca always wins. Stand near the adjustable hoop with the Ranger Dispatch, the stolen loot, and SKY FRAGMENT 4 (Flame) visible but out of reach. YOU CARRY THE BIGGEST REVEAL OF THE MORNING — read the reveal lines below before you start.",
       spokenLines: [
-        "So you’re the famous Luca. Oak chose you; we chose this extremely secure basketball hoop.",
-        "Break my patented, definitely-not-adjustable defense and attempt the Final Poké Shot!",
-        "Impossible! That defense had a warranty! Fine—take it.",
-        "REVEAL, slowly: Those pieces are not four things. They are ONE — a Sky Stone the Rangers smashed apart. Turn them over. Four numbers, in that order, open their front door."
+        "So you’re the famous Luca. We chose this very secure basketball hoop.",
+        "Break my patented defense and attempt the Final Poké Shot!",
+        "Impossible! That defense had a warranty! Take it.",
+        "REVEAL, slowly: Those pieces are ONE thing — a Sky Stone the Rangers smashed apart. Every piece has a number. Together they are a combination.",
+        "Which comes first? We never worked it out. Their vault is at the closest place to the sky."
       ],
       challengeSteps: [
         "Stage 1 — Close Basket: begin at the easiest marker.",
@@ -168,22 +169,23 @@
         "Stage 3 — Final Poké Shot: Luca chooses the spot.",
         "Move closer or lower the hoop immediately. Luca always wins.",
         "AFTER the loss: surrender Sky Fragment 4, then deliver the REVEAL while Luca fits all four edges together.",
-        "Full reveal script — say it in this order: (1) They are not four things, they are one. (2) A Sky Stone fell over Creekside. (3) The Rangers smashed it into four so Team Rocket could never take it whole. (4) Turn them over — every piece has a number. (5) Those four numbers, in that order, open the Rangers’ front door. (6) You have been carrying their key since the garden.",
+        "Full reveal script, in this order: (1) They are not four things, they are one. (2) A Sky Stone fell over Creekside. (3) The Rangers smashed it into four so Team Rocket could never take it whole. (4) Every piece has a number, and together they are a combination. (5) Team Rocket never worked out which number comes first. (6) The Rangers hid their vault at the closest place to the sky in their whole yard.",
+        "Do NOT hint at how to order the numbers. That answer belongs to Professor Oak.",
         "This is the biggest reveal of the morning. Slow down. Let him assemble the stone in his own hands while you talk."
       ],
       runtimeSteps: [
-        "Close Basket, then a Defense Target. Move closer or lower the hoop until Team Rocket loses.",
-        "Surrender Fragment 4 and deliver the REVEAL while Luca assembles all four."
+        "Close Basket, then a Defense Target. Move closer or lower the hoop until you lose.",
+        "Surrender Fragment 4 and deliver the REVEAL. Never hint at the order."
       ],
-      whenFinished: "Surrender the loot and Fragment 4, deliver the REVEAL, and let Luca assemble the stone before he leaves.",
-      runtimeBackup: "One close shot or three soft passes. Luca wins. Never cut the reveal.",
+      whenFinished: "Surrender the loot and Fragment 4, deliver the REVEAL, then send him skyward.",
+      runtimeBackup: "One close shot or three soft passes. Never cut the reveal.",
       successCondition: "Mike always loses. A basket, target hit, layup, soft pass, or prepared fallback defeats the defense.",
       rewardPackages: ["RECOVERED TEAM ROCKET LOOT"],
       rewardOwners: ["Mike"],
-      rewardPreparation: "Keep the loot, Ranger Dispatch, and SKY FRAGMENT 4 (Flame) ready. After the result screen, open the team cards, place the booster in the Booster Satchel, then hand over the Dispatch and the final fragment together and deliver the reveal. This is the one chapter where the numbers are said out loud — keep the audience to Luca and his escort.",
+      rewardPreparation: "Keep the loot, Ranger Dispatch, and SKY FRAGMENT 4 (Flame) ready. After the result screen, open the team cards, place the booster in the Booster Satchel, then hand over the Dispatch and the final fragment and deliver the reveal. Say the numbers are a combination; never say the order, and never demonstrate the jagged fit.",
       fallback: "Lower the hoop, use the closest marker, count target hits, accept three soft passes, or use one close shot plus two easy Pokémon questions.",
-      transitionLine: "Four pieces, four numbers, one door. The Rangers were waiting for whoever put that stone back together—and it turned out to be you!",
-      transitionDestination: "Secret Ranger Vault",
+      transitionLine: "The Rangers hid their vault at the closest place to the sky in their yard. Go find it!",
+      transitionDestination: "The Rangers’ Trampoline",
       handoffStory: "Team Rocket is blocking the route and holding Oak’s Ranger Dispatch.",
       handoffLabel: "Adult: Hold to open Mike’s cue",
       completionLabel: "Phone Captain: Hold Mission Complete"
@@ -194,33 +196,34 @@
       performerName: "Designated Adult Escort",
       characterName: "Ranger Vault Escort",
       phoneCaptain: "Adult Escort",
-      entranceCue: "Confirm the approved boundary, keypad fallback, outside fallback, and designated bag carrier. Luca carries the four Sky Fragments; the numbers exist only on their backs.",
+      entranceCue: "Stage the LOCKED vault under or beside the Rangers’ trampoline with three Ranger symbols leading to it, and one book strapped to the lid. Confirm the approved boundary and the designated bag carrier. THE BOX MUST NOT OPEN TODAY UNTIL PROFESSOR OAK — do not test the combination in front of Luca.",
       spokenLines: [
-        "Trainer Luca, turn your four fragments over. Read me the numbers: Leaf, Wave, Heart, Flame.",
-        "I will stay beside you while we use the real keypad.",
-        "Now follow the three Ranger symbols to the protected cache."
+        "The Rangers hid it at the closest place to the sky in their whole yard. What in this yard is closest to the sky?",
+        "Try the lock, Trainer. Four numbers… but which one comes first?",
+        "Read the lid. It says take this to Professor Oak. Carry it — you found it."
       ],
       challengeSteps: [
         "The escort keeps Luca inside the approved configurable boundary.",
-        "Use only the numbers stamped on the four physical fragments; the app never receives or displays them.",
-        "Follow the three prepared Ranger symbols.",
-        "Recover the cache, exit, and confirm success outside.",
-        "Open one story item only; the bag carrier takes larger items home or to the Professors."
+        "Follow the three prepared Ranger symbols to the trampoline.",
+        "Let Luca recover the locked box and try the combination himself. It will not open. That failure IS the beat.",
+        "Read the lid aloud: FOUR PIECES, ONE STONE. TAKE THIS TO PROFESSOR OAK.",
+        "Open ONLY the book strapped to the lid. Never hint at the order of the numbers.",
+        "Exit, confirm success outside, and carry the still-locked vault to the lab."
       ],
       runtimeSteps: [
-        "Stay beside Luca inside the approved boundary and use only the numbers on the four physical Sky Fragments.",
-        "Recover the cache, exit, and confirm outside. Open one story item; the bag carrier takes the rest."
+        "Stay beside Luca, follow the symbols to the trampoline, and let him try the locked box himself.",
+        "It stays locked. Read the lid, open one story item only, then exit and confirm outside."
       ],
-      whenFinished: "Outside, let Luca read the file cover himself: RETURN TO PROFESSOR OAK — DO NOT OPEN. Keep it sealed and tell the Phone Captain the result is ready.",
-      runtimeBackup: "Operate the keypad for Luca or bring the sealed cache outside.",
-      successCondition: "Adult-accompanied entry and safe recovery of the cache and sealed file. The escort may operate the keypad or bring the cache outside.",
+      whenFinished: "Let Luca read the lid himself. Keep the vault locked and tell the Phone Captain the result is ready.",
+      runtimeBackup: "Point straight to the box if the search stalls. It still travels to Oak locked.",
+      successCondition: "Luca finds the vault and tries the lock. Not opening it is the success. The escort may lead directly to the box if the search stalls.",
       rewardPackages: ["SECRET RANGER CACHE"],
       rewardOwners: ["Designated Adult Escort"],
-      rewardPreparation: "Keep the cache staged inside the approved boundary. Outside, open one story item only; the designated bag carrier takes larger items home or to the Professors.",
-      fallback: "The escort enters the private information or brings the sealed cache outside and delivers the Ranger transmission verbally.",
-      transitionLine: "The sealed file is addressed to Professor Oak. Only he can say what four fragments make when they go back together.",
+      rewardPreparation: "Stage the locked vault at the trampoline with one book strapped to the lid. Only that book opens here. Everything else stays locked inside until Oak, and the bag carrier moves the vault.",
+      fallback: "If the trampoline is unavailable, place the box at the highest safe point in the yard and keep the sky clue. The escort may point straight to it.",
+      transitionLine: "The lid names Professor Oak. Only he knows what four broken pieces do when they go back together.",
       transitionDestination: "Professor Oak’s Lab",
-      handoffStory: "Rangers never open a cache alone. Bring someone you trust.",
+      handoffStory: "The Rangers hid their vault at the closest place to the sky. Bring someone you trust.",
       handoffLabel: "Adult: Hold to open the Adult Escort’s cue",
       completionLabel: "Phone Captain: Hold Mission Complete"
     },
@@ -230,33 +233,35 @@
       performerName: "Professor Oak and Professor Monica",
       characterName: "Partner Professors",
       phoneCaptain: "Patrick",
-      entranceCue: "Run a compact 5–8 minute return: Luca assembles all four fragments on the table, Monica opens the file, one callback question, Rayquaza finding, League Authorization, compact reward, then immediate Victory Road departure. The assembly is the payoff for the whole morning — do not rush it.",
+      entranceCue: "Luca arrives carrying a LOCKED vault and four jagged fragments. You are the only person who can open it, and that is the payoff for the whole morning — do not rush it. The pieces join one way only; joined and turned over they form the Sky Stone, and read left to right across the joined face the four numbers give the combination. Have a tray or clear table ready.",
       spokenLines: [
-        "Professor Oak: Luca… the mark on this file matches the License I asked the League to prepare for you.",
-        "Professor Monica: Fit them together, Luca. All four. …Oak, it is whole. This is a Sky Stone — it fell from the Sky Pillar.",
-        "Professor Oak: Mega Rayquaza has been circling Creekside looking for this. The signal was testing a path to you. Why do you think it kept leading you home?"
+        "Professor Oak: Let me see that lid. Ah. Give me the pieces.",
+        "Professor Monica: Fit them together — they only join one way. …Turn it over. Oak, it is whole. A Sky Stone, from the Sky Pillar.",
+        "Professor Oak: Now read it face up, left to right. There is your combination. You found it — you open it."
       ],
       challengeSteps: [
-        "Have Luca fit all four Sky Fragments together into one stone on the table.",
-        "Accept the sealed Research File and let Professor Monica open it and announce the Rayquaza finding.",
-        "Professor Oak asks one friendly callback question.",
-        "Award League Authorization."
+        "Read the vault lid aloud, then ask Luca for the four fragments.",
+        "Guide him to join the jagged edges — they only fit one way. Turn the joined stone over: that is the Sky Stone.",
+        "Turn it face up and read the four numbers left to right. That is the combination.",
+        "Luca dials the lock himself and opens the vault. Help as much as needed; he always turns the last dial.",
+        "Monica opens the sealed Research File from inside and announces the Rayquaza finding.",
+        "One friendly callback question, then award League Authorization."
       ],
       runtimeSteps: [
-        "Luca assembles the four fragments; accept the sealed Research File.",
-        "Monica announces the Rayquaza finding; Oak asks one friendly question.",
+        "Luca joins the pieces, flips to see the Sky Stone, reads the numbers, and dials the lock.",
+        "Open the vault. Monica announces Rayquaza; Oak asks one friendly question.",
         "Any answer counts, then award League Authorization."
       ],
-      whenFinished: "Give the compact reward and League Authorization, then send Luca immediately to Victory Road.",
-      runtimeBackup: "Ask one two-choice question or simply announce that the scan confirms qualification.",
-      successCondition: "Any remembered detail, prompted choice, or sincere answer qualifies Luca for the League.",
-      rewardPackages: ["MEGA EVOLUTION RESEARCH FILE"],
-      rewardOwners: ["Monica"],
-      rewardPreparation: "Keep the research reward and League Authorization ready. After the result screen, open the book and card, save the booster, and hand over the authorization. Luca keeps the assembled Sky Stone — Patrick needs the numbers on it after the credits.",
-      fallback: "Ask only one two-choice question or announce that Oak’s scan confirms qualification.",
+      whenFinished: "Unpack the vault, award League Authorization, send Luca to Victory Road. He keeps the Sky Stone.",
+      runtimeBackup: "Oak joins the pieces and reads the numbers aloud while Luca dials. He always opens it.",
+      successCondition: "The vault opens with Luca’s hand on the dial. Any amount of help from Oak is fine.",
+      rewardPackages: ["SECRET RANGER CACHE", "MEGA EVOLUTION RESEARCH FILE"],
+      rewardOwners: ["Monica", "Bruce"],
+      rewardPreparation: "The SECRET RANGER CACHE lives inside the vault and comes out here, with the MEGA EVOLUTION RESEARCH FILE. Open the books, tin, and team cards; every booster goes in the Booster Satchel. Luca keeps the assembled Sky Stone — Patrick needs the numbers on it after the credits.",
+      fallback: "Oak assembles the stone and reads the combination aloud. If the lock jams, Oak opens it and hands the vault straight to Luca.",
       transitionLine: "The legend points home. Victory Road will reveal whether the signal has truly chosen Luca.",
       transitionDestination: "Victory Road",
-      handoffStory: "The research partners are ready to analyze Luca’s evidence.",
+      handoffStory: "The research partners are the only people who can open that vault.",
       handoffLabel: "Adult: Hold to open Professor Oak and Professor Monica’s return cue",
       completionLabel: "Phone Captain: Hold Mission Complete"
     },

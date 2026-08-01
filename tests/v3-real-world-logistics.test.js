@@ -54,7 +54,7 @@ assert.match(cues.rocket.challengeSteps.join(" "), /Close Basket.*Defense Target
 assert.match(cues.rocket.challengeSteps.join(" "), /rim or backboard weakens/i);
 assert.match(cues.rocket.challengeSteps.join(" "), /Luca always wins/i);
 
-assert.match(cues.vault.entranceCue, /approved boundary.*keypad fallback.*outside fallback.*bag carrier/i);
+assert.match(cues.vault.entranceCue, /trampoline.*approved boundary.*bag carrier.*MUST NOT OPEN/is);
 assert.match(cues.vault.runtimeSteps.join(" "), /exit.*confirm outside/i);
 assert.match(cues.vault.runtimeSteps.join(" "), /one story item/i);
 
