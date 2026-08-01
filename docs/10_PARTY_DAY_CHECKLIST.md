@@ -42,10 +42,10 @@ labels below exactly match `packageId` values in `creekside-content.js`.
 
 - [ ] The combination may live anywhere — repo, docs, printed props. It is a re-settable luggage lock, not a house code. Keep it away from Luca before Oak, and nowhere else matters.
 - [ ] Print one digit on the FRONT of each Sky Fragment, beside its symbol. Keep them plain and unlabelled — no "1 of 4", no slot numbers, nothing that gives away the order.
-- [ ] Combination is **1737**, and the stone assembles **Flame → Heart → Leaf → Wave** left to right. Digits: Flame 1, Heart 7, Leaf 3, Wave 7.
+- [ ] Combination is **0151** — 151 is Mew's Pokédex number, which is the hinge of the ending. The stone assembles **Flame → Heart → Leaf → Wave** left to right. Printed digits: Flame 0, Heart 1, Leaf 5, Wave 1.
 - [ ] Note the assembly order is NOT collection order. Flame is collected last but sits first, so remembering the pickup order misleads. This is deliberate.
 - [ ] Cut the four fragments with jagged interlocking edges so they join exactly one way. Joined and turned over, the backs form the Sky Stone image. Joined face up and read left to right, the digits give the combination.
-- [ ] Set 1737 on the luggage lock and TEST IT before the party. Then never open the box again until Professor Oak.
+- [ ] Set 0151 on the luggage lock and TEST IT before the party. Then never open the box again until Professor Oak.
 - [ ] Chapter 1 hands over NO code card and NO fragment. Luca receives nothing he cannot explain.
 - [ ] Fragments are earned one per chapter in Chapters 2–5: Fragment 1 Fairy Garden (Leaf), Fragment 2 Oak's Lab (Wave), Fragment 3 Pokémon Center (Heart), Fragment 4 Team Rocket Base (Flame).
 - [ ] Only Mike explains what they are. Everyone before him says "Sky Fragment" and nothing more.

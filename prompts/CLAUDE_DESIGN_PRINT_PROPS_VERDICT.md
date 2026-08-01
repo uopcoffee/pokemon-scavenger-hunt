@@ -87,7 +87,7 @@ Mew epilogue.
 
 | # | Piece | Verdict | Why |
 |---|---|---|---|
-| 1 | Trainer License (front) | **REVISE** | One conflict — see below |
+| 1 | Trainer License (front) | **KEEP** | Tropius is correct — see below |
 | 2 | Trainer Oath (back) | **KEEP** | Four lines match the app exactly |
 | 3, 5, 12, 14 | Ranger code fragment slips ×4 | **RETIRE** | Replaced entirely — section 3 |
 | 4 | Station Sign 1 · League Registration | **KEEP** | Chapter unchanged |
@@ -104,22 +104,11 @@ Mew epilogue.
 | 23 | Cut marks | **KEEP** | No change |
 | — | Ranger Record (dropped) | **STAYS DROPPED** | Correctly retired |
 
-### Piece 1 — the one conflict
+### Piece 1 — no change needed
 
-The License prints **"Buddy · Tropius"**, but the app still opens with a live
-avatar picker offering six choices: Tropius, Pikachu, Mega Charizard Y, Mega
-Lucario, Mega Blastoise, Mega Mewtwo X. If Luca picks Mewtwo, his printed license
-contradicts his screen on the first screen of the morning.
-
-Pick one:
-
-- **(a)** Leave the buddy portrait well **empty**, and supply six small
-  peel-and-stick buddy chips sized to it. Ariel applies the one he picks. My
-  recommendation — it makes the choice feel consequential.
-- **(b)** Print six complete licenses, one per buddy, and hand over the match.
-- **(c)** Drop the buddy field from the card.
-
-Everything else on that card is fine. `CRK-2026-007` conflicts with nothing.
+Keep the card exactly as designed, Tropius included. Ariel assigns the buddy and
+it is Tropius, Luca's favourite. There is no avatar picker in the live app.
+`CRK-2026-007` conflicts with nothing.
 
 ### Your least-confident item #2 — you are not wrong
 
@@ -152,20 +141,30 @@ pieces must physically interlock, so they cannot be rectangles.
 
 | Symbol | Collected in | Position in the joined stone | Printed digit |
 |---|---|---|---|
-| Flame | Chapter 5 · Team Rocket | 1st, leftmost | **1** |
-| Heart | Chapter 4 · Pokémon Center | 2nd | **7** |
-| Leaf | Chapter 2 · Fairy Garden | 3rd | **3** |
-| Wave | Chapter 3 · Oak's preserve | 4th, rightmost | **7** |
+| Flame | Chapter 5 · Team Rocket | 1st, leftmost | **0** |
+| Heart | Chapter 4 · Pokémon Center | 2nd | **1** |
+| Leaf | Chapter 2 · Fairy Garden | 3rd | **5** |
+| Wave | Chapter 3 · Oak's preserve | 4th, rightmost | **1** |
 
-Combination: **1737**.
+Combination: **0151**.
 
-Note what this does. Assembly order is **not** collection order — Flame is the
-last piece Luca is handed and the first piece in the stone. If he tries to solve
-it by remembering what he picked up first, he gets the wrong answer. That is
-deliberate and it is what keeps the puzzle standing until Oak.
+**151 is Mew's Pokédex number, and that is the ending.** Luca carries Mew's
+number in his pocket from the Fairy Garden onward. Nobody names it — Oak opens
+the vault without remarking on it — until after the credits, when Patrick asks
+whether he still remembers the code and Luca says it aloud.
 
-Two sevens is also intentional: it makes the digits read as arbitrary rather than
-as a pattern.
+Two consequences for the artwork:
+
+- **Set the digits plainly and identically.** No emphasis, no ornament, no
+  differing weight. The moment works because 0, 1, 5 and 1 look like nothing on
+  four separate pieces.
+- **Nothing anywhere in the pack may reference Mew, 151, or a Pokédex number.**
+  That includes the Chapter 6 and Chapter 7 pieces, the assembly sheet, and any
+  slug or file name. The connection must be unmade until Luca makes it.
+
+Assembly order is also **not** collection order — Flame is the last piece he is
+handed and the first piece in the stone. Solving it by remembering the pickup
+order gives the wrong answer, which is what keeps the puzzle standing until Oak.
 
 ### Behaviour required
 
@@ -294,7 +293,8 @@ them alone.
 
 ## 7. Standing constraints
 
-- **Print the digits.** The combination is 1737 and is not a secret.
+- **Print the digits.** The combination is 0151 and is not a secret.
+- **Never reference Mew, 151, or a Pokédex number** anywhere in the pack.
 - **Never disclose or imply the fragment order** on any surface Luca handles
   before Oak. This is the rule that replaced the old one, and it is the only one
   that matters now.
