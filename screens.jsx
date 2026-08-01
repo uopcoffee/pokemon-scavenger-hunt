@@ -1195,41 +1195,6 @@ function SceneSpecificContent({ config, state, scene }) {
     );
   }
 
-  if (scene.type === "adult-logistics") {
-    const logisticsRewardIds = scene.logisticsRewardIds || [];
-    return (
-      <div className="combined-success">
-        {!!logisticsRewardIds.length && (
-          <div className="combined-reward-list">
-            {logisticsRewardIds.map((rewardId, index) => {
-              const reward = config.rewards[rewardId];
-              return reward ? (
-                <div key={rewardId} className="reward-item" style={{ "--reveal-order": index }}>
-                  <Icon name="sparkle" color="var(--gold)" />
-                  <strong>{reward.label}</strong>
-                  <span className={`reward-disposition reward-disposition--${reward.disposition.toLowerCase().replace(/\s+/g, "-")}`}>{reward.disposition}</span>
-                </div>
-              ) : null;
-            })}
-          </div>
-        )}
-        {Number.isInteger(scene.fragmentSlot) && (
-          <div className="combined-fragment">
-            <strong>Physical Ranger Card</strong>
-            <CodeFragmentSlots fragments={config.codeFragments} collectedSlots={state.collectedFragments} />
-            <small>Write the private mark only on the physical Ranger Code Card. The app records the symbol, never the private information.</small>
-          </div>
-        )}
-        {scene.rewardHandoff && (
-          <div className="physical-reward-callout">
-            <Icon name="sparkle" size={26} color="var(--gold)" />
-            <div><strong>Reward handoff</strong><p>{scene.rewardHandoff}</p></div>
-          </div>
-        )}
-      </div>
-    );
-  }
-
   if (Array.isArray(scene.dialogue)) {
     return (
       <div className="dialogue-lines">
@@ -1323,6 +1288,8 @@ function SceneSpecificContent({ config, state, scene }) {
   return null;
 }
 
+/* Every runtime scene is player-facing now, so nothing on the quest screens
+   renders this badge. It stays defined for adult-only surfaces. */
 function AudienceIndicator({ audience, performerName }) {
   const label = audience === "luca"
     ? "Trainer View · Show Luca"
@@ -1343,10 +1310,9 @@ function RelayHandoffScreen({ config, sequence, scene, dispatch }) {
     <Field type={sequence.type} className="relay-field relay-field--luca" audience="luca">
       <div style={{ ...shell }}>
         <div style={{ ...pad, gap: 16, justifyContent: "center" }}>
-          <AudienceIndicator audience="luca" />
           <Card
             name={scene.title}
-            meta="Ready for the real-world mission"
+            meta="Put the phone away and go"
             hero={<HeroArt src={sequence.art ? ART + sequence.art : undefined} glyph="sparkle" color="var(--mewtwo-x)" label={sequence.name} size={132} bob />}
             burst
             holo
@@ -1360,119 +1326,10 @@ function RelayHandoffScreen({ config, sequence, scene, dispatch }) {
             </div>
             <AdultHoldButton
               duration={config.adultHoldMs}
-              label="Hold to begin the mission"
+              label="Adult: Hold when the mission is complete"
               onComplete={() => dispatch({ type: "COMPLETE_RELAY_HOLD" })}
             />
           </Card>
-        </div>
-      </div>
-    </Field>
-  );
-}
-
-function PrivacyShieldScreen({ sequence, scene, dispatch }) {
-  return (
-    <Field hero className="relay-field relay-field--adult" audience="adult">
-      <div style={{ ...shell }}>
-        <div style={{ ...pad, justifyContent: "center" }}>
-          <section className="relay-shield" data-testid="privacy-shield" aria-labelledby="privacy-shield-title">
-            <AudienceIndicator audience="adult" performerName={scene.performerName} />
-            <div className="relay-shield__icon" aria-hidden><Icon name="lock" size={64} color="var(--banana)" /></div>
-            <p className="relay-shield__eyebrow">Private cue ahead</p>
-            <h1 id="privacy-shield-title">Turn the Screen Away</h1>
-            <p>Turn the phone away from Luca.</p>
-            <Button
-              variant="reward"
-              size="lg"
-              block
-              onClick={() => dispatch({ type: "ADVANCE_SCENE" })}
-              data-testid="open-cast-cue"
-            >
-              Phone is turned away — open private cue
-            </Button>
-            <small>The next screen contains short speaking lines and live challenge steps.</small>
-          </section>
-        </div>
-      </div>
-    </Field>
-  );
-}
-
-function CastCueScreen({ config, sequence, scene, dispatch }) {
-  return (
-    <div className="runtime-cast-screen" data-audience="cast" data-testid="cast-cue-screen">
-      <div className="runtime-cast-screen__shell">
-        <AudienceIndicator audience="cast" performerName={scene.performerName} />
-        <header className="runtime-cast-header">
-          <p>Active performer</p>
-          <h1>{scene.performerName}</h1>
-          <strong>{scene.characterName}</strong>
-          {scene.supportingRole && <small>{scene.supportingRole}</small>}
-          <div className="runtime-cast-meta">
-            <span><b>Phone Captain</b>{scene.phoneCaptain}</span>
-            {scene.waterSafetyAdult && <span><b>Water Safety Adult</b>{scene.waterSafetyAdult}</span>}
-          </div>
-        </header>
-
-        <section className="runtime-cue-card">
-          <span>1. Say This</span>
-          <div className="runtime-spoken-lines">
-            {scene.spokenLines.map((line, index) => <blockquote key={`${scene.id}-spoken-${index}`}>“{line}”</blockquote>)}
-          </div>
-        </section>
-
-        <section className="runtime-cue-card">
-          <span>2. Help Luca Do This</span>
-          <ol>
-            {scene.helpLucaSteps.map((step, index) => <li key={`${scene.id}-step-${index}`}>{step}</li>)}
-          </ol>
-        </section>
-
-        <div className="runtime-cue-grid">
-          <section className="runtime-cue-box runtime-cue-box--success">
-            <strong>3. When He Finishes</strong>
-            <p>{scene.whenFinished}</p>
-          </section>
-          <section className="runtime-cue-box runtime-cue-box--fallback">
-            <strong>4. Easy Backup</strong>
-            <p>{scene.easyBackup}</p>
-          </section>
-        </div>
-
-        <div className="runtime-cast-completion">
-          <p><strong>Phone Captain: {scene.phoneCaptain}.</strong> Keep the phone; the performer does not need to operate it.</p>
-          <AdultHoldButton
-            duration={config.adultHoldMs}
-            label={scene.completionLabel}
-            onComplete={() => dispatch({ type: "COMPLETE_RELAY_HOLD" })}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ReturnToPlayerScreen({ sequence, scene, dispatch }) {
-  return (
-    <Field hero className="relay-field relay-field--adult" audience="adult">
-      <div style={{ ...shell }}>
-        <div style={{ ...pad, justifyContent: "center" }}>
-          <section className="relay-shield relay-shield--return" data-testid="return-to-player" aria-labelledby="return-player-title">
-            <AudienceIndicator audience="adult" performerName={scene.performerName} />
-            <div className="relay-shield__icon" aria-hidden><Icon name="pokeball" size={68} color="var(--banana)" /></div>
-            <p className="relay-shield__eyebrow">Mission result ready</p>
-            <h1 id="return-player-title">Turn the Screen Back to Luca</h1>
-            <p>The adult may keep holding the phone. Make sure Luca can see the next screen before continuing.</p>
-            <Button
-              variant="reward"
-              size="lg"
-              block
-              onClick={() => dispatch({ type: "ADVANCE_SCENE" })}
-              data-testid="reveal-mission-result"
-            >
-              Luca can see the screen — reveal mission result
-            </Button>
-          </section>
         </div>
       </div>
     </Field>
@@ -1494,15 +1351,6 @@ function CreeksideScene({ config, state, dispatch }) {
 
   if (scene.type === "cast-handoff") {
     return <RelayHandoffScreen config={config} sequence={sequence} scene={scene} dispatch={dispatch} />;
-  }
-  if (scene.type === "privacy-shield") {
-    return <PrivacyShieldScreen sequence={sequence} scene={scene} dispatch={dispatch} />;
-  }
-  if (scene.type === "cast-cue") {
-    return <CastCueScreen config={config} sequence={sequence} scene={scene} dispatch={dispatch} />;
-  }
-  if (scene.type === "return-to-player") {
-    return <ReturnToPlayerScreen sequence={sequence} scene={scene} dispatch={dispatch} />;
   }
   if (scene.type === "relay-result") {
     return (
@@ -1546,7 +1394,6 @@ function CreeksideScene({ config, state, dispatch }) {
     <Field type={sequence.type} className="luca-scene-field" audience={scene.audience}>
       <div style={{ ...shell }}>
         <div style={{ ...pad, gap: 14 }}>
-          <AudienceIndicator audience={scene.audience} performerName={scene.performerName} />
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
             <Button
               variant="ghost"

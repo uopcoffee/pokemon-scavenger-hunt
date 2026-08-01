@@ -16,6 +16,59 @@
     return { label: label, category: category, disposition: disposition, packageId: packageId };
   }
 
+  /* Every runtime screen is now player-facing: the performer cue cards and the
+     gift map live on paper. A cast-handoff therefore no longer opens a private
+     screen — it tells Luca what is about to happen out in the world and then
+     waits for the hold that says the real-world mission is finished. */
+  var MISSION_COMPLETE_HOLD_LABEL = "Adult: Hold when the mission is complete";
+
+  var PLAYER_MISSION_BRIEFS = {
+    orientation: {
+      characterName: "The League Recruiter",
+      body: "Auntie Ariel is waiting to make you a real Trainer. Go take the oath and protect your very first card."
+    },
+    fairy: {
+      characterName: "Nina and Auntie Ariel",
+      body: "Eight Fairy Lights are hidden in the garden. Go find every one with Nina and carry them to the Fairy Table."
+    },
+    "oak-water": {
+      characterName: "The Partner Professors",
+      body: "Four sealed capsules are floating out at the water preserve. Go help the Professors recover all four."
+    },
+    "nurse-joy": {
+      characterName: "Nurse Joy",
+      body: "Three frightened Pokémon are waiting at the Center. Go match each one with the care it needs."
+    },
+    rocket: {
+      characterName: "The Team Rocket Boss",
+      body: "Team Rocket hid the stolen Dispatch behind a basketball hoop. Go break their defense and take it back."
+    },
+    vault: {
+      characterName: "Rangers Hannah and Noa",
+      body: "The Rangers locked their cache behind four marks. Go with someone you trust and bring out the sealed file."
+    },
+    "oak-return": {
+      characterName: "The Partner Professors",
+      body: "The Professors are waiting for the Sky Fragment and the sealed file. Go show them everything you found."
+    },
+    "victory-road": {
+      characterName: "Auntie Ariel",
+      body: "Victory Road is open. Go cross the tall grass, walk the forest line, hit the target, and find three Energy Tokens."
+    },
+    champion: {
+      characterName: "The Creekside Champion",
+      body: "The Champion is ready for the final match. Go show your knowledge, your skill, and your heart."
+    },
+    mew: {
+      characterName: "A Mythical Pokémon",
+      body: "Pink energy is drifting along the backyard trail. Go follow all three markers and see what is waiting."
+    },
+    rayquaza: {
+      characterName: "Mega Rayquaza",
+      body: "The sky opens and Mega Rayquaza circles above, watching. Go send one soft throw and show it who answered."
+    }
+  };
+
   var config = {
     version: 3,
     release: "4.0",
@@ -516,26 +569,20 @@
       revealItems: ["The recovered energy forms a green spiral overhead"],
       nextDestination: "Don’t leave the path. Auntie Ariel is watching the sky."
     }),
+    /* The Legendary encounter is one screen now: Luca sees Rayquaza arrive and
+       the same protected hold that used to live on a separate control screen
+       releases the result. The mechanics live on the printed cast guide. */
     sceneFrom(victory, "victory-challenge-b", {
-      type: "story",
+      type: "cast-handoff",
       audience: "luca",
       title: "Mega Rayquaza Appears!",
-      body: "The sky opens. Mega Rayquaza circles the signal, then lowers its gaze toward Luca. It has come to see who answered.",
+      body: PLAYER_MISSION_BRIEFS.rayquaza.body,
+      characterName: PLAYER_MISSION_BRIEFS.rayquaza.characterName,
+      handoffLabel: MISSION_COMPLETE_HOLD_LABEL,
       successRule: undefined,
       fallbackText: undefined,
       adultPrompt: undefined
     }),
-    {
-      id: "victory-challenge-b-control",
-      type: "physical-challenge",
-      audience: "adult",
-      preserveAudience: true,
-      title: "Continue Ariel’s Legendary Encounter",
-      body: "Ariel’s existing cue remains active. Keep the mechanics private while Luca responds to Rayquaza.",
-      successRule: "Use one soft throw, ring toss, Sky-symbol match, or Legendary Assist. Move closer after a miss; one assisted success always counts.",
-      fallbackText: "Ariel may guide the throw, place the ring, or point to three Sky symbols.",
-      adultPrompt: "Phone Captain Patrick: hold when the Legendary encounter is complete."
-    },
     {
       id: "victory-challenge-b-result",
       type: "relay-result",
@@ -584,6 +631,7 @@
     "victory-stage-b": "victory-challenge-b",
     "victory-challenge-b-handoff": "victory-challenge-b",
     "victory-challenge-b-privacy": "victory-challenge-b",
+    "victory-challenge-b-control": "victory-challenge-b",
     "victory-challenge-b-return": "victory-challenge-b-result",
     "champion-character": "champion-challenge-handoff",
     "champion-stage": "champion-challenge-handoff",
@@ -666,57 +714,21 @@
     "mew-challenge": "mew"
   };
 
+  /* Each live encounter is two player-facing screens: the mission brief that
+     ends in the protected "mission is complete" hold, and the reveal. The
+     privacy shield, runtime cast screen, return shield, and adult reward
+     checklist all moved to the printed cast guides and the printed gift map. */
   function buildRelayScenes(originalScene, cue) {
-    var relayScenes = [
+    var brief = PLAYER_MISSION_BRIEFS[cue.id];
+    return [
       {
         id: originalScene.id + "-handoff",
         type: "cast-handoff",
         audience: "luca",
         title: originalScene.title,
-        body: cue.handoffStory,
-        characterName: cue.characterName,
-        handoffLabel: "Hold to begin the mission",
-        phoneCaptain: cue.phoneCaptain,
-        waterSafetyAdult: cue.waterSafetyAdult,
-        cueId: cue.id
-      },
-      {
-        id: originalScene.id + "-privacy",
-        type: "privacy-shield",
-        audience: "adult",
-        title: "Adult Cast Screen Ahead",
-        body: "Turn the phone away from Luca.",
-        performerName: cue.performerName,
-        phoneCaptain: cue.phoneCaptain,
-        waterSafetyAdult: cue.waterSafetyAdult,
-        cueId: cue.id
-      },
-      {
-        id: originalScene.id,
-        type: "cast-cue",
-        audience: "cast",
-        title: originalScene.title,
-        performerName: cue.performerName,
-        characterName: cue.characterName,
-        phoneCaptain: cue.phoneCaptain,
-        waterSafetyAdult: cue.waterSafetyAdult,
-        supportingRole: cue.supportingRole,
-        spokenLines: cue.spokenLines.slice(),
-        helpLucaSteps: cue.runtimeSteps.slice(),
-        whenFinished: cue.whenFinished,
-        easyBackup: cue.runtimeBackup,
-        completionLabel: "Phone Captain: Hold Mission Complete",
-        cueId: cue.id
-      },
-      {
-        id: originalScene.id + "-return",
-        type: "return-to-player",
-        audience: "adult",
-        title: "Turn the screen back to Luca",
-        body: "Do not reveal the result, reward, badge, fragment, or next destination until Luca can see the phone.",
-        performerName: cue.performerName,
-        phoneCaptain: cue.phoneCaptain,
-        waterSafetyAdult: cue.waterSafetyAdult,
+        body: brief.body,
+        characterName: brief.characterName,
+        handoffLabel: MISSION_COMPLETE_HOLD_LABEL,
         cueId: cue.id
       },
       {
@@ -731,27 +743,20 @@
         fragmentSlot: originalScene.fragmentSlot,
         fragmentStory: originalScene.fragmentStory,
         nextDestination: originalScene.nextDestination,
-        phoneCaptain: cue.phoneCaptain,
-        waterSafetyAdult: cue.waterSafetyAdult,
         cueId: cue.id
       }
     ];
-    if ((originalScene.rewardIds && originalScene.rewardIds.length) || originalScene.rewardHandoff || Number.isInteger(originalScene.fragmentSlot)) {
-      relayScenes.push({
-        id: originalScene.id + "-logistics",
-        type: "adult-logistics",
-        audience: "adult",
-        title: "Prepare the Physical Reward",
-        body: "Luca has seen the story result. Use this private checklist to present the physical items without spoiling later rewards.",
-        logisticsRewardIds: Array.isArray(originalScene.rewardIds) ? originalScene.rewardIds.slice() : [],
-        fragmentSlot: originalScene.fragmentSlot,
-        rewardHandoff: originalScene.rewardHandoff,
-        performerName: cue.performerName,
-        phoneCaptain: cue.phoneCaptain,
-        cueId: cue.id
-      });
-    }
-    return relayScenes;
+  }
+
+  /* A mid-event refresh must never strand anyone on a screen that no longer
+     exists, so every ID the paper-cast rebuild removed still resolves to the
+     nearest surviving player-facing screen. */
+  function registerRemovedRelayAliases(sequence, challengeId) {
+    var aliases = sequence.sceneAliases || (sequence.sceneAliases = {});
+    aliases[challengeId + "-privacy"] = challengeId + "-handoff";
+    aliases[challengeId] = challengeId + "-handoff";
+    aliases[challengeId + "-return"] = challengeId + "-result";
+    aliases[challengeId + "-logistics"] = challengeId + "-result";
   }
 
   function applyTheatricalRelays(sequence) {
@@ -765,11 +770,12 @@
           type: "cast-handoff",
           audience: "adult",
           title: "Mission Recovery",
-          body: "The cast cue could not be loaded. Open Parent Mode and return to the preceding scene.",
+          body: "The printed guide could not be matched. Open Parent Mode and return to the preceding scene.",
           performerName: "Lead Adult",
           handoffLabel: "Adult: Hold to open recovery instructions"
         });
       }
+      registerRemovedRelayAliases(sequence, scene.id);
       return scenes.concat(buildRelayScenes(scene, cue));
     }, []);
   }

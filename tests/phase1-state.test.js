@@ -39,6 +39,10 @@ vm.runInContext(fs.readFileSync(path.join(repositoryRoot, "state.js"), "utf8"), 
 const config = context.window.CREEKSIDE_CONFIG;
 const stateEngine = context.window.CreeksideState;
 const forbiddenFragmentKeys = ["digit", "value", "answer", "code"];
+/* Paper-cast contract: the only scene types that resist an ordinary tap are the
+   physical-challenge legacy type and the cast-handoff, whose hold now means
+   "the real-world mission is finished". The cast-cue type no longer exists. */
+const HOLD_GATED_TYPES = ["physical-challenge", "cast-handoff"];
 
 assert.strictEqual(config.chapters.length, 7, "Creekside must contain seven chapters");
 assert.strictEqual(config.codeFragments.length, 4, "Creekside must contain four symbolic fragment slots");
@@ -74,7 +78,7 @@ config.chapters.forEach((chapter, chapterIndex) => {
 
   state = stateEngine.reducer(state, { type: "OPEN_CURRENT_CHAPTER" });
   chapter.scenes.forEach((scene) => {
-    if (["physical-challenge", "cast-handoff", "cast-cue"].includes(scene.type)) {
+    if (HOLD_GATED_TYPES.includes(scene.type)) {
       const sceneIndexBeforeTap = state.currentSceneIndex;
       state = stateEngine.reducer(state, { type: "ADVANCE_SCENE" });
       assert.strictEqual(state.currentSceneIndex, sceneIndexBeforeTap, "A normal advance must not complete a protected relay hold");
@@ -92,7 +96,7 @@ config.chapters.forEach((chapter, chapterIndex) => {
     state = stateEngine.reducer(state, { type: "OPEN_CHECKPOINT" });
     config.checkpoint.scenes.forEach((scene) => {
       state = stateEngine.reducer(state, {
-        type: ["physical-challenge", "cast-handoff", "cast-cue"].includes(scene.type) ? "COMPLETE_RELAY_HOLD" : "ADVANCE_SCENE",
+        type: HOLD_GATED_TYPES.includes(scene.type) ? "COMPLETE_RELAY_HOLD" : "ADVANCE_SCENE",
       });
     });
     assert.strictEqual(state.checkpointComplete, true);
@@ -115,7 +119,7 @@ assert.strictEqual(state.mewUnlocked, true, "The confirmed adult action must unl
 assert.strictEqual(state.activeFlow, "mew");
 config.epilogue.scenes.forEach((scene) => {
   state = stateEngine.reducer(state, {
-    type: ["physical-challenge", "cast-handoff", "cast-cue"].includes(scene.type) ? "COMPLETE_RELAY_HOLD" : "ADVANCE_SCENE",
+    type: HOLD_GATED_TYPES.includes(scene.type) ? "COMPLETE_RELAY_HOLD" : "ADVANCE_SCENE",
   });
 });
 
@@ -154,12 +158,15 @@ gatedVault = stateEngine.reducer(gatedVault, { type: "BACK_TO_MAP" });
 gatedVault = stateEngine.reducer(gatedVault, { type: "OPEN_CURRENT_CHAPTER" });
 assert.strictEqual(gatedVault.view, "map", "The Ranger Vault must reject normal entry without all four fragments");
 
+const mewHandoffIndex = config.epilogue.scenes.findIndex((scene) => scene.type === "cast-handoff");
+assert.notStrictEqual(mewHandoffIndex, -1, "The Mew epilogue must still gate its mission behind a hold");
 const parentMew = stateEngine.reducer(stateEngine.initialState(), {
   type: "PARENT_JUMP_MEW",
-  sceneIndex: config.epilogue.scenes.findIndex((scene) => scene.type === "cast-cue"),
+  sceneIndex: mewHandoffIndex,
 });
 assert.strictEqual(parentMew.activeFlow, "mew");
-assert.strictEqual(stateEngine.currentScene(parentMew).type, "cast-cue");
+assert.strictEqual(stateEngine.currentScene(parentMew).type, "cast-handoff");
+assert.strictEqual(stateEngine.currentScene(parentMew).audience, "luca", "Parent Mode must land on a player-facing screen");
 assert.strictEqual(parentMew.mewUnlocked, true);
 
 console.log("Creekside state tests passed.");

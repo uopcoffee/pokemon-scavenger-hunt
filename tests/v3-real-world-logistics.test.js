@@ -33,10 +33,15 @@ assert.match(cues["oak-water"].runtimeSteps.join(" "), /Water Safety Adult.*Phon
 assert.match(cues["oak-water"].runtimeSteps.join(" "), /Stow the phone safely away/i);
 assert.match(cues["oak-water"].runtimeBackup, /skimmer.*dry-tub.*one capsule/i);
 assert.match(JSON.stringify(oak.scenes), /A second mark\. The Professors go very quiet when the Star appears\./);
-const oakLogistics = oak.scenes.find((scene) => scene.id === "oak-challenge-logistics");
-assert.strictEqual(oakLogistics.audience, "adult");
-assert.strictEqual(oakLogistics.fragmentSlot, 2);
-assert.match(oakLogistics.rewardHandoff, /WATER RESEARCH packages/i);
+/* The Water Research gift handoff moved to the printed gift map. The runtime
+   keeps only the player-facing reveal that records the second Ranger mark, and
+   the package wording must stay with the cast core that gets printed. */
+assert.strictEqual(oak.scenes.some((scene) => scene.id === "oak-challenge-logistics"), false);
+const oakResult = oak.scenes.find((scene) => scene.id === "oak-challenge-result");
+assert.strictEqual(oakResult.audience, "luca");
+assert.strictEqual(oakResult.fragmentSlot, 2);
+assert.strictEqual(oakResult.rewardHandoff, undefined, "Luca must never see reward logistics");
+assert.match(cues["oak-water"].rewardPreparation, /Stage both packages away from the water/i);
 
 assert.match(cues.fairy.supportingRole, /never handles the phone/i);
 assert.match(cues.fairy.supportingRole, /eight hiding places.*point.*one-word clues.*one light.*lose interest.*skip/i);
@@ -54,7 +59,7 @@ assert.match(cues.vault.runtimeSteps.join(" "), /exit.*confirm outside/i);
 assert.match(cues.vault.runtimeSteps.join(" "), /one story item/i);
 
 const victory = config.chapters.find((chapter) => chapter.id === "victory-road");
-assert.strictEqual(victory.scenes.filter((scene) => scene.type === "cast-cue" && scene.cueId === "victory-road").length, 1);
+assert.strictEqual(victory.scenes.filter((scene) => scene.type === "cast-handoff" && scene.cueId === "victory-road").length, 1);
 assert.ok(victory.scenes.find((scene) => scene.id === "victory-challenge-a-result"));
 assert.ok(victory.scenes.find((scene) => scene.id === "victory-challenge-b"));
 assert.ok(victory.scenes.find((scene) => scene.id === "victory-challenge-b-result"));
