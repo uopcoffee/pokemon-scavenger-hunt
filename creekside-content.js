@@ -2,8 +2,18 @@
    Loaded after data.js so the preserved V1 data remains intact while this
    file is the source of truth for the configurable Creekside engine.
 
-   SECURITY: symbolic fragment labels are not keypad digits. Never place the
-   real entry code, a code-derived hint, or a digit field in this repository.
+   VAULT COMBINATION: the Ranger vault is a luggage combination lock on a prop
+   box, re-settable at will. It is not a house entry code, so the combination
+   lives here, in the docs, and printed on the four fragment props.
+
+   It is still a SPOILER. The ORDER is the Chapter 6 puzzle, and the only thing
+   that reveals it is physically joining the four jagged pieces. So the digits
+   must never appear as a group on a Luca-facing screen before Professor Oak's
+   checkpoint. Parent Mode is the one place the app shows the full combination.
+
+   Note that `assemblyOrder` is deliberately NOT collection order. Flame is
+   collected last but sits first in the stone, so remembering the order he
+   picked them up actively misleads.
 */
 (function () {
   "use strict";
@@ -98,15 +108,29 @@
       { id: "noa", displayName: "Ranger Noa", role: "Absent Pokémon Ranger" },
     ],
 
-    /* The four Sky Fragments are one broken object, not four keepsakes. Each
-       physical fragment carries a symbol AND a private digit; the app shows
-       only the symbol. Luca receives the first one in the Fairy Garden with no
-       explanation and learns what they are from Team Rocket in Chapter 5. */
+    /* The luggage lock combination, in the order the assembled Sky Stone reads
+       left to right. Set the physical lock to this and test it before the party.
+       Shown in Parent Mode so an adult can recover it if a fragment goes
+       missing. Empty string means Parent Mode reports it is not set. */
+    vaultCombination: "1737",
+
+    /* The four Sky Fragments are one broken object, not four keepsakes.
+
+       `slot` is collection order: 1 Fairy Garden, 2 Oak's preserve, 3 Pokémon
+       Center, 4 Team Rocket Base.
+
+       `assemblyOrder` is where the piece sits in the joined stone, left to
+       right, and it is deliberately unrelated to collection order. Reading the
+       digits in assemblyOrder gives `vaultCombination`.
+
+       `digit` is printed on the fragment prop beside its symbol. Individually
+       the digits are meaningless; only the jagged fit reveals their order. The
+       app renders `displaySymbol` alone and never the digit. */
     codeFragments: [
-      { slot: 1, id: "fragment-leaf", displaySymbol: "Leaf" },
-      { slot: 2, id: "fragment-wave", displaySymbol: "Wave" },
-      { slot: 3, id: "fragment-heart", displaySymbol: "Heart" },
-      { slot: 4, id: "fragment-flame", displaySymbol: "Flame" },
+      { slot: 1, id: "fragment-leaf",  displaySymbol: "Leaf",  assemblyOrder: 3, digit: "3" },
+      { slot: 2, id: "fragment-wave",  displaySymbol: "Wave",  assemblyOrder: 4, digit: "7" },
+      { slot: 3, id: "fragment-heart", displaySymbol: "Heart", assemblyOrder: 2, digit: "7" },
+      { slot: 4, id: "fragment-flame", displaySymbol: "Flame", assemblyOrder: 1, digit: "1" },
     ],
 
     rewards: {

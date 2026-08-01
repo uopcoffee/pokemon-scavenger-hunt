@@ -104,7 +104,38 @@ const styles = fs.readFileSync(path.join(root, "styles.css"), "utf8");
 assert.match(styles, /prefers-reduced-motion/);
 assert.strictEqual(config.settings.soundEnabled, false);
 
-const tracked = [screens, fs.readFileSync(path.join(root, "state.js"), "utf8"), fs.readFileSync(path.join(root, "cast/cast-data.js"), "utf8")].join("\n");
-assert.doesNotMatch(tracked, /\b(?:code|digit|pin|keypad)\s*[:=]\s*["']?\d{4}\b/i);
+/* The vault is a re-settable luggage lock, so the combination may live in the
+   repo. It is a spoiler, not a secret: Parent Mode may show it, Luca-facing
+   scene copy may not. */
+const lucaFacingCopy = JSON.stringify(
+  [].concat(config.chapters, [config.checkpoint, config.epilogue])
+    .flatMap((sequence) => sequence.scenes)
+    .filter((scene) => scene.audience === "luca")
+);
+assert.doesNotMatch(lucaFacingCopy, /\b\d{4}\b/, "No four-digit run may appear in Luca-facing scene copy");
+assert.match(screens, /vaultCombination/, "Parent Mode must be able to surface the combination");
+
+/* The digits are printed on the props, so the config carries them. Two things
+   must hold: the combination and the per-fragment digits cannot drift apart,
+   and no Luca-facing screen may render a digit. */
+const byAssembly = config.codeFragments
+  .slice()
+  .sort((a, b) => a.assemblyOrder - b.assemblyOrder);
+assert.strictEqual(
+  byAssembly.map((fragment) => fragment.assemblyOrder).join(","),
+  "1,2,3,4",
+  "assemblyOrder must be a permutation of 1-4"
+);
+assert.strictEqual(
+  byAssembly.map((fragment) => fragment.digit).join(""),
+  config.vaultCombination,
+  "vaultCombination must equal the digits read in assemblyOrder"
+);
+assert.notStrictEqual(
+  byAssembly.map((fragment) => fragment.slot).join(","),
+  "1,2,3,4",
+  "assembly order must not match collection order, or the puzzle solves itself"
+);
+assert.doesNotMatch(screens, /fragment\.digit|\.digit\b/, "No screen may render a fragment digit");
 
 console.log("V3.5 adult-triggered Mew surprise tests passed.");

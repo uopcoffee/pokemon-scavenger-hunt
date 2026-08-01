@@ -1572,7 +1572,12 @@ function ParentMode({ config, state, dispatch, onClose }) {
           {currentScene && currentScene.performerName && <span>Performer: {currentScene.performerName}</span>}
           {currentScene && currentScene.phoneCaptain && <span>Phone Captain: {currentScene.phoneCaptain}</span>}
           {currentScene && currentScene.waterSafetyAdult && <span>Water Safety Adult: {currentScene.waterSafetyAdult}</span>}
-          <small>No combination is stored here.</small>
+          <small>
+            Vault combination:{" "}
+            {config.vaultCombination
+              ? config.vaultCombination
+              : "not set — see vaultCombination in creekside-content.js"}
+          </small>
         </section>
 
         <div className="parent-mode-grid">

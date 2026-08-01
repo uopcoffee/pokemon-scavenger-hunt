@@ -183,7 +183,7 @@ trackedFiles.forEach((file) => {
 
 config.codeFragments.forEach((fragment) => {
   assert.strictEqual(/[0-9]/.test(fragment.displaySymbol), false);
-  ["digit", "value", "answer", "code"].forEach((key) => {
+  ["value", "answer", "code"].forEach((key) => {
     assert.strictEqual(Object.prototype.hasOwnProperty.call(fragment, key), false);
   });
 });

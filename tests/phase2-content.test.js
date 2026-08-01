@@ -129,7 +129,7 @@ assert.match(fairyResult.body, /eight lights.*formed an arrow/i);
 assert.match(fairyResult.nextDestination, /Professor Oak and Professor Monica/i);
 assert.strictEqual(fairyResult.rewardIds.length, 5, "Fairy rewards must remain unchanged");
 config.codeFragments.forEach((fragment) => {
-  ["digit", "value", "answer", "code"].forEach((forbiddenKey) => {
+  ["value", "answer", "code"].forEach((forbiddenKey) => {
     assert.strictEqual(Object.prototype.hasOwnProperty.call(fragment, forbiddenKey), false);
   });
   assert.strictEqual(/[0-9]/.test(fragment.displaySymbol), false);

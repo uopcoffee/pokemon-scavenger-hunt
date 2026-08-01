@@ -55,7 +55,7 @@ browser.
 | Reward registry audit | **PASS** | 60 registered rewards, 60 assignments, zero duplicates, zero unassigned entries. |
 | Package operating audit | **PASS** | All 11 package labels have staging location, behavior, and responsible adult in the Phase 3 guide. |
 | Reserve package contents | **PASS WITH PARTY-DAY CHECK** | The Hall of Fame Team Reserve is documented; Patrick must write its exact physical contents on the private packing slip before sealing. |
-| Symbolic fragment audit | **PASS** | Leaf, Star, Heart, and Wave only; no digit/value/answer/code fields. |
+| Symbolic fragment audit | **PASS** | Leaf, Wave, Heart, and Flame only. Superseded by docs/19: the combination is now configurable in `vaultCombination` and shown in Parent Mode. |
 | Secret/privacy scan | **PASS** | No numbered Creekside household address, phone-number-like value, or common secret assignment remains in tracked text. Four-digit matches were reviewed as years, dimensions, timeouts, colors, or hash constants. |
 | Real entry code absent | **PASS TO THE LIMIT OF AVAILABLE EVIDENCE** | No code value or four-digit code field was found. Because the private code was never provided, exact-value matching was not possible. |
 | GitHub Pages configuration inspection | **PASS** | API reported `built`, legacy deployment from `main` root, public HTTPS URL, no custom domain. |

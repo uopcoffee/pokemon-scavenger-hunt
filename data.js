@@ -80,12 +80,12 @@ window.LUCA_CONFIG = {
    screen — do not read this block.
 
    PATRICK — CODE FRAGMENT NOTE:
-   `displaySymbol` is only a harmless symbol shown in the app. The active
-   symbolic values are in creekside-content.js. You may replace those four
-   symbols locally if desired, but NEVER put the real keypad digits, full
-   code, or code-derived answers in either file.
-   The actual digits belong only on the backs of the four physical Sky
-   Fragments.
+   `displaySymbol` is the symbol shown in the app. The active symbolic values
+   are in creekside-content.js, and you may replace them locally if you like.
+   The vault combination itself lives in `vaultCombination` in that file and is
+   displayed in Parent Mode; it is a re-settable luggage lock, not a house code.
+   Keep it off Luca-facing screens before the Oak checkpoint — the ORDER of the
+   digits is the Chapter 6 puzzle.
    ============================================================ */
 window.CREEKSIDE_CONFIG = {
   version: 2,
