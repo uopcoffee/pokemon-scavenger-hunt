@@ -47,25 +47,46 @@ supplied per-target, and make the artwork slot the primary input (see below).
 
 - **Tile grid:** 2 columns × 3 rows = 6 sheets, US Letter **portrait**
   (8.5 in × 11 in each).
-- **Finished poster:** roughly **16.5 in wide × 32 in tall** after overlap and
-  trim. Give me the exact final dimensions your layout produces.
-- **Printable area:** assume a home inkjet cannot print to the edge. Use a
-  **0.25 in unprintable margin** on all four sides of every sheet, and design so
-  the artwork survives it.
-- **Seam handling:** this is the part that usually goes wrong, so pick one
-  approach and be explicit about it. I want **trim-and-butt**: each sheet prints
-  a thin **cut line** 0.25 in inside the paper edge on the interior seams only
-  (not on the poster's outer edges), I cut on that line, and the sheets butt
-  together with no overlap. Artwork must be positioned so the image is continuous
-  across the cut lines.
-- **Assembly aids on every sheet, printed in the margin outside the cut line:**
-  - a **sheet ID** like `CHARIZARD · R2C1` in the label font, large enough to
-    read from a pile
-  - a **mini thumbnail** of the whole poster with this sheet's cell highlighted
-  - **edge-match tick marks** at the seams so I can align neighbors by eye
-  - an **arrow marked TOP**
-  These must all fall in the discarded margin, so nothing shows on the assembled
-  poster.
+- **Nothing gets cut. This is the governing constraint.** Each sheet is printed,
+  laminated whole in its own pouch, and the finished pouches are butted edge to
+  edge. I never trim paper and I never trim laminate. Design to that, not around it.
+- **This means there is a dead band between neighboring sheets**, and it is wider
+  than people expect. It is the printer's unprintable margin on both sheets, plus
+  the sealed laminate border sticking out past the paper on both sheets — call it
+  **1 inch total between the two printable areas**, horizontally and vertically.
+  Treat that band as **gutter**: real, unavoidable, and part of the design.
+- **Make it a `gutter` config value in inches, default 1.0**, so I can retune it
+  after measuring my actual pouches. Everything downstream — art slicing, zone
+  geometry, final poster size — recomputes from it.
+- **Slice the art gutter-aware ("exploded" layout).** The Pokémon is laid out
+  across the full assembled poster *including* the gutters, and each sheet renders
+  only the part that falls inside its own printable area. The band simply isn't
+  drawn. The result is a shape pulled slightly apart at the seams — that is
+  correct and it reads fine from throwing distance. **Do not** scale or squeeze the
+  art to close the gaps: that bends the silhouette and misaligns every zone.
+- **Make the grid look intentional.** Since the seams will be visible, own them:
+  give every sheet a thin panel frame in the target's type color, just inside its
+  printable edge, so the assembled poster reads as a deliberate six-panel grid
+  rather than a poster that didn't line up. This is the single highest-leverage
+  thing you can do for how it looks on the fence.
+- **Finished poster:** roughly **18 in wide × 34.5 in tall** including laminate
+  overhang at the default gutter. Give me the exact numbers your layout produces,
+  and recompute them if I change `gutter`.
+- **Assembly aids** — with nothing trimmed there is no discard margin, so these
+  have to live inside the printed area and be designed, not slapped on. Keep them
+  small, muted `--ink-soft`, tucked into the panel frame like a trading-card
+  corner index:
+  - a **sheet ID** such as `CHARIZARD · R2C1`, bottom-left of each panel
+  - a **tiny 6-cell grid glyph** with this sheet's cell filled, bottom-right
+  - a small **TOP arrow** on the row-1 sheets only
+  Nothing bigger than the smallest text on the scoreboard. From ten feet away
+  these should disappear.
+- **Calibration page, print this first:** one Letter sheet with a ruled scale
+  along all four printable edges and clear instructions to print it, laminate it,
+  measure the distance from the printed edge rule to the outer laminate edge, and
+  double that number to get my real `gutter`. Pouch seal widths vary by brand and
+  my guess of 1.0 in could be off by a quarter inch in either direction — which
+  across three rows is an inch of accumulated error in Charizard's neck.
 
 ## The swappable target config
 
@@ -108,9 +129,17 @@ the type color so the poster still prints and plays.
   forehead, the tiny Voltorb dot. That's the whole game.
 - Water balloons hit hard and wet: use **high-contrast fills**, not subtle ones.
   Assume the laminate will glare in sun.
-- Include a **wet-strike note in the design**: nothing important within 0.5 in of
-  the poster's outer edge, since that's where tape, zip ties, and grommet
-  reinforcement go.
+- **Zone chips must never land in a gutter.** A zone's natural centroid can fall
+  in the dead band between sheets, which would erase its point number entirely.
+  Detect that case and push the chip to the nearest spot inside a printable area,
+  still within the zone. Do this automatically — I should not have to hand-check
+  24-plus zones every time I change `gutter` or swap in new art.
+- A zone region itself may span the gutter; that's expected and fine. Draw its
+  outline continuous across the band in the layout so the two halves line up when
+  the sheets are butted.
+- Keep zone outlines and chips at least 0.5 in inside each panel's printable edge,
+  so nothing important sits where a corner zip-tie or a curling laminate edge
+  will obscure it.
 
 ## Six targets to ship
 
@@ -146,14 +175,22 @@ Do not merge or drop any of these; I want all six on the fence at once.
   sheets. Keep posters **paper-light with saturated accents**. The screen app's
   dark energy-field treatments are wrong here for the same reason they were wrong
   on the food cards.
-- Laminating happens **per sheet, before assembly** — standard 9 × 11.5 in pouches
-  swallow a Letter sheet with a sealing edge, so the cut line must fall inside the
-  laminate, not on the sealed border. Call out in your notes that I should
-  **cut the interior seams before laminating**, then laminate, then tape.
-- Add a **corner reinforcement mark** at the poster's four outer corners showing
-  where to punch a hole or add a grommet for zip-tying to the fence.
-- Give me a short **assembly note** at the top of the file: print order, cut
-  order, laminate, tape the seams on the back with clear packing tape, mount.
+- **No trimming at any stage.** Print the sheet, laminate it whole in a standard
+  9 × 11.5 in pouch, butt the finished pouches together. Do not put a cut line,
+  crop mark, or trim guide anywhere in the design — I will not use them and they
+  would print on the visible face.
+- Every sheet is mounted independently, so add a **zip-tie mark at all four
+  corners of every panel**, not just the poster's outer corners — a small ring
+  glyph in the panel frame showing where to punch through the laminate. Six
+  sheets, four ties each, straight onto the fence; the fence is the backing.
+  That means the poster tolerates one sheet coming loose mid-party, which a
+  taped-together slab would not.
+- Note in the assembly instructions that punching the laminate **inside the sealed
+  border** breaks the water seal at that spot. Put the ring marks so the punch
+  lands in the sealed margin, outside the printed panel frame.
+- Give me a short **assembly note** at the top of the file: print the calibration
+  page, measure, set `gutter`, print all 36, laminate all 36, sort by sheet ID,
+  then mount row by row from the top.
 
 ## Heads-up before you build
 
