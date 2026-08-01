@@ -3,31 +3,33 @@
 Thank you for the inventory. It was thorough and the flags were useful — three of
 them caught real problems, and I have answers for every open question you raised.
 
-Read this whole document before touching anything. Section 0 is urgent, section 3
-is the hard build, and section 6 answers the questions you could not resolve.
+Read this whole document before touching anything. Section 0 stands down your
+code-secrecy flag, section 3 is the hard build, and section 6 answers the
+questions you could not resolve.
 
 ---
 
-## 0. Urgent — the code is exposed in two places
+## 0. About the code — the rule has changed, stand down
 
-You were right to lead with this, and it is worse than a formatting issue.
+You led with the exposed digits, which was the right instinct under the old rule.
+That rule is now retired, so this is no longer urgent.
 
-Under the revised arc **the digits must never be printed at all**. They open a
-real combination lock, and the whole Chapter 6 → Oak sequence depends on Luca not
-being able to read the answer off anything.
+The vault used to be a real house entry code. It is now a **luggage combination
+lock on a prop box that can be re-set at any time**, so the combination is not a
+secret. It may be printed on the props, and it lives openly in the repository and
+the docs.
 
-Do this before any other work:
+**Print the digits on the fragments.** No hand-lettering field.
 
-1. **Strip the digits from the assembly sheet's contents table.** Replace the row
-   label with a neutral description. That page is the first thing anyone picks
-   up, exactly as you said.
-2. **Strip the digits from the fragment artwork.** They are replaced by a blank
-   hand-lettering field — see section 3.
-3. Tell me if the digits exist anywhere else in the document, including layer
-   names, artboard names, slug lines, alt text, or comments.
+What still holds is a **spoiler** rule, and it is narrower but absolute: the
+*order* of the four digits is the Chapter 6 puzzle. The digits may appear
+individually on the props; the ordered combination may not appear anywhere Luca
+can read it before Professor Oak's checkpoint.
 
-Do not put placeholder digits in the replacement artwork, and do not ask me what
-the numbers are.
+The one thing still worth doing from your flag: the **assembly sheet** prints the
+ordered combination in plain text on page 0, and that sheet sits on a counter all
+morning. Split it into a separate adult-only document, as you yourself suggested.
+The digits can stay in it once it is separated.
 
 ---
 
@@ -55,9 +57,10 @@ no Chapter 1 fragment at all. Luca leaves registration with his License only.
 Chapter 1 yields none; Chapter 5 now yields one. That also resolves your
 least-confident item #3.
 
-**The order is now the secret.** This is the single most important change for
-you. The correct sequence is what Luca cannot know until Professor Oak shows him.
-Nothing printed may disclose or imply it.
+**The order is now the secret — not the digits.** This is the single most
+important change for you. The digits are printed in plain sight; the correct
+*sequence* is what Luca cannot know until Professor Oak shows him. Nothing he
+handles may disclose or imply it.
 
 **The vault is a locked box, not a chest in a yard.** It is a box on a **luggage
 combination lock**, staged at the Rangers' **trampoline** — the closest place to
@@ -97,7 +100,7 @@ Mew epilogue.
 | 17 | Station Sign 6 · Secret Ranger Vault | **REVISE** | Location and sky clue |
 | 18–20 | Type-choice cards ×3 | **REVISE** | Becomes one of three trivia questions |
 | 21 | Station Sign 7 · Victory Road | **REVISE** | Ariel's title, no stations |
-| 22 | Print & Assembly sheet | **REVISE** | Urgent, §0. Also stale footer |
+| 22 | Print & Assembly sheet | **REVISE** | Split out as adult-only, §0. Also stale footer |
 | 23 | Cut marks | **KEEP** | No change |
 | — | Ranger Record (dropped) | **STAYS DROPPED** | Correctly retired |
 
@@ -142,17 +145,36 @@ pieces must physically interlock, so they cannot be rectangles.
   plainly as a number does.
 - **"Never say it aloud" must go.** The ending now depends on Luca saying the
   numbers out loud after the credits.
-- **The printed digit must go**, replaced by a hand-lettering field.
+- **The printed digit stays** — see the table below for which digit goes where.
 - **The identical backs must go** — the backs now carry the payoff image.
+
+### The digits and the assembly order
+
+| Symbol | Collected in | Position in the joined stone | Printed digit |
+|---|---|---|---|
+| Flame | Chapter 5 · Team Rocket | 1st, leftmost | **1** |
+| Heart | Chapter 4 · Pokémon Center | 2nd | **7** |
+| Leaf | Chapter 2 · Fairy Garden | 3rd | **3** |
+| Wave | Chapter 3 · Oak's preserve | 4th, rightmost | **7** |
+
+Combination: **1737**.
+
+Note what this does. Assembly order is **not** collection order — Flame is the
+last piece Luca is handed and the first piece in the stone. If he tries to solve
+it by remembering what he picked up first, he gets the wrong answer. That is
+deliberate and it is what keeps the puzzle standing until Oak.
+
+Two sevens is also intentional: it makes the digits read as arbitrary rather than
+as a pattern.
 
 ### Behaviour required
 
 1. Four pieces, cut with **jagged interlocking edges that join in exactly one
    arrangement**. Avoid regular or symmetric zigzags — findable by feel, but only
    one fit.
-2. **Front of each piece:** its symbol (Leaf / Wave / Heart / Flame) and a blank
-   field for one hand-written digit. The four fronts must **not** combine into a
-   picture — no front-side cue to the order.
+2. **Front of each piece:** its symbol (Leaf / Wave / Heart / Flame) and its
+   printed digit, plain and unlabelled, on the same face. The four fronts must
+   **not** combine into a picture — no front-side cue to the order.
 3. **Backs:** when correctly joined and turned over, the four backs form **one
    complete Sky Stone image**. This is the confirmation beat.
 4. Turned face up and read **left to right**, the digits give the combination.
@@ -272,8 +294,10 @@ them alone.
 
 ## 7. Standing constraints
 
-- **Never print, store, or request the four digits.** Hand-lettering fields only.
-- **Never disclose or imply the fragment order** on any printed surface.
+- **Print the digits.** The combination is 1737 and is not a secret.
+- **Never disclose or imply the fragment order** on any surface Luca handles
+  before Oak. This is the rule that replaced the old one, and it is the only one
+  that matters now.
 - **Do not spoil the arc.** Nothing printed before Chapter 5 may hint that the
   fragments are one object, that they are a combination, or that a vault exists.
 - **Preserve the existing visual identity.** Evolve it; do not rebrand.
@@ -282,7 +306,7 @@ them alone.
 
 ## 8. Order of work
 
-1. Section 0 — strip the digits from both places, and report where else they live.
+1. Split the assembly sheet into a separate adult-only document.
 2. The four Sky Fragments, including the paper mirroring test before final art.
 3. The Chapter 6 set — lid label, trail symbols, Dispatch, sealed file.
 4. The Chapter 4 patient and treatment cards.

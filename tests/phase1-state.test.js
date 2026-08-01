@@ -38,7 +38,8 @@ vm.runInContext(fs.readFileSync(path.join(repositoryRoot, "state.js"), "utf8"), 
 
 const config = context.window.CREEKSIDE_CONFIG;
 const stateEngine = context.window.CreeksideState;
-const forbiddenFragmentKeys = ["digit", "value", "answer", "code"];
+/* `digit` is expected now — the digits are printed on the fragment props. */
+const forbiddenFragmentKeys = ["value", "answer", "code"];
 /* Paper-cast contract: the only scene types that resist an ordinary tap are the
    physical-challenge legacy type and the cast-handoff, whose hold now means
    "the real-world mission is finished". The cast-cue type no longer exists. */
@@ -51,7 +52,7 @@ config.codeFragments.forEach((fragment) => {
     assert.strictEqual(Object.prototype.hasOwnProperty.call(fragment, key), false, `Fragment config must not contain ${key}`);
   });
   assert.strictEqual(typeof fragment.displaySymbol, "string");
-  assert.strictEqual(/[0-9]/.test(fragment.displaySymbol), false, "Fragment symbols must not contain keypad digits");
+  assert.strictEqual(/[0-9]/.test(fragment.displaySymbol), false, "Fragment display symbols are names, not digits");
 });
 
 let state = stateEngine.initialState();

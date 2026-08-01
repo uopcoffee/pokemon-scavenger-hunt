@@ -72,7 +72,6 @@ assert.ok(portal.director.timeline.some((item) => /10–15 min sheltered reset/.
 assert.ok(portal.director.timeline.some((item) => /25–35 min combined finale/.test(item.window)));
 assert.ok(portal.director.globalOperations.some((item) => /individual photos at neighbor stations/i.test(item)));
 
-assert.doesNotMatch(allTrackedText, /\b(?:code|digit|pin|keypad)\s*[:=]\s*["']?\d{4}\b/i);
 assert.doesNotMatch(allTrackedText, /\b\d{3}[-.)\s]\d{3}[-.\s]\d{4}\b/);
 
 console.log("V3.5 real-world logistics tests passed.");

@@ -32,9 +32,16 @@ combination to the four numbers written on them.
 
 ### How the props are made
 
-Each fragment carries its symbol **and** one plain digit on the **same face**.
-Keep the digits nondescript: no "1 of 4", no slot number, nothing that hints at
-the order. On their own the four numbers are meaningless.
+Each fragment carries its symbol **and** one plain printed digit on the **same
+face**. Keep the digits nondescript: no "1 of 4", no slot number, nothing that
+hints at the order. On their own the four numbers are meaningless.
+
+The combination is **1737**. The stone assembles **Flame → Heart → Leaf → Wave**,
+so the printed digits are Flame **1**, Heart **7**, Leaf **3**, Wave **7**.
+
+Assembly order is deliberately **not** collection order — Flame is the last piece
+Luca is given and the first piece in the stone. Remembering the order he picked
+them up actively misleads, which is what keeps the puzzle standing until Oak.
 
 Cut the four with **jagged interlocking edges so they join exactly one way**.
 That single correct arrangement is the whole puzzle:
@@ -44,8 +51,10 @@ That single correct arrangement is the whole puzzle:
 - Joined **face up and read left to right**, the four digits give the vault
   combination, in order.
 
-Set that combination on the lock and test it before the party. **The real digits
-still exist nowhere in this repository.**
+Set 1737 on the lock and test it before the party. It lives in
+`vaultCombination` in `creekside-content.js`, with the per-fragment digits and
+`assemblyOrder` alongside, and Parent Mode displays it if a fragment goes
+missing. A test asserts the two can never drift apart.
 
 The separate "Sky Fragment prop" from Chapter 3 is gone — it was the same object
 as fragment 2. The Team Rocket phone-glitch at the pool is also gone; Team Rocket
@@ -149,8 +158,17 @@ The Champion Chest handoff says so explicitly.
 Runtime: the epilogue's first scene is now `champion-code-question`, ahead of
 `mew-glitch`. Everything after it is unchanged.
 
-## 7. Security, unchanged
+## 7. The combination is a spoiler, not a secret
 
-The four digits exist only on the four physical fragments. They are
-not in the app, this repository, its tests, its assets, or these docs, and the
-app never asks for them.
+**Superseded by the update below.** The original rule — digits nowhere in the
+repository — existed when the vault was a real house entry code. It is now a
+luggage combination lock on a prop box that can be re-set at any time, so the
+combination may live in this repository, in these docs, and on the props.
+
+What still holds is the story rule: **the order of the four digits is the
+Chapter 6 puzzle.** Nothing Luca sees or handles before Professor Oak's
+checkpoint may reveal or imply it — not the fragments, not the vault lid, not the
+Ranger Dispatch, and no app screen. Parent Mode is the one place the app shows
+the combination, so an adult can recover it if a fragment is lost.
+
+Set it in `vaultCombination` in `creekside-content.js`.
